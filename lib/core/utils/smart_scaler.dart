@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// =============================================================
-/// 🔥 Smart Responsive System
+/// Smart Responsive System
 /// =============================================================
 
 class SmartScaler {
