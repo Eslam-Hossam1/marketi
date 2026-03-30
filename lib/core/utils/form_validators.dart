@@ -1,4 +1,4 @@
-import 'package:marketi/core/theme/utils/app_regex.dart';
+import 'package:marketi/core/utils/app_regex.dart';
 
 abstract class FormValidators {
   static String? customTextFormFieldValidator(String? value) {

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/theme/utils/smart_scaler.dart';
+import 'package:marketi/core/utils/smart_scaler.dart';
 
 abstract class AppTextStyles {
   // Font size 68
