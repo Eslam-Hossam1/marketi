@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/routing/app_router.dart';
+import 'package:marketi/core/theme/app_themes.dart';
 
 class MarketiApp extends StatelessWidget {
   const MarketiApp({super.key});
@@ -9,6 +10,9 @@ class MarketiApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }

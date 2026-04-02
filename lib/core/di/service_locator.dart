@@ -8,6 +8,7 @@ import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
 
 final getIt = GetIt.instance;
+
 Future<void> setupServiceLocator() async {
   await _setupCaching();
 }
@@ -21,9 +22,7 @@ Future<void> _setupCaching() async {
 
   AndroidOptions getAndroidOptions() => const AndroidOptions();
 
-  final secureStorage = FlutterSecureStorage(
-    aOptions: getAndroidOptions(),
-  );
+  final secureStorage = FlutterSecureStorage(aOptions: getAndroidOptions());
 
   getIt.registerSingleton<SecureStorageService>(
     SecureStorageService(secureStorage),
@@ -31,7 +30,8 @@ Future<void> _setupCaching() async {
 
   getIt.registerSingleton<AuthCredentialsManager>(
     AuthCredentialsManager(
-        secureStorageService: getIt<SecureStorageService>(),
-        jwtDecoder: const JwtDecoderServiceImpl()),
+      secureStorageService: getIt<SecureStorageService>(),
+      jwtDecoder: const JwtDecoderServiceImpl(),
+    ),
   );
 }
