@@ -14,24 +14,36 @@ class SignUpViewBody extends StatefulWidget {
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  void _enableAutoValidation() {
+    if (autovalidateMode == AutovalidateMode.disabled) {
+      setState(() {
+        autovalidateMode = AutovalidateMode.always;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w(context)),
       child: Form(
         key: formKey,
-        autovalidateMode: autoValidateMode,
+        autovalidateMode: autovalidateMode,
         child: CustomScrollView(
           slivers: [
-            SliverHeightSpace(height: 8),
+            const SliverHeightSpace(height: 8),
             SliverToBoxAdapter(
               child: Center(child: AppLogoImage(width: 180.w(context))),
             ),
-            SliverHeightSpace(height: 12),
-            SignUpTextFieldsSection(),
-            SliverHeightSpace(height: 40),
-            SignUpButtonAndAlreadyHaveAccountSection(),
+            const SliverHeightSpace(height: 12),
+            const SignUpTextFieldsSection(),
+            const SliverHeightSpace(height: 40),
+            SignUpButtonAndAlreadyHaveAccountSection(
+              formKey: formKey,
+              enableAutoValidation: _enableAutoValidation,
+            ),
           ],
         ),
       ),

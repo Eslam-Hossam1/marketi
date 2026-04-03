@@ -46,7 +46,7 @@ AwesomeDialog getCustomAwesomeDialog(
   );
 }
 
-getAwesomeDialogAdaptiveWidth(context) {
+double getAwesomeDialogAdaptiveWidth(BuildContext context) {
   double width = MediaQuery.sizeOf(context).width;
   if (SmartScaler.isTablet) {
     return width * .9;
