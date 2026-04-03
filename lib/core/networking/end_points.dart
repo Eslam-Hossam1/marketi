@@ -4,7 +4,7 @@ abstract class EndPoints {
   // Auth
   static const String signIn = "/auth/signIn";
   static const String signUp = "/auth/signUp";
-  static const String resetPassCode = "/auth/resetPassCode";
+  static const String sendForgotPassowrdOtp = "/auth/resetPassCode";
+  static const String verifyForgotPasswordOtp = "/auth/activeResetPass";
   static const String resetPassword = "/auth/resetPassword";
 }
-

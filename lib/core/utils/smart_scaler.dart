@@ -12,7 +12,7 @@ class SmartScaler {
   static late Orientation _orientation;
 
   // Design Sizes
-  static const double _mobileDesignWidth = 375;
+  static const double mobileDesignWidth = 375;
   static const double _tabletDesignWidth = 800;
   static const double _desktopDesignWidth = 1200;
 
@@ -74,7 +74,7 @@ class SmartScaler {
     init(context);
     // Scale MODE (NO BREAKPOINTS)
     if (!useBreakpoints) {
-      final scale = _deviceWidth / _mobileDesignWidth;
+      final scale = _deviceWidth / mobileDesignWidth;
       return size *
           scale.clamp(lowerLimitRatio ?? 0.75, upperLimitRatio ?? 1.5);
     }
@@ -83,7 +83,7 @@ class SmartScaler {
     double baseWidth;
 
     if (isMobile) {
-      baseWidth = _mobileDesignWidth;
+      baseWidth = mobileDesignWidth;
     } else if (isTablet) {
       baseWidth = _tabletDesignWidth;
     } else {

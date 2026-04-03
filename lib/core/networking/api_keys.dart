@@ -6,6 +6,7 @@ abstract class ApiKeys {
   static const String data = "data";
   static const String authorization = "Authorization";
   static const String acceptLanguage = "Accept-Language";
+  static const String otp = "code";
 
   // Auth
   static const String name = "name";
