@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_view_body.dart';
+import 'package:marketi/features/auth/presentation/widgets/login/login_view_body.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: const SignUpViewBody()));
+    return Scaffold(body: SafeArea(child: const LoginViewBody()));
   }
 }
