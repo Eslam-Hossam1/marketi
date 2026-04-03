@@ -16,10 +16,10 @@ abstract class DialogHelper {
     getCustomAwesomeDialog(
       context,
       dialogType: DialogType.error,
-      title: "خطأ",
+      title: "Error",
       desc: errorMessage,
       btnOkOnPress: btnOkOnPress ?? () {},
-      btnOkText: btnOkText ?? "حسنا",
+      btnOkText: btnOkText ?? "Ok",
       btnOk: btnOk,
       onDismissCallback: onDismissCallback ?? (DismissType _) {},
     ).show();
@@ -40,15 +40,15 @@ abstract class DialogHelper {
     getCustomAwesomeDialog(
       context,
       dialogType: DialogType.warning,
-      title: "تحذير",
+      title: "Warning",
       desc: errorMessage,
       btnOkOnPress: btnOkOnPress,
-      btnOkText: btnOkText ?? "حسنا",
+      btnOkText: btnOkText ?? "Ok",
       btnOk: btnOk,
       btnOkColor: btnOkColor,
       onDismissCallback: onDismissCallback,
       btnCancelColor: btnCancelColor,
-      btnCancelText: btnCanceltext ?? "الغاء",
+      btnCancelText: btnCanceltext ?? "Cancel",
       btnCancelOnPress: () {},
     ).show();
   }
@@ -67,10 +67,10 @@ abstract class DialogHelper {
     getCustomAwesomeDialog(
       context,
       dialogType: DialogType.warning,
-      title: title ?? 'انتهت الجلسة',
-      desc: 'انتهت الجلسة، يرجى تسجيل الدخول مرة أخرى',
+      title: title ?? 'Session Ended',
+      desc: 'Session Ended, please login again',
       btnOkOnPress: btnOkOnPress,
-      btnOkText: btnOkText ?? 'حسنا',
+      btnOkText: btnOkText ?? 'Ok',
       btnOk: btnOk,
       btnOkColor: btnOkColor,
       onDismissCallback: onDismissCallback,
@@ -92,10 +92,10 @@ abstract class DialogHelper {
     getCustomAwesomeDialog(
       context,
       dialogType: DialogType.success,
-      title: "نجاح",
+      title: "Success",
       desc: message,
       btnOkOnPress: btnOkOnPress ?? () {},
-      btnOkText: btnOkText ?? "حسنا",
+      btnOkText: btnOkText ?? "Ok",
       btnOk: btnOk,
       btnOkColor: btnOkColor,
       onDismissCallback: onDismissCallback,
@@ -112,14 +112,14 @@ abstract class DialogHelper {
       errorMessage: errorMessage ?? _warningExitConfirmationMessage,
       btnOkOnPress: btnOkOnPress ?? () => context.pop(),
       btnOkColor: Colors.red,
-      btnOkText: 'خروج',
+      btnOkText: 'Exit',
       btnCancelColor: Colors.green,
-      btnCanceltext: "البقاء",
+      btnCanceltext: "Stay",
     );
   }
 
   static const String _warningExitConfirmationMessage =
-      "هل انت متاكد من الخروج؟ لم تكمل التحقق بعد وقد تفقد تقدمك.";
+      "Are you sure you want to exit? You haven't completed the verification yet and may lose your progress.";
 
   static void showLoadingDialog(BuildContext context) {
     showDialog(

@@ -5,15 +5,25 @@ import 'package:marketi/features/auth/presentation/widgets/sign_up/already_have_
 import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_button.dart';
 
 class SignUpButtonAndAlreadyHaveAccountSection extends StatelessWidget {
-  const SignUpButtonAndAlreadyHaveAccountSection({super.key});
+  final GlobalKey<FormState> formKey;
+  final void Function() enableAutoValidation;
+
+  const SignUpButtonAndAlreadyHaveAccountSection({
+    super.key,
+    required this.formKey,
+    required this.enableAutoValidation,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SliverStickyFooter(
       children: [
-        SignUpButton(),
-        HeightSpace(height: 8),
-        AlreadyHaveAnAccount(),
+        SignUpButton(
+          formKey: formKey,
+          enableAutoValidation: enableAutoValidation,
+        ),
+        const HeightSpace(height: 8),
+        const AlreadyHaveAnAccount(),
       ],
     );
   }

@@ -16,12 +16,10 @@ class AuthCredentialsManager {
   Future<void> init() async {
     _authCredentialsModel = AuthCredentials._(
       accessToken: await getAccessToken(),
-      refreshToken: await getRefreshToken(),
     );
   }
 
   String? get accessToken => _authCredentialsModel?.accessToken;
-  String? get refreshToken => _authCredentialsModel?.refreshToken;
   String? get userId {
     var decodedToken = jwtDecoder.decodeToken(
       token: _authCredentialsModel?.accessToken,
@@ -35,11 +33,6 @@ class AuthCredentialsManager {
     );
   }
 
-  Future<String?> getRefreshToken() async {
-    return await secureStorageService.getString(
-      key: SecureStorageKeys.refreshToken,
-    );
-  }
 
   Future<void> storeAccessToken(String token) async {
     token = removeBearer(token);
@@ -50,25 +43,15 @@ class AuthCredentialsManager {
     _authCredentialsModel?.accessToken = token;
   }
 
-  Future<void> storeRefreshToken(String token) async {
-    token = removeBearer(token);
-    await secureStorageService.setData(
-      key: SecureStorageKeys.refreshToken,
-      value: token,
-    );
-    _authCredentialsModel?.refreshToken = token;
-  }
+
 
   Future<void> storeTokens({
     required String accessToken,
-    required String refreshToken,
   }) async {
     accessToken = removeBearer(accessToken);
-    refreshToken = removeBearer(refreshToken);
 
     await Future.wait([
       storeAccessToken(accessToken),
-      storeRefreshToken(refreshToken),
     ]);
     await init();
   }
@@ -76,7 +59,6 @@ class AuthCredentialsManager {
   Future<void> clearTokens() async {
     await secureStorageService.clear();
     _authCredentialsModel?.accessToken = null;
-    _authCredentialsModel?.refreshToken = null;
     _authCredentialsModel = null;
   }
 
@@ -88,7 +70,6 @@ class AuthCredentialsManager {
 
 class AuthCredentials {
   String? accessToken;
-  String? refreshToken;
 
-  AuthCredentials._({required this.accessToken, required this.refreshToken});
+  AuthCredentials._({required this.accessToken});
 }

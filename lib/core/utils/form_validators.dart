@@ -51,7 +51,7 @@ abstract class FormValidators {
   }
 
   static bool isValueEmpty(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return true;
     } else {
       return false;

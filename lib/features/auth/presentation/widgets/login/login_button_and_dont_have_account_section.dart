@@ -5,12 +5,26 @@ import 'package:marketi/features/auth/presentation/widgets/login/dont_have_an_em
 import 'package:marketi/features/auth/presentation/widgets/login/login_button.dart';
 
 class LoginButtonAndDontHaveAccountSection extends StatelessWidget {
-  const LoginButtonAndDontHaveAccountSection({super.key});
+  final GlobalKey<FormState> formKey;
+  final void Function() enableAutoValidation;
+
+  const LoginButtonAndDontHaveAccountSection({
+    super.key,
+    required this.formKey,
+    required this.enableAutoValidation,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SliverStickyFooter(
-      children: [LoginButton(), HeightSpace(height: 8), DontHaveAnEmail()],
+      children: [
+        LoginButton(
+          formKey: formKey,
+          enableAutoValidation: enableAutoValidation,
+        ),
+        const HeightSpace(height: 8),
+        const DontHaveAnEmail(),
+      ],
     );
   }
 }

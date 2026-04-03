@@ -12,16 +12,20 @@ class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
   const CustomPasswordTextFormFieldWithTitle({
     super.key,
     this.onSaved,
+    this.onChanged,
+    this.validator,
     this.title = 'Password',
     this.hint = 'Enter your password',
   });
   final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
   final String title;
   final String hint;
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: .start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
@@ -32,8 +36,9 @@ class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
         HeightSpace(height: 4),
         ObscureTextFormField(
           hintText: hint,
-          validator: FormValidators.passwordValidator,
+          validator: validator ?? FormValidators.passwordValidator,
           onSaved: onSaved,
+          onChanged: onChanged,
           prefixIcon: SvgPicture.asset(
             Assets.imagesSvgPasswordIcon,
             fit: BoxFit.contain,
