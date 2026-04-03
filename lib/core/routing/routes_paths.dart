@@ -6,4 +6,5 @@ abstract class RoutePaths {
   static const resetPassword = "/reset_password";
   static const home = "/home";
   static const otp = "/otp";
+  static const profile = "/profile";
 }

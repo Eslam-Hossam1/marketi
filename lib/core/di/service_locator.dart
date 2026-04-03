@@ -1,4 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:marketi/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:marketi/features/profile/data/datasources/profile_remote_data_source_impl.dart';
+import 'package:marketi/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:marketi/features/profile/domain/repos/profile_repo.dart';
+import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
+import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
 import 'package:marketi/features/otp/data/repos/otp_repo_impl.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
@@ -36,6 +42,25 @@ Future<void> setupServiceLocator() async {
   _setupAuth();
   _setupForgotPassword();
   _setupOtp();
+  _setupProfile();
+}
+
+void _setupProfile() {
+  getIt.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImpl(getIt<ProfileRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<GetUserDataUseCase>(
+    () => GetUserDataUseCase(getIt<ProfileRepo>()),
+  );
+
+  getIt.registerFactory<ProfileCubit>(
+    () => ProfileCubit(getIt<GetUserDataUseCase>()),
+  );
 }
 
 void _setupOtp() {
