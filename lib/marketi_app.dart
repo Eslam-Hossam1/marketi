@@ -12,7 +12,7 @@ class MarketiApp extends StatelessWidget {
       routerConfig: AppRouter.router,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
     );
   }
 }

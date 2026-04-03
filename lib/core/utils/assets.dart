@@ -34,6 +34,18 @@ class Assets {
   /// assets/images/png/Illustration_Verification_Code_With_Email.png
   static const String imagesPngIllustrationVerificationCodeWithEmail = "assets/images/png/Illustration_Verification_Code_With_Email.png";
 
+  /// Assets for imagesPngImagePlaceholder
+  /// assets/images/png/image_placeholder.png
+  static const String imagesPngImagePlaceholder = "assets/images/png/image_placeholder.png";
+
+  /// Assets for imagesPngProfileGalaxyCircles
+  /// assets/images/png/profile_galaxy_circles.png
+  static const String imagesPngProfileGalaxyCircles = "assets/images/png/profile_galaxy_circles.png";
+
+  /// Assets for imagesPngProfileGalaxyCirclesDark
+  /// assets/images/png/profile_galaxy_circles_dark.png
+  static const String imagesPngProfileGalaxyCirclesDark = "assets/images/png/profile_galaxy_circles_dark.png";
+
   /// Assets for imagesPngSplashImage
   /// assets/images/png/splash_image.png
   static const String imagesPngSplashImage = "assets/images/png/splash_image.png";
@@ -42,9 +54,33 @@ class Assets {
   /// assets/images/png/splash_image_android_12.png
   static const String imagesPngSplashImageAndroid12 = "assets/images/png/splash_image_android_12.png";
 
+  /// Assets for imagesSvgCameraAddIcon
+  /// assets/images/svg/camera_add_icon.svg
+  static const String imagesSvgCameraAddIcon = "assets/images/svg/camera_add_icon.svg";
+
+  /// Assets for imagesSvgCreditCardIcon
+  /// assets/images/svg/credit_card_icon.svg
+  static const String imagesSvgCreditCardIcon = "assets/images/svg/credit_card_icon.svg";
+
+  /// Assets for imagesSvgDarkModeIcon
+  /// assets/images/svg/dark_mode_icon.svg
+  static const String imagesSvgDarkModeIcon = "assets/images/svg/dark_mode_icon.svg";
+
   /// Assets for imagesSvgEmailIcon
   /// assets/images/svg/email_icon.svg
   static const String imagesSvgEmailIcon = "assets/images/svg/email_icon.svg";
+
+  /// Assets for imagesSvgFeedbackIcon
+  /// assets/images/svg/feedback_icon.svg
+  static const String imagesSvgFeedbackIcon = "assets/images/svg/feedback_icon.svg";
+
+  /// Assets for imagesSvgLogOutIcon
+  /// assets/images/svg/log_out_icon.svg
+  static const String imagesSvgLogOutIcon = "assets/images/svg/log_out_icon.svg";
+
+  /// Assets for imagesSvgNotificationIcon
+  /// assets/images/svg/notification_icon.svg
+  static const String imagesSvgNotificationIcon = "assets/images/svg/notification_icon.svg";
 
   /// Assets for imagesSvgPasswordIcon
   /// assets/images/svg/password_icon.svg
@@ -53,6 +89,10 @@ class Assets {
   /// Assets for imagesSvgPhoneIcon
   /// assets/images/svg/phone_icon.svg
   static const String imagesSvgPhoneIcon = "assets/images/svg/phone_icon.svg";
+
+  /// Assets for imagesSvgRateIcon
+  /// assets/images/svg/rate_icon.svg
+  static const String imagesSvgRateIcon = "assets/images/svg/rate_icon.svg";
 
   /// Assets for imagesSvgUserIcon
   /// assets/images/svg/user_icon.svg

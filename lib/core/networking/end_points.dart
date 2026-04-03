@@ -7,4 +7,7 @@ abstract class EndPoints {
   static const String sendForgotPassowrdOtp = "/auth/resetPassCode";
   static const String verifyForgotPasswordOtp = "/auth/activeResetPass";
   static const String resetPassword = "/auth/resetPassword";
+
+  // Profile
+  static const String userData = "/portfoilo/userData";
 }
