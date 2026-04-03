@@ -1,4 +1,12 @@
 import 'package:dio/dio.dart';
+import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
+import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source_impl.dart';
+import '../../features/forgot_password/data/repos/forgot_password_repo_impl.dart';
+import '../../features/forgot_password/domain/repos/forgot_password_repo.dart';
+import '../../features/forgot_password/domain/usecases/reset_password_use_case.dart';
+import '../../features/forgot_password/domain/usecases/send_code_use_case.dart';
+import '../../features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
+import '../../features/forgot_password/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +32,7 @@ Future<void> setupServiceLocator() async {
   await _setupCaching();
   _setupNetworking();
   _setupAuth();
+  _setupForgotPassword();
 }
 
 Future<void> _setupCaching() async {
@@ -83,5 +92,34 @@ void _setupAuth() {
   );
   getIt.registerFactory<SignUpCubit>(
     () => SignUpCubit(getIt<SignUpUseCase>()),
+  );
+}
+
+void _setupForgotPassword() {
+  // Data Source
+  getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(
+    () => ForgotPasswordRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+
+  // Repository
+  getIt.registerLazySingleton<ForgotPasswordRepo>(
+    () => ForgotPasswordRepoImpl(getIt<ForgotPasswordRemoteDataSource>()),
+  );
+
+  // Use Cases
+  getIt.registerLazySingleton<SendCodeUseCase>(
+    () => SendCodeUseCase(getIt<ForgotPasswordRepo>()),
+  );
+  getIt.registerLazySingleton<ResetPasswordUseCase>(
+    () => ResetPasswordUseCase(getIt<ForgotPasswordRepo>()),
+  );
+
+  // Cubits (factory — new instance per screen)
+  getIt.registerFactory<ForgotPasswordCubit>(
+    () => ForgotPasswordCubit(getIt<SendCodeUseCase>()),
+  );
+
+  getIt.registerFactory<ResetPasswordCubit>(
+    () => ResetPasswordCubit(getIt<ResetPasswordUseCase>()),
   );
 }
