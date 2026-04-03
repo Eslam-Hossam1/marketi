@@ -1,0 +1,3 @@
+class ForgotPasswordFormData {
+  String email = '';
+}
