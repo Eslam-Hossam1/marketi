@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
+import 'package:marketi/features/otp/data/repos/otp_repo_impl.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source_impl.dart';
 import '../../features/forgot_password/data/repos/forgot_password_repo_impl.dart';
@@ -33,6 +35,17 @@ Future<void> setupServiceLocator() async {
   _setupNetworking();
   _setupAuth();
   _setupForgotPassword();
+  _setupOtp();
+}
+
+void _setupOtp() {
+  getIt.registerSingleton<OtpRepoImpl>(
+    OtpRepoImpl(
+      otpRemoteDataSource: OtpRemoteDataSourceImpl(
+        apiConsumer: getIt<ApiConsumer>(),
+      ),
+    ),
+  );
 }
 
 Future<void> _setupCaching() async {
@@ -59,9 +72,7 @@ Future<void> _setupCaching() async {
 }
 
 void _setupNetworking() {
-  getIt.registerLazySingleton<ApiConsumer>(
-    () => DioConsumer(dio: Dio()),
-  );
+  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
 }
 
 void _setupAuth() {
@@ -87,12 +98,8 @@ void _setupAuth() {
   );
 
   // Cubits (factory — new instance per screen)
-  getIt.registerFactory<LoginCubit>(
-    () => LoginCubit(getIt<LoginUseCase>()),
-  );
-  getIt.registerFactory<SignUpCubit>(
-    () => SignUpCubit(getIt<SignUpUseCase>()),
-  );
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginUseCase>()));
+  getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt<SignUpUseCase>()));
 }
 
 void _setupForgotPassword() {

@@ -4,7 +4,8 @@ import 'package:marketi/features/forgot_password/data/datasources/forgot_passwor
 import 'package:marketi/features/forgot_password/data/models/reset_password_request_model.dart';
 import 'package:marketi/features/forgot_password/data/models/send_code_request_model.dart';
 
-class ForgotPasswordRemoteDataSourceImpl implements ForgotPasswordRemoteDataSource {
+class ForgotPasswordRemoteDataSourceImpl
+    implements ForgotPasswordRemoteDataSource {
   final ApiConsumer _apiConsumer;
 
   ForgotPasswordRemoteDataSourceImpl(this._apiConsumer);
@@ -12,7 +13,7 @@ class ForgotPasswordRemoteDataSourceImpl implements ForgotPasswordRemoteDataSour
   @override
   Future<void> sendCode(SendCodeRequestModel requestModel) async {
     await _apiConsumer.post(
-      EndPoints.resetPassCode,
+      EndPoints.sendForgotPassowrdOtp,
       data: requestModel.toJson(),
     );
   }
