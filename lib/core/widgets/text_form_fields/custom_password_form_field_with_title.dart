@@ -9,22 +9,29 @@ import 'package:marketi/core/widgets/text_form_fields/obscure_text_form_field.da
 import 'package:flutter/material.dart';
 
 class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
-  const CustomPasswordTextFormFieldWithTitle({super.key, this.onSaved});
+  const CustomPasswordTextFormFieldWithTitle({
+    super.key,
+    this.onSaved,
+    this.title = 'Password',
+    this.hint = 'Enter your password',
+  });
   final void Function(String?)? onSaved;
+  final String title;
+  final String hint;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: .start,
       children: [
         Text(
-          'Password',
+          title,
           style: AppTextStyles.semiBold14(
             context,
           ).copyWith(color: context.mainTextColor),
         ),
         HeightSpace(height: 4),
         ObscureTextFormField(
-          hintText: 'Enter your password',
+          hintText: hint,
           validator: FormValidators.passwordValidator,
           onSaved: onSaved,
           prefixIcon: SvgPicture.asset(
