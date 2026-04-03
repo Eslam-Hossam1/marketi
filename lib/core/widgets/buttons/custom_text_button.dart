@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/widget/buttons/custom_button.dart';
+import 'package:marketi/core/widgets/buttons/custom_button.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({

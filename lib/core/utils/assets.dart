@@ -33,5 +33,29 @@ class Assets {
   /// Assets for imagesPngIllustrationVerificationCodeWithEmail
   /// assets/images/png/Illustration_Verification_Code_With_Email.png
   static const String imagesPngIllustrationVerificationCodeWithEmail = "assets/images/png/Illustration_Verification_Code_With_Email.png";
+
+  /// Assets for imagesPngSplashImage
+  /// assets/images/png/splash_image.png
+  static const String imagesPngSplashImage = "assets/images/png/splash_image.png";
+
+  /// Assets for imagesPngSplashImageAndroid12
+  /// assets/images/png/splash_image_android_12.png
+  static const String imagesPngSplashImageAndroid12 = "assets/images/png/splash_image_android_12.png";
+
+  /// Assets for imagesSvgEmailIcon
+  /// assets/images/svg/email_icon.svg
+  static const String imagesSvgEmailIcon = "assets/images/svg/email_icon.svg";
+
+  /// Assets for imagesSvgPasswordIcon
+  /// assets/images/svg/password_icon.svg
+  static const String imagesSvgPasswordIcon = "assets/images/svg/password_icon.svg";
+
+  /// Assets for imagesSvgPhoneIcon
+  /// assets/images/svg/phone_icon.svg
+  static const String imagesSvgPhoneIcon = "assets/images/svg/phone_icon.svg";
+
+  /// Assets for imagesSvgUserIcon
+  /// assets/images/svg/user_icon.svg
+  static const String imagesSvgUserIcon = "assets/images/svg/user_icon.svg";
 }
 
