@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/widget/buttons/custom_text_button.dart';
+import 'package:marketi/core/widgets/buttons/custom_text_button.dart';
 import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
 
 class OnboardingNextButton extends StatelessWidget {
