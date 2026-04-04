@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:marketi/features/profile/data/datasources/profile_remote_data_source.dart';
-import 'package:marketi/features/profile/data/datasources/profile_remote_data_source_impl.dart';
-import 'package:marketi/features/profile/data/repos/profile_repo_impl.dart';
-import 'package:marketi/features/profile/domain/repos/profile_repo.dart';
+import 'package:marketi/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
+import 'package:marketi/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
+import 'package:marketi/features/edit_profile/domain/repos/edit_profile_repo.dart';
+import 'package:marketi/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:marketi/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
+import 'package:marketi/core/services/image_picker_service/cropped_image_picker_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
 import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
@@ -33,6 +37,10 @@ import '../services/auth_credentials_manager/auth_credentials_manager.dart';
 import '../services/jwt_decoder/jwt_decoder_service_impl.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
+import 'package:marketi/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:marketi/features/profile/data/datasources/profile_remote_data_source_impl.dart';
+import 'package:marketi/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:marketi/features/profile/domain/repos/profile_repo.dart';
 
 final getIt = GetIt.instance;
 
@@ -43,6 +51,31 @@ Future<void> setupServiceLocator() async {
   _setupForgotPassword();
   _setupOtp();
   _setupProfile();
+  _setupEditProfile();
+}
+
+void _setupEditProfile() {
+  getIt.registerLazySingleton<CroppedImagePickerService>(
+    () => CroppedImagePickerService(ImagePicker(), ImageCropper()),
+  );
+
+  getIt.registerLazySingleton<EditProfileRemoteDataSource>(
+    () => EditProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+
+  getIt.registerLazySingleton<EditProfileRepo>(
+    () => EditProfileRepoImpl(getIt<EditProfileRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<EditUserDataUseCase>(
+    () => EditUserDataUseCase(getIt<EditProfileRepo>()),
+  );
+
+  getIt.registerLazySingleton<AddImageUseCase>(
+    () => AddImageUseCase(getIt<EditProfileRepo>()),
+  );
+
+
 }
 
 void _setupProfile() {

@@ -50,6 +50,27 @@ abstract class FormValidators {
     }
   }
 
+  static String? validateName(String? value) {
+    if (isValueEmpty(value)) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  static String? validatePhoneNumber(String? value) {
+    if (isValueEmpty(value)) {
+      return 'Please enter your phone number';
+    }
+    return null;
+  }
+
+  static String? validateAddress(String? value) {
+    if (isValueEmpty(value)) {
+      return 'Please enter your address';
+    }
+    return null;
+  }
+
   static bool isValueEmpty(String? value) {
     if (value == null || value.trim().isEmpty) {
       return true;

@@ -1,4 +1,5 @@
 abstract class RoutePaths {
+  static const initialRoute = "/";
   static const onboarding = "/onboarding";
   static const login = "/login";
   static const signUp = "/sign_up";
@@ -7,4 +8,5 @@ abstract class RoutePaths {
   static const home = "/home";
   static const otp = "/otp";
   static const profile = "/profile";
+  static const editProfile = "/edit_profile";
 }
