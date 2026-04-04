@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
 import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_state.dart';
 import 'package:marketi/features/onboarding/presentation/widgets/onboarding_dots_indicator_and_next_button_section/onboarding_dots_indicator.dart';

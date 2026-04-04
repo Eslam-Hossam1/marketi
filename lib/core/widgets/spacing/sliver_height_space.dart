@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
 
 class SliverHeightSpace extends StatelessWidget {
   const SliverHeightSpace({super.key, required this.height});

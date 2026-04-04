@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
 

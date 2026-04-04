@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:marketi/core/utils/smart_scaler.dart';
+import 'package:marketi/core/utils/responsive_helper.dart';
 
 import '../../theme/app_text_styles.dart';
 import '../../theme/theme_colors_extension.dart';
@@ -48,7 +48,7 @@ AwesomeDialog getCustomAwesomeDialog(
 
 double getAwesomeDialogAdaptiveWidth(BuildContext context) {
   double width = MediaQuery.sizeOf(context).width;
-  if (SmartScaler.isTablet) {
+  if (ResponsiveHelper.isTablet) {
     return width * .9;
   } else {
     return (width - (width * .20 * 2)) * .8;

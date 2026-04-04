@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/widgets/app_logo_image.dart';
 import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
 import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_button_and_already_have_account_section.dart';

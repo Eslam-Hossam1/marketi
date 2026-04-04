@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/utils/smart_scaler.dart';
+import 'package:marketi/core/utils/responsive_helper.dart';
 
 abstract class AppTextStyles {
   // Font size 68
@@ -834,7 +834,7 @@ abstract class AppTextStyles {
     double? upperLimitRatio,
     bool useBreakpoints = false,
   }) {
-    return SmartScaler.scale(
+    return ResponsiveHelper.scale(
       baseFontSize,
       context,
       useBreakpoints: useBreakpoints,

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 /// Smart Responsive System
 /// =============================================================
 
-class SmartScaler {
-  SmartScaler._();
+class ResponsiveHelper {
+  ResponsiveHelper._();
 
   static late double _deviceWidth;
   static late double _deviceHeight;
