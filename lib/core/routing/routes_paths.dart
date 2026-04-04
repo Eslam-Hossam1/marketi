@@ -10,4 +10,5 @@ abstract class RoutePaths {
   static const profile = "/profile";
   static const editProfile = "/edit_profile";
   static const themeSelection = "/theme_selection";
+  static const main = "/main";
 }

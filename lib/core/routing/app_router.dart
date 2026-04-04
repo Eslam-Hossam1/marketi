@@ -18,7 +18,7 @@ class AppRouter {
 
   static final router = GoRouter(
     redirect: routerRedirect.redirect,
-    initialLocation: RoutePaths.initialRoute,
+    initialLocation: RoutePaths.home,
     navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: AppRoutes.routes,
