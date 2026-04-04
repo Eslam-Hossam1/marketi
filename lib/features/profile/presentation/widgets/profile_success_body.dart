@@ -22,7 +22,7 @@ class ProfileSuccessBody extends StatelessWidget {
           ),
         ),
         const SliverHeightSpace(height: 24),
-        const SliverToBoxAdapter(child: ProfileSettingsList()),
+        SliverToBoxAdapter(child: ProfileSettingsList()),
       ],
     );
   }

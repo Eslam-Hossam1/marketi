@@ -8,13 +8,17 @@ import 'package:marketi/features/edit_profile/presentation/manager/edit_profile/
 import 'package:marketi/features/edit_profile/presentation/views/edit_profile_view.dart';
 import 'package:marketi/features/profile/domain/entities/user_profile_entity.dart';
 import 'package:marketi/features/profile/presentation/views/profile_view.dart';
-
+import 'package:marketi/features/theme_selection/presentation/views/theme_selection_view.dart';
 
 class ProfileRoute {
   static List<GoRoute> routes = [
     GoRoute(
       path: RoutePaths.profile,
       builder: (context, state) => const ProfileView(),
+    ),
+    GoRoute(
+      path: RoutePaths.themeSelection,
+      builder: (context, state) => const ThemeSelectionView(),
     ),
     GoRoute(
       path: RoutePaths.editProfile,
