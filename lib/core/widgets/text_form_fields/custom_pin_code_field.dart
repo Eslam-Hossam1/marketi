@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
-import 'package:marketi/core/utils/smart_scaler.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
+import 'package:marketi/core/utils/responsive_helper.dart';
 import '../../theme/app_text_styles.dart';
 import '../../theme/theme_colors_extension.dart';
 import '../../utils/form_validators.dart';
@@ -50,6 +50,6 @@ class CustomPinCodeField extends StatelessWidget {
 
   double getFieldWidth(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    return (48 * (width / SmartScaler.mobileDesignWidth)).clamp(18, 100);
+    return (48 * (width / ResponsiveHelper.mobileDesignWidth)).clamp(18, 100);
   }
 }

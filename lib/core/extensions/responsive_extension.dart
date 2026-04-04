@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/utils/smart_scaler.dart';
+import 'package:marketi/core/utils/responsive_helper.dart';
 
-extension SmartScaleExtension on num {
+extension ResponsiveExtension on num {
   double w(
     BuildContext context, {
     bool useBreakpoints = false,
     double? lowerLimitRatio,
     double? upperLimitRatio,
-  }) => SmartScaler.w(
+  }) => ResponsiveHelper.w(
     toDouble(),
     context,
     useBreakpoints: useBreakpoints,
@@ -19,7 +19,7 @@ extension SmartScaleExtension on num {
     bool useBreakpoints = false,
     double? lowerLimitRatio,
     double? upperLimitRatio,
-  }) => SmartScaler.h(
+  }) => ResponsiveHelper.h(
     toDouble(),
     context,
     useBreakpoints: useBreakpoints,
@@ -31,7 +31,7 @@ extension SmartScaleExtension on num {
     bool useBreakpoints = false,
     double? lowerLimitRatio,
     double? upperLimitRatio,
-  }) => SmartScaler.r(
+  }) => ResponsiveHelper.r(
     toDouble(),
     context,
     useBreakpoints: useBreakpoints,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/smart_scale_extension.dart';
+import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/widgets/custom_back_button_with_title_header.dart';
 import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
 import 'package:marketi/core/widgets/sliver_sticky_footer.dart';
