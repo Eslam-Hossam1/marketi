@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/home/presentation/widgets/home_section_header.dart';
-import 'package:marketi/features/home/presentation/widgets/home_product_card.dart';
+import 'package:marketi/features/home/domain/entities/product_entity.dart';
+import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
+import 'package:marketi/features/home/presentation/widgets/home_product_card/home_product_card.dart';
 
 class HomeBuyAgainList extends StatelessWidget {
-  const HomeBuyAgainList({super.key});
+  final List<ProductEntity> products;
+  const HomeBuyAgainList({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +20,13 @@ class HomeBuyAgainList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return const HomeProductCard(
-                name: "Black Sony Headphone",
-                imageUrl: "https://images.unsplash.com/photo-1767418255600-d984f5e48292?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3", // placeholder
-                price: 399,
-                rating: 4.5,
+              return HomeProductCard(
+                product: products[index],
                 hasAddButton: true,
               );
             },
             separatorBuilder: (context, index) => const SizedBox(width: 16),
-            itemCount: 5,
+            itemCount: products.length,
           ),
         ),
       ],

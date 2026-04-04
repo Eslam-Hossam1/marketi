@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/home/presentation/widgets/home_section_header.dart';
-import 'package:marketi/features/home/presentation/widgets/home_product_card.dart';
+import 'package:marketi/features/home/domain/entities/product_entity.dart';
+import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
+import 'package:marketi/features/home/presentation/widgets/home_product_card/home_product_card.dart';
 
 class HomePopularProductsList extends StatelessWidget {
-  const HomePopularProductsList({super.key});
+  final List<ProductEntity> products;
+  const HomePopularProductsList({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,12 @@ class HomePopularProductsList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return const HomeProductCard(
-                name: "Smart Watch",
-                imageUrl:
-                    "https://images.unsplash.com/photo-1767418255600-d984f5e48292?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3", // placeholder
-                price: 499,
-                rating: 4.9,
-                discount: "15% OFF",
+              return HomeProductCard(
+                product: products[index],
               );
             },
             separatorBuilder: (context, index) => const SizedBox(width: 16),
-            itemCount: 5,
+            itemCount: products.length,
           ),
         ),
       ],

@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/home/presentation/widgets/home_section_header.dart';
-import 'package:marketi/features/home/presentation/widgets/category_item.dart';
+import 'package:marketi/features/home/domain/entities/category_entity.dart';
+import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
+import 'package:marketi/features/home/presentation/widgets/categories/category_item.dart';
 
 class HomeCategoriesGrid extends StatelessWidget {
-  const HomeCategoriesGrid({super.key});
+  final List<CategoryEntity> categories;
+  const HomeCategoriesGrid({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      "Pampers",
-      "Electronics",
-      "Plants",
-      "Phones",
-      "Food",
-      "Fashion"
-    ];
-
     return Column(
       children: [
         const HomeSectionHeader(title: "Category"),
@@ -28,8 +21,7 @@ class HomeCategoriesGrid extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return CategoryItem(
-                name: categories[index],
-                imageUrl: "https://images.unsplash.com/photo-1767418255600-d984f5e48292?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3", // placeholder
+                category: categories[index],
               );
             },
             separatorBuilder: (context, index) => const SizedBox(width: 24),

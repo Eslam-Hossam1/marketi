@@ -4,11 +4,22 @@ import 'package:marketi/features/edit_profile/data/repos/edit_profile_repo_impl.
 import 'package:marketi/features/edit_profile/domain/repos/edit_profile_repo.dart';
 import 'package:marketi/features/edit_profile/domain/usecases/add_image_use_case.dart';
 import 'package:marketi/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
+import 'package:marketi/features/home/data/datasources/home_remote_data_source/home_remote_data_source.dart';
+import 'package:marketi/features/home/data/datasources/home_remote_data_source/home_remote_data_source_impl.dart';
+import 'package:marketi/features/home/data/repos/home_repo_impl.dart';
+import 'package:marketi/features/home/domain/repos/home_repo.dart';
+import 'package:marketi/features/home/domain/usecases/get_brands_use_case.dart';
+import 'package:marketi/features/home/domain/usecases/get_categories_use_case.dart';
+import 'package:marketi/features/home/domain/usecases/get_products_use_case.dart';
 import 'package:marketi/core/services/image_picker_service/cropped_image_picker_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
-import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
+import 'package:marketi/features/home/presentation/manager/best_for_you_products_cubit/best_for_you_products_cubit.dart';
+import 'package:marketi/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
+import 'package:marketi/features/home/presentation/manager/buy_again_products_cubit/buy_again_products_cubit.dart';
+import 'package:marketi/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
+import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
 import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
 import 'package:marketi/features/otp/data/repos/otp_repo_impl.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
@@ -52,6 +63,7 @@ Future<void> setupServiceLocator() async {
   _setupOtp();
   _setupProfile();
   _setupEditProfile();
+  _setupHome();
 }
 
 void _setupEditProfile() {
@@ -91,9 +103,6 @@ void _setupProfile() {
     () => GetUserDataUseCase(getIt<ProfileRepo>()),
   );
 
-  getIt.registerFactory<ProfileCubit>(
-    () => ProfileCubit(getIt<GetUserDataUseCase>()),
-  );
 }
 
 void _setupOtp() {
@@ -186,5 +195,47 @@ void _setupForgotPassword() {
 
   getIt.registerFactory<ResetPasswordCubit>(
     () => ResetPasswordCubit(getIt<ResetPasswordUseCase>()),
+  );
+}
+
+void _setupHome() {
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(),
+  );
+
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(homeRemoteDataSource: getIt()),
+  );
+
+  getIt.registerLazySingleton<GetBrandsUseCase>(
+    () => GetBrandsUseCase(getIt()),
+  );
+
+  getIt.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(getIt()),
+  );
+
+  getIt.registerLazySingleton<GetProductsUseCase>(
+    () => GetProductsUseCase(getIt()),
+  );
+
+  getIt.registerFactory<BrandsCubit>(
+    () => BrandsCubit(getIt()),
+  );
+
+  getIt.registerFactory<CategoriesCubit>(
+    () => CategoriesCubit(getIt()),
+  );
+
+  getIt.registerFactory<PopularProductsCubit>(
+    () => PopularProductsCubit(getIt()),
+  );
+
+  getIt.registerFactory<BestForYouProductsCubit>(
+    () => BestForYouProductsCubit(getIt()),
+  );
+
+  getIt.registerFactory<BuyAgainProductsCubit>(
+    () => BuyAgainProductsCubit(getIt()),
   );
 }
