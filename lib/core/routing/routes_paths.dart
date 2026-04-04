@@ -9,4 +9,5 @@ abstract class RoutePaths {
   static const otp = "/otp";
   static const profile = "/profile";
   static const editProfile = "/edit_profile";
+  static const themeSelection = "/theme_selection";
 }

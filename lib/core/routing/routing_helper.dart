@@ -16,4 +16,8 @@ abstract class RoutingHelper {
   }) {
     return context.push<T>(RoutePaths.editProfile, extra: userProfile);
   }
+
+  static void pushThemeSelection(BuildContext context) {
+    context.push(RoutePaths.themeSelection);
+  }
 }
