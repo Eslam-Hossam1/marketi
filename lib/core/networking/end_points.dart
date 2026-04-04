@@ -10,4 +10,6 @@ abstract class EndPoints {
 
   // Profile
   static const String userData = "/portfoilo/userData";
+  static const String editUserData = "/portfoilo/editUserData";
+  static const String addImage = "/portfoilo/addImage";
 }
