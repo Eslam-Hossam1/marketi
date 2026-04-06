@@ -9,6 +9,7 @@ class ResponsiveHelper {
 
   static late double _deviceWidth;
   static late double _deviceHeight;
+  static late double _shortestSide;
   static late Orientation _orientation;
 
   // Design Sizes
@@ -22,12 +23,13 @@ class ResponsiveHelper {
 
   static void init(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-
+    _shortestSide = size.shortestSide;
+    _orientation = MediaQuery.orientationOf(context);
     // If shortest side is less than mobileMax, it's a mobile device
-    if (size.shortestSide < mobileMax) {
+    if (_shortestSide < mobileMax) {
       // Mobile: always use min dimension for width to scale consistently
-      _deviceWidth = size.shortestSide;
-      _deviceHeight = size.longestSide;
+      _deviceWidth = _shortestSide;
+      _deviceHeight = _shortestSide;
     } else {
       // Tablet/Desktop: use actual width for adaptive scaling
       _deviceWidth = size.width;
@@ -39,10 +41,10 @@ class ResponsiveHelper {
   // DEVICE TYPE
   // -------------------------------------------------------------
 
-  static bool get isMobile => _deviceWidth < mobileMax;
+  static bool get isMobile => _shortestSide < mobileMax;
   static bool get isTablet =>
-      _deviceWidth >= mobileMax && _deviceWidth < tabletMax;
-  static bool get isDesktop => _deviceWidth >= tabletMax;
+      _shortestSide >= mobileMax && _shortestSide < tabletMax;
+  static bool get isDesktop => _shortestSide >= tabletMax;
 
   // -------------------------------------------------------------
   // ORIENTATION
@@ -74,7 +76,7 @@ class ResponsiveHelper {
     init(context);
     // Scale MODE (NO BREAKPOINTS)
     if (!useBreakpoints) {
-      final scale = _deviceWidth / mobileDesignWidth;
+      final scale = _shortestSide / mobileDesignWidth;
       return size *
           scale.clamp(lowerLimitRatio ?? 0.75, upperLimitRatio ?? 1.5);
     }
