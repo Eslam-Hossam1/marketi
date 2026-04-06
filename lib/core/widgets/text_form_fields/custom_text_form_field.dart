@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:marketi/core/utils/form_validators.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -39,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isObscureText,
     this.suffixIcon,
     this.backgroundColor,
-    this.validator,
+    this.validator = FormValidators.customTextFormFieldValidator,
     this.prefixIcon,
     this.keyboardType,
     this.maxLines,
