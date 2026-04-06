@@ -27,7 +27,9 @@ class BrandItem extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             brand.name,
-            style: AppTextStyles.medium12(context),
+            style: AppTextStyles.medium12(
+              context,
+            ).copyWith(color: context.mainTextColor),
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

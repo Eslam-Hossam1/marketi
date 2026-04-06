@@ -63,8 +63,8 @@ class ProductCardImage extends StatelessWidget {
             right: 8,
             child: Container(
               padding: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: context.scaffoldBackgroundColor,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -77,7 +77,7 @@ class ProductCardImage extends StatelessWidget {
               child: Icon(
                 Icons.favorite_border,
                 size: 18.w(context),
-                color: const Color(0xFF0D1B3E),
+                color: context.mainTextColor,
               ),
             ),
           ),

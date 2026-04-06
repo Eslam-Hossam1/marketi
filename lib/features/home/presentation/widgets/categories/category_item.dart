@@ -37,9 +37,9 @@ class CategoryItem extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           category.name,
-          style: AppTextStyles.bold16(context).copyWith(
-            color: const Color(0xFF0D1B3E), // Dark navy from image
-          ),
+          style: AppTextStyles.bold16(
+            context,
+          ).copyWith(color: context.mainTextColor),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

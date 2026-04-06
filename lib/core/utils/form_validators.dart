@@ -61,6 +61,9 @@ abstract class FormValidators {
     if (isValueEmpty(value)) {
       return 'Please enter your phone number';
     }
+    if (!AppRegex.isPhoneNumberValid(value!)) {
+      return 'Please enter a valid phone number';
+    }
     return null;
   }
 

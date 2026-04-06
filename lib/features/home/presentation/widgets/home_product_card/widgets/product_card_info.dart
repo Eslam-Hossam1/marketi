@@ -27,23 +27,23 @@ class ProductCardInfo extends StatelessWidget {
             children: [
               Text(
                 "${product.price.toInt()} LE",
-                style: AppTextStyles.bold14(context).copyWith(
-                  color: const Color(0xFF0D1B3E),
-                ),
+                style: AppTextStyles.bold14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
               Row(
                 children: [
                   Icon(
                     Icons.star_border,
                     size: 18.w(context),
-                    color: const Color(0xFF0D1B3E),
+                    color: context.mainTextColor,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     product.rating.toString(),
                     style: AppTextStyles.medium14(
                       context,
-                    ).copyWith(color: const Color(0xFF0D1B3E)),
+                    ).copyWith(color: context.mainTextColor),
                   ),
                 ],
               ),
@@ -57,7 +57,7 @@ class ProductCardInfo extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.bold14(
               context,
-            ).copyWith(color: const Color(0xFF0D1B3E)),
+            ).copyWith(color: context.mainTextColor),
           ),
           if (hasAddButton) ...[
             const SizedBox(height: 10),

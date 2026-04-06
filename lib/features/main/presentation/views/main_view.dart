@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/features/home/presentation/views/home_view.dart';
-import 'package:marketi/features/profile/presentation/views/profile_view.dart';
 
-class MainView extends StatefulWidget {
-  const MainView({super.key});
+class MainView extends StatelessWidget {
+  const MainView({super.key, required this.navigationShell});
 
-  @override
-  State<MainView> createState() => _MainViewState();
-}
+  final StatefulNavigationShell navigationShell;
 
-class _MainViewState extends State<MainView> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomeView(),
-    const Scaffold(body: Center(child: Text("Cart"))),
-    const Scaffold(body: Center(child: Text("Favorites"))),
-    const ProfileView(),
-  ];
+  void _onTap(int index) {
+    navigationShell.goBranch(
+      index,
+      // Re-tap on the active branch pops back to its initial route
+      initialLocation: index == navigationShell.currentIndex,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        currentIndex: navigationShell.currentIndex,
+        backgroundColor: context.scaffoldBackgroundColor,
+        onTap: _onTap,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: context.primaryColor,
         unselectedItemColor: context.secondaryTextColor,
@@ -38,21 +30,22 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-            label: "Home",
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),
             activeIcon: Icon(Icons.shopping_cart),
-            label: "Cart",
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
-            label: "Favorites",
+            label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: "Menu",
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

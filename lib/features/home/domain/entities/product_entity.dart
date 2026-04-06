@@ -8,7 +8,7 @@ class ProductEntity {
   final double rating;
   final int stock;
   final List<String> tags;
-  final String brand;
+  final String? brand;
   final String? sku;
   final String? availabilityStatus;
   final List<String> images;
@@ -24,7 +24,7 @@ class ProductEntity {
     required this.rating,
     required this.stock,
     required this.tags,
-    required this.brand,
+    this.brand,
     this.sku,
     this.availabilityStatus,
     required this.images,

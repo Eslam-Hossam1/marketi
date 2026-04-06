@@ -9,6 +9,8 @@ import 'package:marketi/features/home/domain/entities/products_entity.dart';
 import 'package:marketi/features/home/domain/params/product_params.dart';
 import 'package:marketi/features/home/domain/repos/home_repo.dart';
 
+import '../models/product_request_model.dart';
+
 class HomeRepoImpl implements HomeRepo {
   final HomeRemoteDataSource _homeRemoteDataSource;
 
@@ -47,7 +49,9 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<ApiFailure, ProductsEntity>> getProducts(
       ProductParams params) async {
     try {
-      final productsResponse = await _homeRemoteDataSource.getProducts(params);
+      final productsResponse = await _homeRemoteDataSource.getProducts(
+        ProductRequestModel.fromParams(params),
+      );
       return Right(productsResponse);
     } on DioException catch (e) {
       return Left(DioApiFailure.fromDioException(e));

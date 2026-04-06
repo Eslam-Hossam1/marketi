@@ -30,6 +30,7 @@ class CustomFailureMessageWithButton extends StatelessWidget {
           ),
           SizedBox(height: 24.h(context)),
           CustomButton(
+            height: 60.h(context),
             onPressed: onPressed,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
