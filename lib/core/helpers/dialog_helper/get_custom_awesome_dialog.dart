@@ -42,15 +42,18 @@ AwesomeDialog getCustomAwesomeDialog(
     dismissOnBackKeyPress: dismissOnBackKeyPress,
     dismissOnTouchOutside: dismissOnTouchOutside,
     onDismissCallback: onDismissCallback,
+
     width: getAwesomeDialogAdaptiveWidth(context),
   );
 }
 
 double getAwesomeDialogAdaptiveWidth(BuildContext context) {
   double width = MediaQuery.sizeOf(context).width;
-  if (ResponsiveHelper.isTablet) {
+  if (ResponsiveHelper.isMobileLandscape) {
+    return width * .8;
+  } else if (ResponsiveHelper.isMobile) {
     return width * .9;
   } else {
-    return (width - (width * .20 * 2)) * .8;
+    return width * .7;
   }
 }
