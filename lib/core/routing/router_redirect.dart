@@ -37,7 +37,7 @@ class RouterRedirect {
       return RoutePaths.onboarding;
     } else {
       return _authCredentialsManager.userIsAuthenticated()
-          ? RoutePaths.main
+          ? RoutePaths.home
           : RoutePaths.login;
     }
   }
