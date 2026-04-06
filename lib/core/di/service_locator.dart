@@ -200,7 +200,7 @@ void _setupForgotPassword() {
 
 void _setupHome() {
   getIt.registerLazySingleton<HomeRemoteDataSource>(
-    () => HomeRemoteDataSourceImpl(),
+    () => HomeRemoteDataSourceImpl(getIt<ApiConsumer>()),
   );
 
   getIt.registerLazySingleton<HomeRepo>(
