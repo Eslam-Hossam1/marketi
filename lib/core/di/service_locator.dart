@@ -15,9 +15,7 @@ import 'package:marketi/core/services/image_picker_service/cropped_image_picker_
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
-import 'package:marketi/features/home/presentation/manager/best_for_you_products_cubit/best_for_you_products_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
-import 'package:marketi/features/home/presentation/manager/buy_again_products_cubit/buy_again_products_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
 import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
@@ -229,13 +227,5 @@ void _setupHome() {
 
   getIt.registerFactory<PopularProductsCubit>(
     () => PopularProductsCubit(getIt()),
-  );
-
-  getIt.registerFactory<BestForYouProductsCubit>(
-    () => BestForYouProductsCubit(getIt()),
-  );
-
-  getIt.registerFactory<BuyAgainProductsCubit>(
-    () => BuyAgainProductsCubit(getIt()),
   );
 }
