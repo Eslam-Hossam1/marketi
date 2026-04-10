@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/home/domain/entities/brand_entity.dart';
+import 'package:marketi/core/entities/brand_entity.dart';
+import 'package:marketi/core/routing/routes_paths.dart';
 import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
 import 'package:marketi/features/home/presentation/widgets/brands/brand_item.dart';
 
@@ -12,7 +14,10 @@ class HomeBrandsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const HomeSectionHeader(title: "Brands"),
+        HomeSectionHeader(
+          title: "Brands",
+          onViewAllPressed: () => context.push(RoutePaths.brands),
+        ),
         const SizedBox(height: 16),
         SizedBox(
           height: 100.h(context),
@@ -20,9 +25,7 @@ class HomeBrandsList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return BrandItem(
-                brand: brands[index],
-              );
+              return BrandItem(brand: brands[index]);
             },
             separatorBuilder: (context, index) => const SizedBox(width: 16),
             itemCount: brands.length,

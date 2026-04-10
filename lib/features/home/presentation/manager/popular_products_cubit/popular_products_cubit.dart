@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/product_entity.dart';
-import '../../../domain/params/product_params.dart';
-import '../../../domain/usecases/get_products_use_case.dart';
+import 'package:marketi/core/entities/product_entity.dart';
+import 'package:marketi/core/params/product_params.dart';
+import 'package:marketi/features/products/domain/usecases/get_products_use_case.dart';
 import 'popular_products_state.dart';
 
 class PopularProductsCubit extends Cubit<PopularProductsState> {

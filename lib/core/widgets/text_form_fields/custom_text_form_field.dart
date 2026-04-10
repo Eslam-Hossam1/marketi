@@ -51,13 +51,16 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled,
     this.readOnly,
     this.border,
+    this.autoFocus,
   });
   final String? errorText;
   final FocusNode? focusNode;
   final String? prefixSvgPath;
+  final bool? autoFocus;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: autoFocus ?? false,
       initialValue: initialValue,
       onSaved: onSaved,
       onChanged: onChanged,

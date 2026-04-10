@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/home/domain/entities/category_entity.dart';
+import 'package:marketi/core/entities/category_entity.dart';
 import 'package:marketi/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/categories_cubit/categories_state.dart';
 import 'package:marketi/features/home/presentation/widgets/categories/home_categories_grid.dart';
@@ -20,7 +20,7 @@ class CategoriesBuilder extends StatelessWidget {
           );
         } else if (state is CategoriesError) {
           return CustomFailureMessageWithButton(
-            message: state.message,
+            failureMessage: state.message,
             onPressed: () {
               context.read<CategoriesCubit>().getCategories();
             },

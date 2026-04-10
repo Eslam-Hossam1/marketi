@@ -16,4 +16,8 @@ abstract class RoutePaths {
   // Full-screen routes (pushed on root navigator, no bottom nav)
   static const editProfile = "/edit_profile";
   static const themeSelection = "/theme_selection";
+  static const products = "/products";
+  static const brands = "/brands";
+  static const categories = "/categories";
+  static const search = "/search";
 }

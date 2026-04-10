@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/home/domain/entities/product_entity.dart';
+import 'package:marketi/core/entities/product_entity.dart';
 import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_state.dart';
 import 'package:marketi/features/home/presentation/widgets/popular_products/home_popular_products_list.dart';
@@ -20,7 +20,7 @@ class PopularProductsBuilder extends StatelessWidget {
           );
         } else if (state is PopularProductsError) {
           return CustomFailureMessageWithButton(
-            message: state.message,
+            failureMessage: state.message,
             onPressed: () {
               context.read<PopularProductsCubit>().getPopularProducts();
             },

@@ -7,11 +7,11 @@ import 'package:marketi/core/widgets/buttons/custom_button.dart';
 class CustomFailureMessageWithButton extends StatelessWidget {
   const CustomFailureMessageWithButton({
     super.key,
-    required this.message,
+    required this.failureMessage,
     this.btnText,
     required this.onPressed,
   });
-  final String message;
+  final String failureMessage;
   final String? btnText;
   final VoidCallback onPressed;
   @override
@@ -23,7 +23,7 @@ class CustomFailureMessageWithButton extends StatelessWidget {
         children: [
           Text(
             textAlign: TextAlign.center,
-            message,
+            failureMessage,
             style: AppTextStyles.semiBold16(
               context,
             ).copyWith(color: context.mainTextColor),

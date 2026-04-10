@@ -4,7 +4,8 @@ import 'package:marketi/core/theme/theme_colors_extension.dart';
 
 class HomeSectionHeader extends StatelessWidget {
   final String title;
-  const HomeSectionHeader({super.key, required this.title});
+  final VoidCallback? onViewAllPressed;
+  const HomeSectionHeader({super.key, required this.title, this.onViewAllPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,13 @@ class HomeSectionHeader extends StatelessWidget {
               color: context.mainTextColor,
             ),
           ),
-          Text(
-            "View all",
-            style: AppTextStyles.medium16(context).copyWith(
-              color: context.primaryColor,
+          GestureDetector(
+            onTap: onViewAllPressed,
+            child: Text(
+              "View all",
+              style: AppTextStyles.medium16(context).copyWith(
+                color: context.primaryColor,
+              ),
             ),
           ),
         ],

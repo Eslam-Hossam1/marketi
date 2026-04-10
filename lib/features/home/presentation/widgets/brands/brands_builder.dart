@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/home/domain/entities/brand_entity.dart';
+import 'package:marketi/core/entities/brand_entity.dart';
 import 'package:marketi/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
 import 'package:marketi/features/home/presentation/manager/brands_cubit/brands_state.dart';
 import 'package:marketi/features/home/presentation/widgets/brands/home_brands_list.dart';
@@ -18,7 +18,7 @@ class BrandsBuilder extends StatelessWidget {
           return HomeBrandsList(brands: context.read<BrandsCubit>().brands!);
         } else if (state is BrandsError) {
           return CustomFailureMessageWithButton(
-            message: state.message,
+            failureMessage: state.message,
             onPressed: () {
               context.read<BrandsCubit>().getBrands();
             },
