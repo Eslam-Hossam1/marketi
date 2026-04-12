@@ -21,7 +21,7 @@ class ProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProductsCubit(getIt<GetProductsUseCase>())
-        ..getProducts(
+        ..firstFetchProducts(
           categoryId: categoryId,
           brandId: brandId,
         ),

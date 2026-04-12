@@ -1,39 +1,48 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/entities/product_entity.dart';
 import 'package:marketi/core/params/product_params.dart';
+import 'package:marketi/core/utils/constants.dart';
 import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
 import 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   final SearchProductsUseCase _searchProductsUseCase;
 
-  SearchCubit(this._searchProductsUseCase) : super(const SearchInitial());
+  SearchCubit(this._searchProductsUseCase) : super(SearchInitial());
 
-  List<ProductEntity> allProducts = [];
+  List<ProductEntity> products = [];
   int skip = 0;
-  final int limit = 10;
-  bool isFetching = false;
+  final int limit = Constants.productsLimit;
+  bool isLoading = false;
+  bool hasMoreData = true;
   String currentSearchQuery = "";
 
-  Future<void> searchProducts(String query, {bool isLoadMore = false}) async {
+  Future<void> firstFetchSearch(String query) async {
     if (query.isEmpty) {
-      allProducts.clear();
+      products.clear();
       skip = 0;
-      emit(const SearchInitial());
+      currentSearchQuery = "";
+      emit(SearchInitial());
       return;
     }
 
-    if (isFetching) return;
-    isFetching = true;
+    currentSearchQuery = query;
+    products.clear();
+    skip = 0;
+    hasMoreData = true;
+    emit(SearchFirstLoading());
+    await _fetchSearch();
+  }
 
-    if (!isLoadMore) {
-      allProducts.clear();
-      skip = 0;
-      currentSearchQuery = query;
-      emit(const SearchLoading());
-    } else {
-      emit(SearchPaginationLoading(allProducts));
-    }
+  Future<void> fetchMoreSearch() async {
+    if (isLoading || !hasMoreData || currentSearchQuery.isEmpty) return;
+    emit(SearchLoadingMore());
+    await _fetchSearch();
+  }
+
+  Future<void> _fetchSearch() async {
+    if (isLoading) return;
+    isLoading = true;
 
     final result = await _searchProductsUseCase(ProductParams(
       skip: skip,
@@ -43,25 +52,30 @@ class SearchCubit extends Cubit<SearchState> {
 
     result.fold(
       (failure) {
-        if (!isLoadMore) {
-          emit(SearchError(failure.errMsg));
+        isLoading = false;
+        if (products.isEmpty) {
+          emit(SearchFirstFetchFailure(errorMessage: failure.errMsg));
         } else {
-          emit(SearchPaginationError(
-            products: allProducts,
-            message: failure.errMsg,
-          ));
+          emit(SearchLoadingMoreFailure(errorMessage: failure.errMsg));
         }
       },
       (productsEntity) {
-        allProducts.addAll(productsEntity.list);
+        if (productsEntity.list.isEmpty && products.isEmpty) {
+          hasMoreData = false;
+          isLoading = false;
+          emit(SearchEmpty());
+          return;
+        }
+
+        if (productsEntity.list.length < limit) {
+          hasMoreData = false;
+        }
+
+        products.addAll(productsEntity.list);
         skip += limit;
-        emit(SearchLoaded(
-          products: List.from(allProducts),
-          hasReachedMax: productsEntity.list.length < limit,
-        ));
+        isLoading = false;
+        emit(SearchSuccess());
       },
     );
-
-    isFetching = false;
   }
 }

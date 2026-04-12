@@ -1,35 +1,36 @@
-import 'package:marketi/core/entities/product_entity.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class SearchState {
+sealed class SearchState extends Equatable {
   const SearchState();
+
+  @override
+  List<Object> get props => [];
 }
 
-class SearchInitial extends SearchState {
-  const SearchInitial();
+final class SearchInitial extends SearchState {}
+
+final class SearchFirstLoading extends SearchState {}
+
+final class SearchSuccess extends SearchState {}
+
+final class SearchLoadingMore extends SearchState {}
+
+final class SearchFirstFetchFailure extends SearchState {
+  final String errorMessage;
+
+  const SearchFirstFetchFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }
 
-class SearchLoading extends SearchState {
-  const SearchLoading();
+final class SearchLoadingMoreFailure extends SearchState {
+  final String errorMessage;
+
+  const SearchLoadingMoreFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }
 
-class SearchPaginationLoading extends SearchState {
-  final List<ProductEntity> products;
-  const SearchPaginationLoading(this.products);
-}
-
-class SearchLoaded extends SearchState {
-  final List<ProductEntity> products;
-  final bool hasReachedMax;
-  const SearchLoaded({required this.products, required this.hasReachedMax});
-}
-
-class SearchError extends SearchState {
-  final String message;
-  const SearchError(this.message);
-}
-
-class SearchPaginationError extends SearchState {
-  final List<ProductEntity> products;
-  final String message;
-  const SearchPaginationError({required this.products, required this.message});
-}
+final class SearchEmpty extends SearchState {}

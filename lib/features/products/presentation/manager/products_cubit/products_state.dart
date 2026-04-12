@@ -1,35 +1,36 @@
-import 'package:marketi/core/entities/product_entity.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class ProductsState {
+sealed class ProductsState extends Equatable {
   const ProductsState();
+
+  @override
+  List<Object> get props => [];
 }
 
-class ProductsInitial extends ProductsState {
-  const ProductsInitial();
+final class ProductsInitial extends ProductsState {}
+
+final class ProductsFirstLoading extends ProductsState {}
+
+final class ProductsSuccess extends ProductsState {}
+
+final class ProductsLoadingMore extends ProductsState {}
+
+final class ProductsFirstFetchFailure extends ProductsState {
+  final String errorMessage;
+
+  const ProductsFirstFetchFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }
 
-class ProductsLoading extends ProductsState {
-  const ProductsLoading();
+final class ProductsLoadingMoreFailure extends ProductsState {
+  final String errorMessage;
+
+  const ProductsLoadingMoreFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }
 
-class ProductsPaginationLoading extends ProductsState {
-  final List<ProductEntity> products;
-  const ProductsPaginationLoading(this.products);
-}
-
-class ProductsLoaded extends ProductsState {
-  final List<ProductEntity> products;
-  final bool hasReachedMax;
-  const ProductsLoaded({required this.products, required this.hasReachedMax});
-}
-
-class ProductsError extends ProductsState {
-  final String message;
-  const ProductsError(this.message);
-}
-
-class ProductsPaginationError extends ProductsState {
-  final List<ProductEntity> products;
-  final String message;
-  const ProductsPaginationError({required this.products, required this.message});
-}
+final class ProductsEmpty extends ProductsState {}
