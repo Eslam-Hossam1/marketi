@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/entities/product_entity.dart';
+import 'package:marketi/core/routing/routing_helper.dart';
 import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
 import 'package:marketi/core/widgets/product/product_card.dart';
 
@@ -12,7 +13,12 @@ class HomePopularProductsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const HomeSectionHeader(title: "Popular Product"),
+        HomeSectionHeader(
+          title: "Popular Products",
+          onViewAllPressed: () {
+            RoutingHelper.pushProducts(context, title: "Popular Products");
+          },
+        ),
         const SizedBox(height: 16),
         SizedBox(
           height: 230.h(context),
@@ -20,8 +26,9 @@ class HomePopularProductsList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return ProductCard(
-                product: products[index],
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: ProductCard(product: products[index]),
               );
             },
             separatorBuilder: (context, index) => const SizedBox(width: 16),

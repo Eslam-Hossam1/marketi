@@ -36,4 +36,8 @@ abstract class RoutingHelper {
   }) {
     context.push(RoutePaths.brandProducts, extra: params.toJson());
   }
+
+  static void pushProducts(BuildContext context, {String title = 'Products'}) {
+    context.push(RoutePaths.products, extra: {'title': title});
+  }
 }
