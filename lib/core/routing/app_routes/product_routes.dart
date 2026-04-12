@@ -13,8 +13,6 @@ class ProductRoutes {
         final extra = state.extra as Map<String, dynamic>?;
         return ProductsView(
           title: extra?['title'] ?? 'Products',
-          categoryId: extra?['categoryId'],
-          brandId: extra?['brandId'],
         );
       },
     ),

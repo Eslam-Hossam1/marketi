@@ -7,24 +7,14 @@ import '../widgets/products_view_body.dart';
 
 class ProductsView extends StatelessWidget {
   final String title;
-  final String? categoryId;
-  final String? brandId;
 
-  const ProductsView({
-    super.key,
-    required this.title,
-    this.categoryId,
-    this.brandId,
-  });
+  const ProductsView({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProductsCubit(getIt<GetProductsUseCase>())
-        ..firstFetchProducts(
-          categoryId: categoryId,
-          brandId: brandId,
-        ),
+        ..firstFetchProducts(),
       child: Scaffold(
         body: SafeArea(
           child: ProductsViewBody(title: title),

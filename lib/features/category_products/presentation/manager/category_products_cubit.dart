@@ -2,31 +2,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/entities/product_entity.dart';
 import 'package:marketi/core/params/product_params.dart';
 import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/features/products/domain/usecases/get_products_use_case.dart';
-import 'products_state.dart';
+import 'package:marketi/features/category_products/domain/usecases/get_category_products_use_case.dart';
+import 'category_products_state.dart';
 
-class ProductsCubit extends Cubit<ProductsState> {
-  final GetProductsUseCase _getProductsUseCase;
+class CategoryProductsCubit extends Cubit<CategoryProductsState> {
+  final GetCategoryProductsUseCase _getCategoryProductsUseCase;
 
-  ProductsCubit(this._getProductsUseCase) : super(ProductsInitial());
+  CategoryProductsCubit(this._getCategoryProductsUseCase) : super(CategoryProductsInitial());
 
   List<ProductEntity> products = [];
   int skip = 0;
   final int limit = Constants.productsLimit;
   bool isLoading = false;
   bool hasMoreData = true;
+  String categorySlug = "";
 
-  Future<void> firstFetchProducts() async {
+  Future<void> firstFetchProducts(String slug) async {
+    categorySlug = slug;
     products.clear();
     skip = 0;
     hasMoreData = true;
-    emit(ProductsFirstLoading());
+    emit(CategoryProductsFirstLoading());
     await _fetchProducts();
   }
 
   Future<void> fetchMoreProducts() async {
     if (isLoading || !hasMoreData) return;
-    emit(ProductsLoadingMore());
+    emit(CategoryProductsLoadingMore());
     await _fetchProducts();
   }
 
@@ -34,7 +36,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     products.clear();
     skip = 0;
     hasMoreData = true;
-    emit(ProductsFirstLoading());
+    emit(CategoryProductsFirstLoading());
     await _fetchProducts();
   }
 
@@ -42,25 +44,26 @@ class ProductsCubit extends Cubit<ProductsState> {
     if (isLoading) return;
     isLoading = true;
 
-    final result = await _getProductsUseCase(ProductParams(
+    final result = await _getCategoryProductsUseCase(ProductParams(
       skip: skip,
       limit: limit,
+      category: categorySlug,
     ));
 
     result.fold(
       (failure) {
         isLoading = false;
         if (products.isEmpty) {
-          emit(ProductsFirstFetchFailure(errorMessage: failure.errMsg));
+          emit(CategoryProductsFirstFetchFailure(errorMessage: failure.errMsg));
         } else {
-          emit(ProductsLoadingMoreFailure(errorMessage: failure.errMsg));
+          emit(CategoryProductsLoadingMoreFailure(errorMessage: failure.errMsg));
         }
       },
       (productsEntity) {
         if (productsEntity.list.isEmpty && products.isEmpty) {
           hasMoreData = false;
           isLoading = false;
-          emit(ProductsEmpty());
+          emit(CategoryProductsEmpty());
           return;
         }
 
@@ -71,7 +74,7 @@ class ProductsCubit extends Cubit<ProductsState> {
         products.addAll(productsEntity.list);
         skip += limit;
         isLoading = false;
-        emit(ProductsSuccess());
+        emit(CategoryProductsSuccess());
       },
     );
   }

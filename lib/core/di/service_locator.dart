@@ -36,6 +36,11 @@ import 'package:marketi/features/search/data/datasources/search_remote_data_sour
 import 'package:marketi/features/search/data/repos/search_repo_impl.dart';
 import 'package:marketi/features/search/domain/repos/search_repo.dart';
 import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
+import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source.dart';
+import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source_impl.dart';
+import 'package:marketi/features/category_products/data/repos/category_products_repo_impl.dart';
+import 'package:marketi/features/category_products/domain/repos/category_products_repo.dart';
+import 'package:marketi/features/category_products/domain/usecases/get_category_products_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,6 +76,7 @@ Future<void> setupServiceLocator() async {
   _setupBrands();
   _setupCategories();
   _setupSearch();
+  _setupCategoryProducts();
 }
 
 void _setupEditProfile() {
@@ -235,5 +241,17 @@ void _setupSearch() {
   );
   getIt.registerLazySingleton<SearchProductsUseCase>(
     () => SearchProductsUseCase(getIt<SearchRepo>()),
+  );
+}
+
+void _setupCategoryProducts() {
+  getIt.registerLazySingleton<CategoryProductsRemoteDataSource>(
+    () => CategoryProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<CategoryProductsRepo>(
+    () => CategoryProductsRepoImpl(getIt<CategoryProductsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetCategoryProductsUseCase>(
+    () => GetCategoryProductsUseCase(getIt<CategoryProductsRepo>()),
   );
 }

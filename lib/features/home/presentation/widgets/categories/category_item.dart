@@ -17,8 +17,8 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.push(
-          RoutePaths.products,
-          extra: {'title': category.name, 'categoryId': category.name},
+          RoutePaths.categoryProducts,
+          extra: {'title': category.name, 'categorySlug': category.slug},
         );
       },
       child: Column(

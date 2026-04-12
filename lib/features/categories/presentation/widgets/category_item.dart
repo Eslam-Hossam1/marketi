@@ -16,10 +16,10 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.push(
-          RoutePaths.products,
+          RoutePaths.categoryProducts,
           extra: {
             'title': category.name,
-            'categoryId': category.name, // The API uses the name as an identifier based on current home implementation
+            'categorySlug': category.slug,
           },
         );
       },
