@@ -14,25 +14,32 @@ class BrandsList extends StatelessWidget {
     return BlocBuilder<BrandsCubit, BrandsState>(
       builder: (context, state) {
         if (state is BrandsLoading) {
-          return const Center(child: CustomCircularProgressIndecator());
+          return const SliverFillRemaining(
+            child: Center(child: CustomCircularProgressIndecator()),
+          );
         } else if (state is BrandsError) {
-          return CustomFailureMessageWithButton(
-            failureMessage: state.message,
-            onPressed: () => context.read<BrandsCubit>().getBrands(),
+          return SliverFillRemaining(
+            hasScrollBody: false,
+            child: CustomFailureMessageWithButton(
+              failureMessage: state.message,
+              onPressed: () => context.read<BrandsCubit>().getBrands(),
+            ),
           );
         } else if (state is BrandsLoaded) {
           if (state.brands.isEmpty) {
-            return const Center(child: Text("No brands found."));
+            return const SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(child: Text("No brands found.")),
+            );
           }
-          return ListView.builder(
+          return SliverList.builder(
             itemCount: state.brands.length,
-            padding: const EdgeInsets.symmetric(vertical: 8),
             itemBuilder: (context, index) {
               return BrandItem(brand: state.brands[index]);
             },
           );
         }
-        return const SizedBox.shrink();
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );
   }

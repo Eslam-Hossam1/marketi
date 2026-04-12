@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
 import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:marketi/core/widgets/custom_header_with_image.dart';
 import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/core/widgets/spacing/width_space.dart';
-import 'package:go_router/go_router.dart';
 import '../manager/search_cubit/search_cubit.dart';
 import 'search_results_grid.dart';
 import 'search_scrolling_loading_indicator_builder.dart';
+import 'search_text_field.dart';
 
 class SearchViewBody extends StatefulWidget {
   const SearchViewBody({super.key});
@@ -43,50 +40,24 @@ class _SearchViewBodyState extends State<SearchViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const HeightSpace(height: 24),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () => context.pop(),
-                icon: Icon(
-                  Icons.arrow_back_ios_new,
-                  size: 20.w(context),
-                  color: context.primaryColor,
-                ),
-              ),
-              const WidthSpace(width: 8),
-              Expanded(
-                child: CustomTextFormField(
-                  hintText: "What are you looking for ?",
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: context.primaryColor,
-                    size: 20.w(context),
-                  ),
-                  autoFocus: true,
-                  onChanged: (value) {
-                    context.read<SearchCubit>().firstFetchSearch(value!);
-                  },
-                ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          const SliverToBoxAdapter(child: HeightSpace(height: 24)),
+          const SliverToBoxAdapter(
+            child: CustomHeaderWithImage(title: "Search"),
           ),
-        ),
-        const HeightSpace(height: 24),
-        Expanded(
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: const [
-              SearchResultsGrid(),
-              SearchScrollingLoadingIndicatorBuilder(),
-            ],
+          const SliverToBoxAdapter(child: HeightSpace(height: 24)),
+          const SliverToBoxAdapter(
+            child: SearchTextField(),
           ),
-        ),
-      ],
+          const SliverToBoxAdapter(child: HeightSpace(height: 16)),
+          const SearchResultsGrid(),
+          const SearchScrollingLoadingIndicatorBuilder(),
+        ],
+      ),
     );
   }
 }

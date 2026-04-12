@@ -36,6 +36,11 @@ import 'package:marketi/features/search/data/datasources/search_remote_data_sour
 import 'package:marketi/features/search/data/repos/search_repo_impl.dart';
 import 'package:marketi/features/search/domain/repos/search_repo.dart';
 import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
+import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source.dart';
+import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source_impl.dart';
+import 'package:marketi/features/brand_products/data/repos/brand_products_repo_impl.dart';
+import 'package:marketi/features/brand_products/domain/repos/brand_products_repo.dart';
+import 'package:marketi/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
 import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source.dart';
 import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source_impl.dart';
 import 'package:marketi/features/category_products/data/repos/category_products_repo_impl.dart';
@@ -77,6 +82,7 @@ Future<void> setupServiceLocator() async {
   _setupCategories();
   _setupSearch();
   _setupCategoryProducts();
+  _setupBrandProducts();
 }
 
 void _setupEditProfile() {
@@ -253,5 +259,17 @@ void _setupCategoryProducts() {
   );
   getIt.registerLazySingleton<GetCategoryProductsUseCase>(
     () => GetCategoryProductsUseCase(getIt<CategoryProductsRepo>()),
+  );
+}
+
+void _setupBrandProducts() {
+  getIt.registerLazySingleton<BrandProductsRemoteDataSource>(
+    () => BrandProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<BrandProductsRepo>(
+    () => BrandProductsRepoImpl(getIt<BrandProductsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetBrandProductsUseCase>(
+    () => GetBrandProductsUseCase(getIt<BrandProductsRepo>()),
   );
 }

@@ -1,56 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
+import 'package:marketi/core/routing/routing_helper.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
 import 'package:marketi/core/widgets/custom_cached_network_image.dart';
+import 'package:marketi/features/category_products/domain/params/category_products_routing_params.dart';
 import 'package:marketi/core/entities/category_entity.dart';
 
 class CategoryItem extends StatelessWidget {
   final CategoryEntity category;
-
   const CategoryItem({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(
-          RoutePaths.categoryProducts,
-          extra: {'title': category.name, 'categorySlug': category.slug},
+        RoutingHelper.pushCategoryProducts(
+          context,
+          params: CategoryProductsRoutingParams(
+            title: category.name,
+            categorySlug: category.slug,
+          ),
         );
       },
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 85.w(context),
-            height: 85.h(context),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: context.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: context.primaryColor.withValues(alpha: 0.2),
-                width: 1.5,
-              ),
+              shape: BoxShape.circle,
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(14.5),
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: context.primaryColor.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
               child: CustomCachedNetworkImage(
                 url: category.image,
-                fit: BoxFit.cover,
+                width: 32.w(context),
+                height: 32.h(context),
               ),
             ),
           ),
           const SizedBox(height: 8),
           Text(
             category.name,
-            style: AppTextStyles.medium14(
-              context,
-            ).copyWith(color: context.mainTextColor),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.regular14(context)
+                .copyWith(color: context.mainTextColor),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

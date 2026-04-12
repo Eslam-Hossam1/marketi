@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? enabled;
   final bool? readOnly;
   final InputBorder? border;
+  final void Function(String)? onFieldSubmitted;
   const CustomTextFormField({
     this.onSaved,
     this.prefixSvgPath,
@@ -52,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly,
     this.border,
     this.autoFocus,
+    this.onFieldSubmitted,
   });
   final String? errorText;
   final FocusNode? focusNode;
@@ -64,6 +66,7 @@ class CustomTextFormField extends StatelessWidget {
       initialValue: initialValue,
       onSaved: onSaved,
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       maxLines: maxLines,
       controller: controller,

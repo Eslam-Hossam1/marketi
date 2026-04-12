@@ -3,19 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/utils/constants.dart';
 import 'package:marketi/core/widgets/custom_header_with_image.dart';
 import 'package:marketi/core/widgets/spacing/height_space.dart';
-import '../manager/category_products_cubit.dart';
-import 'category_products_grid.dart';
-import 'category_products_scrolling_loading_indicator_builder.dart';
+import '../manager/brand_products_cubit.dart';
+import 'brand_products_grid.dart';
+import 'brand_products_scrolling_loading_indicator_builder.dart';
 
-class CategoryProductsViewBody extends StatefulWidget {
+class BrandProductsViewBody extends StatefulWidget {
   final String title;
-  const CategoryProductsViewBody({super.key, required this.title});
+  const BrandProductsViewBody({super.key, required this.title});
 
   @override
-  State<CategoryProductsViewBody> createState() => _CategoryProductsViewBodyState();
+  State<BrandProductsViewBody> createState() => _BrandProductsViewBodyState();
 }
 
-class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
+class _BrandProductsViewBodyState extends State<BrandProductsViewBody> {
   late ScrollController _scrollController;
 
   @override
@@ -28,7 +28,7 @@ class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
   void _onScroll() {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent * Constants.loadMoreTriggerRatio) {
-      context.read<CategoryProductsCubit>().fetchMoreProducts();
+      context.read<BrandProductsCubit>().fetchMoreProducts();
     }
   }
 
@@ -39,7 +39,7 @@ class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
   }
 
   Future<void> _onRefresh() async {
-    await context.read<CategoryProductsCubit>().refreshProducts();
+    await context.read<BrandProductsCubit>().refreshProducts();
   }
 
   @override
@@ -56,8 +56,8 @@ class _CategoryProductsViewBodyState extends State<CategoryProductsViewBody> {
               child: CustomHeaderWithImage(title: widget.title),
             ),
             const SliverToBoxAdapter(child: HeightSpace(height: 24)),
-            const CategoryProductsGrid(),
-            const CategoryProductsScrollingLoadingIndicatorBuilder(),
+            const BrandProductsGrid(),
+            const BrandProductsScrollingLoadingIndicatorBuilder(),
           ],
         ),
       ),

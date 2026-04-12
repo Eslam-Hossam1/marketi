@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
+import 'package:marketi/core/routing/routing_helper.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
 import 'package:marketi/core/entities/brand_entity.dart';
+import 'package:marketi/features/brand_products/domain/params/brand_products_routing_params.dart';
 
 class BrandItem extends StatelessWidget {
   final BrandEntity brand;
@@ -15,12 +15,12 @@ class BrandItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(
-          RoutePaths.products,
-          extra: {
-            'title': brand.name,
-            'brandId': brand.name,
-          },
+        RoutingHelper.pushBrandProducts(
+          context,
+          params: BrandProductsRoutingParams(
+            title: brand.name,
+            brand: brand.name,
+          ),
         );
       },
       child: Container(
