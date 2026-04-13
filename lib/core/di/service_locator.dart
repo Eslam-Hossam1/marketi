@@ -66,6 +66,11 @@ import 'package:marketi/features/profile/data/datasources/profile_remote_data_so
 import 'package:marketi/features/profile/data/datasources/profile_remote_data_source_impl.dart';
 import 'package:marketi/features/profile/data/repos/profile_repo_impl.dart';
 import 'package:marketi/features/profile/domain/repos/profile_repo.dart';
+import 'package:marketi/features/product_details/data/datasources/product_details_remote_data_source.dart';
+import 'package:marketi/features/product_details/data/datasources/product_details_remote_data_source_impl.dart';
+import 'package:marketi/features/product_details/data/repos/product_details_repo_impl.dart';
+import 'package:marketi/features/product_details/domain/repos/product_details_repo.dart';
+import 'package:marketi/features/product_details/domain/usecases/get_product_details_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -83,6 +88,19 @@ Future<void> setupServiceLocator() async {
   _setupSearch();
   _setupCategoryProducts();
   _setupBrandProducts();
+  _setupProductDetails();
+}
+
+void _setupProductDetails() {
+  getIt.registerLazySingleton<ProductDetailsRemoteDataSource>(
+    () => ProductDetailsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<ProductDetailsRepo>(
+    () => ProductDetailsRepoImpl(getIt<ProductDetailsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetProductDetailsUseCase>(
+    () => GetProductDetailsUseCase(getIt<ProductDetailsRepo>()),
+  );
 }
 
 void _setupEditProfile() {
