@@ -49,7 +49,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               ),
             ),
             const SliverHeightSpace(height: 32),
-            const EditProfileForm(),
+            SliverToBoxAdapter(child: const EditProfileForm()),
             SliverStickyFooter(
               children: [
                 EditProfileSaveButton(

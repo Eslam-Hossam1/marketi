@@ -15,6 +15,7 @@ class PasswordAndConfirmPasswordSection extends StatelessWidget {
       children: [
         CustomPasswordTextFormFieldWithTitle(
           onSaved: (value) => cubit.formData.password = value!.trim(),
+          onChanged: (value) => cubit.formData.password = value.trim(),
         ),
         HeightSpace(height: Constants.authTextFormFieldsGap),
         CustomPasswordTextFormFieldWithTitle(
@@ -22,6 +23,9 @@ class PasswordAndConfirmPasswordSection extends StatelessWidget {
           hint: "Confirm your password",
           onSaved: (value) => cubit.formData.confirmPassword = value!.trim(),
           validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please confirm your password';
+            }
             if (value != cubit.formData.password) {
               return 'Passwords do not match';
             }

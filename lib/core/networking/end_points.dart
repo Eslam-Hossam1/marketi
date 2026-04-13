@@ -12,4 +12,13 @@ abstract class EndPoints {
   static const String userData = "/portfoilo/userData";
   static const String editUserData = "/portfoilo/editUserData";
   static const String addImage = "/portfoilo/addImage";
+  // Home
+  static const String brands = "/home/brands";
+  static const String categories = "/home/categories";
+  static const String products = "/home/products";
+  static String categoryProductsPath(String category) =>
+      "/home/products/category/$category";
+  static String brandProductsPath(String brand) =>
+      "/home/products/brand/$brand";
+  static const String productsFilter = "/home/productsFilter";
 }
