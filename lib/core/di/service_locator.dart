@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:marketi/features/brands/domain/usecases/get_brands_use_case.dart';
+import 'package:marketi/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'package:marketi/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
 import 'package:marketi/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:marketi/features/edit_profile/domain/repos/edit_profile_repo.dart';
@@ -8,7 +10,6 @@ import 'package:marketi/core/services/image_picker_service/cropped_image_picker_
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
-import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
 import 'package:marketi/features/otp/data/repos/otp_repo_impl.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
@@ -17,8 +18,34 @@ import '../../features/forgot_password/data/repos/forgot_password_repo_impl.dart
 import '../../features/forgot_password/domain/repos/forgot_password_repo.dart';
 import '../../features/forgot_password/domain/usecases/reset_password_use_case.dart';
 import '../../features/forgot_password/domain/usecases/send_code_use_case.dart';
-import '../../features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
-import '../../features/forgot_password/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
+import 'package:marketi/features/products/data/datasources/products_remote_data_source/products_remote_data_source.dart';
+import 'package:marketi/features/products/data/datasources/products_remote_data_source/products_remote_data_source_impl.dart';
+import 'package:marketi/features/products/data/repos/products_repo_impl.dart';
+import 'package:marketi/features/products/domain/repos/products_repo.dart';
+import 'package:marketi/features/products/domain/usecases/get_products_use_case.dart' as products_usecase;
+import 'package:marketi/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source.dart';
+import 'package:marketi/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source_impl.dart';
+import 'package:marketi/features/brands/data/repos/brands_repo_impl.dart';
+import 'package:marketi/features/brands/domain/repos/brands_repo.dart';
+import 'package:marketi/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source.dart';
+import 'package:marketi/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source_impl.dart';
+import 'package:marketi/features/categories/data/repos/categories_repo_impl.dart';
+import 'package:marketi/features/categories/domain/repos/categories_repo.dart';
+import 'package:marketi/features/search/data/datasources/search_remote_data_source/search_remote_data_source.dart';
+import 'package:marketi/features/search/data/datasources/search_remote_data_source/search_remote_data_source_impl.dart';
+import 'package:marketi/features/search/data/repos/search_repo_impl.dart';
+import 'package:marketi/features/search/domain/repos/search_repo.dart';
+import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
+import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source.dart';
+import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source_impl.dart';
+import 'package:marketi/features/brand_products/data/repos/brand_products_repo_impl.dart';
+import 'package:marketi/features/brand_products/domain/repos/brand_products_repo.dart';
+import 'package:marketi/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
+import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source.dart';
+import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source_impl.dart';
+import 'package:marketi/features/category_products/data/repos/category_products_repo_impl.dart';
+import 'package:marketi/features/category_products/domain/repos/category_products_repo.dart';
+import 'package:marketi/features/category_products/domain/usecases/get_category_products_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,8 +56,6 @@ import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/domain/repos/auth_repo.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
-import '../../features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import '../../features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import '../networking/api_consumer.dart';
 import '../networking/dio_consumer.dart';
 import '../services/auth_credentials_manager/auth_credentials_manager.dart';
@@ -52,6 +77,12 @@ Future<void> setupServiceLocator() async {
   _setupOtp();
   _setupProfile();
   _setupEditProfile();
+  _setupProducts();
+  _setupBrands();
+  _setupCategories();
+  _setupSearch();
+  _setupCategoryProducts();
+  _setupBrandProducts();
 }
 
 void _setupEditProfile() {
@@ -74,8 +105,6 @@ void _setupEditProfile() {
   getIt.registerLazySingleton<AddImageUseCase>(
     () => AddImageUseCase(getIt<EditProfileRepo>()),
   );
-
-
 }
 
 void _setupProfile() {
@@ -89,10 +118,6 @@ void _setupProfile() {
 
   getIt.registerLazySingleton<GetUserDataUseCase>(
     () => GetUserDataUseCase(getIt<ProfileRepo>()),
-  );
-
-  getIt.registerFactory<ProfileCubit>(
-    () => ProfileCubit(getIt<GetUserDataUseCase>()),
   );
 }
 
@@ -154,10 +179,6 @@ void _setupAuth() {
   getIt.registerLazySingleton<SignUpUseCase>(
     () => SignUpUseCase(getIt<AuthRepo>()),
   );
-
-  // Cubits (factory — new instance per screen)
-  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginUseCase>()));
-  getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt<SignUpUseCase>()));
 }
 
 void _setupForgotPassword() {
@@ -178,13 +199,77 @@ void _setupForgotPassword() {
   getIt.registerLazySingleton<ResetPasswordUseCase>(
     () => ResetPasswordUseCase(getIt<ForgotPasswordRepo>()),
   );
+}
 
-  // Cubits (factory — new instance per screen)
-  getIt.registerFactory<ForgotPasswordCubit>(
-    () => ForgotPasswordCubit(getIt<SendCodeUseCase>()),
+
+void _setupProducts() {
+  getIt.registerLazySingleton<ProductsRemoteDataSource>(
+    () => ProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
   );
+  getIt.registerLazySingleton<ProductsRepo>(
+    () => ProductsRepoImpl(getIt<ProductsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<products_usecase.GetProductsUseCase>(
+    () => products_usecase.GetProductsUseCase(getIt<ProductsRepo>()),
+  );
+}
 
-  getIt.registerFactory<ResetPasswordCubit>(
-    () => ResetPasswordCubit(getIt<ResetPasswordUseCase>()),
+void _setupBrands() {
+  getIt.registerLazySingleton<BrandsRemoteDataSource>(
+    () => BrandsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<BrandsRepo>(
+    () => BrandsRepoImpl(getIt<BrandsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetBrandsUseCase>(
+    () => GetBrandsUseCase(getIt<BrandsRepo>()),
+  );
+}
+
+void _setupCategories() {
+  getIt.registerLazySingleton<CategoriesRemoteDataSource>(
+    () => CategoriesRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<CategoriesRepo>(
+    () => CategoriesRepoImpl(getIt<CategoriesRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(getIt<CategoriesRepo>()),
+  );
+}
+
+void _setupSearch() {
+  getIt.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<SearchRepo>(
+    () => SearchRepoImpl(getIt<SearchRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<SearchProductsUseCase>(
+    () => SearchProductsUseCase(getIt<SearchRepo>()),
+  );
+}
+
+void _setupCategoryProducts() {
+  getIt.registerLazySingleton<CategoryProductsRemoteDataSource>(
+    () => CategoryProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<CategoryProductsRepo>(
+    () => CategoryProductsRepoImpl(getIt<CategoryProductsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetCategoryProductsUseCase>(
+    () => GetCategoryProductsUseCase(getIt<CategoryProductsRepo>()),
+  );
+}
+
+void _setupBrandProducts() {
+  getIt.registerLazySingleton<BrandProductsRemoteDataSource>(
+    () => BrandProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<BrandProductsRepo>(
+    () => BrandProductsRepoImpl(getIt<BrandProductsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetBrandProductsUseCase>(
+    () => GetBrandProductsUseCase(getIt<BrandProductsRepo>()),
   );
 }

@@ -3,6 +3,7 @@ import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
 import 'package:marketi/core/widgets/spacing/height_space.dart';
 import 'package:marketi/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:marketi/core/utils/form_validators.dart';
 
 class CustomTextFormFieldWithTitle extends StatelessWidget {
   const CustomTextFormFieldWithTitle({
@@ -12,7 +13,7 @@ class CustomTextFormFieldWithTitle extends StatelessWidget {
     required this.title,
     required this.hint,
     this.onChanged,
-    this.validator,
+    this.validator = FormValidators.customTextFormFieldValidator,
     this.onSaved,
     this.enabledBorder,
     this.focusedBorder,

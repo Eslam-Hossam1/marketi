@@ -10,16 +10,18 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.placeHolder,
     this.width,
     this.height,
+    this.fit,
   });
 
   final String url;
   final Widget? placeHolder;
   final double? width;
   final double? height;
+  final BoxFit? fit;
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      fit: BoxFit.cover,
+      fit: fit ?? BoxFit.cover,
       width: width,
       height: height,
       imageUrl: url,

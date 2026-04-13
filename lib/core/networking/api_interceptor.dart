@@ -19,7 +19,7 @@ class ApiInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final token = authCredentialsManager.accessToken;
-    options.headers[ApiKeys.authorization] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSGFuZWVuIiwic3ViIjoiMyIsInBob25lX251bWJlciI6IisyMDEwMjI2MjMzMTAiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJCYXNpYyBBZG1pbiIsImV4cCI6MTc3NDUyNDU3NSwiaXNzIjoiRGtQb3J0YWwiLCJhdWQiOiJEa1BvcnRhbFVzZXJzIn0.LLBh1PErdjFGLVjcdW9IJPpi3XHnDxHekjJY-TQXito";
+    options.headers[ApiKeys.authorization] = "Bearer $token";
 
     super.onRequest(options, handler);
   }

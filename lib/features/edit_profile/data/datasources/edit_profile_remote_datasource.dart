@@ -15,7 +15,7 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
 
   @override
   Future<void> editUserData(EditUserDataRequestModel requestModel) async {
-    await _apiConsumer.put(
+    await _apiConsumer.post(
       EndPoints.editUserData,
       data: requestModel.toJson(),
     );

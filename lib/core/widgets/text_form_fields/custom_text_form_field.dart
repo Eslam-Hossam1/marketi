@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/theme/app_text_styles.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:marketi/core/utils/form_validators.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? enabled;
   final bool? readOnly;
   final InputBorder? border;
+  final void Function(String)? onFieldSubmitted;
   const CustomTextFormField({
     this.onSaved,
     this.prefixSvgPath,
@@ -39,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isObscureText,
     this.suffixIcon,
     this.backgroundColor,
-    this.validator,
+    this.validator = FormValidators.customTextFormFieldValidator,
     this.prefixIcon,
     this.keyboardType,
     this.maxLines,
@@ -50,16 +52,21 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled,
     this.readOnly,
     this.border,
+    this.autoFocus,
+    this.onFieldSubmitted,
   });
   final String? errorText;
   final FocusNode? focusNode;
   final String? prefixSvgPath;
+  final bool? autoFocus;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: autoFocus ?? false,
       initialValue: initialValue,
       onSaved: onSaved,
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       maxLines: maxLines,
       controller: controller,
