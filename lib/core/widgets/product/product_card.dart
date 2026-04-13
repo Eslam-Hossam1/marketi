@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marketi/core/extensions/responsive_extension.dart';
 import 'package:marketi/core/theme/theme_colors_extension.dart';
 import 'package:marketi/core/entities/product_entity.dart';
+import 'package:marketi/features/product_details/domain/params/product_details_params.dart';
+import 'package:marketi/core/routing/routing_helper.dart';
 import 'widgets/product_card_image.dart';
 import 'widgets/product_card_info.dart';
 
@@ -17,8 +19,15 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 160.w(context),
+    return GestureDetector(
+      onTap: () {
+        RoutingHelper.pushProductDetails(
+          context,
+          params: ProductDetailsRoutingParams(productId: product.id),
+        );
+      },
+      child: Container(
+        width: 160.w(context),
       decoration: BoxDecoration(
         color: context.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(16),
@@ -38,6 +47,7 @@ class ProductCard extends StatelessWidget {
           ProductCardInfo(product: product, hasAddButton: hasAddButton),
         ],
       ),
+    ),
     );
   }
 }

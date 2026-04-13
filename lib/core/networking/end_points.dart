@@ -21,4 +21,5 @@ abstract class EndPoints {
   static String brandProductsPath(String brand) =>
       "/home/products/brand/$brand";
   static const String productsFilter = "/home/productsFilter";
+  static String productDetailsPath(int id) => "/home/products/$id";
 }
