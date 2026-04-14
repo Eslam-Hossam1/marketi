@@ -21,13 +21,13 @@ class HomePopularProductsList extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 230.h(context),
+          height: 280.h(context),
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: ProductCard(product: products[index]),
               );
             },
