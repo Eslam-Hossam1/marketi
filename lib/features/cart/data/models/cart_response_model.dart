@@ -10,7 +10,7 @@ class CartResponseModel extends CartEntity {
   });
 
   factory CartResponseModel.fromJson(Map<String, dynamic> json) {
-    final outerList = json['list'] as List;
+    final List<dynamic> outerList = json['list'] as List? ?? [];
     if (outerList.isEmpty) {
       return const CartResponseModel(
         products: [],
@@ -20,14 +20,17 @@ class CartResponseModel extends CartEntity {
       );
     }
 
-    final innerData = outerList[0] as Map<String, dynamic>;
+    final metadata = outerList[0] as Map<String, dynamic>;
+    final products = outerList
+        .skip(1)
+        .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+
     return CartResponseModel(
-      products: (innerData['list'] as List)
-          .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      total: innerData['total'] as int? ?? 0,
-      skip: innerData['skip'] as int? ?? 0,
-      limit: innerData['limit'] as int? ?? 0,
+      products: products,
+      total: metadata['total'] as int? ?? 0,
+      skip: metadata['skip'] as int? ?? 0,
+      limit: metadata['limit'] as int? ?? 0,
     );
   }
 }

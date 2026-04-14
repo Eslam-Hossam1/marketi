@@ -25,11 +25,15 @@ class CartCubit extends Cubit<CartState> {
   double get subtotal =>
       cartProducts.fold(0.0, (sum, product) => sum + product.price);
 
-  Future<void> getCart() async {
-    emit(CartLoading());
+  Future<void> getCart({bool showLoading = true}) async {
+    if (showLoading) emit(CartLoading());
     final result = await _getCartUseCase();
     result.fold(
-      (failure) => emit(CartFailure(errorMessage: failure.errMsg)),
+      (failure) {
+        if (showLoading) {
+          emit(CartFailure(errorMessage: failure.errMsg));
+        }
+      },
       (cartEntity) {
         cartProducts = List.from(cartEntity.products);
         _cartProductIds
@@ -55,9 +59,11 @@ class CartCubit extends Cubit<CartState> {
         productId: productId,
         errorMessage: failure.errMsg,
       )),
-      (_) {
+      (_) async {
         _cartProductIds.add(productId);
         emit(AddToCartSuccess(productId: productId));
+        // Sync with cart after success
+        await getCart(showLoading: false);
       },
     );
   }
@@ -72,7 +78,7 @@ class CartCubit extends Cubit<CartState> {
         productId: productId,
         errorMessage: failure.errMsg,
       )),
-      (_) {
+      (_) async {
         cartProducts.removeWhere((p) => p.id == productId);
         _cartProductIds.remove(productId);
         if (cartProducts.isEmpty) {
@@ -80,6 +86,8 @@ class CartCubit extends Cubit<CartState> {
         } else {
           emit(RemoveFromCartSuccess(productId: productId));
         }
+        // Sync with cart after success to ensure consistency
+        await getCart(showLoading: false);
       },
     );
   }

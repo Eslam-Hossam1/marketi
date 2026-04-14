@@ -41,23 +41,34 @@ class ProductDetailsBottomBar extends StatelessWidget {
         ),
         BlocBuilder<CartCubit, CartState>(
           buildWhen: (previous, current) =>
-              (current is AddToCartLoading &&
+              (current is AddToCartLoading && current.productId == productId) ||
+              (current is AddToCartSuccess && current.productId == productId) ||
+              (current is AddToCartFailure && current.productId == productId) ||
+              (current is RemoveFromCartLoading &&
                   current.productId == productId) ||
-              (current is AddToCartSuccess &&
+              (current is RemoveFromCartSuccess &&
                   current.productId == productId) ||
-              (current is AddToCartFailure &&
+              (current is RemoveFromCartFailure &&
                   current.productId == productId) ||
               current is CartSuccess,
           builder: (context, state) {
             final cartCubit = context.read<CartCubit>();
             final isInCart = cartCubit.isInCart(productId);
-            final isLoading = state is AddToCartLoading &&
-                state.productId == productId;
+            final isLoading = (state is AddToCartLoading &&
+                    state.productId == productId) ||
+                (state is RemoveFromCartLoading &&
+                    state.productId == productId);
 
             return CustomButton(
-              onPressed: isLoading || isInCart
+              onPressed: isLoading
                   ? null
-                  : () => cartCubit.addToCart(productId),
+                  : () {
+                      if (isInCart) {
+                        cartCubit.removeFromCart(productId);
+                      } else {
+                        cartCubit.addToCart(productId);
+                      }
+                    },
               width: 200.w(context),
               borderRadius: 16.r(context),
               backgroundColor: isInCart ? Colors.green : null,
@@ -75,9 +86,7 @@ class ProductDetailsBottomBar extends StatelessWidget {
                     )
                   else ...[
                     Icon(
-                      isInCart
-                          ? Icons.check
-                          : Icons.shopping_cart_outlined,
+                      isInCart ? Icons.check : Icons.shopping_cart_outlined,
                       color: Colors.white,
                       size: 20.w(context),
                     ),
