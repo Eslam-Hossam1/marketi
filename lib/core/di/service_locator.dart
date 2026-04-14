@@ -71,6 +71,13 @@ import 'package:marketi/features/product_details/data/datasources/product_detail
 import 'package:marketi/features/product_details/data/repos/product_details_repo_impl.dart';
 import 'package:marketi/features/product_details/domain/repos/product_details_repo.dart';
 import 'package:marketi/features/product_details/domain/usecases/get_product_details_usecase.dart';
+import 'package:marketi/features/cart/data/datasources/cart_remote_data_source/cart_remote_data_source.dart';
+import 'package:marketi/features/cart/data/datasources/cart_remote_data_source/cart_remote_data_source_impl.dart';
+import 'package:marketi/features/cart/data/repos/cart_repo_impl.dart';
+import 'package:marketi/features/cart/domain/repos/cart_repo.dart';
+import 'package:marketi/features/cart/domain/usecases/get_cart_use_case.dart';
+import 'package:marketi/features/cart/domain/usecases/add_to_cart_use_case.dart';
+import 'package:marketi/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -89,6 +96,25 @@ Future<void> setupServiceLocator() async {
   _setupCategoryProducts();
   _setupBrandProducts();
   _setupProductDetails();
+  _setupCart();
+}
+
+void _setupCart() {
+  getIt.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(getIt<ApiConsumer>()),
+  );
+  getIt.registerLazySingleton<CartRepo>(
+    () => CartRepoImpl(getIt<CartRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetCartUseCase>(
+    () => GetCartUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<AddToCartUseCase>(
+    () => AddToCartUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<RemoveFromCartUseCase>(
+    () => RemoveFromCartUseCase(getIt<CartRepo>()),
+  );
 }
 
 void _setupProductDetails() {

@@ -43,7 +43,7 @@ class ProductDetailsViewBody extends StatelessWidget {
 
               SliverStickyFooter(
                 horizontalPadding: 16,
-                children: [ProductDetailsBottomBar(price: product.price)],
+                children: [ProductDetailsBottomBar(price: product.price, productId: product.id)],
               ),
             ],
           );

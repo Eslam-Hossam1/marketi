@@ -22,4 +22,9 @@ abstract class EndPoints {
       "/home/products/brand/$brand";
   static const String productsFilter = "/home/productsFilter";
   static String productDetailsPath(int id) => "/home/products/$id";
+
+  // Cart
+  static const String addCart = "/user/addCart";
+  static const String deleteCart = "/user/deleteCart";
+  static const String getCart = "/user/getCart";
 }
