@@ -8,7 +8,6 @@ class ResponsiveHelper {
   ResponsiveHelper._();
 
   static late double _deviceWidth;
-  static late double _deviceHeight;
   static late double _shortestSide;
   static late Orientation _orientation;
 
@@ -29,11 +28,9 @@ class ResponsiveHelper {
     if (_shortestSide < mobileMax) {
       // Mobile: always use min dimension for width to scale consistently
       _deviceWidth = _shortestSide;
-      _deviceHeight = _shortestSide;
     } else {
       // Tablet/Desktop: use actual width for adaptive scaling
       _deviceWidth = size.width;
-      _deviceHeight = size.height;
     }
   }
 
