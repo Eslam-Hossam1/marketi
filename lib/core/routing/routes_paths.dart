@@ -23,4 +23,8 @@ abstract class RoutePaths {
   static const categoryProducts = "/category_products";
   static const brandProducts = "/brand_products";
   static const productDetails = "/product_details";
+  static const checkout = "/checkout";
+  static const paymentSuccess = "/payment_success";
+  static const paymentFailure = "/payment_failure";
+  static const orders = "/orders";
 }

@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 
 class AppInitializer {
   static Future<void> initialize() async {
+    await _setupDotEnv();
     await _initBlocObserverAndHydratedBloc();
     await _initServiceLocator();
     await _initAuthCredentials();

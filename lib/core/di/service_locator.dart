@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:marketi/features/brands/domain/usecases/get_brands_use_case.dart';
 import 'package:marketi/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'package:marketi/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
@@ -78,6 +79,12 @@ import 'package:marketi/features/cart/domain/repos/cart_repo.dart';
 import 'package:marketi/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:marketi/features/cart/domain/usecases/add_to_cart_use_case.dart';
 import 'package:marketi/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:marketi/features/payment/data/datasources/payment_service.dart';
+import 'package:marketi/features/payment/data/datasources/paymob_service_impl.dart';
+import 'package:marketi/features/payment/data/repositories/payment_repository_impl.dart';
+import 'package:marketi/features/payment/domain/repositories/payment_repository.dart';
+import 'package:marketi/features/payment/domain/usecases/request_payment_use_case.dart';
+import 'package:marketi/features/payment/presentation/manager/payment_cubit/payment_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -97,6 +104,7 @@ Future<void> setupServiceLocator() async {
   _setupBrandProducts();
   _setupProductDetails();
   _setupCart();
+  _setupPayment();
 }
 
 void _setupCart() {
@@ -199,7 +207,8 @@ Future<void> _setupCaching() async {
 }
 
 void _setupNetworking() {
-  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
+  getIt.registerLazySingleton<Dio>(() => Dio());
+  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt<Dio>()));
 }
 
 void _setupAuth() {
@@ -315,5 +324,27 @@ void _setupBrandProducts() {
   );
   getIt.registerLazySingleton<GetBrandProductsUseCase>(
     () => GetBrandProductsUseCase(getIt<BrandProductsRepo>()),
+  );
+}
+
+void _setupPayment() {
+  getIt.registerLazySingleton<PaymentService>(
+    () => PaymobServiceImpl(Dio()..interceptors.add(PrettyDioLogger(
+          request: true,
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+        ))),
+  );
+  getIt.registerLazySingleton<PaymentRepository>(
+    () => PaymentRepositoryImpl(getIt<PaymentService>()),
+  );
+  getIt.registerLazySingleton<RequestPaymentUseCase>(
+    () => RequestPaymentUseCase(getIt<PaymentRepository>()),
+  );
+  getIt.registerFactory<PaymentCubit>(
+    () => PaymentCubit(getIt<RequestPaymentUseCase>()),
   );
 }
