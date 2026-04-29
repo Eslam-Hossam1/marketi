@@ -13,6 +13,9 @@ import 'package:marketi/core/routing/app_routes/onboarding_route.dart';
 import 'package:marketi/core/routing/app_routes/otp_route.dart';
 import 'package:marketi/core/routing/app_routes/product_routes.dart';
 import 'package:marketi/core/routing/app_routes/profile_route.dart';
+import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
+import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
+import 'package:marketi/core/routing/app_routes/payment_routes.dart';
 import 'package:marketi/core/routing/app_routes/reset_password_routes.dart';
 
 class AppRoutes {
@@ -20,12 +23,20 @@ class AppRoutes {
     // Authenticated Shell: home / cart / favorites / profile + full screen features
     ShellRoute(
       builder: (context, state, child) {
-        return BlocProvider(
-          create: (context) => CartCubit(
-            getIt<GetCartUseCase>(),
-            getIt<AddToCartUseCase>(),
-            getIt<RemoveFromCartUseCase>(),
-          )..getCart(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CartCubit(
+                getIt<GetCartUseCase>(),
+                getIt<AddToCartUseCase>(),
+                getIt<RemoveFromCartUseCase>(),
+              )..getCart(),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  ProfileCubit(getIt<GetUserDataUseCase>()),
+            ),
+          ],
           child: child,
         );
       },
@@ -43,5 +54,6 @@ class AppRoutes {
     ...AuthRoutes.routes,
     ...ResetPasswordRoutes.routes,
     ...OtpRoute.routes,
+    ...PaymentRoutes.routes,
   ];
 }
