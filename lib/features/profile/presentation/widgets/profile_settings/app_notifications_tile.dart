@@ -20,7 +20,7 @@ class _AppNotificationsTileState extends State<AppNotificationsTile> {
       title: 'App Notifications',
       trailing: CupertinoSwitch(
         value: isNotificationsEnabled,
-        activeColor: Colors.blueAccent,
+        activeTrackColor: Colors.blueAccent,
         onChanged: (value) {
           setState(() {
             isNotificationsEnabled = value;

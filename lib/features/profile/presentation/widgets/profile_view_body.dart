@@ -7,8 +7,22 @@ import 'package:marketi/features/profile/presentation/widgets/profile_success_bo
 import '../manager/profile_cubit/profile_cubit.dart';
 import '../manager/profile_cubit/profile_state.dart';
 
-class ProfileViewBody extends StatelessWidget {
+class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
+
+  @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+
+class _ProfileViewBodyState extends State<ProfileViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    final profileCubit = context.read<ProfileCubit>();
+    if (profileCubit.userProfile == null) {
+      profileCubit.getUserData();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +34,7 @@ class ProfileViewBody extends StatelessWidget {
             return const Center(child: CustomCircularProgressIndecator());
           } else if (state is ProfileError) {
             return Center(child: Text(state.message));
-          } else if (state is ProfileLoaded) {
+          } else if (state is ProfileLoaded || context.read<ProfileCubit>().userProfile != null) {
             return ProfileSuccessBody();
           }
           return const SizedBox.shrink();

@@ -1,4 +1,3 @@
-import '../../../domain/entities/user_profile_entity.dart';
 
 abstract class ProfileState {
   const ProfileState();
