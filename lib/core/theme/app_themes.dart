@@ -7,7 +7,6 @@ import 'custom_colors.dart';
 abstract class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     textTheme: GoogleFonts.poppinsTextTheme(),
-    dialogBackgroundColor: AppColors.lightDialogBackground,
     scaffoldBackgroundColor: AppColors.lightScaffoldBackground,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
@@ -32,12 +31,11 @@ abstract class AppThemes {
         otherChatBubbleTimeTextColor:
             AppColors.lightOtherChatBubbleTimeTextColor,
       ),
-    ],
+    ], dialogTheme: DialogThemeData(backgroundColor: AppColors.lightDialogBackground),
   );
 
   static final ThemeData darkTheme = ThemeData(
     textTheme: GoogleFonts.poppinsTextTheme(),
-    dialogBackgroundColor: AppColors.darkDialogBackground,
     scaffoldBackgroundColor: AppColors.darkScaffoldBackground,
     colorScheme: const ColorScheme.dark(
       primary: AppColors.darkPrimary,
@@ -63,6 +61,6 @@ abstract class AppThemes {
         otherChatBubbleTimeTextColor:
             AppColors.darkOtherChatBubbleTimeTextColor,
       ),
-    ],
+    ], dialogTheme: DialogThemeData(backgroundColor: AppColors.darkDialogBackground),
   );
 }
