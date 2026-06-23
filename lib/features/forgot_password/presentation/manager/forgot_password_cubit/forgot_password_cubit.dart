@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/forgot_password/domain/params/send_code_params.dart';
-import 'package:marketi/features/forgot_password/domain/usecases/send_code_use_case.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_form_data.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
+import 'package:nexcart/features/forgot_password/domain/params/send_code_params.dart';
+import 'package:nexcart/features/forgot_password/domain/usecases/send_code_use_case.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_form_data.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final SendCodeUseCase _sendCodeUseCase;

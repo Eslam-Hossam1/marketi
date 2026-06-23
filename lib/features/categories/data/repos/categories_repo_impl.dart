@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/errors/dio_api_failure.dart';
-import 'package:marketi/core/entities/category_entity.dart';
+import 'package:nexcart/core/errors/api_failure.dart';
+import 'package:nexcart/core/errors/dio_api_failure.dart';
+import 'package:nexcart/core/entities/category_entity.dart';
 import '../datasources/categories_remote_data_source/categories_remote_data_source.dart';
 import '../../domain/repos/categories_repo.dart';
 

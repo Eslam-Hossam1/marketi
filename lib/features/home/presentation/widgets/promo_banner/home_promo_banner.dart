@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/widgets/custom_cached_network_image.dart';
 
 class HomePromoBanner extends StatelessWidget {
   const HomePromoBanner({super.key});

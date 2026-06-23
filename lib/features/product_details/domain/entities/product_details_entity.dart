@@ -1,4 +1,4 @@
-import 'package:marketi/core/entities/product_entity.dart';
+import 'package:nexcart/core/entities/product_entity.dart';
 import 'review_entity.dart';
 
 class ProductDetailsEntity extends ProductEntity {

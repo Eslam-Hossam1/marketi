@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/core/utils/form_validators.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_password_form_field_with_title.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
+import 'package:nexcart/core/utils/constants.dart';
+import 'package:nexcart/core/utils/form_validators.dart';
+import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nexcart/core/widgets/text_form_fields/custom_password_form_field_with_title.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
 
 class ResetPasswordTextFieldsSection extends StatelessWidget {
   const ResetPasswordTextFieldsSection({super.key});

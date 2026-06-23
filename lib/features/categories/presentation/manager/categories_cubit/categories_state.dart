@@ -1,4 +1,4 @@
-import 'package:marketi/core/entities/category_entity.dart';
+import 'package:nexcart/core/entities/category_entity.dart';
 
 abstract class CategoriesState {
   const CategoriesState();

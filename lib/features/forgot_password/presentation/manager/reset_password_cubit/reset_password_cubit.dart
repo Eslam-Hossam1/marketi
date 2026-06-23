@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/forgot_password/domain/params/reset_password_params.dart';
-import 'package:marketi/features/forgot_password/domain/usecases/reset_password_use_case.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_form_data.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_state.dart';
+import 'package:nexcart/features/forgot_password/domain/params/reset_password_params.dart';
+import 'package:nexcart/features/forgot_password/domain/usecases/reset_password_use_case.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_form_data.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/reset_password_cubit/reset_password_state.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   final ResetPasswordUseCase _resetPasswordUseCase;

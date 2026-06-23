@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/features/brand_products/domain/params/brand_products_routing_params.dart';
-import 'package:marketi/features/brand_products/presentation/views/brand_products_view.dart';
+import 'package:nexcart/core/routing/routes_paths.dart';
+import 'package:nexcart/features/brand_products/domain/params/brand_products_routing_params.dart';
+import 'package:nexcart/features/brand_products/presentation/views/brand_products_view.dart';
 
 class BrandProductsRoutes {
   static List<RouteBase> routes = [

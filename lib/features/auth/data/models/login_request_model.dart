@@ -1,5 +1,5 @@
-import 'package:marketi/core/networking/api_keys.dart';
-import 'package:marketi/features/auth/domain/params/login_params.dart';
+import 'package:nexcart/core/networking/api_keys.dart';
+import 'package:nexcart/features/auth/domain/params/login_params.dart';
 
 class LoginRequestModel {
   final String email;

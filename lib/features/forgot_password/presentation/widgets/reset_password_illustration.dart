@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/utils/assets.dart';
 
 class ResetPasswordIllustration extends StatelessWidget {
   const ResetPasswordIllustration({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
+import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nexcart/core/widgets/custom_cached_network_image.dart';
 
 class CustomNetworkCircleImage extends StatelessWidget {
   const CustomNetworkCircleImage({

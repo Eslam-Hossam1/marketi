@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/usecases/use_case.dart';
-import 'package:marketi/features/auth/domain/entities/auth_entity.dart';
-import 'package:marketi/features/auth/domain/params/login_params.dart';
-import 'package:marketi/features/auth/domain/repos/auth_repo.dart';
+import 'package:nexcart/core/errors/api_failure.dart';
+import 'package:nexcart/core/usecases/use_case.dart';
+import 'package:nexcart/features/auth/domain/entities/auth_entity.dart';
+import 'package:nexcart/features/auth/domain/params/login_params.dart';
+import 'package:nexcart/features/auth/domain/repos/auth_repo.dart';
 
 class LoginUseCase extends UseCase<ApiFailure, AuthEntity, LoginParams> {
   final AuthRepo _repo;

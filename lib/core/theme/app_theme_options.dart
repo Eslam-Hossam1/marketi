@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/models/theme_mode_option.dart';
+import 'package:nexcart/core/theme/models/theme_mode_option.dart';
 
 abstract class AppThemeOptions {
   static final ThemeModeOption light = ThemeModeOption(

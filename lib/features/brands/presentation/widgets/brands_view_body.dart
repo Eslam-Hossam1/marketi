@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/widgets/custom_header_with_image.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
+import 'package:nexcart/core/widgets/custom_header_with_image.dart';
+import 'package:nexcart/core/widgets/spacing/height_space.dart';
 import 'brands_search_text_field.dart';
 import 'brands_list.dart';
 

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/failures.dart';
-import 'package:marketi/core/errors/dio_api_failure.dart';
+import 'package:nexcart/core/errors/failures.dart';
+import 'package:nexcart/core/errors/dio_api_failure.dart';
 import '../../domain/entities/product_details_entity.dart';
 import '../../domain/params/product_details_params.dart';
 import '../../domain/repos/product_details_repo.dart';

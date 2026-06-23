@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:marketi/features/profile/presentation/widgets/profile_success_body.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nexcart/features/profile/presentation/widgets/profile_success_body.dart';
 
 import '../manager/profile_cubit/profile_cubit.dart';
 import '../manager/profile_cubit/profile_state.dart';

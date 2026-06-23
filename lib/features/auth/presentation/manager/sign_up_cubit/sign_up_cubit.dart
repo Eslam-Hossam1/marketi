@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/auth/domain/params/sign_up_params.dart';
-import 'package:marketi/features/auth/domain/usecases/sign_up_use_case.dart';
-import 'package:marketi/features/auth/presentation/manager/sign_up_cubit/sign_up_form_data.dart';
-import 'package:marketi/features/auth/presentation/manager/sign_up_cubit/sign_up_state.dart';
+import 'package:nexcart/features/auth/domain/params/sign_up_params.dart';
+import 'package:nexcart/features/auth/domain/usecases/sign_up_use_case.dart';
+import 'package:nexcart/features/auth/presentation/manager/sign_up_cubit/sign_up_form_data.dart';
+import 'package:nexcart/features/auth/presentation/manager/sign_up_cubit/sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   final SignUpUseCase _signUpUseCase;

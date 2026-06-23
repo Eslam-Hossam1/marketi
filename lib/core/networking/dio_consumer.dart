@@ -1,5 +1,5 @@
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nexcart/core/di/service_locator.dart';
+import 'package:nexcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
 
 import 'api_interceptor.dart';
 import 'package:dio/dio.dart';

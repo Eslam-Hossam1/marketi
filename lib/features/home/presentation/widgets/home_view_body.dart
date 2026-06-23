@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/features/home/presentation/widgets/brands/brands_builder.dart';
-import 'package:marketi/features/home/presentation/widgets/categories/categories_builder.dart';
-import 'package:marketi/features/home/presentation/widgets/header/home_header.dart';
-import 'package:marketi/features/home/presentation/widgets/header/home_search_text_field.dart';
-import 'package:marketi/features/home/presentation/widgets/promo_banner/home_promo_banner.dart';
-import 'package:marketi/features/home/presentation/widgets/popular_products/popular_products_builder.dart';
+import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nexcart/features/home/presentation/widgets/brands/brands_builder.dart';
+import 'package:nexcart/features/home/presentation/widgets/categories/categories_builder.dart';
+import 'package:nexcart/features/home/presentation/widgets/header/home_header.dart';
+import 'package:nexcart/features/home/presentation/widgets/header/home_search_text_field.dart';
+import 'package:nexcart/features/home/presentation/widgets/promo_banner/home_promo_banner.dart';
+import 'package:nexcart/features/home/presentation/widgets/popular_products/popular_products_builder.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});

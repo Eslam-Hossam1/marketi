@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
-import 'package:marketi/features/profile/domain/entities/user_profile_entity.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nexcart/core/utils/assets.dart';
+import 'package:nexcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nexcart/features/profile/domain/entities/user_profile_entity.dart';
 
 class ProfileGalaxyImage extends StatelessWidget {
   const ProfileGalaxyImage({super.key, required this.userProfile});

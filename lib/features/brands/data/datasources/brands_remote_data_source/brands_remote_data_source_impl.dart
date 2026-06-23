@@ -1,6 +1,6 @@
-import 'package:marketi/core/networking/api_consumer.dart';
-import 'package:marketi/core/networking/end_points.dart';
-import 'package:marketi/core/models/brand_model.dart';
+import 'package:nexcart/core/networking/api_consumer.dart';
+import 'package:nexcart/core/networking/end_points.dart';
+import 'package:nexcart/core/models/brand_model.dart';
 import 'brands_remote_data_source.dart';
 
 class BrandsRemoteDataSourceImpl implements BrandsRemoteDataSource {

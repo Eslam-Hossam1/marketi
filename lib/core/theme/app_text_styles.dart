@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/utils/responsive_helper.dart';
+import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nexcart/core/utils/responsive_helper.dart';
 
 abstract class AppTextStyles {
   // Font size 68

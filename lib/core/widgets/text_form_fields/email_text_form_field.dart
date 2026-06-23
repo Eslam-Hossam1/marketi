@@ -1,5 +1,5 @@
-import 'package:marketi/core/utils/form_validators.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:nexcart/core/utils/form_validators.dart';
+import 'package:nexcart/core/widgets/text_form_fields/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class EmailTextFormField extends StatelessWidget {

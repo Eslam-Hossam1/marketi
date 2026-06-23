@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/core/widgets/buttons/custom_text_button.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
-import 'package:marketi/features/otp/data/models/auth_otp/forgot_password_otp_reason.dart';
+import 'package:nexcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nexcart/core/routing/routing_helper.dart';
+import 'package:nexcart/core/widgets/buttons/custom_text_button.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
+import 'package:nexcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
+import 'package:nexcart/features/otp/data/models/auth_otp/forgot_password_otp_reason.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;

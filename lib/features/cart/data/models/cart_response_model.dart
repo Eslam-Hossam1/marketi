@@ -1,4 +1,4 @@
-import 'package:marketi/core/models/product_model.dart';
+import 'package:nexcart/core/models/product_model.dart';
 import '../../domain/entities/cart_entity.dart';
 
 class CartResponseModel extends CartEntity {

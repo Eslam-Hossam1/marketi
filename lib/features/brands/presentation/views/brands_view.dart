@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/features/brands/domain/usecases/get_brands_use_case.dart';
+import 'package:nexcart/core/di/service_locator.dart';
+import 'package:nexcart/features/brands/domain/usecases/get_brands_use_case.dart';
 import '../manager/brands_cubit/brands_cubit.dart';
 import '../widgets/brands_view_body.dart';
 

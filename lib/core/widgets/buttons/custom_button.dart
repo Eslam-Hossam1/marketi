@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/theme/theme_colors_extension.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({

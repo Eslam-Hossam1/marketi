@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/entities/category_entity.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/features/home/presentation/widgets/common/home_section_header.dart';
-import 'package:marketi/features/home/presentation/widgets/categories/category_item.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/core/entities/category_entity.dart';
+import 'package:nexcart/core/routing/routes_paths.dart';
+import 'package:nexcart/features/home/presentation/widgets/common/home_section_header.dart';
+import 'package:nexcart/features/home/presentation/widgets/categories/category_item.dart';
 
 class HomeCategoriesGrid extends StatelessWidget {
   final List<CategoryEntity> categories;

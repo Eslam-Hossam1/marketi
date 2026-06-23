@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'product_details_carousel_indicator.dart';
 import 'product_details_carousel_thumbnails.dart';
 import 'product_details_carousel_view.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
+import 'package:nexcart/core/widgets/spacing/height_space.dart';
 
 class ProductDetailsCarousel extends StatefulWidget {
   final List<String> images;

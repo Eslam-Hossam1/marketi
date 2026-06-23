@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/utils/assets.dart';
+import 'package:nexcart/core/utils/assets.dart';
 
 class AppLogoImage extends StatelessWidget {
   const AppLogoImage({super.key, required this.width});

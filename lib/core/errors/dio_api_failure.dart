@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/api_error_model/api_error_model.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/errors/error_codes.dart';
-import 'package:marketi/core/errors/status_code.dart';
+import 'package:nexcart/core/errors/api_error_model/api_error_model.dart';
+import 'package:nexcart/core/errors/api_failure.dart';
+import 'package:nexcart/core/errors/error_codes.dart';
+import 'package:nexcart/core/errors/status_code.dart';
 
 class DioApiFailure extends ApiFailure {
   DioApiFailure(

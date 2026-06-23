@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/core/utils/form_validators.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_text_form_field_with_title.dart';
-import 'package:marketi/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/password_and_confirm_password_section.dart';
+import 'package:nexcart/core/utils/assets.dart';
+import 'package:nexcart/core/utils/constants.dart';
+import 'package:nexcart/core/utils/form_validators.dart';
+import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nexcart/core/widgets/text_form_fields/custom_text_form_field_with_title.dart';
+import 'package:nexcart/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'package:nexcart/features/auth/presentation/widgets/sign_up/password_and_confirm_password_section.dart';
 
 class SignUpTextFieldsSection extends StatelessWidget {
   const SignUpTextFieldsSection({super.key});

@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
-import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_state.dart';
-import 'package:marketi/features/onboarding/presentation/widgets/onboarding_dots_indicator_and_next_button_section/onboarding_dots_indicator.dart';
-import 'package:marketi/features/onboarding/presentation/widgets/onboarding_dots_indicator_and_next_button_section/onboarding_next_button.dart';
+import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nexcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
+import 'package:nexcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_state.dart';
+import 'package:nexcart/features/onboarding/presentation/widgets/onboarding_dots_indicator_and_next_button_section/onboarding_dots_indicator.dart';
+import 'package:nexcart/features/onboarding/presentation/widgets/onboarding_dots_indicator_and_next_button_section/onboarding_next_button.dart';
 
 class DotsIndicatorAndNextButtonSection extends StatelessWidget {
   const DotsIndicatorAndNextButtonSection({

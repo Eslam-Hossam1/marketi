@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/usecases/use_case.dart';
+import 'package:nexcart/core/errors/api_failure.dart';
+import 'package:nexcart/core/usecases/use_case.dart';
 import '../entities/cart_entity.dart';
 import '../repos/cart_repo.dart';
 

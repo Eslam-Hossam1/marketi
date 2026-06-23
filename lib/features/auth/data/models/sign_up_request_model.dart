@@ -1,5 +1,5 @@
-import 'package:marketi/core/networking/api_keys.dart';
-import 'package:marketi/features/auth/domain/params/sign_up_params.dart';
+import 'package:nexcart/core/networking/api_keys.dart';
+import 'package:nexcart/features/auth/domain/params/sign_up_params.dart';
 
 class SignUpRequestModel {
   final String name;

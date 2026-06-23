@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/entities/product_entity.dart';
-import 'package:marketi/core/params/product_params.dart';
-import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
+import 'package:nexcart/core/entities/product_entity.dart';
+import 'package:nexcart/core/params/product_params.dart';
+import 'package:nexcart/core/utils/constants.dart';
+import 'package:nexcart/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
 import 'brand_products_state.dart';
 
 class BrandProductsCubit extends Cubit<BrandProductsState> {

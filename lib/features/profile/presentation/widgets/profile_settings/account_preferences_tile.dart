@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
+import 'package:nexcart/core/routing/routing_helper.dart';
+import 'package:nexcart/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 
 import 'profile_setting_item.dart';
 

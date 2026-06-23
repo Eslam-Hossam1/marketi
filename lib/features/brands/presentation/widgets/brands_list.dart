@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:marketi/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nexcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/brands_cubit/brands_cubit.dart';
 import '../manager/brands_cubit/brands_state.dart';
 import 'brand_item.dart';

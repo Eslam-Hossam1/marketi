@@ -1,4 +1,4 @@
-import 'package:marketi/core/utils/app_regex.dart';
+import 'package:nexcart/core/utils/app_regex.dart';
 
 abstract class FormValidators {
   static String? customTextFormFieldValidator(String? value) {
