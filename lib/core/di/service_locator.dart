@@ -85,6 +85,13 @@ import 'package:marketi/features/payment/data/repositories/payment_repository_im
 import 'package:marketi/features/payment/domain/repositories/payment_repository.dart';
 import 'package:marketi/features/payment/domain/usecases/request_payment_use_case.dart';
 import 'package:marketi/features/payment/presentation/manager/payment_cubit/payment_cubit.dart';
+import 'package:marketi/features/orders/data/datasources/orders_local_data_source.dart';
+import 'package:marketi/features/orders/data/datasources/orders_local_data_source_impl.dart';
+import 'package:marketi/features/orders/data/repos/orders_repo_impl.dart';
+import 'package:marketi/features/orders/domain/repos/orders_repo.dart';
+import 'package:marketi/features/orders/domain/usecases/get_orders_use_case.dart';
+import 'package:marketi/features/orders/domain/usecases/add_order_use_case.dart';
+import 'package:marketi/features/orders/presentation/manager/orders_cubit/orders_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -105,6 +112,7 @@ Future<void> setupServiceLocator() async {
   _setupProductDetails();
   _setupCart();
   _setupPayment();
+  _setupOrders();
 }
 
 void _setupCart() {
@@ -346,5 +354,23 @@ void _setupPayment() {
   );
   getIt.registerFactory<PaymentCubit>(
     () => PaymentCubit(getIt<RequestPaymentUseCase>()),
+  );
+}
+
+void _setupOrders() {
+  getIt.registerLazySingleton<OrdersLocalDataSource>(
+    () => OrdersLocalDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<OrdersRepo>(
+    () => OrdersRepoImpl(getIt<OrdersLocalDataSource>()),
+  );
+  getIt.registerLazySingleton<GetOrdersUseCase>(
+    () => GetOrdersUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerLazySingleton<AddOrderUseCase>(
+    () => AddOrderUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerFactory<OrdersCubit>(
+    () => OrdersCubit(getIt<GetOrdersUseCase>(), getIt<AddOrderUseCase>()),
   );
 }

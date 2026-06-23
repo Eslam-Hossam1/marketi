@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:marketi/core/utils/app_initializer.dart';
 import 'package:marketi/marketi_app.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppInitializer.initialize();

@@ -31,6 +31,7 @@ class PaymobServiceImpl implements PaymentService {
         "items": items.map((e) => e.toJson()).toList(),
         "billing_data": billingData.toJson(),
         "expiration": 3600,
+        "redirection_url": "https://marketi-app.com/payment-callback",
       },
     );
 

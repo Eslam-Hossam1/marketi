@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/widgets/custom_circular_progress_indecator.dart';
 import 'package:marketi/features/payment/domain/params/payment_params.dart';
 import 'package:marketi/features/payment/presentation/manager/payment_cubit/payment_cubit.dart';
 import 'package:marketi/features/payment/presentation/manager/payment_cubit/payment_state.dart';
@@ -18,11 +19,12 @@ class PaymentCheckoutView extends StatelessWidget {
       child: BlocBuilder<PaymentCubit, PaymentState>(
         builder: (context, state) {
           if (state is PaymentLoading) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
+            return Scaffold(
+              appBar: AppBar(title: const Text('Checkout')),
+              body: const Center(child: CustomCircularProgressIndecator()),
             );
           } else if (state is PaymentUrlSuccess) {
-            return CheckoutWebView(paymentUrl: state.paymentUrl);
+            return CheckoutWebView(paymentUrl: state.paymentUrl, params: params);
           } else if (state is PaymentFailure) {
             return Scaffold(
               appBar: AppBar(title: const Text('Checkout Error')),
@@ -31,8 +33,9 @@ class PaymentCheckoutView extends StatelessWidget {
               ),
             );
           }
-          return const Scaffold(
-            body: Center(child: Text('Initializing...')),
+          return Scaffold(
+            appBar: AppBar(title: const Text('Checkout')),
+            body: const Center(child: CustomCircularProgressIndecator()),
           );
         },
       ),

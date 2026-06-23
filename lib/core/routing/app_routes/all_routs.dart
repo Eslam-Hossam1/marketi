@@ -17,6 +17,10 @@ import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.
 import 'package:marketi/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:marketi/core/routing/app_routes/payment_routes.dart';
 import 'package:marketi/core/routing/app_routes/reset_password_routes.dart';
+import 'package:marketi/core/routing/app_routes/orders_routes.dart';
+import 'package:marketi/features/orders/domain/usecases/add_order_use_case.dart';
+import 'package:marketi/features/orders/domain/usecases/get_orders_use_case.dart';
+import 'package:marketi/features/orders/presentation/manager/orders_cubit/orders_cubit.dart';
 
 class AppRoutes {
   static List<RouteBase> routes = [
@@ -33,8 +37,13 @@ class AppRoutes {
               )..getCart(),
             ),
             BlocProvider(
-              create: (context) =>
-                  ProfileCubit(getIt<GetUserDataUseCase>()),
+              create: (context) => ProfileCubit(getIt<GetUserDataUseCase>()),
+            ),
+            BlocProvider(
+              create: (context) => OrdersCubit(
+                getIt<GetOrdersUseCase>(),
+                getIt<AddOrderUseCase>(),
+              ),
             ),
           ],
           child: child,
@@ -46,6 +55,8 @@ class AppRoutes {
         ...ProductRoutes.routes,
         ...CategoryProductsRoutes.routes,
         ...BrandProductsRoutes.routes,
+        ...PaymentRoutes.routes,
+        ...OrdersRoutes.routes,
       ],
     ),
 
@@ -54,6 +65,5 @@ class AppRoutes {
     ...AuthRoutes.routes,
     ...ResetPasswordRoutes.routes,
     ...OtpRoute.routes,
-    ...PaymentRoutes.routes,
   ];
 }
