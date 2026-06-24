@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/product/product_card.dart';
-import 'package:marketi/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:marketi/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/product/product_card.dart';
+import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/brand_products_cubit.dart';
 import '../manager/brand_products_state.dart';
 

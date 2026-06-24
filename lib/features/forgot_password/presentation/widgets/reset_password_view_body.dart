@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
-import 'package:marketi/core/widgets/custom_back_button_with_title_header.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_button.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_description_text.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_illustration.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_text_fields_section.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/spacing/sliver_height_space.dart';
+import 'package:nextcart/core/widgets/custom_back_button_with_title_header.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_button.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_description_text.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_illustration.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_text_fields_section.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
   const ResetPasswordViewBody({super.key});

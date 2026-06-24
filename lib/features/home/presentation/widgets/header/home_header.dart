@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/avatar/custom_network_circle_image.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/avatar/custom_network_circle_image.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});

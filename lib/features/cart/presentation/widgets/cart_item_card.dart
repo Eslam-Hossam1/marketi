@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/entities/product_entity.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
-import 'package:marketi/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
-import 'package:marketi/features/cart/presentation/manager/cart_cubit/cart_state.dart';
-import 'package:marketi/features/product_details/domain/params/product_details_params.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/features/product_details/domain/params/product_details_params.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 
 class CartItemCard extends StatelessWidget {
   final ProductEntity product;

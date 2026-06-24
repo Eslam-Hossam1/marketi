@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:marketi/core/widgets/buttons/custom_text_button.dart';
-import 'package:marketi/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
-import 'package:marketi/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/widgets/buttons/custom_text_button.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
 
 class EditProfileSaveButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/widgets/sliver_sticky_footer.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/already_have_an_account.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_button.dart';
+import 'package:nextcart/core/widgets/sliver_sticky_footer.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/features/auth/presentation/widgets/sign_up/already_have_an_account.dart';
+import 'package:nextcart/features/auth/presentation/widgets/sign_up/sign_up_button.dart';
 
 class SignUpButtonAndAlreadyHaveAccountSection extends StatelessWidget {
   final GlobalKey<FormState> formKey;

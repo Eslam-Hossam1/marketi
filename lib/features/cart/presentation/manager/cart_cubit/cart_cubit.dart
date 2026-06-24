@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/entities/product_entity.dart';
-import 'package:marketi/features/cart/domain/params/cart_product_params.dart';
-import 'package:marketi/features/cart/domain/usecases/add_to_cart_use_case.dart';
-import 'package:marketi/features/cart/domain/usecases/get_cart_use_case.dart';
-import 'package:marketi/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/features/cart/domain/params/cart_product_params.dart';
+import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {

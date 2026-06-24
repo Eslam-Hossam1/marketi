@@ -1,6 +1,6 @@
-import 'package:marketi/core/networking/api_consumer.dart';
-import 'package:marketi/core/networking/end_points.dart';
-import 'package:marketi/features/cart/data/models/cart_response_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/features/cart/data/models/cart_response_model.dart';
 import 'cart_remote_data_source.dart';
 
 class CartRemoteDataSourceImpl implements CartRemoteDataSource {

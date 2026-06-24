@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/errors/dio_api_failure.dart';
-import 'package:marketi/features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
-import 'package:marketi/features/forgot_password/data/models/reset_password_request_model.dart';
-import 'package:marketi/features/forgot_password/data/models/send_code_request_model.dart';
-import 'package:marketi/features/forgot_password/domain/params/reset_password_params.dart';
-import 'package:marketi/features/forgot_password/domain/params/send_code_params.dart';
-import 'package:marketi/features/forgot_password/domain/repos/forgot_password_repo.dart';
+import 'package:nextcart/core/errors/api_failure.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
+import 'package:nextcart/features/forgot_password/data/models/reset_password_request_model.dart';
+import 'package:nextcart/features/forgot_password/data/models/send_code_request_model.dart';
+import 'package:nextcart/features/forgot_password/domain/params/reset_password_params.dart';
+import 'package:nextcart/features/forgot_password/domain/params/send_code_params.dart';
+import 'package:nextcart/features/forgot_password/domain/repos/forgot_password_repo.dart';
 
 class ForgotPasswordRepoImpl implements ForgotPasswordRepo {
   final ForgotPasswordRemoteDataSource _remoteDataSource;

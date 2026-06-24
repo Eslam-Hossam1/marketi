@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_pin_code_field.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_pin_code_field.dart';
 
 import '../../../../../core/theme/app_text_styles.dart';
 import '../../../../../core/theme/theme_colors_extension.dart';

@@ -1,6 +1,6 @@
-import 'package:marketi/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
 // ignore: unused_import
-import 'package:marketi/core/networking/end_points.dart';
+import 'package:nextcart/core/networking/end_points.dart';
 import '../../domain/params/product_details_params.dart';
 import '../models/product_details_model.dart';
 import 'product_details_remote_data_source.dart';

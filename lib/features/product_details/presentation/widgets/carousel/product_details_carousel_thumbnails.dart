@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 
 class ProductDetailsCarouselThumbnails extends StatelessWidget {
   final List<String> images;

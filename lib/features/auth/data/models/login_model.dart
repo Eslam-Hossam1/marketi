@@ -1,5 +1,5 @@
-import 'package:marketi/core/networking/api_keys.dart';
-import 'package:marketi/features/auth/domain/entities/auth_entity.dart';
+import 'package:nextcart/core/networking/api_keys.dart';
+import 'package:nextcart/features/auth/domain/entities/auth_entity.dart';
 
 class LoginModel extends AuthEntity {
   final String message;

@@ -1,6 +1,6 @@
-import 'package:marketi/core/networking/api_consumer.dart';
-import 'package:marketi/core/networking/end_points.dart';
-import 'package:marketi/core/models/category_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/core/models/category_model.dart';
 import 'categories_remote_data_source.dart';
 
 class CategoriesRemoteDataSourceImpl implements CategoriesRemoteDataSource {

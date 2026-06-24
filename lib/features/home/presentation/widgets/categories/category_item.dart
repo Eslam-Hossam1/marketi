@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
-import 'package:marketi/features/category_products/domain/params/category_products_routing_params.dart';
-import 'package:marketi/core/entities/category_entity.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/features/category_products/domain/params/category_products_routing_params.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
 
 class CategoryItem extends StatelessWidget {
   final CategoryEntity category;

@@ -1,7 +1,7 @@
-import 'package:marketi/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:marketi/core/routing/app_router.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/routing/app_router.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
 import 'api_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';

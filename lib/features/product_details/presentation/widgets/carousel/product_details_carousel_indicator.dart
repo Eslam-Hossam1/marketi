@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class ProductDetailsCarouselIndicator extends StatelessWidget {
   final int itemCount;

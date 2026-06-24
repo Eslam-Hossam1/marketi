@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class CustomFileCircleImage extends StatelessWidget {
   const CustomFileCircleImage({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/utils/assets.dart';
 
 class ForgotPasswordIllustration extends StatelessWidget {
   const ForgotPasswordIllustration({super.key});

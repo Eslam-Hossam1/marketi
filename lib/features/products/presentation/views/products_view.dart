@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/features/products/domain/usecases/get_products_use_case.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/features/products/domain/usecases/get_products_use_case.dart';
 import '../manager/products_cubit/products_cubit.dart';
 import '../widgets/products_view_body.dart';
 

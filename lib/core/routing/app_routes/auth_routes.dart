@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/features/auth/domain/usecases/login_use_case.dart';
-import 'package:marketi/features/auth/domain/usecases/sign_up_use_case.dart';
-import 'package:marketi/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:marketi/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
-import 'package:marketi/features/auth/presentation/views/login_view.dart';
-import 'package:marketi/features/auth/presentation/views/sign_up_view.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/features/auth/domain/usecases/login_use_case.dart';
+import 'package:nextcart/features/auth/domain/usecases/sign_up_use_case.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:nextcart/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'package:nextcart/features/auth/presentation/views/login_view.dart';
+import 'package:nextcart/features/auth/presentation/views/sign_up_view.dart';
 
 class AuthRoutes {
   static List<GoRoute> routes = [

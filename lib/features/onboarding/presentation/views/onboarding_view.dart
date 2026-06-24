@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
-import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_state.dart';
-import 'package:marketi/features/onboarding/presentation/widgets/onboarding_view_body.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
+import 'package:nextcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_state.dart';
+import 'package:nextcart/features/onboarding/presentation/widgets/onboarding_view_body.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});

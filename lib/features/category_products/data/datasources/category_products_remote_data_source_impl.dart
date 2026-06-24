@@ -1,7 +1,7 @@
-import 'package:marketi/core/networking/api_consumer.dart';
-import 'package:marketi/core/networking/end_points.dart';
-import 'package:marketi/core/models/product_request_model.dart';
-import 'package:marketi/core/models/products_response_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/core/models/product_request_model.dart';
+import 'package:nextcart/core/models/products_response_model.dart';
 import 'category_products_remote_data_source.dart';
 
 class CategoryProductsRemoteDataSourceImpl implements CategoryProductsRemoteDataSource {

@@ -1,4 +1,4 @@
-import 'package:marketi/core/entities/product_entity.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
 
 class CartEntity {
   final List<ProductEntity> products;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/avatar/custom_file_circle_image.dart';
-import 'package:marketi/core/widgets/avatar/custom_network_circle_image.dart';
-import 'package:marketi/core/widgets/choose_image_source_bottom_sheet.dart';
-import 'package:marketi/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
-import 'package:marketi/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/avatar/custom_file_circle_image.dart';
+import 'package:nextcart/core/widgets/avatar/custom_network_circle_image.dart';
+import 'package:nextcart/core/widgets/choose_image_source_bottom_sheet.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
 
 class EditProfileImagePicker extends StatelessWidget {
   final String currentImageUrl;

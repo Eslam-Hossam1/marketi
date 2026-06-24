@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/errors/dio_api_failure.dart';
-import 'package:marketi/core/entities/products_entity.dart';
-import 'package:marketi/core/params/product_params.dart';
-import 'package:marketi/core/models/product_request_model.dart';
+import 'package:nextcart/core/errors/api_failure.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/entities/products_entity.dart';
+import 'package:nextcart/core/params/product_params.dart';
+import 'package:nextcart/core/models/product_request_model.dart';
 import '../datasources/products_remote_data_source/products_remote_data_source.dart';
 import '../../domain/repos/products_repo.dart';
 

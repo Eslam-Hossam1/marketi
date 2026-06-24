@@ -1,15 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:marketi/core/errors/api_failure.dart';
-import 'package:marketi/core/errors/dio_api_failure.dart';
-import 'package:marketi/core/services/auth_credentials_manager/auth_credentials_manager.dart';
-import 'package:marketi/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
-import 'package:marketi/features/auth/data/models/login_request_model.dart';
-import 'package:marketi/features/auth/data/models/sign_up_request_model.dart';
-import 'package:marketi/features/auth/domain/entities/auth_entity.dart';
-import 'package:marketi/features/auth/domain/params/login_params.dart';
-import 'package:marketi/features/auth/domain/params/sign_up_params.dart';
-import 'package:marketi/features/auth/domain/repos/auth_repo.dart';
+import 'package:nextcart/core/errors/api_failure.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nextcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
+import 'package:nextcart/features/auth/data/models/login_request_model.dart';
+import 'package:nextcart/features/auth/data/models/sign_up_request_model.dart';
+import 'package:nextcart/features/auth/domain/entities/auth_entity.dart';
+import 'package:nextcart/features/auth/domain/params/login_params.dart';
+import 'package:nextcart/features/auth/domain/params/sign_up_params.dart';
+import 'package:nextcart/features/auth/domain/repos/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final AuthRemoteDataSource _remoteDataSource;

@@ -1,4 +1,4 @@
-import 'package:marketi/features/edit_profile/domain/params/edit_user_data_params.dart';
+import 'package:nextcart/features/edit_profile/domain/params/edit_user_data_params.dart';
 
 class EditUserDataRequestModel extends EditUserDataParams {
   EditUserDataRequestModel({

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/features/onboarding/domain/entities/onboarding_page_entity.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/features/onboarding/domain/entities/onboarding_page_entity.dart';
 
 class OnboardingPageItem extends StatelessWidget {
   final OnboardingPageEntity page;
