@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
 
 class OnboardingDotsIndicator extends StatelessWidget {
   final int currentPage;

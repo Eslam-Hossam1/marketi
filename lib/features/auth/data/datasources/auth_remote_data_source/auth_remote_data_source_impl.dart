@@ -1,10 +1,10 @@
-import 'package:nexcart/core/networking/api_consumer.dart';
-import 'package:nexcart/core/networking/end_points.dart';
-import 'package:nexcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
-import 'package:nexcart/features/auth/data/models/login_model.dart';
-import 'package:nexcart/features/auth/data/models/login_request_model.dart';
-import 'package:nexcart/features/auth/data/models/sign_up_model.dart';
-import 'package:nexcart/features/auth/data/models/sign_up_request_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
+import 'package:nextcart/features/auth/data/models/login_model.dart';
+import 'package:nextcart/features/auth/data/models/login_request_model.dart';
+import 'package:nextcart/features/auth/data/models/sign_up_model.dart';
+import 'package:nextcart/features/auth/data/models/sign_up_request_model.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiConsumer _apiConsumer;

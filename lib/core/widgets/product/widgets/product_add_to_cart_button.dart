@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/product_entity.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
-import 'package:nexcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 
 class ProductAddToCartButton extends StatelessWidget {
   final ProductEntity product;

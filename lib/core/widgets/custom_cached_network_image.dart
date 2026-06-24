@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/utils/assets.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 class CustomCachedNetworkImage extends StatelessWidget {

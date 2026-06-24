@@ -1,5 +1,5 @@
-import 'package:nexcart/core/errors/failures.dart';
-import 'package:nexcart/core/errors/status_code.dart';
+import 'package:nextcart/core/errors/failures.dart';
+import 'package:nextcart/core/errors/status_code.dart';
 
 abstract class ApiFailure extends Failure {
   final String errCode;

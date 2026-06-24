@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
 
 class ProductDetailsTitleAndDescription extends StatelessWidget {
   final String title;

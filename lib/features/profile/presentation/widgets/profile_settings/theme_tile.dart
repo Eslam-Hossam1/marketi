@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/cubit/theme_cubit/theme_cubit.dart';
-import 'package:nexcart/core/routing/routing_helper.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/theme/app_theme_options.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/cubit/theme_cubit/theme_cubit.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/app_theme_options.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 import 'profile_setting_item.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/product_entity.dart';
-import 'package:nexcart/core/params/product_params.dart';
-import 'package:nexcart/core/utils/constants.dart';
-import 'package:nexcart/features/category_products/domain/usecases/get_category_products_use_case.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/params/product_params.dart';
+import 'package:nextcart/core/utils/constants.dart';
+import 'package:nextcart/features/category_products/domain/usecases/get_category_products_use_case.dart';
 import 'category_products_state.dart';
 
 class CategoryProductsCubit extends Cubit<CategoryProductsState> {

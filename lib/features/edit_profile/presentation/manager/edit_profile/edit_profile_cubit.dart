@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nexcart/core/di/service_locator.dart';
-import 'package:nexcart/core/services/image_picker_service/cropped_image_picker_service.dart';
-import 'package:nexcart/features/edit_profile/domain/params/edit_user_data_params.dart';
-import 'package:nexcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
-import 'package:nexcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
-import 'package:nexcart/features/profile/domain/entities/user_profile_entity.dart';
-import 'package:nexcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_form_data.dart';
-import 'package:nexcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/core/services/image_picker_service/cropped_image_picker_service.dart';
+import 'package:nextcart/features/edit_profile/domain/params/edit_user_data_params.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
+import 'package:nextcart/features/profile/domain/entities/user_profile_entity.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_form_data.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_state.dart';
 
 class EditProfileCubit extends Cubit<EditProfileState> {
   final EditUserDataUseCase _editUserDataUseCase;

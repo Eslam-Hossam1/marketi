@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
 
 class HeightSpace extends StatelessWidget {
   const HeightSpace({super.key, required this.height});

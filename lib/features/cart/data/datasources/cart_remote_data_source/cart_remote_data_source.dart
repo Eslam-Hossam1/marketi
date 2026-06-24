@@ -1,4 +1,4 @@
-import 'package:nexcart/features/cart/data/models/cart_response_model.dart';
+import 'package:nextcart/features/cart/data/models/cart_response_model.dart';
 
 abstract class CartRemoteDataSource {
   Future<CartResponseModel> getCart();

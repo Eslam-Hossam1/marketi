@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/widgets/text_form_fields/custom_text_form_field.dart';
-import 'package:nexcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
 
 class EditProfileForm extends StatelessWidget {
   const EditProfileForm({super.key});

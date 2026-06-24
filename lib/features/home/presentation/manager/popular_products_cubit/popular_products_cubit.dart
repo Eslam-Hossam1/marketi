@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/product_entity.dart';
-import 'package:nexcart/core/params/product_params.dart';
-import 'package:nexcart/features/products/domain/usecases/get_products_use_case.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/params/product_params.dart';
+import 'package:nextcart/features/products/domain/usecases/get_products_use_case.dart';
 import 'popular_products_state.dart';
 
 class PopularProductsCubit extends Cubit<PopularProductsState> {

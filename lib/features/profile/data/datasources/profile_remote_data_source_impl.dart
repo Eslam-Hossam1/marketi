@@ -1,4 +1,4 @@
-import 'package:nexcart/core/networking/end_points.dart';
+import 'package:nextcart/core/networking/end_points.dart';
 
 import '../../../../core/networking/api_consumer.dart';
 import '../models/user_profile_model.dart';

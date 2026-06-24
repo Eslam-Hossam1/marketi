@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:nexcart/core/routing/routes_paths.dart';
-import 'package:nexcart/features/category_products/domain/params/category_products_routing_params.dart';
-import 'package:nexcart/features/category_products/presentation/views/category_products_view.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/features/category_products/domain/params/category_products_routing_params.dart';
+import 'package:nextcart/features/category_products/presentation/views/category_products_view.dart';
 
 class CategoryProductsRoutes {
   static List<RouteBase> routes = [

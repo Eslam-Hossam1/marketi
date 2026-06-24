@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/brand_entity.dart';
-import 'package:nexcart/features/brands/domain/usecases/get_brands_use_case.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
+import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
 import 'brands_state.dart';
 
 class BrandsCubit extends Cubit<BrandsState> {

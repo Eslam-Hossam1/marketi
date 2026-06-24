@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
 import '../../../domain/entities/product_details_entity.dart';
 import 'product_details_shipping_and_rating.dart';
 import 'product_details_title_and_description.dart';

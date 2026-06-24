@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/category_entity.dart';
-import 'package:nexcart/features/categories/domain/usecases/get_categories_use_case.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
+import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {

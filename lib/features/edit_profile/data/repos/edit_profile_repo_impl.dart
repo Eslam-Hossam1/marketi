@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nexcart/core/errors/dio_api_failure.dart';
-import 'package:nexcart/core/errors/failures.dart';
-import 'package:nexcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
-import 'package:nexcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
-import 'package:nexcart/features/edit_profile/domain/params/edit_user_data_params.dart';
-import 'package:nexcart/features/edit_profile/domain/repos/edit_profile_repo.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/errors/failures.dart';
+import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
+import 'package:nextcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
+import 'package:nextcart/features/edit_profile/domain/params/edit_user_data_params.dart';
+import 'package:nextcart/features/edit_profile/domain/repos/edit_profile_repo.dart';
 
 class EditProfileRepoImpl implements EditProfileRepo {
   final EditProfileRemoteDataSource _remoteDataSource;

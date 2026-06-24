@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:nexcart/core/errors/failures.dart';
-import 'package:nexcart/core/usecases/use_case.dart';
+import 'package:nextcart/core/errors/failures.dart';
+import 'package:nextcart/core/usecases/use_case.dart';
 import '../entities/product_details_entity.dart';
 import '../params/product_details_params.dart';
 import '../repos/product_details_repo.dart';

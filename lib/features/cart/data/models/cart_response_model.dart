@@ -1,4 +1,4 @@
-import 'package:nexcart/core/models/product_model.dart';
+import 'package:nextcart/core/models/product_model.dart';
 import '../../domain/entities/cart_entity.dart';
 
 class CartResponseModel extends CartEntity {

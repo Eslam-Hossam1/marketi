@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key, required this.navigationShell});

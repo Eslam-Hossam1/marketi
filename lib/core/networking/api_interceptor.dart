@@ -1,7 +1,7 @@
-import 'package:nexcart/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:nexcart/core/routing/app_router.dart';
-import 'package:nexcart/core/routing/routes_paths.dart';
-import 'package:nexcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/routing/app_router.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
 import 'api_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';

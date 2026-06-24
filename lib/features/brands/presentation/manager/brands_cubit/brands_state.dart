@@ -1,4 +1,4 @@
-import 'package:nexcart/core/entities/brand_entity.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
 
 abstract class BrandsState {
   const BrandsState();

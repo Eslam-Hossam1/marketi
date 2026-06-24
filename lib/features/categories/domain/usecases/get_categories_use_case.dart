@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:nexcart/core/errors/api_failure.dart';
-import 'package:nexcart/core/entities/category_entity.dart';
-import 'package:nexcart/core/usecases/use_case.dart';
+import 'package:nextcart/core/errors/api_failure.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
+import 'package:nextcart/core/usecases/use_case.dart';
 import '../repos/categories_repo.dart';
 
 class GetCategoriesUseCase

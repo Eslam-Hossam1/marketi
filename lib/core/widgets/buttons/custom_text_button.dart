@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/widgets/buttons/custom_button.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/widgets/buttons/custom_button.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({

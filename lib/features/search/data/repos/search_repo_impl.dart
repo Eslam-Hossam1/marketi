@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nexcart/core/errors/failures.dart';
-import 'package:nexcart/core/errors/dio_api_failure.dart';
-import 'package:nexcart/core/entities/products_entity.dart';
-import 'package:nexcart/core/params/product_params.dart';
-import 'package:nexcart/core/models/product_request_model.dart';
+import 'package:nextcart/core/errors/failures.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/entities/products_entity.dart';
+import 'package:nextcart/core/params/product_params.dart';
+import 'package:nextcart/core/models/product_request_model.dart';
 import '../datasources/search_remote_data_source/search_remote_data_source.dart';
 import '../../domain/repos/search_repo.dart';
 

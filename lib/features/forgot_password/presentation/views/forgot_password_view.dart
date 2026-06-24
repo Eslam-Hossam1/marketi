@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/features/forgot_password/presentation/widgets/forgot_password_view_body.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/forgot_password_view_body.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/widgets/custom_header_with_image.dart';
-import 'package:nexcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/widgets/custom_header_with_image.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
 import 'categories_search_text_field.dart';
 import 'categories_grid.dart';
 

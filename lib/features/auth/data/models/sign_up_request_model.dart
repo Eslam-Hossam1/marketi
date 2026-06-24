@@ -1,5 +1,5 @@
-import 'package:nexcart/core/networking/api_keys.dart';
-import 'package:nexcart/features/auth/domain/params/sign_up_params.dart';
+import 'package:nextcart/core/networking/api_keys.dart';
+import 'package:nextcart/features/auth/domain/params/sign_up_params.dart';
 
 class SignUpRequestModel {
   final String name;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/utils/responsive_helper.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/utils/responsive_helper.dart';
 import '../../theme/app_text_styles.dart';
 import '../../theme/theme_colors_extension.dart';
 import '../../utils/form_validators.dart';

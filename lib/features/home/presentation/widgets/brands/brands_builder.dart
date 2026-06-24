@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/brand_entity.dart';
-import 'package:nexcart/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
-import 'package:nexcart/features/home/presentation/manager/brands_cubit/brands_state.dart';
-import 'package:nexcart/features/home/presentation/widgets/brands/home_brands_list.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
+import 'package:nextcart/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
+import 'package:nextcart/features/home/presentation/manager/brands_cubit/brands_state.dart';
+import 'package:nextcart/features/home/presentation/widgets/brands/home_brands_list.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 
 class BrandsBuilder extends StatelessWidget {
   const BrandsBuilder({super.key});

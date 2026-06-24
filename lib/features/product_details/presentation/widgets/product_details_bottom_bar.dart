@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/widgets/buttons/custom_button.dart';
-import 'package:nexcart/core/widgets/spacing/width_space.dart';
-import 'package:nexcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
-import 'package:nexcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/buttons/custom_button.dart';
+import 'package:nextcart/core/widgets/spacing/width_space.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 
 class ProductDetailsBottomBar extends StatelessWidget {
   final double price;

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:nexcart/core/networking/api_consumer.dart';
-import 'package:nexcart/core/networking/end_points.dart';
-import 'package:nexcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
 
 abstract class EditProfileRemoteDataSource {
   Future<void> editUserData(EditUserDataRequestModel requestModel);

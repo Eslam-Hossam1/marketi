@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/entities/product_entity.dart';
-import 'package:nexcart/features/product_details/domain/params/product_details_params.dart';
-import 'package:nexcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/features/product_details/domain/params/product_details_params.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 import 'widgets/product_card_image.dart';
 import 'widgets/product_card_price_and_rating.dart';
 import 'widgets/product_card_title.dart';

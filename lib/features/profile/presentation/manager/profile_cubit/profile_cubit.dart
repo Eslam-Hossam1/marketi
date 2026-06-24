@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/features/profile/domain/entities/user_profile_entity.dart';
+import 'package:nextcart/features/profile/domain/entities/user_profile_entity.dart';
 
 import '../../../domain/usecases/get_user_data_use_case.dart';
 import 'profile_state.dart';

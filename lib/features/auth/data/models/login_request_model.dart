@@ -1,5 +1,5 @@
-import 'package:nexcart/core/networking/api_keys.dart';
-import 'package:nexcart/features/auth/domain/params/login_params.dart';
+import 'package:nextcart/core/networking/api_keys.dart';
+import 'package:nextcart/features/auth/domain/params/login_params.dart';
 
 class LoginRequestModel {
   final String email;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nexcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../manager/otp_cubit/otp_cubit.dart';

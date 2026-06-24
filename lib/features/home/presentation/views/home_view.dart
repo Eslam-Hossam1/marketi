@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/di/service_locator.dart';
-import 'package:nexcart/features/brands/domain/usecases/get_brands_use_case.dart';
-import 'package:nexcart/features/categories/domain/usecases/get_categories_use_case.dart';
-import 'package:nexcart/features/products/domain/usecases/get_products_use_case.dart';
-import 'package:nexcart/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
-import 'package:nexcart/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
-import 'package:nexcart/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
-import 'package:nexcart/features/home/presentation/widgets/home_view_body.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
+import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
+import 'package:nextcart/features/products/domain/usecases/get_products_use_case.dart';
+import 'package:nextcart/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
+import 'package:nextcart/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
+import 'package:nextcart/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
+import 'package:nextcart/features/home/presentation/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

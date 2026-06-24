@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/core/entities/product_entity.dart';
-import 'package:nexcart/core/theme/app_text_styles.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class ProductCardTitle extends StatelessWidget {
   final ProductEntity product;

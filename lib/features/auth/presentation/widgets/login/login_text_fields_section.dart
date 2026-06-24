@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/utils/assets.dart';
-import 'package:nexcart/core/utils/constants.dart';
-import 'package:nexcart/core/utils/form_validators.dart';
-import 'package:nexcart/core/widgets/spacing/height_space.dart';
-import 'package:nexcart/core/widgets/text_form_fields/custom_password_form_field_with_title.dart';
-import 'package:nexcart/core/widgets/text_form_fields/custom_text_form_field_with_title.dart';
-import 'package:nexcart/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:nexcart/features/auth/presentation/widgets/login/forgot_password_clickable_text.dart';
+import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/core/utils/constants.dart';
+import 'package:nextcart/core/utils/form_validators.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_password_form_field_with_title.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_text_form_field_with_title.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:nextcart/features/auth/presentation/widgets/login/forgot_password_clickable_text.dart';
 
 class LoginTextFieldsSection extends StatelessWidget {
   const LoginTextFieldsSection({super.key});

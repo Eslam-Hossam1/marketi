@@ -1,8 +1,8 @@
-import 'package:nexcart/core/networking/api_consumer.dart';
-import 'package:nexcart/core/networking/end_points.dart';
-import 'package:nexcart/features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
-import 'package:nexcart/features/forgot_password/data/models/reset_password_request_model.dart';
-import 'package:nexcart/features/forgot_password/data/models/send_code_request_model.dart';
+import 'package:nextcart/core/networking/api_consumer.dart';
+import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
+import 'package:nextcart/features/forgot_password/data/models/reset_password_request_model.dart';
+import 'package:nextcart/features/forgot_password/data/models/send_code_request_model.dart';
 
 class ForgotPasswordRemoteDataSourceImpl
     implements ForgotPasswordRemoteDataSource {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexcart/features/edit_profile/presentation/views/widgets/edit_profile_view_body.dart';
+import 'package:nextcart/features/edit_profile/presentation/views/widgets/edit_profile_view_body.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
-import 'package:nexcart/features/onboarding/presentation/widgets/onboarding_page_view/onboarding_page_item.dart';
+import 'package:nextcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
+import 'package:nextcart/features/onboarding/presentation/widgets/onboarding_page_view/onboarding_page_item.dart';
 
 class OnboardingPageView extends StatelessWidget {
   const OnboardingPageView({super.key});

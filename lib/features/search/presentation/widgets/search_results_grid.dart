@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/widgets/product/product_card.dart';
-import 'package:nexcart/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/product/product_card.dart';
+import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/search_cubit/search_cubit.dart';
 import '../manager/search_cubit/search_state.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:nexcart/core/di/service_locator.dart';
-import 'package:nexcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
-import 'package:nexcart/core/utils/app_bloc_observer.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nextcart/core/utils/app_bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
 
 

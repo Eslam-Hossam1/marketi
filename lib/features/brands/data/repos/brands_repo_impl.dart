@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:nexcart/core/errors/api_failure.dart';
-import 'package:nexcart/core/errors/dio_api_failure.dart';
-import 'package:nexcart/core/entities/brand_entity.dart';
+import 'package:nextcart/core/errors/api_failure.dart';
+import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
 import '../datasources/brands_remote_data_source/brands_remote_data_source.dart';
 import '../../domain/repos/brands_repo.dart';
 

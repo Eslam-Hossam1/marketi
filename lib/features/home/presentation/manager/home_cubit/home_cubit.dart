@@ -1,11 +1,11 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:nexcart/core/entities/brand_entity.dart';
-// import 'package:nexcart/core/entities/category_entity.dart';
-// import 'package:nexcart/core/entities/product_entity.dart';
-// import 'package:nexcart/core/params/product_params.dart';
-// import 'package:nexcart/features/brands/domain/usecases/get_brands_use_case.dart';
-// import 'package:nexcart/features/categories/domain/usecases/get_categories_use_case.dart';
-// import 'package:nexcart/features/products/domain/usecases/get_products_use_case.dart';
+// import 'package:nextcart/core/entities/brand_entity.dart';
+// import 'package:nextcart/core/entities/category_entity.dart';
+// import 'package:nextcart/core/entities/product_entity.dart';
+// import 'package:nextcart/core/params/product_params.dart';
+// import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
+// import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
+// import 'package:nextcart/features/products/domain/usecases/get_products_use_case.dart';
 // import 'home_state.dart';
 
 // class HomeCubit extends Cubit<HomeState> {

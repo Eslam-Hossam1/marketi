@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/di/service_locator.dart';
-import 'package:nexcart/features/categories/domain/usecases/get_categories_use_case.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
 import '../manager/categories_cubit/categories_cubit.dart';
 import '../widgets/categories_view_body.dart';
 

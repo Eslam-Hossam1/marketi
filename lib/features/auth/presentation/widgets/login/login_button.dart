@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:nexcart/core/routing/routes_paths.dart';
-import 'package:nexcart/core/widgets/buttons/custom_text_button.dart';
-import 'package:nexcart/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:nexcart/features/auth/presentation/manager/login_cubit/login_state.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/widgets/buttons/custom_text_button.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_state.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginButton extends StatelessWidget {

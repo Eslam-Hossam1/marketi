@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/entities/category_entity.dart';
-import 'package:nexcart/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
-import 'package:nexcart/features/home/presentation/manager/categories_cubit/categories_state.dart';
-import 'package:nexcart/features/home/presentation/widgets/categories/home_categories_grid.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
+import 'package:nextcart/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
+import 'package:nextcart/features/home/presentation/manager/categories_cubit/categories_state.dart';
+import 'package:nextcart/features/home/presentation/widgets/categories/home_categories_grid.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 
 class CategoriesBuilder extends StatelessWidget {
   const CategoriesBuilder({super.key});

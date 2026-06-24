@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/categories_cubit/categories_cubit.dart';
 import '../manager/categories_cubit/categories_state.dart';
 import 'category_item.dart';

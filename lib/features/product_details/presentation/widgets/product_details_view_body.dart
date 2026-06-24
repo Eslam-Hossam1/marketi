@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/widgets/custom_circular_progress_indecator.dart';
-import 'package:nexcart/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/product_details_cubit/product_details_cubit.dart';
 import '../manager/product_details_cubit/product_details_state.dart';
 import 'product_details_header.dart';
 import 'carousel/product_details_carousel.dart';
 import 'info/product_details_info.dart';
 import 'product_details_bottom_bar.dart';
-import 'package:nexcart/core/widgets/spacing/height_space.dart';
-import 'package:nexcart/core/widgets/sliver_sticky_footer.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/widgets/sliver_sticky_footer.dart';
 
 class ProductDetailsViewBody extends StatelessWidget {
   const ProductDetailsViewBody({super.key});

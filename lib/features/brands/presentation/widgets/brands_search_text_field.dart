@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nexcart/core/extensions/responsive_extension.dart';
-import 'package:nexcart/core/theme/theme_colors_extension.dart';
-import 'package:nexcart/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_text_form_field.dart';
 import '../manager/brands_cubit/brands_cubit.dart';
 
 class BrandsSearchTextField extends StatelessWidget {
