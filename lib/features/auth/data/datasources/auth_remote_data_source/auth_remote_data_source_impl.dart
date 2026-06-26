@@ -1,31 +1,31 @@
-import 'package:nextcart/core/networking/api_consumer.dart';
-import 'package:nextcart/core/networking/end_points.dart';
+import 'package:nextcart/core/services/supabase_service/supabase_service.dart';
 import 'package:nextcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
-import 'package:nextcart/features/auth/data/models/login_model.dart';
 import 'package:nextcart/features/auth/data/models/login_request_model.dart';
-import 'package:nextcart/features/auth/data/models/sign_up_model.dart';
 import 'package:nextcart/features/auth/data/models/sign_up_request_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final ApiConsumer _apiConsumer;
-
-  AuthRemoteDataSourceImpl(this._apiConsumer);
+  AuthRemoteDataSourceImpl();
 
   @override
-  Future<LoginModel> login(LoginRequestModel requestModel) async {
-    final response = await _apiConsumer.post(
-      EndPoints.signIn,
-      data: requestModel.toJson(),
+  Future<AuthResponse> login(LoginRequestModel requestModel) async {
+    final response = await SupabaseService.client.auth.signInWithPassword(
+      email: requestModel.email,
+      password: requestModel.password,
     );
-    return LoginModel.fromJson(response);
+    return response;
   }
 
   @override
-  Future<SignUpModel> signUp(SignUpRequestModel requestModel) async {
-    final response = await _apiConsumer.post(
-      EndPoints.signUp,
-      data: requestModel.toJson(),
+  Future<AuthResponse> signUp(SignUpRequestModel requestModel) async {
+    final response = await SupabaseService.client.auth.signUp(
+      email: requestModel.email,
+      password: requestModel.password,
+      data: {
+        'name': requestModel.name,
+        'phone': requestModel.phone,
+      },
     );
-    return SignUpModel.fromJson(response);
+    return response;
   }
 }

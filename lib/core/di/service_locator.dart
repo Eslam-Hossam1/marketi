@@ -205,7 +205,7 @@ void _setupNetworking() {
 void _setupAuth() {
   // Data Source
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => AuthRemoteDataSourceImpl(),
   );
 
   // Repository
