@@ -9,11 +9,26 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthResponse> login(LoginRequestModel requestModel) async {
-    final response = await SupabaseService.client.auth.signInWithPassword(
-      email: requestModel.email,
-      password: requestModel.password,
-    );
-    return response;
+    try {
+      final response = await SupabaseService.client.auth.signInWithPassword(
+        email: requestModel.email,
+        password: requestModel.password,
+      );
+      return response;
+    } on AuthException catch (e) {
+      if (e.message.toLowerCase().contains('email not confirmed')) {
+        try {
+          await SupabaseService.client.auth.resend(
+            type: OtpType.signup,
+            email: requestModel.email,
+            emailRedirectTo: 'io.supabase.flutterquickstart://login-callback/',
+          );
+        } catch (_) {
+          // Ignore resend errors, continue to throw original exception
+        }
+      }
+      rethrow;
+    }
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:nextcart/core/errors/api_failure.dart';
 import 'package:nextcart/core/errors/supabase_failures/supabase_auth_failure.dart';
+import 'package:nextcart/core/services/supabase_service/supabase_service.dart';
 import 'package:nextcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
 import 'package:nextcart/features/auth/data/models/login_request_model.dart';
 import 'package:nextcart/features/auth/data/models/sign_up_request_model.dart';

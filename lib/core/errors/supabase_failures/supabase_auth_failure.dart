@@ -46,7 +46,7 @@ class SupabaseAuthFailure extends SupabaseFailure {
     } else if (msg.contains('user already registered')) {
       return 'An account with this email already exists. Try logging in instead.';
     } else if (msg.contains('email not confirmed')) {
-      return 'Please confirm your email address before logging in.';
+      return 'Please confirm your email address. A new confirmation link has been sent to your email.';
     } else if (msg.contains('password should be at least')) {
       return 'Your password is too weak. Please use a stronger password.';
     } else if (msg.contains('rate limit')) {
