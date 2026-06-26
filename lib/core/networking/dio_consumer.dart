@@ -11,8 +11,6 @@ class DioConsumer extends ApiConsumer {
 
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoints.baseUrl;
-    _setupTimeOut();
-    _setupInterceptors();
   }
 
   void _setupTimeOut() {

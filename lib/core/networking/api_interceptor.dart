@@ -47,7 +47,7 @@ class ApiInterceptor extends Interceptor {
     final navigatorState = AppRouter.rootNavigatorKey.currentState;
     final context = navigatorState?.context;
 
-    //await Supabase.instance.client.auth.signOut();
+    await Supabase.instance.client.auth.signOut();
 
     if (context != null && (navigatorState?.mounted ?? false)) {
       DialogHelper.showEndSessionDialog(
