@@ -21,11 +21,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await SupabaseService.client.auth.signUp(
       email: requestModel.email,
       password: requestModel.password,
-      data: {
-        'name': requestModel.name,
-        'phone': requestModel.phone,
-      },
+      data: {'name': requestModel.name, 'phone': requestModel.phone},
+      emailRedirectTo: 'io.supabase.flutterquickstart://login-callback/',
     );
+    
+    if (response.user != null && (response.user!.identities?.isEmpty ?? false)) {
+      throw const AuthException(
+        'User already registered',
+        statusCode: '400',
+      );
+    }
+    
     return response;
   }
 }

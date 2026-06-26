@@ -58,8 +58,6 @@ import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../networking/api_consumer.dart';
 import '../networking/dio_consumer.dart';
-import '../services/auth_credentials_manager/auth_credentials_manager.dart';
-import '../services/jwt_decoder/jwt_decoder_service_impl.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
 import 'package:nextcart/features/profile/data/datasources/profile_remote_data_source.dart';
@@ -190,12 +188,6 @@ Future<void> _setupCaching() async {
     SecureStorageService(secureStorage),
   );
 
-  getIt.registerSingleton<AuthCredentialsManager>(
-    AuthCredentialsManager(
-      secureStorageService: getIt<SecureStorageService>(),
-      jwtDecoder: const JwtDecoderServiceImpl(),
-    ),
-  );
 }
 
 void _setupNetworking() {
@@ -212,7 +204,6 @@ void _setupAuth() {
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       getIt<AuthRemoteDataSource>(),
-      getIt<AuthCredentialsManager>(),
     ),
   );
 

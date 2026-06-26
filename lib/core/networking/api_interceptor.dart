@@ -1,26 +1,26 @@
 import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 import 'package:nextcart/core/routing/app_router.dart';
 import 'package:nextcart/core/routing/routes_paths.dart';
-import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
 import 'api_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ApiInterceptor extends Interceptor {
   final Dio client;
-  final AuthCredentialsManager authCredentialsManager;
 
-  ApiInterceptor({required this.client, required this.authCredentialsManager});
+  ApiInterceptor({required this.client});
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = authCredentialsManager.accessToken;
-    options.headers[ApiKeys.authorization] = "Bearer $token";
-
+    final token = Supabase.instance.client.auth.currentSession?.accessToken;
+    if (token != null) {
+      options.headers[ApiKeys.authorization] = "Bearer $token";
+    }
     super.onRequest(options, handler);
   }
 
@@ -34,20 +34,22 @@ class ApiInterceptor extends Interceptor {
     );
 
     final isUnauthorized = err.response?.statusCode == 401;
-    final isUserLoggedIn = authCredentialsManager.userIsAuthenticated();
+    final isUserLoggedIn = Supabase.instance.client.auth.currentSession != null;
 
     if (isUnauthorized && isUserLoggedIn) {
-      _handleEndSession();
+      await _handleEndSession();
     }
 
     super.onError(err, handler);
   }
 
-  void _handleEndSession() {
-    authCredentialsManager.clearTokens();
+  Future<void> _handleEndSession() async {
+    final navigatorState = AppRouter.rootNavigatorKey.currentState;
+    final context = navigatorState?.context;
 
-    final context = AppRouter.rootNavigatorKey.currentState?.context;
-    if (context != null) {
+    //await Supabase.instance.client.auth.signOut();
+
+    if (context != null && (navigatorState?.mounted ?? false)) {
       DialogHelper.showEndSessionDialog(
         context,
         onDismissCallback: (_) => context.go(RoutePaths.login),

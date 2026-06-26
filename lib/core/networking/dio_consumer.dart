@@ -1,6 +1,3 @@
-import 'package:nextcart/core/di/service_locator.dart';
-import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
-
 import 'api_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -28,10 +25,7 @@ class DioConsumer extends ApiConsumer {
 
   void _setupInterceptors() {
     dio.interceptors.add(
-      ApiInterceptor(
-        client: dio,
-        authCredentialsManager: getIt<AuthCredentialsManager>(),
-      ),
+      ApiInterceptor(client: dio),
     );
     if (kDebugMode) {
       dio.interceptors.add(
