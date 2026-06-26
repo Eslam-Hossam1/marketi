@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../networking/supabase_config.dart';
+import '../../networking/supabase_logger_client.dart';
 
 class SupabaseService {
   SupabaseService._();
@@ -9,6 +10,7 @@ class SupabaseService {
     await Supabase.initialize(
       url: SupabaseConfig.projectUrl,
       publishableKey: SupabaseConfig.publishableKey,
+      httpClient: SupabaseLoggerClient(),
     );
   }
 

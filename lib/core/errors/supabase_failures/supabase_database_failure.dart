@@ -16,7 +16,6 @@ class SupabaseDatabaseFailure extends SupabaseFailure {
 
   factory SupabaseDatabaseFailure.fromPostgrestException(PostgrestException exception) {
     // Postgrest exception typically contains 'code', 'message', 'details', 'hint'
-    int status = 400; // Postgrest exceptions don't directly map to HTTP status easily all the time, default 400.
     String friendlyMessage = _getFriendlyMessage(exception.message, exception.code);
 
     return SupabaseDatabaseFailure(

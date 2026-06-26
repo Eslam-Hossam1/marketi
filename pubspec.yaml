@@ -58,6 +58,7 @@ dependencies:
   equatable: ^2.0.8
   supabase_flutter: ^2.15.0
   flutter_dotenv: ^5.2.1
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:
