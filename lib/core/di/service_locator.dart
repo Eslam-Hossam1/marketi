@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
 import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
@@ -58,8 +59,6 @@ import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../networking/api_consumer.dart';
 import '../networking/dio_consumer.dart';
-import '../services/auth_credentials_manager/auth_credentials_manager.dart';
-import '../services/jwt_decoder/jwt_decoder_service_impl.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
 import 'package:nextcart/features/profile/data/datasources/profile_remote_data_source.dart';
@@ -190,29 +189,23 @@ Future<void> _setupCaching() async {
     SecureStorageService(secureStorage),
   );
 
-  getIt.registerSingleton<AuthCredentialsManager>(
-    AuthCredentialsManager(
-      secureStorageService: getIt<SecureStorageService>(),
-      jwtDecoder: const JwtDecoderServiceImpl(),
-    ),
-  );
 }
 
 void _setupNetworking() {
+  getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
 }
 
 void _setupAuth() {
   // Data Source
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => AuthRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   // Repository
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       getIt<AuthRemoteDataSource>(),
-      getIt<AuthCredentialsManager>(),
     ),
   );
 

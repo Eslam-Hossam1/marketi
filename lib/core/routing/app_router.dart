@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/di/service_locator.dart';
 import 'package:nextcart/core/routing/router_redirect.dart';
-import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
 import 'package:nextcart/core/services/storage_services/preferences/preferences_service.dart';
 
 import 'app_routes/all_routs.dart';
@@ -13,7 +12,6 @@ class AppRouter {
 
   static final routerRedirect = RouterRedirect(
     preferencesService: getIt<PreferencesService>(),
-    authCredentialsManager: getIt<AuthCredentialsManager>(),
   );
 
   static final router = GoRouter(

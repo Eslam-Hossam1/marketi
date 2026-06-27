@@ -19,8 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
     final result = await _loginUseCase(params);
     result.fold(
-      (failure) =>
-          emit(LoginFailure(failure.serverErrorMessage ?? failure.errMsg)),
+      (failure) => emit(LoginFailure(failure.errMsg)),
       (_) => emit(const LoginSuccess()),
     );
   }

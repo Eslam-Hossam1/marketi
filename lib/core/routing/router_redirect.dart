@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../services/auth_credentials_manager/auth_credentials_manager.dart';
 import '../services/storage_services/preferences/preferences_keys.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
 import 'routes_paths.dart';
 
 class RouterRedirect {
   final PreferencesService _preferencesService;
-  final AuthCredentialsManager _authCredentialsManager;
 
   const RouterRedirect({
     required PreferencesService preferencesService,
-    required AuthCredentialsManager authCredentialsManager,
-  })  : _preferencesService = preferencesService,
-        _authCredentialsManager = authCredentialsManager;
+  }) : _preferencesService = preferencesService;
 
   String? redirect(BuildContext context, GoRouterState state) {
     bool isAppJustOpenedNormally =
@@ -36,9 +33,8 @@ class RouterRedirect {
     if (!onboardingCompleted) {
       return RoutePaths.onboarding;
     } else {
-      return _authCredentialsManager.userIsAuthenticated()
-          ? RoutePaths.home
-          : RoutePaths.login;
+      final isUserLoggedIn = Supabase.instance.client.auth.currentSession != null;
+      return isUserLoggedIn ? RoutePaths.home : RoutePaths.login;
     }
   }
 }

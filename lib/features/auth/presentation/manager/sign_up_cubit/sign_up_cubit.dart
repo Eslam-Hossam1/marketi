@@ -22,8 +22,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     );
     final result = await _signUpUseCase(params);
     result.fold(
-      (failure) =>
-          emit(SignUpFailure(failure.serverErrorMessage ?? failure.errMsg)),
+      (failure) => emit(SignUpFailure(failure.errMsg)),
       (_) => emit(const SignUpSuccess()),
     );
   }

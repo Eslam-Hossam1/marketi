@@ -22,7 +22,11 @@ class SignUpButton extends StatelessWidget {
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-          context.go(RoutePaths.home);
+          DialogHelper.showSuccessSnackBar(
+            context,
+            'Please check your email for a confirmation link',
+          );
+          context.go(RoutePaths.login);
         } else if (state is SignUpFailure) {
           DialogHelper.showErrorDialog(context, errorMessage: state.errMsg);
         }

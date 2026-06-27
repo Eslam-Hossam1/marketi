@@ -1,20 +1,27 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:nextcart/core/di/service_locator.dart';
-import 'package:nextcart/core/services/auth_credentials_manager/auth_credentials_manager.dart';
+import 'package:nextcart/core/networking/supabase_config.dart';
+import 'package:nextcart/core/networking/supabase_logger_client.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/utils/app_bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 class AppInitializer {
   static Future<void> initialize() async {
+    await dotenv.load(fileName: ".env");
     await _initBlocObserverAndHydratedBloc();
+    await _initSupabase();
     await _initServiceLocator();
-    await _initAuthCredentials();
   }
 
-  static Future<void> _initAuthCredentials() async {
-    await getIt<AuthCredentialsManager>().init();
+  static Future<void> _initSupabase() async {
+    await Supabase.initialize(
+      url: SupabaseConfig.projectUrl,
+      anonKey: SupabaseConfig.publishableKey,
+      httpClient: SupabaseLoggerClient(),
+    );
   }
 
   static Future<void> _initServiceLocator() async {
