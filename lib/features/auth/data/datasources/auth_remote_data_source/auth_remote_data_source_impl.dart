@@ -1,16 +1,17 @@
-import 'package:nextcart/core/services/supabase_service/supabase_service.dart';
 import 'package:nextcart/features/auth/data/datasources/auth_remote_data_source/auth_remote_data_source.dart';
 import 'package:nextcart/features/auth/data/models/login_request_model.dart';
 import 'package:nextcart/features/auth/data/models/sign_up_request_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  AuthRemoteDataSourceImpl();
+  final SupabaseClient _supabaseClient;
+
+  AuthRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<AuthResponse> login(LoginRequestModel requestModel) async {
     try {
-      final response = await SupabaseService.client.auth.signInWithPassword(
+      final response = await _supabaseClient.auth.signInWithPassword(
         email: requestModel.email,
         password: requestModel.password,
       );
@@ -18,7 +19,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } on AuthException catch (e) {
       if (e.message.toLowerCase().contains('email not confirmed')) {
         try {
-          await SupabaseService.client.auth.resend(
+          await _supabaseClient.auth.resend(
             type: OtpType.signup,
             email: requestModel.email,
             emailRedirectTo: 'io.supabase.flutterquickstart://login-callback/',
@@ -33,7 +34,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthResponse> signUp(SignUpRequestModel requestModel) async {
-    final response = await SupabaseService.client.auth.signUp(
+    final response = await _supabaseClient.auth.signUp(
       email: requestModel.email,
       password: requestModel.password,
       data: {'name': requestModel.name, 'phone': requestModel.phone},

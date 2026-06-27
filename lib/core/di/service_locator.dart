@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
 import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
@@ -191,13 +192,14 @@ Future<void> _setupCaching() async {
 }
 
 void _setupNetworking() {
+  getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
 }
 
 void _setupAuth() {
   // Data Source
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(),
+    () => AuthRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   // Repository
