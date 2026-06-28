@@ -74,7 +74,7 @@ class CartItemCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h(context)),
                   Text(
-                    product.category,
+                    product.category?.name ?? '',
                     style: AppTextStyles.regular12(context).copyWith(
                       color: context.secondaryTextColor,
                     ),

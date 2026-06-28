@@ -31,7 +31,7 @@ class ProductRoutes {
     GoRoute(
       path: RoutePaths.productDetails,
       builder: (context, state) {
-        final params = ProductDetailsRoutingParams(productId: 1);
+        final params = ProductDetailsRoutingParams(productId: state.pathParameters['id'] ?? "1");
         return ProductDetailsView(productId: params.productId);
       },
     ),

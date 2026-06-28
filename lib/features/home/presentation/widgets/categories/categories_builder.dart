@@ -32,7 +32,7 @@ class CategoriesBuilder extends StatelessWidget {
               categories: List.generate(
                 10,
                 (index) => const CategoryEntity(
-                  slug: "slug",
+                  id: "id",
                   name: "Category Name",
                   url: "url",
                   image: "image",

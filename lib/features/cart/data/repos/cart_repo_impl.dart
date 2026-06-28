@@ -1,7 +1,8 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+
 import 'package:nextcart/core/errors/api_failure.dart';
-import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import '../datasources/cart_remote_data_source/cart_remote_data_source.dart';
 import '../../domain/entities/cart_entity.dart';
 import '../../domain/params/cart_product_params.dart';
@@ -18,10 +19,10 @@ class CartRepoImpl implements CartRepo {
       final response = await _cartRemoteDataSource.getCart();
       return Right(response);
     } catch (e) {
-      if (e is DioException) {
-        return Left(DioApiFailure.fromDioException(e));
+      if (e is PostgrestException) {
+        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
       }
-      return Left(DioApiFailure.unknown(e.toString()));
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 
@@ -31,10 +32,10 @@ class CartRepoImpl implements CartRepo {
       await _cartRemoteDataSource.addToCart(params.productId.toString());
       return const Right(null);
     } catch (e) {
-      if (e is DioException) {
-        return Left(DioApiFailure.fromDioException(e));
+      if (e is PostgrestException) {
+        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
       }
-      return Left(DioApiFailure.unknown(e.toString()));
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 
@@ -45,10 +46,10 @@ class CartRepoImpl implements CartRepo {
       await _cartRemoteDataSource.removeFromCart(params.productId.toString());
       return const Right(null);
     } catch (e) {
-      if (e is DioException) {
-        return Left(DioApiFailure.fromDioException(e));
+      if (e is PostgrestException) {
+        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
       }
-      return Left(DioApiFailure.unknown(e.toString()));
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 }

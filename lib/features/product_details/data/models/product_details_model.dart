@@ -1,5 +1,7 @@
 import '../../domain/entities/product_details_entity.dart';
 import 'review_model.dart';
+import 'package:nextcart/core/models/category_model.dart';
+import 'package:nextcart/core/models/brand_model.dart';
 
 class ProductDetailsModel extends ProductDetailsEntity {
   const ProductDetailsModel({
@@ -24,16 +26,16 @@ class ProductDetailsModel extends ProductDetailsEntity {
   factory ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     final reviewsJson = json['reviews'] as List<dynamic>? ?? [];
     return ProductDetailsModel(
-      id: json['id'] as int,
+      id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
-      category: json['category'] as String,
+      category: CategoryModel.fromJson(json['categories'] ?? json['category'] ?? {}),
       price: (json['price'] as num).toDouble(),
       discountPercentage: (json['discountPercentage'] as num).toDouble(),
       rating: (json['rating'] as num).toDouble(),
       stock: json['stock'] as int,
       tags: List<String>.from(json['tags'] ?? []),
-      brand: json['brand'] as String?,
+      brand: json['brands'] != null ? BrandModel.fromJson(json['brands']) : null,
       sku: json['sku'] as String?,
       availabilityStatus: json['availabilityStatus'] as String?,
       images: List<String>.from(json['images'] ?? []),

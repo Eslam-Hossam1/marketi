@@ -18,9 +18,9 @@ class CartCubit extends Cubit<CartState> {
   ) : super(CartInitial());
 
   List<ProductEntity> cartProducts = [];
-  final Set<int> _cartProductIds = {};
+  final Set<String> _cartProductIds = {};
 
-  bool isInCart(int productId) => _cartProductIds.contains(productId);
+  bool isInCart(String productId) => _cartProductIds.contains(productId);
 
   double get subtotal =>
       cartProducts.fold(0.0, (sum, product) => sum + product.price);
@@ -49,7 +49,7 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> addToCart(int productId) async {
+  Future<void> addToCart(String productId) async {
     emit(AddToCartLoading(productId: productId));
     final result = await _addToCartUseCase(
       CartProductParams(productId: productId),
@@ -68,7 +68,7 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> removeFromCart(int productId) async {
+  Future<void> removeFromCart(String productId) async {
     emit(RemoveFromCartLoading(productId: productId));
     final result = await _removeFromCartUseCase(
       CartProductParams(productId: productId),

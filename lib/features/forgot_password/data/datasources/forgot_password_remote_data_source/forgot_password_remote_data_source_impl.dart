@@ -1,28 +1,21 @@
-import 'package:nextcart/core/networking/api_consumer.dart';
-import 'package:nextcart/core/networking/end_points.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
 import 'package:nextcart/features/forgot_password/data/models/reset_password_request_model.dart';
 import 'package:nextcart/features/forgot_password/data/models/send_code_request_model.dart';
 
 class ForgotPasswordRemoteDataSourceImpl
     implements ForgotPasswordRemoteDataSource {
-  final ApiConsumer _apiConsumer;
+  final SupabaseClient _supabaseClient;
 
-  ForgotPasswordRemoteDataSourceImpl(this._apiConsumer);
+  ForgotPasswordRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<void> sendCode(SendCodeRequestModel requestModel) async {
-    await _apiConsumer.post(
-      EndPoints.sendForgotPassowrdOtp,
-      data: requestModel.toJson(),
-    );
+    await _supabaseClient.auth.resetPasswordForEmail(requestModel.email!);
   }
 
   @override
   Future<void> resetPassword(ResetPasswordRequestModel requestModel) async {
-    await _apiConsumer.post(
-      EndPoints.resetPassword,
-      data: requestModel.toJson(),
-    );
+    await _supabaseClient.auth.updateUser(UserAttributes(password: requestModel.password));
   }
 }

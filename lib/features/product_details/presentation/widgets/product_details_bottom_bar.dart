@@ -10,7 +10,7 @@ import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_stat
 
 class ProductDetailsBottomBar extends StatelessWidget {
   final double price;
-  final int productId;
+  final String productId;
   const ProductDetailsBottomBar({
     super.key,
     required this.price,

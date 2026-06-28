@@ -100,7 +100,7 @@ Future<void> setupServiceLocator() async {
 
 void _setupCart() {
   getIt.registerLazySingleton<CartRemoteDataSource>(
-    () => CartRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => CartRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<CartRepo>(
     () => CartRepoImpl(getIt<CartRemoteDataSource>()),
@@ -118,7 +118,7 @@ void _setupCart() {
 
 void _setupProductDetails() {
   getIt.registerLazySingleton<ProductDetailsRemoteDataSource>(
-    () => ProductDetailsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ProductDetailsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<ProductDetailsRepo>(
     () => ProductDetailsRepoImpl(getIt<ProductDetailsRemoteDataSource>()),
@@ -134,7 +134,7 @@ void _setupEditProfile() {
   );
 
   getIt.registerLazySingleton<EditProfileRemoteDataSource>(
-    () => EditProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => EditProfileRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   getIt.registerLazySingleton<EditProfileRepo>(
@@ -152,7 +152,7 @@ void _setupEditProfile() {
 
 void _setupProfile() {
   getIt.registerLazySingleton<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ProfileRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   getIt.registerLazySingleton<ProfileRepo>(
@@ -168,7 +168,7 @@ void _setupOtp() {
   getIt.registerSingleton<OtpRepoImpl>(
     OtpRepoImpl(
       otpRemoteDataSource: OtpRemoteDataSourceImpl(
-        apiConsumer: getIt<ApiConsumer>(),
+        apiConsumer: getIt<ApiConsumer>(), // Or leave as is if we don't migrate OTP yet
       ),
     ),
   );
@@ -221,7 +221,7 @@ void _setupAuth() {
 void _setupForgotPassword() {
   // Data Source
   getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(
-    () => ForgotPasswordRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ForgotPasswordRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   // Repository
@@ -241,7 +241,7 @@ void _setupForgotPassword() {
 
 void _setupProducts() {
   getIt.registerLazySingleton<ProductsRemoteDataSource>(
-    () => ProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<ProductsRepo>(
     () => ProductsRepoImpl(getIt<ProductsRemoteDataSource>()),
@@ -253,7 +253,7 @@ void _setupProducts() {
 
 void _setupBrands() {
   getIt.registerLazySingleton<BrandsRemoteDataSource>(
-    () => BrandsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => BrandsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<BrandsRepo>(
     () => BrandsRepoImpl(getIt<BrandsRemoteDataSource>()),
@@ -265,7 +265,7 @@ void _setupBrands() {
 
 void _setupCategories() {
   getIt.registerLazySingleton<CategoriesRemoteDataSource>(
-    () => CategoriesRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => CategoriesRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<CategoriesRepo>(
     () => CategoriesRepoImpl(getIt<CategoriesRemoteDataSource>()),
@@ -277,7 +277,7 @@ void _setupCategories() {
 
 void _setupSearch() {
   getIt.registerLazySingleton<SearchRemoteDataSource>(
-    () => SearchRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => SearchRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<SearchRepo>(
     () => SearchRepoImpl(getIt<SearchRemoteDataSource>()),
@@ -289,7 +289,7 @@ void _setupSearch() {
 
 void _setupCategoryProducts() {
   getIt.registerLazySingleton<CategoryProductsRemoteDataSource>(
-    () => CategoryProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => CategoryProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<CategoryProductsRepo>(
     () => CategoryProductsRepoImpl(getIt<CategoryProductsRemoteDataSource>()),
@@ -301,7 +301,7 @@ void _setupCategoryProducts() {
 
 void _setupBrandProducts() {
   getIt.registerLazySingleton<BrandProductsRemoteDataSource>(
-    () => BrandProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => BrandProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<BrandProductsRepo>(
     () => BrandProductsRepoImpl(getIt<BrandProductsRemoteDataSource>()),

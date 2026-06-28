@@ -27,7 +27,7 @@ final class CartEmpty extends CartState {}
 
 // ── Add to Cart States ───────────────────────────────────────────────────
 final class AddToCartLoading extends CartState {
-  final int productId;
+  final String productId;
 
   const AddToCartLoading({required this.productId});
 
@@ -36,7 +36,7 @@ final class AddToCartLoading extends CartState {
 }
 
 final class AddToCartSuccess extends CartState {
-  final int productId;
+  final String productId;
 
   const AddToCartSuccess({required this.productId});
 
@@ -45,7 +45,7 @@ final class AddToCartSuccess extends CartState {
 }
 
 final class AddToCartFailure extends CartState {
-  final int productId;
+  final String productId;
   final String errorMessage;
 
   const AddToCartFailure({
@@ -59,7 +59,7 @@ final class AddToCartFailure extends CartState {
 
 // ── Remove from Cart States ──────────────────────────────────────────────
 final class RemoveFromCartLoading extends CartState {
-  final int productId;
+  final String productId;
 
   const RemoveFromCartLoading({required this.productId});
 
@@ -68,7 +68,7 @@ final class RemoveFromCartLoading extends CartState {
 }
 
 final class RemoveFromCartSuccess extends CartState {
-  final int productId;
+  final String productId;
 
   const RemoveFromCartSuccess({required this.productId});
 
@@ -77,7 +77,7 @@ final class RemoveFromCartSuccess extends CartState {
 }
 
 final class RemoveFromCartFailure extends CartState {
-  final int productId;
+  final String productId;
   final String errorMessage;
 
   const RemoveFromCartFailure({

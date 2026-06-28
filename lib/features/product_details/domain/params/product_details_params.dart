@@ -1,5 +1,5 @@
 class ProductDetailsRoutingParams {
-  final int productId;
+  final String productId;
 
   const ProductDetailsRoutingParams({required this.productId});
 
@@ -11,13 +11,13 @@ class ProductDetailsRoutingParams {
 
   factory ProductDetailsRoutingParams.fromJson(Map<String, dynamic> json) {
     return ProductDetailsRoutingParams(
-      productId: json['productId'] as int,
+      productId: json['productId'] as String,
     );
   }
 }
 
 class ProductDetailsParams {
-  final int productId;
+  final String productId;
 
   const ProductDetailsParams({required this.productId});
 }

@@ -1,8 +1,10 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+
 
 import '../../../../core/errors/api_failure.dart';
-import '../../../../core/errors/dio_api_failure.dart';
+
 import '../../domain/entities/otp_reason.dart';
 import '../../domain/entities/otp_result.dart';
 import '../../domain/repos/otp_repo.dart';
@@ -22,17 +24,10 @@ class OtpRepoImpl implements OtpRepo {
         otpReason: otpReason,
       );
       return const Right(null);
-    } on Exception catch (e) {
-      if (e is DioException) {
-        return Left(
-          DioApiFailure.fromDioException(e),
-        );
-      }
-      return Left(
-        DioApiFailure.unknownException(
-          unKnownExceptionMsg: e.toString(),
-        ),
-      );
+    } on PostgrestException catch (e) {
+      return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
+    } catch (e) {
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 
@@ -46,17 +41,10 @@ class OtpRepoImpl implements OtpRepo {
         pinCode: pinCode,
       );
       return Right(otpResult);
-    } on Exception catch (e) {
-      if (e is DioException) {
-        return Left(
-          DioApiFailure.fromDioException(e),
-        );
-      }
-      return Left(
-        DioApiFailure.unknownException(
-          unKnownExceptionMsg: e.toString(),
-        ),
-      );
+    } on PostgrestException catch (e) {
+      return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
+    } catch (e) {
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 }

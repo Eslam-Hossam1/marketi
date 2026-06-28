@@ -45,7 +45,7 @@ class BrandItem extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Text(
-                brand.emoji,
+                brand.image,
                 style: TextStyle(fontSize: 24.w(context)),
               ),
             ),
@@ -53,8 +53,9 @@ class BrandItem extends StatelessWidget {
             Expanded(
               child: Text(
                 brand.name,
-                style: AppTextStyles.medium18(context)
-                    .copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium18(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ),
             Icon(

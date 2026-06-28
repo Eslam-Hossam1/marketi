@@ -29,7 +29,7 @@ class BrandsBuilder extends StatelessWidget {
             child: HomeBrandsList(
               brands: List.generate(
                 10,
-                (index) => const BrandEntity(name: "Brand Name", emoji: "✨"),
+                (index) => const BrandEntity(id: "id", name: "Brand Name", image: "✨"),
               ),
             ),
           );

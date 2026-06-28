@@ -1,5 +1,5 @@
 class CartProductParams {
-  final int productId;
+  final String productId;
 
   const CartProductParams({required this.productId});
 }

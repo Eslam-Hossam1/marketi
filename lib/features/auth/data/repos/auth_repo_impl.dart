@@ -1,3 +1,4 @@
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:nextcart/core/errors/api_failure.dart';
 import 'package:nextcart/core/errors/supabase_failures/supabase_auth_failure.dart';
