@@ -5,6 +5,10 @@ import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart
 import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/remove_from_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit/favorites_cubit.dart';
 import 'package:nextcart/core/routing/app_routes/auth_routes.dart';
 import 'package:nextcart/core/routing/app_routes/brand_products_routes.dart';
 import 'package:nextcart/core/routing/app_routes/category_products_routes.dart';
@@ -20,12 +24,23 @@ class AppRoutes {
     // Authenticated Shell: home / cart / favorites / profile + full screen features
     ShellRoute(
       builder: (context, state, child) {
-        return BlocProvider(
-          create: (context) => CartCubit(
-            getIt<GetCartUseCase>(),
-            getIt<AddToCartUseCase>(),
-            getIt<RemoveFromCartUseCase>(),
-          )..getCart(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CartCubit(
+                getIt<GetCartUseCase>(),
+                getIt<AddToCartUseCase>(),
+                getIt<RemoveFromCartUseCase>(),
+              )..getCart(),
+            ),
+            BlocProvider(
+              create: (context) => FavoritesCubit(
+                getIt<GetFavoritesUseCase>(),
+                getIt<AddToFavoritesUseCase>(),
+                getIt<RemoveFromFavoritesUseCase>(),
+              )..getFavorites(),
+            ),
+          ],
           child: child,
         );
       },

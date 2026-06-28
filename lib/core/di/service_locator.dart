@@ -77,6 +77,13 @@ import 'package:nextcart/features/cart/domain/repos/cart_repo.dart';
 import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source.dart';
+import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source_impl.dart';
+import 'package:nextcart/features/favorites/data/repos/favorites_repo_impl.dart';
+import 'package:nextcart/features/favorites/domain/repos/favorites_repo.dart';
+import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/remove_from_favorites_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -96,6 +103,7 @@ Future<void> setupServiceLocator() async {
   _setupBrandProducts();
   _setupProductDetails();
   _setupCart();
+  _setupFavorites();
 }
 
 void _setupCart() {
@@ -113,6 +121,24 @@ void _setupCart() {
   );
   getIt.registerLazySingleton<RemoveFromCartUseCase>(
     () => RemoveFromCartUseCase(getIt<CartRepo>()),
+  );
+}
+
+void _setupFavorites() {
+  getIt.registerLazySingleton<FavoritesRemoteDataSource>(
+    () => FavoritesRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImpl(getIt<FavoritesRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetFavoritesUseCase>(
+    () => GetFavoritesUseCase(getIt<FavoritesRepo>()),
+  );
+  getIt.registerLazySingleton<AddToFavoritesUseCase>(
+    () => AddToFavoritesUseCase(getIt<FavoritesRepo>()),
+  );
+  getIt.registerLazySingleton<RemoveFromFavoritesUseCase>(
+    () => RemoveFromFavoritesUseCase(getIt<FavoritesRepo>()),
   );
 }
 

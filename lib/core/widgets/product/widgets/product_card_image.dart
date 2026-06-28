@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit/favorites_cubit.dart';
+import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit/favorites_state.dart';
 
 class ProductCardImage extends StatelessWidget {
   final ProductEntity product;
@@ -57,28 +60,74 @@ class ProductCardImage extends StatelessWidget {
                 ),
               ),
             ),
-          // Favorite Icon
+          // Favorite Icon Button
           Positioned(
             top: 8,
             right: 8,
-            child: Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: context.scaffoldBackgroundColor,
-                shape: BoxShape.circle,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
+            child: BlocBuilder<FavoritesCubit, FavoritesState>(
+              buildWhen: (previous, current) =>
+                  (current is AddToFavoritesLoading &&
+                      current.productId == product.id) ||
+                  (current is AddToFavoritesSuccess &&
+                      current.productId == product.id) ||
+                  (current is RemoveFromFavoritesLoading &&
+                      current.productId == product.id) ||
+                  (current is RemoveFromFavoritesSuccess &&
+                      current.productId == product.id) ||
+                  current is FavoritesSuccess,
+              builder: (context, state) {
+                final favoritesCubit = context.read<FavoritesCubit>();
+                final isInFavorites = favoritesCubit.isInFavorites(product.id);
+                final isLoading =
+                    (state is AddToFavoritesLoading &&
+                        state.productId == product.id) ||
+                    (state is RemoveFromFavoritesLoading &&
+                        state.productId == product.id);
+
+                return GestureDetector(
+                  onTap: isLoading
+                      ? null
+                      : () {
+                          if (isInFavorites) {
+                            favoritesCubit.removeFromFavorites(product.id);
+                          } else {
+                            favoritesCubit.addToFavorites(product.id);
+                          }
+                        },
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: context.scaffoldBackgroundColor,
+                      shape: BoxShape.circle,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: isLoading
+                        ? SizedBox(
+                            width: 18.w(context),
+                            height: 18.w(context),
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.red,
+                            ),
+                          )
+                        : Icon(
+                            isInFavorites
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            size: 18.w(context),
+                            color: isInFavorites
+                                ? Colors.red
+                                : context.mainTextColor,
+                          ),
                   ),
-                ],
-              ),
-              child: Icon(
-                Icons.favorite_border,
-                size: 18.w(context),
-                color: context.mainTextColor,
-              ),
+                );
+              },
             ),
           ),
         ],
