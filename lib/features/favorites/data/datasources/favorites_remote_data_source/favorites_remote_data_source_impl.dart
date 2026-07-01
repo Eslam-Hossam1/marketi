@@ -2,6 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/favorites/data/models/favorites_response_model.dart';
 import 'favorites_remote_data_source.dart';
 
+
 class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
   final SupabaseClient _supabaseClient;
 
@@ -10,7 +11,12 @@ class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
   @override
   Future<FavoritesResponseModel> getFavorites() async {
     final user = _supabaseClient.auth.currentUser;
-    if (user == null) throw Exception('Not authenticated');
+    if (user == null) {
+      throw const AuthException(
+        'You are not authenticated. Please log in.',
+        statusCode: '401',
+      );
+    }
 
     final response = await _supabaseClient
         .from('favorites')
@@ -23,7 +29,12 @@ class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
   @override
   Future<void> addToFavorites(String productId) async {
     final user = _supabaseClient.auth.currentUser;
-    if (user == null) throw Exception('Not authenticated');
+    if (user == null) {
+      throw const AuthException(
+        'You are not authenticated. Please log in.',
+        statusCode: '401',
+      );
+    }
 
     await _supabaseClient.from('favorites').insert({
       'user_id': user.id,
@@ -34,7 +45,12 @@ class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
   @override
   Future<void> removeFromFavorites(String productId) async {
     final user = _supabaseClient.auth.currentUser;
-    if (user == null) throw Exception('Not authenticated');
+    if (user == null) {
+      throw const AuthException(
+        'You are not authenticated. Please log in.',
+        statusCode: '401',
+      );
+    }
 
     await _supabaseClient
         .from('favorites')

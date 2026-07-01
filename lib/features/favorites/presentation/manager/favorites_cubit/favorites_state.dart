@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class FavoritesState extends Equatable {
+sealed class FavoritesState extends Equatable {
   const FavoritesState();
 
   @override
@@ -8,14 +8,22 @@ abstract class FavoritesState extends Equatable {
 }
 
 // ── Initial ──────────────────────────────────────────────────────────────
-final class FavoritesInitial extends FavoritesState {}
+final class FavoritesInitial extends FavoritesState {
+  const FavoritesInitial();
+}
 
 // ── Get Favorites States ─────────────────────────────────────────────────
-final class FavoritesLoading extends FavoritesState {}
+final class FavoritesLoading extends FavoritesState {
+  const FavoritesLoading();
+}
 
-final class FavoritesSuccess extends FavoritesState {}
+final class FavoritesSuccess extends FavoritesState {
+  const FavoritesSuccess();
+}
 
-final class FavoritesEmpty extends FavoritesState {}
+final class FavoritesEmpty extends FavoritesState {
+  const FavoritesEmpty();
+}
 
 final class FavoritesFailure extends FavoritesState {
   final String errorMessage;
@@ -26,66 +34,35 @@ final class FavoritesFailure extends FavoritesState {
   List<Object> get props => [errorMessage];
 }
 
-// ── Add to Favorites States ──────────────────────────────────────────────
-final class AddToFavoritesLoading extends FavoritesState {
+// ── Toggle Favorite States ───────────────────────────────────────────────
+/// Emitted optimistically when a product is added to or removed from favorites.
+/// [isFavorite] reflects the NEW state after the toggle.
+final class FavoriteToggled extends FavoritesState {
   final String productId;
+  final bool isFavorite;
 
-  const AddToFavoritesLoading({required this.productId});
+  const FavoriteToggled({
+    required this.productId,
+    required this.isFavorite,
+  });
 
   @override
-  List<Object> get props => [productId];
+  List<Object> get props => [productId, isFavorite];
 }
 
-final class AddToFavoritesSuccess extends FavoritesState {
+/// Emitted when the API call fails and the optimistic update is rolled back.
+/// [isFavorite] reflects the REVERTED (original) state.
+final class FavoriteToggleReverted extends FavoritesState {
   final String productId;
-
-  const AddToFavoritesSuccess({required this.productId});
-
-  @override
-  List<Object> get props => [productId];
-}
-
-final class AddToFavoritesFailure extends FavoritesState {
-  final String productId;
+  final bool isFavorite;
   final String errorMessage;
 
-  const AddToFavoritesFailure({
+  const FavoriteToggleReverted({
     required this.productId,
+    required this.isFavorite,
     required this.errorMessage,
   });
 
   @override
-  List<Object> get props => [productId, errorMessage];
-}
-
-// ── Remove from Favorites States ─────────────────────────────────────────
-final class RemoveFromFavoritesLoading extends FavoritesState {
-  final String productId;
-
-  const RemoveFromFavoritesLoading({required this.productId});
-
-  @override
-  List<Object> get props => [productId];
-}
-
-final class RemoveFromFavoritesSuccess extends FavoritesState {
-  final String productId;
-
-  const RemoveFromFavoritesSuccess({required this.productId});
-
-  @override
-  List<Object> get props => [productId];
-}
-
-final class RemoveFromFavoritesFailure extends FavoritesState {
-  final String productId;
-  final String errorMessage;
-
-  const RemoveFromFavoritesFailure({
-    required this.productId,
-    required this.errorMessage,
-  });
-
-  @override
-  List<Object> get props => [productId, errorMessage];
+  List<Object> get props => [productId, isFavorite, errorMessage];
 }

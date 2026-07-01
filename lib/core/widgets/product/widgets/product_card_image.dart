@@ -64,30 +64,33 @@ class ProductCardImage extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: BlocBuilder<FavoritesCubit, FavoritesState>(
+            child: BlocConsumer<FavoritesCubit, FavoritesState>(
               buildWhen: (previous, current) =>
                   current is FavoritesSuccess ||
                   current is FavoritesEmpty ||
-                  (current is AddToFavoritesSuccess &&
+                  (current is FavoriteToggled &&
                       current.productId == product.id) ||
-                  (current is AddToFavoritesFailure &&
-                      current.productId == product.id) ||
-                  (current is RemoveFromFavoritesSuccess &&
-                      current.productId == product.id) ||
-                  (current is RemoveFromFavoritesFailure &&
+                  (current is FavoriteToggleReverted &&
                       current.productId == product.id),
+              listenWhen: (previous, current) =>
+                  current is FavoriteToggleReverted &&
+                  current.productId == product.id,
+              listener: (context, state) {
+                if (state is FavoriteToggleReverted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
               builder: (context, state) {
                 final favoritesCubit = context.read<FavoritesCubit>();
                 final isInFavorites = favoritesCubit.isInFavorites(product.id);
 
                 return GestureDetector(
-                  onTap: () {
-                    if (isInFavorites) {
-                      favoritesCubit.removeFromFavorites(product);
-                    } else {
-                      favoritesCubit.addToFavorites(product);
-                    }
-                  },
+                  onTap: () => favoritesCubit.toggleFavorite(product),
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
@@ -113,6 +116,7 @@ class ProductCardImage extends StatelessWidget {
               },
             ),
           ),
+
         ],
       ),
     );

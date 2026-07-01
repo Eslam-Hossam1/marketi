@@ -112,20 +112,33 @@ class FavoritesItemCard extends StatelessWidget {
             ),
             SizedBox(width: 8.w(context)),
             // Remove Button
-            BlocBuilder<FavoritesCubit, FavoritesState>(
+            BlocConsumer<FavoritesCubit, FavoritesState>(
               buildWhen: (previous, current) =>
                   current is FavoritesSuccess ||
                   current is FavoritesEmpty ||
-                  (current is RemoveFromFavoritesSuccess &&
+                  (current is FavoriteToggled &&
                       current.productId == product.id) ||
-                  (current is RemoveFromFavoritesFailure &&
+                  (current is FavoriteToggleReverted &&
                       current.productId == product.id),
+              listenWhen: (previous, current) =>
+                  current is FavoriteToggleReverted &&
+                  current.productId == product.id,
+              listener: (context, state) {
+                if (state is FavoriteToggleReverted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () {
                     context
                         .read<FavoritesCubit>()
-                        .removeFromFavorites(product);
+                        .toggleFavorite(product);
                   },
                   child: Container(
                     padding: EdgeInsets.all(8.w(context)),
@@ -142,6 +155,7 @@ class FavoritesItemCard extends StatelessWidget {
                 );
               },
             ),
+
           ],
         ),
       ),

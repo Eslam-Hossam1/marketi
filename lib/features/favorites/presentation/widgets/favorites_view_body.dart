@@ -15,11 +15,12 @@ class FavoritesViewBody extends StatelessWidget {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       buildWhen: (previous, current) =>
           current is FavoritesSuccess ||
-          current is RemoveFromFavoritesSuccess ||
+          current is FavoriteToggled ||
+          current is FavoriteToggleReverted ||
           current is FavoritesEmpty,
       builder: (context, state) {
         final cubit = context.read<FavoritesCubit>();
-        final products = cubit.favoriteProducts;
+        final products = cubit.favorites;
 
         return Column(
           children: [
