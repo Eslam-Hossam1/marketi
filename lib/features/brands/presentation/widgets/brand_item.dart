@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nextcart/core/entities/brand_entity.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
@@ -44,9 +45,16 @@ class BrandItem extends StatelessWidget {
                 color: context.primaryColor.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Text(
-                brand.image,
-                style: TextStyle(fontSize: 24.w(context)),
+              child: SizedBox(
+                width: 32.w(context),
+                height: 32.h(context),
+                child: SvgPicture.network(
+                  brand.image,
+                  placeholderBuilder: (BuildContext context) => const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 16),

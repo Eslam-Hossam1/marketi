@@ -114,44 +114,30 @@ class FavoritesItemCard extends StatelessWidget {
             // Remove Button
             BlocBuilder<FavoritesCubit, FavoritesState>(
               buildWhen: (previous, current) =>
-                  (current is RemoveFromFavoritesLoading &&
-                      current.productId == product.id) ||
+                  current is FavoritesSuccess ||
+                  current is FavoritesEmpty ||
                   (current is RemoveFromFavoritesSuccess &&
                       current.productId == product.id) ||
                   (current is RemoveFromFavoritesFailure &&
                       current.productId == product.id),
               builder: (context, state) {
-                final isRemoving = state is RemoveFromFavoritesLoading &&
-                    state.productId == product.id;
-
                 return GestureDetector(
-                  onTap: isRemoving
-                      ? null
-                      : () {
-                          context
-                              .read<FavoritesCubit>()
-                              .removeFromFavorites(product.id);
-                        },
+                  onTap: () {
+                    context
+                        .read<FavoritesCubit>()
+                        .removeFromFavorites(product);
+                  },
                   child: Container(
                     padding: EdgeInsets.all(8.w(context)),
                     decoration: BoxDecoration(
                       color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10.r(context)),
                     ),
-                    child: isRemoving
-                        ? SizedBox(
-                            width: 20.w(context),
-                            height: 20.w(context),
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Colors.red,
-                            ),
-                          )
-                        : Icon(
-                            Icons.favorite_rounded,
-                            color: Colors.red,
-                            size: 20.w(context),
-                          ),
+                    child: Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 20.w(context),
+                    ),
                   ),
                 );
               },

@@ -66,34 +66,28 @@ class ProductCardImage extends StatelessWidget {
             right: 8,
             child: BlocBuilder<FavoritesCubit, FavoritesState>(
               buildWhen: (previous, current) =>
-                  (current is AddToFavoritesLoading &&
-                      current.productId == product.id) ||
+                  current is FavoritesSuccess ||
+                  current is FavoritesEmpty ||
                   (current is AddToFavoritesSuccess &&
                       current.productId == product.id) ||
-                  (current is RemoveFromFavoritesLoading &&
+                  (current is AddToFavoritesFailure &&
                       current.productId == product.id) ||
                   (current is RemoveFromFavoritesSuccess &&
                       current.productId == product.id) ||
-                  current is FavoritesSuccess,
+                  (current is RemoveFromFavoritesFailure &&
+                      current.productId == product.id),
               builder: (context, state) {
                 final favoritesCubit = context.read<FavoritesCubit>();
                 final isInFavorites = favoritesCubit.isInFavorites(product.id);
-                final isLoading =
-                    (state is AddToFavoritesLoading &&
-                        state.productId == product.id) ||
-                    (state is RemoveFromFavoritesLoading &&
-                        state.productId == product.id);
 
                 return GestureDetector(
-                  onTap: isLoading
-                      ? null
-                      : () {
-                          if (isInFavorites) {
-                            favoritesCubit.removeFromFavorites(product.id);
-                          } else {
-                            favoritesCubit.addToFavorites(product.id);
-                          }
-                        },
+                  onTap: () {
+                    if (isInFavorites) {
+                      favoritesCubit.removeFromFavorites(product);
+                    } else {
+                      favoritesCubit.addToFavorites(product);
+                    }
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
@@ -107,24 +101,13 @@ class ProductCardImage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: isLoading
-                        ? SizedBox(
-                            width: 18.w(context),
-                            height: 18.w(context),
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Colors.red,
-                            ),
-                          )
-                        : Icon(
-                            isInFavorites
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
-                            size: 18.w(context),
-                            color: isInFavorites
-                                ? Colors.red
-                                : context.mainTextColor,
-                          ),
+                    child: Icon(
+                      isInFavorites
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_rounded,
+                      size: 18.w(context),
+                      color: isInFavorites ? Colors.red : context.mainTextColor,
+                    ),
                   ),
                 );
               },

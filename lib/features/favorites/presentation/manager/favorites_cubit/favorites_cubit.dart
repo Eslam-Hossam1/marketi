@@ -47,43 +47,67 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     );
   }
 
-  Future<void> addToFavorites(String productId) async {
-    emit(AddToFavoritesLoading(productId: productId));
+  Future<void> addToFavorites(ProductEntity product) async {
+    // Optimistic Update
+    _favoriteProductIds.add(product.id);
+    favoriteProducts.add(product);
+    emit(AddToFavoritesSuccess(productId: product.id));
+
     final result = await _addToFavoritesUseCase(
-      FavoriteProductParams(productId: productId),
+      FavoriteProductParams(productId: product.id),
     );
+    
     result.fold(
-      (failure) => emit(AddToFavoritesFailure(
-        productId: productId,
-        errorMessage: failure.errMsg,
-      )),
+      (failure) {
+        // Revert Optimistic Update
+        _favoriteProductIds.remove(product.id);
+        favoriteProducts.removeWhere((p) => p.id == product.id);
+        emit(AddToFavoritesFailure(
+          productId: product.id,
+          errorMessage: failure.errMsg,
+        ));
+      },
       (_) async {
-        _favoriteProductIds.add(productId);
-        emit(AddToFavoritesSuccess(productId: productId));
-        await getFavorites(showLoading: false);
+        // The API call was successful.
       },
     );
   }
 
-  Future<void> removeFromFavorites(String productId) async {
-    emit(RemoveFromFavoritesLoading(productId: productId));
+  Future<void> removeFromFavorites(ProductEntity product) async {
+    // Optimistic Update
+    _favoriteProductIds.remove(product.id);
+    final int index = favoriteProducts.indexWhere((p) => p.id == product.id);
+    if (index != -1) {
+      favoriteProducts.removeAt(index);
+    }
+    
+    emit(RemoveFromFavoritesSuccess(productId: product.id));
+
+    if (favoriteProducts.isEmpty) {
+      emit(FavoritesEmpty());
+    }
+
     final result = await _removeFromFavoritesUseCase(
-      FavoriteProductParams(productId: productId),
+      FavoriteProductParams(productId: product.id),
     );
+    
     result.fold(
-      (failure) => emit(RemoveFromFavoritesFailure(
-        productId: productId,
-        errorMessage: failure.errMsg,
-      )),
-      (_) async {
-        favoriteProducts.removeWhere((p) => p.id == productId);
-        _favoriteProductIds.remove(productId);
-        if (favoriteProducts.isEmpty) {
-          emit(FavoritesEmpty());
+      (failure) {
+        // Revert Optimistic Update
+        _favoriteProductIds.add(product.id);
+        if (index != -1) {
+          favoriteProducts.insert(index, product);
         } else {
-          emit(RemoveFromFavoritesSuccess(productId: productId));
+          favoriteProducts.add(product);
         }
-        await getFavorites(showLoading: false);
+        
+        emit(RemoveFromFavoritesFailure(
+          productId: product.id,
+          errorMessage: failure.errMsg,
+        ));
+      },
+      (_) async {
+        // Success.
       },
     );
   }
