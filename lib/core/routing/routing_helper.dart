@@ -42,10 +42,7 @@ abstract class RoutingHelper {
     context.push(RoutePaths.products, extra: {'title': title});
   }
 
-  static void pushProductDetails(
-    BuildContext context, {
-    required ProductDetailsRoutingParams params,
-  }) {
-    context.push(RoutePaths.productDetails, extra: params.toJson());
+  static void pushProductDetails(BuildContext context, {required String productId}) {
+    context.push(RoutePaths.productDetails, extra: productId);
   }
 }

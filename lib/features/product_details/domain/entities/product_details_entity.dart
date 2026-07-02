@@ -1,10 +1,6 @@
 import 'package:nextcart/core/entities/product_entity.dart';
-import 'review_entity.dart';
 
 class ProductDetailsEntity extends ProductEntity {
-  final String? shippingInformation;
-  final List<ReviewEntity> reviews;
-
   const ProductDetailsEntity({
     required super.id,
     required super.title,
@@ -20,7 +16,5 @@ class ProductDetailsEntity extends ProductEntity {
     super.availabilityStatus,
     required super.images,
     required super.thumbnail,
-    this.shippingInformation,
-    required this.reviews,
   });
 }

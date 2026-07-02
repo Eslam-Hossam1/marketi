@@ -116,7 +116,6 @@ class ProductCardImage extends StatelessWidget {
               },
             ),
           ),
-
         ],
       ),
     );
