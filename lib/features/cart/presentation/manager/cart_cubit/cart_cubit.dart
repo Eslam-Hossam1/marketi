@@ -55,10 +55,9 @@ class CartCubit extends Cubit<CartState> {
       CartProductParams(productId: productId),
     );
     result.fold(
-      (failure) => emit(AddToCartFailure(
-        productId: productId,
-        errorMessage: failure.errMsg,
-      )),
+      (failure) => emit(
+        AddToCartFailure(productId: productId, errorMessage: failure.errMsg),
+      ),
       (_) async {
         _cartProductIds.add(productId);
         emit(AddToCartSuccess(productId: productId));
@@ -74,17 +73,18 @@ class CartCubit extends Cubit<CartState> {
       CartProductParams(productId: productId),
     );
     result.fold(
-      (failure) => emit(RemoveFromCartFailure(
-        productId: productId,
-        errorMessage: failure.errMsg,
-      )),
+      (failure) => emit(
+        RemoveFromCartFailure(
+          productId: productId,
+          errorMessage: failure.errMsg,
+        ),
+      ),
       (_) async {
         cartProducts.removeWhere((p) => p.id == productId);
         _cartProductIds.remove(productId);
+        emit(RemoveFromCartSuccess(productId: productId));
         if (cartProducts.isEmpty) {
           emit(CartEmpty());
-        } else {
-          emit(RemoveFromCartSuccess(productId: productId));
         }
         // Sync with cart after success to ensure consistency
         await getCart(showLoading: false);

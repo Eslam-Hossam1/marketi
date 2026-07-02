@@ -54,8 +54,8 @@ class ProductDetailsBottomBar extends StatelessWidget {
           builder: (context, state) {
             final cartCubit = context.read<CartCubit>();
             final isInCart = cartCubit.isInCart(productId);
-            final isLoading = (state is AddToCartLoading &&
-                    state.productId == productId) ||
+            final isLoading =
+                (state is AddToCartLoading && state.productId == productId) ||
                 (state is RemoveFromCartLoading &&
                     state.productId == productId);
 
@@ -107,4 +107,3 @@ class ProductDetailsBottomBar extends StatelessWidget {
     );
   }
 }
-
