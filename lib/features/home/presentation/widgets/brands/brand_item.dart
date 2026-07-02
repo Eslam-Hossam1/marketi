@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
@@ -38,11 +38,11 @@ class BrandItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.network(
-              brand.image,
+            CustomCachedNetworkImage(
+              url: brand.image,
               width: 40.w(context),
               height: 40.h(context),
-              placeholderBuilder: (BuildContext context) => SizedBox(
+              placeHolder: SizedBox(
                 width: 24.w(context),
                 height: 24.w(context),
                 child: const Center(
