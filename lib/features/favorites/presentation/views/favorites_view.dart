@@ -19,18 +19,22 @@ class FavoritesView extends StatelessWidget {
               current is FavoritesLoading ||
               current is FavoritesSuccess ||
               current is FavoritesFailure ||
-              current is FavoritesEmpty,
+              current is FavoritesEmpty ||
+              current is FavoriteToggled ||
+              current is FavoriteToggleReverted,
           builder: (context, state) {
+            final cubit = context.read<FavoritesCubit>();
+
             if (state is FavoritesLoading) {
               return const CustomCircularProgressIndecator();
             }
             if (state is FavoritesFailure) {
               return CustomFailureMessageWithButton(
                 failureMessage: state.errorMessage,
-                onPressed: () => context.read<FavoritesCubit>().getFavorites(),
+                onPressed: () => cubit.getFavorites(),
               );
             }
-            if (state is FavoritesEmpty) {
+            if (state is FavoritesEmpty || (cubit.favorites.isEmpty && state is! FavoritesInitial)) {
               return const FavoritesEmptyWidget();
             }
             return const FavoritesViewBody();
