@@ -29,7 +29,7 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<Either<ApiFailure, void>> addToCart(CartProductParams params) async {
     try {
-      await _cartRemoteDataSource.addToCart(params.productId.toString());
+      await _cartRemoteDataSource.addToCart(params.productId);
       return const Right(null);
     } catch (e) {
       if (e is PostgrestException) {
@@ -40,10 +40,22 @@ class CartRepoImpl implements CartRepo {
   }
 
   @override
-  Future<Either<ApiFailure, void>> removeFromCart(
-      CartProductParams params) async {
+  Future<Either<ApiFailure, void>> removeFromCart(CartProductParams params) async {
     try {
-      await _cartRemoteDataSource.removeFromCart(params.productId.toString());
+      await _cartRemoteDataSource.removeFromCart(params.productId);
+      return const Right(null);
+    } catch (e) {
+      if (e is PostgrestException) {
+        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
+      }
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, void>> updateQuantity(CartProductParams params) async {
+    try {
+      await _cartRemoteDataSource.updateQuantity(params.productId, params.quantity);
       return const Right(null);
     } catch (e) {
       if (e is PostgrestException) {

@@ -4,6 +4,7 @@ import 'package:nextcart/core/di/service_locator.dart';
 import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/update_cart_quantity_use_case.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
 import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_case.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
                 getIt<GetCartUseCase>(),
                 getIt<AddToCartUseCase>(),
                 getIt<RemoveFromCartUseCase>(),
+                getIt<UpdateCartQuantityUseCase>(),
               )..getCart(),
             ),
             BlocProvider(

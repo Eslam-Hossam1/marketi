@@ -18,6 +18,7 @@ class CartViewBody extends StatelessWidget {
       buildWhen: (previous, current) =>
           current is CartSuccess ||
           current is RemoveFromCartSuccess ||
+          current is UpdateCartQuantitySuccess ||
           current is CartEmpty,
       builder: (context, state) {
         final cubit = context.read<CartCubit>();

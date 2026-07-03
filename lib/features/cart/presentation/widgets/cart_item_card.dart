@@ -7,7 +7,6 @@ import 'package:nextcart/core/entities/product_entity.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
-import 'package:nextcart/features/product_details/domain/params/product_details_params.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 
 class CartItemCard extends StatelessWidget {
@@ -80,28 +79,15 @@ class CartItemCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Price
                       Text(
                         '${product.price.toStringAsFixed(2)} EGP',
                         style: AppTextStyles.bold14(context).copyWith(
                           color: context.primaryColor,
                         ),
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star_rounded,
-                            size: 16.w(context),
-                            color: Colors.amber,
-                          ),
-                          SizedBox(width: 2.w(context)),
-                          Text(
-                            product.rating.toString(),
-                            style: AppTextStyles.medium12(context).copyWith(
-                              color: context.secondaryTextColor,
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Quantity Stepper
+                      _QuantityStepper(productId: product.id),
                     ],
                   ),
                 ],
@@ -154,6 +140,115 @@ class CartItemCard extends StatelessWidget {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _QuantityStepper extends StatelessWidget {
+  final String productId;
+
+  const _QuantityStepper({required this.productId});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartCubit, CartState>(
+      buildWhen: (previous, current) =>
+          (current is UpdateCartQuantityLoading &&
+              current.productId == productId) ||
+          (current is UpdateCartQuantitySuccess &&
+              current.productId == productId) ||
+          (current is UpdateCartQuantityFailure &&
+              current.productId == productId),
+      builder: (context, state) {
+        final cubit = context.read<CartCubit>();
+        final quantity = cubit.getQuantity(productId);
+        final isLoading = state is UpdateCartQuantityLoading &&
+            state.productId == productId;
+
+        return Container(
+          decoration: BoxDecoration(
+            color: context.primaryColor.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(10.r(context)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Decrement button
+              _StepperButton(
+                icon: quantity <= 1
+                    ? Icons.delete_outline_rounded
+                    : Icons.remove_rounded,
+                iconColor: quantity <= 1 ? Colors.red : context.primaryColor,
+                onTap: isLoading
+                    ? null
+                    : () => cubit.updateQuantity(productId, quantity - 1),
+              ),
+              // Quantity display
+              SizedBox(
+                width: 28.w(context),
+                child: isLoading
+                    ? Center(
+                        child: SizedBox(
+                          width: 14.w(context),
+                          height: 14.w(context),
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1.5,
+                            color: context.primaryColor,
+                          ),
+                        ),
+                      )
+                    : Text(
+                        '$quantity',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.bold14(context).copyWith(
+                          color: context.mainTextColor,
+                        ),
+                      ),
+              ),
+              // Increment button
+              _StepperButton(
+                icon: Icons.add_rounded,
+                iconColor: context.primaryColor,
+                onTap: isLoading
+                    ? null
+                    : () => cubit.updateQuantity(productId, quantity + 1),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _StepperButton extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final VoidCallback? onTap;
+
+  const _StepperButton({
+    required this.icon,
+    required this.iconColor,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 8.w(context),
+          vertical: 6.h(context),
+        ),
+        child: Icon(
+          icon,
+          size: 18.w(context),
+          color: onTap == null
+              ? iconColor.withValues(alpha: 0.4)
+              : iconColor,
         ),
       ),
     );

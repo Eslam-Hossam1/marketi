@@ -88,3 +88,35 @@ final class RemoveFromCartFailure extends CartState {
   @override
   List<Object> get props => [productId, errorMessage];
 }
+
+// ── Update Quantity States ───────────────────────────────────────────────
+final class UpdateCartQuantityLoading extends CartState {
+  final String productId;
+
+  const UpdateCartQuantityLoading({required this.productId});
+
+  @override
+  List<Object> get props => [productId];
+}
+
+final class UpdateCartQuantitySuccess extends CartState {
+  final String productId;
+
+  const UpdateCartQuantitySuccess({required this.productId});
+
+  @override
+  List<Object> get props => [productId];
+}
+
+final class UpdateCartQuantityFailure extends CartState {
+  final String productId;
+  final String errorMessage;
+
+  const UpdateCartQuantityFailure({
+    required this.productId,
+    required this.errorMessage,
+  });
+
+  @override
+  List<Object> get props => [productId, errorMessage];
+}

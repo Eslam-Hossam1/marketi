@@ -2,14 +2,12 @@ import 'package:nextcart/core/entities/product_entity.dart';
 
 class CartEntity {
   final List<ProductEntity> products;
+  final Map<String, int> quantities;
   final int total;
-  final int skip;
-  final int limit;
 
   const CartEntity({
     required this.products,
+    required this.quantities,
     required this.total,
-    required this.skip,
-    required this.limit,
   });
 }
