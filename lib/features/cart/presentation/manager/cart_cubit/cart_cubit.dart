@@ -70,7 +70,6 @@ class CartCubit extends Cubit<CartState> {
       (_) async {
         _cartItems[product.id] = CartItemEntity(product: product, quantity: 1);
         emit(AddToCartSuccess(productId: product.id));
-        emit(CartSuccess());
       },
     );
   }
@@ -92,8 +91,6 @@ class CartCubit extends Cubit<CartState> {
         emit(RemoveFromCartSuccess(productId: productId));
         if (_cartItems.isEmpty) {
           emit(CartEmpty());
-        } else {
-          emit(CartSuccess());
         }
       },
     );
