@@ -188,8 +188,13 @@ class CartCubit extends Cubit<CartState> {
     result.fold(
       (failure) {
         // Rollback the optimistic update to the last committed quantity.
+        // Re-read the latest item from the map to avoid overwriting any updates
+        // (e.g., price/title changes from realtime events) that occurred during the await.
+        final latestItem = _cartItems[productId];
+        if (latestItem == null) return;
+
         // Improvement #4: copyWith keeps future CartItemEntity fields intact.
-        _cartItems[productId] = currentItem.copyWith(quantity: previousCommitted);
+        _cartItems[productId] = latestItem.copyWith(quantity: previousCommitted);
         emit(UpdateCartQuantityFailure(
           productId: productId,
           errorMessage: failure.errMsg,
