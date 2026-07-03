@@ -44,14 +44,14 @@ class CartItemCard extends StatelessWidget {
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Product Image
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r(context)),
               child: SizedBox(
-                width: 90.w(context),
-                height: 90.h(context),
+                width: 105.w(context),
+                height: 105.h(context),
                 child: CustomCachedNetworkImage(
                   url: cartItem.product.thumbnail,
                   fit: BoxFit.cover,
@@ -160,6 +160,9 @@ class _QuantityStepper extends StatelessWidget {
               isRound: false,
               isDelete: quantity <= 1,
               isLoading: isRemoving,
+              icon: quantity <= 1
+                  ? Icons.delete_outline_rounded
+                  : Icons.remove_rounded,
               onTap: isLoading
                   ? null
                   : () => cubit.updateQuantity(productId, quantity - 1),
@@ -189,6 +192,7 @@ class _QuantityStepper extends StatelessWidget {
             _StepperButton(
               isRound: false,
               isDelete: false,
+              icon: Icons.add_rounded,
               isLoading: false,
               onTap: isLoading
                   ? null
@@ -205,12 +209,14 @@ class _StepperButton extends StatelessWidget {
   final bool isDelete;
   final bool isRound;
   final bool isLoading;
+  final IconData icon;
   final VoidCallback? onTap;
 
   const _StepperButton({
     required this.isDelete,
     required this.isRound,
     required this.isLoading,
+    required this.icon,
     required this.onTap,
   });
 
@@ -244,7 +250,7 @@ class _StepperButton extends StatelessWidget {
                 ),
               )
             : Icon(
-                isDelete ? Icons.delete_outline_rounded : Icons.add_rounded,
+                icon,
                 size: 20.w(context),
                 color: onTap == null
                     ? iconColor.withValues(alpha: 0.4)
