@@ -34,6 +34,14 @@ class CartCubit extends Cubit<CartState> {
   /// Per-product debounce timers — only one outstanding timer per product.
   final Map<String, Timer> _debounceTimers = {};
 
+  /// Improvement #1 — Race condition guard.
+  ///
+  /// Monotonically-incrementing version counter per product. Captured at the
+  /// start of each [_commitQuantityUpdate] call and checked after the await.
+  /// If the stored version has advanced (a newer request fired while this one
+  /// was in-flight), the stale response is silently dropped.
+  final Map<String, int> _requestVersions = {};
+
   // ── Public getters ────────────────────────────────────────────────────────
 
   List<CartItemEntity> get cartItems => _cartItems.values.toList();
@@ -59,6 +67,7 @@ class CartCubit extends Cubit<CartState> {
       (cartEntity) {
         _cartItems.clear();
         _committedQuantities.clear();
+        _requestVersions.clear();
         for (final item in cartEntity.items) {
           _cartItems[item.product.id] = item;
           _committedQuantities[item.product.id] = item.quantity;
@@ -92,8 +101,9 @@ class CartCubit extends Cubit<CartState> {
   // ── Remove from Cart ──────────────────────────────────────────────────────
 
   Future<void> removeFromCart(String productId) async {
-    // Cancel any pending debounce for this product before removing.
+    // Cancel any pending debounce and invalidate the version for this product.
     _debounceTimers.remove(productId)?.cancel();
+    _requestVersions.remove(productId);
 
     emit(RemoveFromCartLoading(productId: productId));
     final result = await _removeFromCartUseCase(
@@ -117,9 +127,8 @@ class CartCubit extends Cubit<CartState> {
 
   // ── Update Quantity (optimistic + debounced) ──────────────────────────────
 
-  /// Instantly reflects the new quantity in the UI, then debounces the
-  /// backend call. If the backend call fails, the quantity is rolled back
-  /// to the last committed value and a failure state is emitted.
+  /// Instantly reflects the new quantity in the UI (optimistic), then
+  /// debounces the backend call so rapid taps produce a single request.
   void updateQuantity(String productId, int newQuantity) {
     if (newQuantity <= 0) {
       _debounceTimers.remove(productId)?.cancel();
@@ -130,15 +139,12 @@ class CartCubit extends Cubit<CartState> {
     final currentItem = _cartItems[productId];
     if (currentItem == null) return;
 
-    // --- Optimistic update: update the UI immediately ---
-    _cartItems[productId] = CartItemEntity(
-      product: currentItem.product,
-      quantity: newQuantity,
-    );
-    // Emitting success instantly refreshes quantity + subtotal in the UI.
+    // --- Optimistic update: UI and subtotal reflect the change instantly ---
+    // Improvement #4: use copyWith instead of constructing a new entity.
+    _cartItems[productId] = currentItem.copyWith(quantity: newQuantity);
     emit(UpdateCartQuantitySuccess(productId: productId));
 
-    // --- Debounce: reset the timer, only sync once user stops tapping ---
+    // --- Debounce: collapse rapid taps into a single network request ---
     _debounceTimers[productId]?.cancel();
     _debounceTimers[productId] = Timer(
       _kDebounceDuration,
@@ -146,7 +152,7 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  /// Fired by the debounce timer. Sends the current quantity to the backend.
+  /// Fired by the debounce timer. Syncs the current quantity to the backend.
   Future<void> _commitQuantityUpdate(String productId) async {
     _debounceTimers.remove(productId);
 
@@ -156,23 +162,34 @@ class CartCubit extends Cubit<CartState> {
     final targetQuantity = currentItem.quantity;
     final previousCommitted = _committedQuantities[productId] ?? targetQuantity;
 
-    emit(UpdateCartQuantityLoading(productId: productId));
+    // Improvement #2: No-op if the quantity is already in sync with the backend.
+    // This happens when the user taps + then - (or vice versa) before the
+    // debounce fires, landing back on the committed value.
+    if (targetQuantity == previousCommitted) return;
+
+    // Improvement #1: Stamp this request with a monotonically-increasing
+    // version number so stale responses can be detected after the await.
+    final version = (_requestVersions[productId] ?? 0) + 1;
+    _requestVersions[productId] = version;
+
+    // Improvement #3: No loading state — the UI is already up-to-date via the
+    // optimistic update. Emitting loading here would cause an unnecessary
+    // spinner/rebuild for what is intentionally a silent background sync.
 
     final result = await _updateCartQuantityUseCase(
       CartProductParams(productId: productId, quantity: targetQuantity),
     );
 
+    // Improvement #1: Drop the response if a newer request has since been
+    // dispatched. Both success and failure are irrelevant at this point — the
+    // newer request will resolve the final state.
+    if (_requestVersions[productId] != version) return;
+
     result.fold(
       (failure) {
-        // If the user triggered a new debounce session while the request was
-        // in-flight, do NOT rollback — the new timer will sync the correct
-        // value. We still emit failure so a snackbar can be shown.
-        if (!_debounceTimers.containsKey(productId)) {
-          _cartItems[productId] = CartItemEntity(
-            product: currentItem.product,
-            quantity: previousCommitted,
-          );
-        }
+        // Rollback the optimistic update to the last committed quantity.
+        // Improvement #4: copyWith keeps future CartItemEntity fields intact.
+        _cartItems[productId] = currentItem.copyWith(quantity: previousCommitted);
         emit(UpdateCartQuantityFailure(
           productId: productId,
           errorMessage: failure.errMsg,

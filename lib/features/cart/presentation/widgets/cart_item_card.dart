@@ -133,8 +133,6 @@ class _QuantityStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       buildWhen: (previous, current) =>
-          (current is UpdateCartQuantityLoading &&
-              current.productId == productId) ||
           (current is UpdateCartQuantitySuccess &&
               current.productId == productId) ||
           (current is UpdateCartQuantityFailure &&
@@ -147,11 +145,8 @@ class _QuantityStepper extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CartCubit>();
         final quantity = cubit.getQuantity(productId);
-        final isUpdating =
-            state is UpdateCartQuantityLoading && state.productId == productId;
         final isRemoving =
             state is RemoveFromCartLoading && state.productId == productId;
-        final isLoading = isUpdating || isRemoving;
 
         return Row(
           children: [
@@ -163,29 +158,20 @@ class _QuantityStepper extends StatelessWidget {
               icon: quantity <= 1
                   ? Icons.delete_outline_rounded
                   : Icons.remove_rounded,
-              onTap: isLoading
+              onTap: isRemoving
                   ? null
                   : () => cubit.updateQuantity(productId, quantity - 1),
             ),
-            // Quantity display
+            // Quantity display — always shows the live optimistic value.
             Expanded(
               child: Center(
-                child: isUpdating
-                    ? SizedBox(
-                        width: 16.w(context),
-                        height: 16.w(context),
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1.5,
-                          color: context.primaryColor,
-                        ),
-                      )
-                    : Text(
-                        '$quantity',
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.bold16(
-                          context,
-                        ).copyWith(color: context.mainTextColor),
-                      ),
+                child: Text(
+                  '$quantity',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.bold16(
+                    context,
+                  ).copyWith(color: context.mainTextColor),
+                ),
               ),
             ),
             // Increment button
@@ -194,7 +180,7 @@ class _QuantityStepper extends StatelessWidget {
               isDelete: false,
               icon: Icons.add_rounded,
               isLoading: false,
-              onTap: isLoading
+              onTap: isRemoving
                   ? null
                   : () => cubit.updateQuantity(productId, quantity + 1),
             ),

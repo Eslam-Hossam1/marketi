@@ -12,4 +12,11 @@ class CartItemEntity extends Equatable {
 
   @override
   List<Object?> get props => [product, quantity];
+
+  CartItemEntity copyWith({ProductEntity? product, int? quantity}) {
+    return CartItemEntity(
+      product: product ?? this.product,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }
