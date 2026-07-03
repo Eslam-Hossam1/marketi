@@ -14,6 +14,10 @@ final class CartLoading extends CartState {}
 
 final class CartSuccess extends CartState {}
 
+final class CartEmpty extends CartState {}
+
+final class CartNotEmpty extends CartState {}
+
 final class CartFailure extends CartState {
   final String errorMessage;
 

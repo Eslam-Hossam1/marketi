@@ -68,8 +68,12 @@ class CartCubit extends Cubit<CartState> {
         AddToCartFailure(productId: product.id, errorMessage: failure.errMsg),
       ),
       (_) async {
+        final wasEmpty = _cartItems.isEmpty;
         _cartItems[product.id] = CartItemEntity(product: product, quantity: 1);
         emit(AddToCartSuccess(productId: product.id));
+        if (wasEmpty) {
+          emit(CartNotEmpty());
+        }
       },
     );
   }

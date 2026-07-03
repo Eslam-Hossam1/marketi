@@ -20,7 +20,7 @@ class CartView extends StatelessWidget {
               current is CartSuccess ||
               current is CartFailure ||
               current is CartEmpty ||
-              current is AddToCartSuccess,
+              current is CartNotEmpty,
           builder: (context, state) {
             if (state is CartLoading) {
               return const CustomCircularProgressIndecator();
