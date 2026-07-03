@@ -42,7 +42,7 @@ class ProductAddToCartButton extends StatelessWidget {
                     if (isInCart) {
                       cartCubit.removeFromCart(product.id);
                     } else {
-                      cartCubit.addToCart(product.id);
+                      cartCubit.addToCart(product);
                     }
                   },
             style: TextButton.styleFrom(

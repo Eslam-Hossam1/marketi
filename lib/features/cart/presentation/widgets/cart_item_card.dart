@@ -3,22 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
-import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 
 class CartItemCard extends StatelessWidget {
-  final ProductEntity product;
+  final CartItemEntity cartItem;
 
-  const CartItemCard({super.key, required this.product});
+  const CartItemCard({super.key, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutingHelper.pushProductDetails(context, productId: product.id);
+        RoutingHelper.pushProductDetails(context, productId: cartItem.product.id);
       },
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -49,7 +49,7 @@ class CartItemCard extends StatelessWidget {
                 width: 90.w(context),
                 height: 90.h(context),
                 child: CustomCachedNetworkImage(
-                  url: product.thumbnail,
+                  url: cartItem.product.thumbnail,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -61,7 +61,7 @@ class CartItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.title,
+                    cartItem.product.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.bold14(context).copyWith(
@@ -70,7 +70,7 @@ class CartItemCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h(context)),
                   Text(
-                    product.category?.name ?? '',
+                    cartItem.product.category?.name ?? '',
                     style: AppTextStyles.regular12(context).copyWith(
                       color: context.secondaryTextColor,
                     ),
@@ -81,13 +81,13 @@ class CartItemCard extends StatelessWidget {
                     children: [
                       // Price
                       Text(
-                        '${product.price.toStringAsFixed(2)} EGP',
+                        '${cartItem.product.price.toStringAsFixed(2)} EGP',
                         style: AppTextStyles.bold14(context).copyWith(
                           color: context.primaryColor,
                         ),
                       ),
                       // Quantity Stepper
-                      _QuantityStepper(productId: product.id),
+                      _QuantityStepper(productId: cartItem.product.id),
                     ],
                   ),
                 ],
@@ -98,14 +98,14 @@ class CartItemCard extends StatelessWidget {
             BlocBuilder<CartCubit, CartState>(
               buildWhen: (previous, current) =>
                   (current is RemoveFromCartLoading &&
-                      current.productId == product.id) ||
+                      current.productId == cartItem.product.id) ||
                   (current is RemoveFromCartSuccess &&
-                      current.productId == product.id) ||
+                      current.productId == cartItem.product.id) ||
                   (current is RemoveFromCartFailure &&
-                      current.productId == product.id),
+                      current.productId == cartItem.product.id),
               builder: (context, state) {
                 final isRemoving = state is RemoveFromCartLoading &&
-                    state.productId == product.id;
+                    state.productId == cartItem.product.id;
 
                 return GestureDetector(
                   onTap: isRemoving
@@ -113,7 +113,7 @@ class CartItemCard extends StatelessWidget {
                       : () {
                           context
                               .read<CartCubit>()
-                              .removeFromCart(product.id);
+                              .removeFromCart(cartItem.product.id);
                         },
                   child: Container(
                     padding: EdgeInsets.all(8.w(context)),

@@ -22,7 +22,7 @@ class CartViewBody extends StatelessWidget {
           current is CartEmpty,
       builder: (context, state) {
         final cubit = context.read<CartCubit>();
-        final products = cubit.cartProducts;
+        final cartItems = cubit.cartItems;
 
         return Column(
           children: [
@@ -47,15 +47,15 @@ class CartViewBody extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.only(bottom: 8.h(context)),
-                itemCount: products.length,
+                itemCount: cartItems.length,
                 itemBuilder: (context, index) {
-                  return CartItemCard(product: products[index]);
+                  return CartItemCard(cartItem: cartItems[index]);
                 },
               ),
             ),
             // Bottom Bar
             CartBottomBar(
-              itemCount: products.length,
+              itemCount: cartItems.length,
               subtotal: cubit.subtotal,
             ),
           ],
