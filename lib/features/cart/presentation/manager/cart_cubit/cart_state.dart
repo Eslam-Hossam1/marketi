@@ -27,8 +27,6 @@ final class CartFailure extends CartState {
   List<Object> get props => [errorMessage];
 }
 
-final class CartEmpty extends CartState {}
-
 // ── Add to Cart States ───────────────────────────────────────────────────
 final class AddToCartLoading extends CartState {
   final String productId;
@@ -52,10 +50,7 @@ final class AddToCartFailure extends CartState {
   final String productId;
   final String errorMessage;
 
-  const AddToCartFailure({
-    required this.productId,
-    required this.errorMessage,
-  });
+  const AddToCartFailure({required this.productId, required this.errorMessage});
 
   @override
   List<Object> get props => [productId, errorMessage];
