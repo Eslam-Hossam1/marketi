@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nextcart/core/entities/product_entity.dart';
 import 'package:nextcart/features/cart/domain/entities/cart_item_entity.dart';
@@ -21,7 +23,18 @@ class CartCubit extends Cubit<CartState> {
     this._updateCartQuantityUseCase,
   ) : super(CartInitial());
 
+  static const _kDebounceDuration = Duration(milliseconds: 600);
+
+  /// Single source of truth: product id → cart item (with live quantity).
   final Map<String, CartItemEntity> _cartItems = {};
+
+  /// Last quantity confirmed by the backend. Used to rollback on failure.
+  final Map<String, int> _committedQuantities = {};
+
+  /// Per-product debounce timers — only one outstanding timer per product.
+  final Map<String, Timer> _debounceTimers = {};
+
+  // ── Public getters ────────────────────────────────────────────────────────
 
   List<CartItemEntity> get cartItems => _cartItems.values.toList();
 
@@ -34,29 +47,28 @@ class CartCubit extends Cubit<CartState> {
         (sum, item) => sum + item.product.price * item.quantity,
       );
 
+  // ── Get Cart ──────────────────────────────────────────────────────────────
+
   Future<void> getCart({bool showLoading = true}) async {
     if (showLoading) emit(CartLoading());
     final result = await _getCartUseCase();
     result.fold(
       (failure) {
-        if (showLoading) {
-          emit(CartFailure(errorMessage: failure.errMsg));
-        }
+        if (showLoading) emit(CartFailure(errorMessage: failure.errMsg));
       },
       (cartEntity) {
         _cartItems.clear();
+        _committedQuantities.clear();
         for (final item in cartEntity.items) {
           _cartItems[item.product.id] = item;
+          _committedQuantities[item.product.id] = item.quantity;
         }
-
-        if (_cartItems.isEmpty) {
-          emit(CartEmpty());
-        } else {
-          emit(CartSuccess());
-        }
+        emit(_cartItems.isEmpty ? CartEmpty() : CartSuccess());
       },
     );
   }
+
+  // ── Add to Cart ───────────────────────────────────────────────────────────
 
   Future<void> addToCart(ProductEntity product) async {
     emit(AddToCartLoading(productId: product.id));
@@ -67,18 +79,22 @@ class CartCubit extends Cubit<CartState> {
       (failure) => emit(
         AddToCartFailure(productId: product.id, errorMessage: failure.errMsg),
       ),
-      (_) async {
+      (_) {
         final wasEmpty = _cartItems.isEmpty;
         _cartItems[product.id] = CartItemEntity(product: product, quantity: 1);
+        _committedQuantities[product.id] = 1;
         emit(AddToCartSuccess(productId: product.id));
-        if (wasEmpty) {
-          emit(CartNotEmpty());
-        }
+        if (wasEmpty) emit(CartNotEmpty());
       },
     );
   }
 
+  // ── Remove from Cart ──────────────────────────────────────────────────────
+
   Future<void> removeFromCart(String productId) async {
+    // Cancel any pending debounce for this product before removing.
+    _debounceTimers.remove(productId)?.cancel();
+
     emit(RemoveFromCartLoading(productId: productId));
     final result = await _removeFromCartUseCase(
       CartProductParams(productId: productId),
@@ -90,52 +106,93 @@ class CartCubit extends Cubit<CartState> {
           errorMessage: failure.errMsg,
         ),
       ),
-      (_) async {
+      (_) {
         _cartItems.remove(productId);
+        _committedQuantities.remove(productId);
         emit(RemoveFromCartSuccess(productId: productId));
-        if (_cartItems.isEmpty) {
-          emit(CartEmpty());
-        }
+        if (_cartItems.isEmpty) emit(CartEmpty());
       },
     );
   }
 
-  Future<void> updateQuantity(String productId, int newQuantity) async {
-    // If quantity drops to 0, remove the item entirely
+  // ── Update Quantity (optimistic + debounced) ──────────────────────────────
+
+  /// Instantly reflects the new quantity in the UI, then debounces the
+  /// backend call. If the backend call fails, the quantity is rolled back
+  /// to the last committed value and a failure state is emitted.
+  void updateQuantity(String productId, int newQuantity) {
     if (newQuantity <= 0) {
-      await removeFromCart(productId);
+      _debounceTimers.remove(productId)?.cancel();
+      removeFromCart(productId);
       return;
     }
 
     final currentItem = _cartItems[productId];
     if (currentItem == null) return;
 
-    // Optimistic update
-    final previousQuantity = currentItem.quantity;
+    // --- Optimistic update: update the UI immediately ---
     _cartItems[productId] = CartItemEntity(
       product: currentItem.product,
       quantity: newQuantity,
     );
+    // Emitting success instantly refreshes quantity + subtotal in the UI.
+    emit(UpdateCartQuantitySuccess(productId: productId));
+
+    // --- Debounce: reset the timer, only sync once user stops tapping ---
+    _debounceTimers[productId]?.cancel();
+    _debounceTimers[productId] = Timer(
+      _kDebounceDuration,
+      () => _commitQuantityUpdate(productId),
+    );
+  }
+
+  /// Fired by the debounce timer. Sends the current quantity to the backend.
+  Future<void> _commitQuantityUpdate(String productId) async {
+    _debounceTimers.remove(productId);
+
+    final currentItem = _cartItems[productId];
+    if (currentItem == null) return;
+
+    final targetQuantity = currentItem.quantity;
+    final previousCommitted = _committedQuantities[productId] ?? targetQuantity;
+
     emit(UpdateCartQuantityLoading(productId: productId));
 
     final result = await _updateCartQuantityUseCase(
-      CartProductParams(productId: productId, quantity: newQuantity),
+      CartProductParams(productId: productId, quantity: targetQuantity),
     );
+
     result.fold(
       (failure) {
-        // Rollback on failure
-        _cartItems[productId] = CartItemEntity(
-          product: currentItem.product,
-          quantity: previousQuantity,
-        );
+        // If the user triggered a new debounce session while the request was
+        // in-flight, do NOT rollback — the new timer will sync the correct
+        // value. We still emit failure so a snackbar can be shown.
+        if (!_debounceTimers.containsKey(productId)) {
+          _cartItems[productId] = CartItemEntity(
+            product: currentItem.product,
+            quantity: previousCommitted,
+          );
+        }
         emit(UpdateCartQuantityFailure(
           productId: productId,
           errorMessage: failure.errMsg,
         ));
       },
       (_) {
+        _committedQuantities[productId] = targetQuantity;
         emit(UpdateCartQuantitySuccess(productId: productId));
       },
     );
+  }
+
+  // ── Lifecycle ─────────────────────────────────────────────────────────────
+
+  @override
+  Future<void> close() {
+    for (final timer in _debounceTimers.values) {
+      timer.cancel();
+    }
+    _debounceTimers.clear();
+    return super.close();
   }
 }
