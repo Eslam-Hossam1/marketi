@@ -18,7 +18,10 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutingHelper.pushProductDetails(context, productId: cartItem.product.id);
+        RoutingHelper.pushProductDetails(
+          context,
+          productId: cartItem.product.id,
+        );
       },
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -40,93 +43,80 @@ class CartItemCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Top section: image + info ──────────────────────────────
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Product Image
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r(context)),
-                  child: SizedBox(
-                    width: 90.w(context),
-                    height: 90.h(context),
-                    child: CustomCachedNetworkImage(
-                      url: cartItem.product.thumbnail,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            // Product Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.r(context)),
+              child: SizedBox(
+                width: 90.w(context),
+                height: 90.h(context),
+                child: CustomCachedNetworkImage(
+                  url: cartItem.product.thumbnail,
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(width: 12.w(context)),
-                // Product Info
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              ),
+            ),
+            SizedBox(width: 12.w(context)),
+            // Product Info
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title
+                  Text(
+                    cartItem.product.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.bold14(
+                      context,
+                    ).copyWith(color: context.mainTextColor),
+                  ),
+                  SizedBox(height: 4.h(context)),
+                  // Category
+                  Text(
+                    cartItem.product.category?.name ?? '',
+                    style: AppTextStyles.regular12(
+                      context,
+                    ).copyWith(color: context.secondaryTextColor),
+                  ),
+                  SizedBox(height: 8.h(context)),
+                  // Price + Rating row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Title + heart
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              cartItem.product.title,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.bold14(context).copyWith(
-                                color: context.mainTextColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 4.h(context)),
-                      // Category
                       Text(
-                        cartItem.product.category?.name ?? '',
-                        style: AppTextStyles.regular12(context).copyWith(
-                          color: context.secondaryTextColor,
-                        ),
+                        'Price: ${cartItem.product.price.toStringAsFixed(2)} EGP',
+                        style: AppTextStyles.bold14(
+                          context,
+                        ).copyWith(color: context.mainTextColor),
                       ),
-                      SizedBox(height: 8.h(context)),
-                      // Price + Rating row
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            'Price: ${cartItem.product.price.toStringAsFixed(2)} EGP',
-                            style: AppTextStyles.bold14(context).copyWith(
-                              color: context.mainTextColor,
-                            ),
+                          Icon(
+                            Icons.star_rounded,
+                            size: 14.w(context),
+                            color: const Color(0xFFFFA726),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.star_rounded,
-                                size: 14.w(context),
-                                color: const Color(0xFFFFA726),
-                              ),
-                              SizedBox(width: 2.w(context)),
-                              Text(
-                                cartItem.product.rating.toStringAsFixed(1),
-                                style: AppTextStyles.regular12(context).copyWith(
-                                  color: context.secondaryTextColor,
-                                ),
-                              ),
-                            ],
+                          SizedBox(width: 2.w(context)),
+                          Text(
+                            cartItem.product.rating.toStringAsFixed(1),
+                            style: AppTextStyles.regular12(
+                              context,
+                            ).copyWith(color: context.secondaryTextColor),
                           ),
                         ],
                       ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: 10.h(context)),
+                  // Stepper — below price, inside info column
+                  _QuantityStepper(productId: cartItem.product.id),
+                ],
+              ),
             ),
-            SizedBox(height: 12.h(context)),
-            // ── Bottom section: full-width stepper ────────────────────
-            _QuantityStepper(productId: cartItem.product.id),
           ],
         ),
       ),
@@ -149,16 +139,18 @@ class _QuantityStepper extends StatelessWidget {
               current.productId == productId) ||
           (current is UpdateCartQuantityFailure &&
               current.productId == productId) ||
-          (current is RemoveFromCartLoading && current.productId == productId) ||
-          (current is RemoveFromCartSuccess && current.productId == productId) ||
+          (current is RemoveFromCartLoading &&
+              current.productId == productId) ||
+          (current is RemoveFromCartSuccess &&
+              current.productId == productId) ||
           (current is RemoveFromCartFailure && current.productId == productId),
       builder: (context, state) {
         final cubit = context.read<CartCubit>();
         final quantity = cubit.getQuantity(productId);
-        final isUpdating = state is UpdateCartQuantityLoading &&
-            state.productId == productId;
-        final isRemoving = state is RemoveFromCartLoading &&
-            state.productId == productId;
+        final isUpdating =
+            state is UpdateCartQuantityLoading && state.productId == productId;
+        final isRemoving =
+            state is RemoveFromCartLoading && state.productId == productId;
         final isLoading = isUpdating || isRemoving;
 
         return Row(
@@ -187,9 +179,9 @@ class _QuantityStepper extends StatelessWidget {
                     : Text(
                         '$quantity',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.bold16(context).copyWith(
-                          color: context.mainTextColor,
-                        ),
+                        style: AppTextStyles.bold16(
+                          context,
+                        ).copyWith(color: context.mainTextColor),
                       ),
               ),
             ),
@@ -236,7 +228,9 @@ class _StepperButton extends StatelessWidget {
         height: 36.h(context),
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(isRound ? 18.r(context) : 10.r(context)),
+          borderRadius: BorderRadius.circular(
+            isRound ? 18.r(context) : 10.r(context),
+          ),
         ),
         child: isLoading
             ? Center(
