@@ -76,8 +76,8 @@ class CartItemCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8.h(context)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Price
                       Text(
@@ -86,8 +86,13 @@ class CartItemCard extends StatelessWidget {
                           color: context.primaryColor,
                         ),
                       ),
+                      SizedBox(height: 8.h(context)),
                       // Quantity Stepper
-                      _QuantityStepper(productId: cartItem.product.id),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 36.h(context),
+                        child: _QuantityStepper(productId: cartItem.product.id),
+                      ),
                     ],
                   ),
                 ],
@@ -173,7 +178,7 @@ class _QuantityStepper extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r(context)),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Decrement button
               _StepperButton(
@@ -186,8 +191,7 @@ class _QuantityStepper extends StatelessWidget {
                     : () => cubit.updateQuantity(productId, quantity - 1),
               ),
               // Quantity display
-              SizedBox(
-                width: 28.w(context),
+              Expanded(
                 child: isLoading
                     ? Center(
                         child: SizedBox(
@@ -243,12 +247,14 @@ class _StepperButton extends StatelessWidget {
           horizontal: 8.w(context),
           vertical: 6.h(context),
         ),
-        child: Icon(
-          icon,
-          size: 18.w(context),
-          color: onTap == null
-              ? iconColor.withValues(alpha: 0.4)
-              : iconColor,
+        child: Center(
+          child: Icon(
+            icon,
+            size: 18.w(context),
+            color: onTap == null
+                ? iconColor.withValues(alpha: 0.4)
+                : iconColor,
+          ),
         ),
       ),
     );
