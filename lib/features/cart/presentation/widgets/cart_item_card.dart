@@ -40,110 +40,93 @@ class CartItemCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12.r(context)),
-              child: SizedBox(
-                width: 90.w(context),
-                height: 90.h(context),
-                child: CustomCachedNetworkImage(
-                  url: cartItem.product.thumbnail,
-                  fit: BoxFit.cover,
+            // ── Top section: image + info ──────────────────────────────
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Product Image
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12.r(context)),
+                  child: SizedBox(
+                    width: 90.w(context),
+                    height: 90.h(context),
+                    child: CustomCachedNetworkImage(
+                      url: cartItem.product.thumbnail,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(width: 12.w(context)),
-            // Product Info
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    cartItem.product.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.bold14(context).copyWith(
-                      color: context.mainTextColor,
-                    ),
-                  ),
-                  SizedBox(height: 4.h(context)),
-                  Text(
-                    cartItem.product.category?.name ?? '',
-                    style: AppTextStyles.regular12(context).copyWith(
-                      color: context.secondaryTextColor,
-                    ),
-                  ),
-                  SizedBox(height: 8.h(context)),
-                  Column(
+                SizedBox(width: 12.w(context)),
+                // Product Info
+                Expanded(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Price
+                      // Title + heart
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              cartItem.product.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyles.bold14(context).copyWith(
+                                color: context.mainTextColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 4.h(context)),
+                      // Category
                       Text(
-                        '${cartItem.product.price.toStringAsFixed(2)} EGP',
-                        style: AppTextStyles.bold14(context).copyWith(
-                          color: context.primaryColor,
+                        cartItem.product.category?.name ?? '',
+                        style: AppTextStyles.regular12(context).copyWith(
+                          color: context.secondaryTextColor,
                         ),
                       ),
                       SizedBox(height: 8.h(context)),
-                      // Quantity Stepper
-                      SizedBox(
-                        width: double.infinity,
-                        height: 36.h(context),
-                        child: _QuantityStepper(productId: cartItem.product.id),
+                      // Price + Rating row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Price: ${cartItem.product.price.toStringAsFixed(2)} EGP',
+                            style: AppTextStyles.bold14(context).copyWith(
+                              color: context.mainTextColor,
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.star_rounded,
+                                size: 14.w(context),
+                                color: const Color(0xFFFFA726),
+                              ),
+                              SizedBox(width: 2.w(context)),
+                              Text(
+                                cartItem.product.rating.toStringAsFixed(1),
+                                style: AppTextStyles.regular12(context).copyWith(
+                                  color: context.secondaryTextColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(width: 8.w(context)),
-            // Delete Button
-            BlocBuilder<CartCubit, CartState>(
-              buildWhen: (previous, current) =>
-                  (current is RemoveFromCartLoading &&
-                      current.productId == cartItem.product.id) ||
-                  (current is RemoveFromCartSuccess &&
-                      current.productId == cartItem.product.id) ||
-                  (current is RemoveFromCartFailure &&
-                      current.productId == cartItem.product.id),
-              builder: (context, state) {
-                final isRemoving = state is RemoveFromCartLoading &&
-                    state.productId == cartItem.product.id;
-
-                return GestureDetector(
-                  onTap: isRemoving
-                      ? null
-                      : () {
-                          context
-                              .read<CartCubit>()
-                              .removeFromCart(cartItem.product.id);
-                        },
-                  child: Container(
-                    padding: EdgeInsets.all(8.w(context)),
-                    decoration: BoxDecoration(
-                      color: Colors.red.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(10.r(context)),
-                    ),
-                    child: isRemoving
-                        ? SizedBox(
-                            width: 20.w(context),
-                            height: 20.w(context),
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Colors.red,
-                            ),
-                          )
-                        : Icon(
-                            Icons.delete_outline_rounded,
-                            color: Colors.red,
-                            size: 20.w(context),
-                          ),
-                  ),
-                );
-              },
-            ),
+            SizedBox(height: 12.h(context)),
+            // ── Bottom section: full-width stepper ────────────────────
+            _QuantityStepper(productId: cartItem.product.id),
           ],
         ),
       ),
@@ -165,62 +148,61 @@ class _QuantityStepper extends StatelessWidget {
           (current is UpdateCartQuantitySuccess &&
               current.productId == productId) ||
           (current is UpdateCartQuantityFailure &&
-              current.productId == productId),
+              current.productId == productId) ||
+          (current is RemoveFromCartLoading && current.productId == productId) ||
+          (current is RemoveFromCartSuccess && current.productId == productId) ||
+          (current is RemoveFromCartFailure && current.productId == productId),
       builder: (context, state) {
         final cubit = context.read<CartCubit>();
         final quantity = cubit.getQuantity(productId);
-        final isLoading = state is UpdateCartQuantityLoading &&
+        final isUpdating = state is UpdateCartQuantityLoading &&
             state.productId == productId;
+        final isRemoving = state is RemoveFromCartLoading &&
+            state.productId == productId;
+        final isLoading = isUpdating || isRemoving;
 
-        return Container(
-          decoration: BoxDecoration(
-            color: context.primaryColor.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(10.r(context)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Decrement button
-              _StepperButton(
-                icon: quantity <= 1
-                    ? Icons.delete_outline_rounded
-                    : Icons.remove_rounded,
-                iconColor: quantity <= 1 ? Colors.red : context.primaryColor,
-                onTap: isLoading
-                    ? null
-                    : () => cubit.updateQuantity(productId, quantity - 1),
-              ),
-              // Quantity display
-              Expanded(
-                child: isLoading
-                    ? Center(
-                        child: SizedBox(
-                          width: 14.w(context),
-                          height: 14.w(context),
-                          child: CircularProgressIndicator(
-                            strokeWidth: 1.5,
-                            color: context.primaryColor,
-                          ),
+        return Row(
+          children: [
+            // Decrement / Delete button
+            _StepperButton(
+              isRound: false,
+              isDelete: quantity <= 1,
+              isLoading: isRemoving,
+              onTap: isLoading
+                  ? null
+                  : () => cubit.updateQuantity(productId, quantity - 1),
+            ),
+            // Quantity display
+            Expanded(
+              child: Center(
+                child: isUpdating
+                    ? SizedBox(
+                        width: 16.w(context),
+                        height: 16.w(context),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1.5,
+                          color: context.primaryColor,
                         ),
                       )
                     : Text(
                         '$quantity',
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.bold14(context).copyWith(
+                        style: AppTextStyles.bold16(context).copyWith(
                           color: context.mainTextColor,
                         ),
                       ),
               ),
-              // Increment button
-              _StepperButton(
-                icon: Icons.add_rounded,
-                iconColor: context.primaryColor,
-                onTap: isLoading
-                    ? null
-                    : () => cubit.updateQuantity(productId, quantity + 1),
-              ),
-            ],
-          ),
+            ),
+            // Increment button
+            _StepperButton(
+              isRound: false,
+              isDelete: false,
+              isLoading: false,
+              onTap: isLoading
+                  ? null
+                  : () => cubit.updateQuantity(productId, quantity + 1),
+            ),
+          ],
         );
       },
     );
@@ -228,34 +210,52 @@ class _QuantityStepper extends StatelessWidget {
 }
 
 class _StepperButton extends StatelessWidget {
-  final IconData icon;
-  final Color iconColor;
+  final bool isDelete;
+  final bool isRound;
+  final bool isLoading;
   final VoidCallback? onTap;
 
   const _StepperButton({
-    required this.icon,
-    required this.iconColor,
+    required this.isDelete,
+    required this.isRound,
+    required this.isLoading,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bgColor = isDelete
+        ? Colors.red.withValues(alpha: 0.12)
+        : context.primaryColor.withValues(alpha: 0.12);
+    final iconColor = isDelete ? Colors.red : context.primaryColor;
+
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 8.w(context),
-          vertical: 6.h(context),
+      child: Container(
+        width: 42.w(context),
+        height: 36.h(context),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(isRound ? 18.r(context) : 10.r(context)),
         ),
-        child: Center(
-          child: Icon(
-            icon,
-            size: 18.w(context),
-            color: onTap == null
-                ? iconColor.withValues(alpha: 0.4)
-                : iconColor,
-          ),
-        ),
+        child: isLoading
+            ? Center(
+                child: SizedBox(
+                  width: 16.w(context),
+                  height: 16.w(context),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: iconColor,
+                  ),
+                ),
+              )
+            : Icon(
+                isDelete ? Icons.delete_outline_rounded : Icons.add_rounded,
+                size: 20.w(context),
+                color: onTap == null
+                    ? iconColor.withValues(alpha: 0.4)
+                    : iconColor,
+              ),
       ),
     );
   }
