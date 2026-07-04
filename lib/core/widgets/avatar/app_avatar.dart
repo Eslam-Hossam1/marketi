@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 
 class AppAvatar extends StatelessWidget {
   final String? imageUrl;
@@ -19,33 +18,28 @@ class AppAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-      child: ClipOval(
-        child: _buildImage(context),
-      ),
+      backgroundColor:
+          backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+      child: ClipOval(child: _buildImage()),
     );
   }
 
-  Widget _buildImage(BuildContext context) {
-    if (imageUrl == null || imageUrl!.trim().isEmpty) {
-      return _buildDefaultAvatar();
+  Widget _buildImage() {
+    final url = imageUrl;
+    if (url == null || url.trim().isEmpty) {
+      return _defaultAvatar();
     }
 
-    return CachedNetworkImage(
-      imageUrl: imageUrl!,
+    return CustomCachedNetworkImage(
+      url: url,
       width: radius * 2,
       height: radius * 2,
-      fit: BoxFit.cover,
-      placeholder: (context, url) => const Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
-      errorWidget: (context, url, error) => _buildDefaultAvatar(),
     );
   }
 
-  Widget _buildDefaultAvatar() {
-    return SvgPicture.asset(
-      Assets.imagesSvgDefaultAvatar,
+  Widget _defaultAvatar() {
+    return Image.asset(
+      Assets.imagesPngDefaultAvatar,
       width: radius * 2,
       height: radius * 2,
       fit: BoxFit.cover,
