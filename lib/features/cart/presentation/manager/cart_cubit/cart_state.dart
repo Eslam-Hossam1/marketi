@@ -100,11 +100,15 @@ final class UpdateCartQuantityLoading extends CartState {
 
 final class UpdateCartQuantitySuccess extends CartState {
   final String productId;
+  final int quantity;
 
-  const UpdateCartQuantitySuccess({required this.productId});
+  const UpdateCartQuantitySuccess({
+    required this.productId,
+    required this.quantity,
+  });
 
   @override
-  List<Object> get props => [productId];
+  List<Object> get props => [productId, quantity];
 }
 
 final class UpdateCartQuantityFailure extends CartState {

@@ -6,7 +6,7 @@ import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 import 'cart_header.dart';
-import 'cart_item_card.dart';
+import 'cart_item_card/cart_item_card.dart';
 import 'cart_bottom_bar.dart';
 
 class CartViewBody extends StatelessWidget {

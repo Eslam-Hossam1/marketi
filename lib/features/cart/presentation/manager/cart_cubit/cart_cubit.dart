@@ -142,7 +142,7 @@ class CartCubit extends Cubit<CartState> {
     // --- Optimistic update: UI and subtotal reflect the change instantly ---
     // Improvement #4: use copyWith instead of constructing a new entity.
     _cartItems[productId] = currentItem.copyWith(quantity: newQuantity);
-    emit(UpdateCartQuantitySuccess(productId: productId));
+    emit(UpdateCartQuantitySuccess(productId: productId, quantity: newQuantity));
 
     // --- Debounce: collapse rapid taps into a single network request ---
     _debounceTimers[productId]?.cancel();
@@ -202,7 +202,7 @@ class CartCubit extends Cubit<CartState> {
       },
       (_) {
         _committedQuantities[productId] = targetQuantity;
-        emit(UpdateCartQuantitySuccess(productId: productId));
+        emit(UpdateCartQuantitySuccess(productId: productId, quantity: targetQuantity));
       },
     );
   }
