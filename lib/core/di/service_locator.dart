@@ -6,6 +6,7 @@ import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_rem
 import 'package:nextcart/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:nextcart/features/edit_profile/domain/repos/edit_profile_repo.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/delete_image_use_case.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
 import 'package:nextcart/core/services/image_picker_service/cropped_image_picker_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -178,6 +179,10 @@ void _setupEditProfile() {
 
   getIt.registerLazySingleton<AddImageUseCase>(
     () => AddImageUseCase(getIt<EditProfileRepo>()),
+  );
+
+  getIt.registerLazySingleton<DeleteImageUseCase>(
+    () => DeleteImageUseCase(getIt<EditProfileRepo>()),
   );
 }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/utils/assets.dart';
-import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/core/widgets/avatar/app_avatar.dart';
 import 'package:nextcart/features/profile/domain/entities/user_profile_entity.dart';
 
 class ProfileGalaxyImage extends StatelessWidget {
@@ -39,13 +39,10 @@ class ProfileGalaxyImage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(3.w(context)),
               child: Center(
-                child: ClipOval(
-                  child: CustomCachedNetworkImage(
-                        url: userProfile.image,
-                        width: 150.w(context),
-                        height: 150.w(context),
-                      ),
-                    ),
+                child: AppAvatar(
+                  imageUrl: userProfile.image,
+                  radius: 75.w(context),
+                ),
               ),
             ),
           ),

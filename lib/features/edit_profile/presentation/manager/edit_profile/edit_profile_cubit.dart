@@ -5,6 +5,7 @@ import 'package:nextcart/core/di/service_locator.dart';
 import 'package:nextcart/core/services/image_picker_service/cropped_image_picker_service.dart';
 import 'package:nextcart/features/edit_profile/domain/params/edit_user_data_params.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/delete_image_use_case.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
 import 'package:nextcart/features/profile/domain/entities/user_profile_entity.dart';
 import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_form_data.dart';
@@ -13,11 +14,13 @@ import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile
 class EditProfileCubit extends Cubit<EditProfileState> {
   final EditUserDataUseCase _editUserDataUseCase;
   final AddImageUseCase _addImageUseCase;
+  final DeleteImageUseCase _deleteImageUseCase;
   final UserProfileEntity userProfile;
 
   EditProfileCubit(
     this._editUserDataUseCase,
     this._addImageUseCase,
+    this._deleteImageUseCase,
     this.userProfile,
   ) : super(const EditProfileInitial()) {
     formData.name = userProfile.name;
@@ -72,7 +75,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           final dataResult = await _editUserDataUseCase.call(newParams);
           dataResult.fold(
             (failure) => emit(EditProfileFailure(failure.errMsg)),
-            (_) => emit(const EditProfileSuccess()),
+            (_) {
+              emit(const EditProfileSuccess());
+              // Fire-and-forget: delete old image after successful update
+              final oldImage = userProfile.image;
+              if (oldImage.isNotEmpty) {
+                _deleteImageUseCase.call(oldImage);
+              }
+            },
           );
         },
       );

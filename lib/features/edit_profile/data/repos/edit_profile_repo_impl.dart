@@ -37,4 +37,10 @@ class EditProfileRepoImpl implements EditProfileRepo {
       return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
+
+  @override
+  Future<void> deleteImage(String imageUrl) async {
+    // Fire-and-forget: delegate directly, errors are caught in the datasource
+    await _remoteDataSource.deleteImage(imageUrl);
+  }
 }
