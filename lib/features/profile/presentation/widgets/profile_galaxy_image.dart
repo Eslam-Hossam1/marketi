@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/utils/assets.dart';
@@ -39,36 +39,13 @@ class ProfileGalaxyImage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(3.w(context)),
               child: Center(
-                child: Stack(
-                  children: [
-                    ClipOval(
-                      child: CustomCachedNetworkImage(
+                child: ClipOval(
+                  child: CustomCachedNetworkImage(
                         url: userProfile.image,
                         width: 150.w(context),
                         height: 150.w(context),
                       ),
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        radius: 18.r(context),
-                        backgroundColor: context.scaffoldBackgroundColor,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            Assets.imagesSvgCameraAddIcon,
-                            width: 20.w(context),
-                            colorFilter: ColorFilter.mode(
-                              context.primaryColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
           ),

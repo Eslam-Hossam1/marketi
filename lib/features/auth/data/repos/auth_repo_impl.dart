@@ -44,4 +44,16 @@ class AuthRepoImpl implements AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<ApiFailure, void>> logout() async {
+    try {
+      await _remoteDataSource.logout();
+      return const Right(null);
+    } catch (e) {
+      return Left(
+        SupabaseAuthFailure.unknownException(unKnownExceptionMsg: e.toString()),
+      );
+    }
+  }
 }

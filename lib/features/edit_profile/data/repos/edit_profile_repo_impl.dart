@@ -27,10 +27,10 @@ class EditProfileRepoImpl implements EditProfileRepo {
   }
 
   @override
-  Future<Either<Failure, void>> addImage(String filePath) async {
+  Future<Either<Failure, String>> addImage(String filePath) async {
     try {
-      await _remoteDataSource.addImage(filePath);
-      return const Right(null);
+      final imageUrl = await _remoteDataSource.addImage(filePath);
+      return Right(imageUrl);
     } on PostgrestException catch (e) {
       return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
     } catch (e) {

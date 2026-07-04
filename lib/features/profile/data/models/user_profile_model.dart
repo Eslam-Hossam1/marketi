@@ -6,7 +6,6 @@ class UserProfileModel extends UserProfileEntity {
     required super.name,
     required super.phone,
     required super.email,
-    required super.address,
     required super.image,
   });
 
@@ -19,7 +18,6 @@ class UserProfileModel extends UserProfileEntity {
       name: json['name'] ?? '',
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',
-      address: json['address'] ?? '',
       image: json['image'] ?? '',
     );
   }

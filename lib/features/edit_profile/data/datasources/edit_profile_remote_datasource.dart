@@ -1,9 +1,10 @@
+import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
 
 abstract class EditProfileRemoteDataSource {
   Future<void> editUserData(EditUserDataRequestModel requestModel);
-  Future<void> addImage(String filePath);
+  Future<String> addImage(String filePath);
 }
 
 class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
@@ -20,9 +21,19 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
   }
 
   @override
-  Future<void> addImage(String filePath) async {
-    // Add logic to upload image to Supabase Storage if required
+  Future<String> addImage(String filePath) async {
     final user = _supabaseClient.auth.currentUser;
     if (user == null) throw Exception('Not authenticated');
+
+    final file = File(filePath);
+    final fileExt = filePath.split('.').last;
+    final fileName = '${user.id}_${DateTime.now().millisecondsSinceEpoch}.$fileExt';
+    
+    await _supabaseClient.storage
+        .from('avatars')
+        .upload(fileName, file);
+        
+    final imageUrl = _supabaseClient.storage.from('avatars').getPublicUrl(fileName);
+    return imageUrl;
   }
 }

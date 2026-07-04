@@ -57,6 +57,7 @@ import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/domain/repos/auth_repo.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
+import '../../features/auth/domain/usecases/logout_use_case.dart';
 import '../networking/api_consumer.dart';
 import '../networking/dio_consumer.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
@@ -192,6 +193,8 @@ void _setupProfile() {
   getIt.registerLazySingleton<GetUserDataUseCase>(
     () => GetUserDataUseCase(getIt<ProfileRepo>()),
   );
+  
+
 }
 
 void _setupOtp() {
@@ -245,6 +248,9 @@ void _setupAuth() {
   );
   getIt.registerLazySingleton<SignUpUseCase>(
     () => SignUpUseCase(getIt<AuthRepo>()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(getIt<AuthRepo>()),
   );
 }
 

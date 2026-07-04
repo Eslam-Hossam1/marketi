@@ -4,7 +4,6 @@ class EditUserDataRequestModel extends EditUserDataParams {
   EditUserDataRequestModel({
     required super.name,
     required super.phone,
-    required super.address,
     super.image,
   });
 
@@ -12,7 +11,6 @@ class EditUserDataRequestModel extends EditUserDataParams {
     return EditUserDataRequestModel(
       name: params.name,
       phone: params.phone,
-      address: params.address,
       image: params.image,
     );
   }
@@ -22,7 +20,6 @@ class EditUserDataRequestModel extends EditUserDataParams {
     final Map<String, dynamic> data = {
       'name': name,
       'phone': phone,
-      'address': address,
     };
     if (image != null) {
       data['image'] = image;

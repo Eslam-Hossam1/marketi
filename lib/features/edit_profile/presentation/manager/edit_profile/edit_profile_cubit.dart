@@ -22,7 +22,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   ) : super(const EditProfileInitial()) {
     formData.name = userProfile.name;
     formData.phone = userProfile.phone;
-    formData.address = userProfile.address;
   }
 
   final EditProfileFormData formData = EditProfileFormData();
@@ -41,8 +40,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   Future<void> updateProfile(UserProfileEntity userProfile) async {
     final bool infoChanged =
         formData.name != userProfile.name ||
-        formData.phone != userProfile.phone ||
-        formData.address != userProfile.address;
+        formData.phone != userProfile.phone;
     final bool imageChanged = formData.newImageFilePath != null;
     if (!infoChanged && !imageChanged) {
       emit(const EditProfileNoChanges());
@@ -56,7 +54,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     final params = EditUserDataParams(
       name: formData.name,
       phone: formData.phone,
-      address: formData.address,
       image: imageChanged ? null : userProfile.image,
     );
 
@@ -66,9 +63,13 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         (failure) {
           emit(EditProfileFailure(failure.errMsg));
         },
-        (_) async {
-          // Then update user data (without image field)
-          final dataResult = await _editUserDataUseCase.call(params);
+        (imageUrl) async {
+          final newParams = EditUserDataParams(
+            name: formData.name,
+            phone: formData.phone,
+            image: imageUrl,
+          );
+          final dataResult = await _editUserDataUseCase.call(newParams);
           dataResult.fold(
             (failure) => emit(EditProfileFailure(failure.errMsg)),
             (_) => emit(const EditProfileSuccess()),

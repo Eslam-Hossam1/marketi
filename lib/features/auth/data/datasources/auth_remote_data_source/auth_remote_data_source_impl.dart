@@ -50,4 +50,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     
     return response;
   }
+
+  @override
+  Future<void> logout() async {
+    await _supabaseClient.auth.signOut();
+  }
 }

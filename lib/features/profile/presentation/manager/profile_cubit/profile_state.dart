@@ -21,3 +21,17 @@ class ProfileError extends ProfileState {
 
   const ProfileError(this.message);
 }
+
+class ProfileLogoutLoading extends ProfileState {
+  const ProfileLogoutLoading();
+}
+
+class ProfileLogoutSuccess extends ProfileState {
+  const ProfileLogoutSuccess();
+}
+
+class ProfileLogoutError extends ProfileState {
+  final String message;
+
+  const ProfileLogoutError(this.message);
+}
