@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
@@ -30,12 +31,25 @@ class BrandItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: context.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: context.outlineColor.withValues(alpha: 0.1)),
+          border: Border.all(
+            color: context.outlineColor.withValues(alpha: 0.1),
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(brand.emoji, style: TextStyle(fontSize: 24.w(context))),
+            CustomCachedNetworkImage(
+              url: brand.image,
+              width: 40.w(context),
+              height: 40.h(context),
+              placeHolder: SizedBox(
+                width: 24.w(context),
+                height: 24.w(context),
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+            ),
             const SizedBox(height: 8),
             Text(
               brand.name,

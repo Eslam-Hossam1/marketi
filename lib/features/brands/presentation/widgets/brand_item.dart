@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:nextcart/core/entities/brand_entity.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
@@ -44,17 +45,22 @@ class BrandItem extends StatelessWidget {
                 color: context.primaryColor.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Text(
-                brand.emoji,
-                style: TextStyle(fontSize: 24.w(context)),
+              child: SizedBox(
+                width: 32.w(context),
+                height: 32.h(context),
+                child: CustomCachedNetworkImage(
+                  url: brand.image,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Text(
                 brand.name,
-                style: AppTextStyles.medium18(context)
-                    .copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium18(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ),
             Icon(

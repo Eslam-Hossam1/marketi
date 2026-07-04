@@ -1,8 +1,10 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+
 
 import '../../../../core/errors/api_failure.dart';
-import '../../../../core/errors/dio_api_failure.dart';
+
 import '../../domain/entities/user_profile_entity.dart';
 import '../../domain/repos/profile_repo.dart';
 import '../datasources/profile_remote_data_source.dart';
@@ -17,12 +19,10 @@ class ProfileRepoImpl implements ProfileRepo {
     try {
       final userProfileModel = await _remoteDataSource.getUserData();
       return Right(userProfileModel);
-    } on DioException catch (e) {
-      return Left(DioApiFailure.fromDioException(e));
+    } on PostgrestException catch (e) {
+      return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
     } catch (e) {
-      return Left(
-        DioApiFailure.unknownException(unKnownExceptionMsg: e.toString()),
-      );
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 }

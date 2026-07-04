@@ -6,7 +6,7 @@ import '../manager/product_details_cubit/product_details_cubit.dart';
 import '../widgets/product_details_view_body.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  final int productId;
+  final String productId;
 
   const ProductDetailsView({super.key, required this.productId});
 

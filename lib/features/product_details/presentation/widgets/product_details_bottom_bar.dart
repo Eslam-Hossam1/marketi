@@ -7,14 +7,14 @@ import 'package:nextcart/core/widgets/buttons/custom_button.dart';
 import 'package:nextcart/core/widgets/spacing/width_space.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
 
 class ProductDetailsBottomBar extends StatelessWidget {
-  final double price;
-  final int productId;
+  final ProductEntity product;
+  
   const ProductDetailsBottomBar({
     super.key,
-    required this.price,
-    required this.productId,
+    required this.product,
   });
 
   @override
@@ -32,7 +32,7 @@ class ProductDetailsBottomBar extends StatelessWidget {
               ).copyWith(color: context.mainTextColor),
             ),
             Text(
-              '${price.toStringAsFixed(2)} EGP',
+              '${product.price.toStringAsFixed(2)} EGP',
               style: AppTextStyles.bold20(
                 context,
               ).copyWith(color: context.mainTextColor),
@@ -41,32 +41,32 @@ class ProductDetailsBottomBar extends StatelessWidget {
         ),
         BlocBuilder<CartCubit, CartState>(
           buildWhen: (previous, current) =>
-              (current is AddToCartLoading && current.productId == productId) ||
-              (current is AddToCartSuccess && current.productId == productId) ||
-              (current is AddToCartFailure && current.productId == productId) ||
+              (current is AddToCartLoading && current.productId == product.id) ||
+              (current is AddToCartSuccess && current.productId == product.id) ||
+              (current is AddToCartFailure && current.productId == product.id) ||
               (current is RemoveFromCartLoading &&
-                  current.productId == productId) ||
+                  current.productId == product.id) ||
               (current is RemoveFromCartSuccess &&
-                  current.productId == productId) ||
+                  current.productId == product.id) ||
               (current is RemoveFromCartFailure &&
-                  current.productId == productId) ||
+                  current.productId == product.id) ||
               current is CartSuccess,
           builder: (context, state) {
             final cartCubit = context.read<CartCubit>();
-            final isInCart = cartCubit.isInCart(productId);
-            final isLoading = (state is AddToCartLoading &&
-                    state.productId == productId) ||
+            final isInCart = cartCubit.isInCart(product.id);
+            final isLoading =
+                (state is AddToCartLoading && state.productId == product.id) ||
                 (state is RemoveFromCartLoading &&
-                    state.productId == productId);
+                    state.productId == product.id);
 
             return CustomButton(
               onPressed: isLoading
                   ? null
                   : () {
                       if (isInCart) {
-                        cartCubit.removeFromCart(productId);
+                        cartCubit.removeFromCart(product.id);
                       } else {
-                        cartCubit.addToCart(productId);
+                        cartCubit.addToCart(product);
                       }
                     },
               width: 200.w(context),
@@ -107,4 +107,3 @@ class ProductDetailsBottomBar extends StatelessWidget {
     );
   }
 }
-

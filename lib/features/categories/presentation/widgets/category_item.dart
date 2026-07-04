@@ -18,7 +18,7 @@ class CategoryItem extends StatelessWidget {
           context,
           params: CategoryProductsRoutingParams(
             title: category.name,
-            categorySlug: category.slug,
+            categorySlug: category.name,
           ),
         );
       },

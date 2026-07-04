@@ -1,7 +1,8 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+
 import 'package:nextcart/core/errors/failures.dart';
-import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import '../../domain/entities/product_details_entity.dart';
 import '../../domain/params/product_details_params.dart';
 import '../../domain/repos/product_details_repo.dart';
@@ -18,10 +19,10 @@ class ProductDetailsRepoImpl implements ProductDetailsRepo {
       final response = await _remoteDataSource.getProductDetails(params);
       return Right(response);
     } catch (e) {
-      if (e is DioException) {
-        return Left(DioApiFailure.fromDioException(e));
+      if (e is PostgrestException) {
+        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
       }
-      return Left(DioApiFailure.unknown(e.toString()));
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 }

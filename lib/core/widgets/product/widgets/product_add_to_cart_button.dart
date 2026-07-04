@@ -30,8 +30,7 @@ class ProductAddToCartButton extends StatelessWidget {
         final isInCart = cartCubit.isInCart(product.id);
         final isLoading =
             (state is AddToCartLoading && state.productId == product.id) ||
-                (state is RemoveFromCartLoading &&
-                    state.productId == product.id);
+            (state is RemoveFromCartLoading && state.productId == product.id);
 
         return SizedBox(
           width: double.infinity,
@@ -43,7 +42,7 @@ class ProductAddToCartButton extends StatelessWidget {
                     if (isInCart) {
                       cartCubit.removeFromCart(product.id);
                     } else {
-                      cartCubit.addToCart(product.id);
+                      cartCubit.addToCart(product);
                     }
                   },
             style: TextButton.styleFrom(
@@ -77,9 +76,7 @@ class ProductAddToCartButton extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         isInCart ? "In Cart" : "Add to Cart",
-                        style: AppTextStyles.bold13(
-                          context,
-                        ).copyWith(
+                        style: AppTextStyles.bold13(context).copyWith(
                           color: isInCart ? Colors.green : Colors.white,
                         ),
                       ),

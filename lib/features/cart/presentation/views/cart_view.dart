@@ -14,27 +14,45 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<CartCubit, CartState>(
-          buildWhen: (previous, current) =>
-              current is CartLoading ||
-              current is CartSuccess ||
-              current is CartFailure ||
-              current is CartEmpty,
-          builder: (context, state) {
-            if (state is CartLoading) {
-              return const CustomCircularProgressIndecator();
+        child: BlocListener<CartCubit, CartState>(
+          listenWhen: (_, current) => current is UpdateCartQuantityFailure,
+          listener: (context, state) {
+            if (state is UpdateCartQuantityFailure) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red.shade700,
+                    duration: const Duration(seconds: 3),
+                  ),
+                );
             }
-            if (state is CartFailure) {
-              return CustomFailureMessageWithButton(
-                failureMessage: state.errorMessage,
-                onPressed: () => context.read<CartCubit>().getCart(),
-              );
-            }
-            if (state is CartEmpty) {
-              return const CartEmptyWidget();
-            }
-            return const CartViewBody();
           },
+          child: BlocBuilder<CartCubit, CartState>(
+            buildWhen: (previous, current) =>
+                current is CartLoading ||
+                current is CartSuccess ||
+                current is CartFailure ||
+                current is CartEmpty ||
+                current is CartNotEmpty,
+            builder: (context, state) {
+              if (state is CartLoading) {
+                return const CustomCircularProgressIndecator();
+              }
+              if (state is CartFailure) {
+                return CustomFailureMessageWithButton(
+                  failureMessage: state.errorMessage,
+                  onPressed: () => context.read<CartCubit>().getCart(),
+                );
+              }
+              if (state is CartEmpty) {
+                return const CartEmptyWidget();
+              }
+              return const CartViewBody();
+            },
+          ),
         ),
       ),
     );

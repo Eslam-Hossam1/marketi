@@ -1,6 +1,7 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:nextcart/core/errors/failures.dart';
-import 'package:nextcart/core/errors/dio_api_failure.dart';
+import 'package:nextcart/core/errors/supabase_failures/supabase_database_failure.dart';
 import 'package:nextcart/core/entities/products_entity.dart';
 import 'package:nextcart/core/params/product_params.dart';
 import 'package:nextcart/core/models/product_request_model.dart';
@@ -23,7 +24,7 @@ class CategoryProductsRepoImpl implements CategoryProductsRepo {
       if (e is Failure) {
         return Left(e);
       }
-      return Left(DioApiFailure.unknown(e.toString()));
+      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
 }

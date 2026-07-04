@@ -7,4 +7,5 @@ abstract class CartRepo {
   Future<Either<ApiFailure, CartEntity>> getCart();
   Future<Either<ApiFailure, void>> addToCart(CartProductParams params);
   Future<Either<ApiFailure, void>> removeFromCart(CartProductParams params);
+  Future<Either<ApiFailure, void>> updateQuantity(CartProductParams params);
 }

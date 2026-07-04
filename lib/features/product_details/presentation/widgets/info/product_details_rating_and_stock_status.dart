@@ -4,14 +4,14 @@ import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/spacing/width_space.dart';
 
-class ProductDetailsShippingAndRating extends StatelessWidget {
-  final String? shippingInformation;
+class ProductDetailsRatingAndStockStatus extends StatelessWidget {
   final double rating;
+  final bool inStock;
 
-  const ProductDetailsShippingAndRating({
+  const ProductDetailsRatingAndStockStatus({
     super.key,
-    this.shippingInformation,
     required this.rating,
+    required this.inStock,
   });
 
   @override
@@ -19,21 +19,25 @@ class ProductDetailsShippingAndRating extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        if (shippingInformation != null)
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w(context), vertical: 6.h(context)),
-            decoration: BoxDecoration(
-              color: context.primaryColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(16.r(context)),
-              border: Border.all(color: context.primaryColor),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 12.w(context),
+            vertical: 6.h(context),
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.r(context)),
+            border: Border.all(
+              width: 1.2,
+              color: inStock ? context.primaryColor : Colors.red,
             ),
-            child: Text(
-              shippingInformation!,
-              style: AppTextStyles.medium13(context).copyWith(color: context.primaryColor),
-            ),
-          )
-        else
-          const SizedBox.shrink(),
+          ),
+          child: Text(
+            inStock ? 'In Stock' : 'Out of Stock',
+            style: AppTextStyles.bold13(
+              context,
+            ).copyWith(color: inStock ? context.primaryColor : Colors.red),
+          ),
+        ),
         Row(
           children: [
             Row(
@@ -48,7 +52,9 @@ class ProductDetailsShippingAndRating extends StatelessWidget {
             const WidthSpace(width: 4),
             Text(
               '(${rating.toStringAsFixed(1)})',
-              style: AppTextStyles.regular14(context).copyWith(color: context.mainTextColor),
+              style: AppTextStyles.regular14(
+                context,
+              ).copyWith(color: context.mainTextColor),
             ),
           ],
         ),

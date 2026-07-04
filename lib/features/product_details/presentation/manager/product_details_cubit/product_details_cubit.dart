@@ -5,7 +5,7 @@ import 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final GetProductDetailsUseCase _getProductDetailsUseCase;
-  final int productId;
+  final String productId;
 
   ProductDetailsCubit(this.productId, this._getProductDetailsUseCase) : super(ProductDetailsInitial());
 

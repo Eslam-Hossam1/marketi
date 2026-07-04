@@ -19,28 +19,28 @@ class CategoryItem extends StatelessWidget {
           context,
           params: CategoryProductsRoutingParams(
             title: category.name,
-            categorySlug: category.slug,
+            categorySlug: category.name,
           ),
         );
       },
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            width: 60.w(context),
+            height: 60.w(context),
             decoration: BoxDecoration(
-              color: context.scaffoldBackgroundColor,
               shape: BoxShape.circle,
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: context.primaryColor.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
+              border: Border.all(
+                color: context.primaryColor.withValues(alpha: 0.2),
+                width: 1,
               ),
+            ),
+            child: ClipOval(
               child: CustomCachedNetworkImage(
                 url: category.image,
-                width: 32.w(context),
-                height: 32.h(context),
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ),

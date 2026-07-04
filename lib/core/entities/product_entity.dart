@@ -1,14 +1,17 @@
+import 'category_entity.dart';
+import 'brand_entity.dart';
+
 class ProductEntity {
-  final int id;
+  final String id;
   final String title;
   final String description;
-  final String category;
+  final CategoryEntity? category;
   final double price;
   final double discountPercentage;
   final double rating;
   final int stock;
   final List<String> tags;
-  final String? brand;
+  final BrandEntity? brand;
   final String? sku;
   final String? availabilityStatus;
   final List<String> images;
@@ -18,7 +21,7 @@ class ProductEntity {
     required this.id,
     required this.title,
     required this.description,
-    required this.category,
+    this.category,
     required this.price,
     required this.discountPercentage,
     required this.rating,

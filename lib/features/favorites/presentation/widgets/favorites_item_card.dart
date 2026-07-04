@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
-import 'package:nextcart/core/entities/product_entity.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
-import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
-import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit/favorites_cubit.dart';
+import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit/favorites_state.dart';
 import 'package:nextcart/features/product_details/domain/params/product_details_params.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 
-class CartItemCard extends StatelessWidget {
+class FavoritesItemCard extends StatelessWidget {
   final ProductEntity product;
 
-  const CartItemCard({super.key, required this.product});
+  const FavoritesItemCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutingHelper.pushProductDetails(
-          context,
-          params: ProductDetailsRoutingParams(productId: product.id),
-        );
+        RoutingHelper.pushProductDetails(context, productId: product.id);
       },
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -34,7 +31,7 @@ class CartItemCard extends StatelessWidget {
           color: context.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(16.r(context)),
           border: Border.all(
-            color: context.primaryColor.withValues(alpha: 0.1),
+            color: Colors.red.withValues(alpha: 0.12),
           ),
           boxShadow: [
             BoxShadow(
@@ -66,7 +63,7 @@ class CartItemCard extends StatelessWidget {
                 children: [
                   Text(
                     product.title,
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.bold14(context).copyWith(
                       color: context.mainTextColor,
@@ -74,7 +71,7 @@ class CartItemCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h(context)),
                   Text(
-                    product.category,
+                    product.category?.name ?? '',
                     style: AppTextStyles.regular12(context).copyWith(
                       color: context.secondaryTextColor,
                     ),
@@ -111,51 +108,51 @@ class CartItemCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 8.w(context)),
-            // Delete Button
-            BlocBuilder<CartCubit, CartState>(
+            // Remove Button
+            BlocConsumer<FavoritesCubit, FavoritesState>(
               buildWhen: (previous, current) =>
-                  (current is RemoveFromCartLoading &&
+                  current is FavoritesSuccess ||
+                  current is FavoritesEmpty ||
+                  (current is FavoriteToggled &&
                       current.productId == product.id) ||
-                  (current is RemoveFromCartSuccess &&
-                      current.productId == product.id) ||
-                  (current is RemoveFromCartFailure &&
+                  (current is FavoriteToggleReverted &&
                       current.productId == product.id),
+              listenWhen: (previous, current) =>
+                  current is FavoriteToggleReverted &&
+                  current.productId == product.id,
+              listener: (context, state) {
+                if (state is FavoriteToggleReverted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.errorMessage),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
               builder: (context, state) {
-                final isRemoving = state is RemoveFromCartLoading &&
-                    state.productId == product.id;
-
                 return GestureDetector(
-                  onTap: isRemoving
-                      ? null
-                      : () {
-                          context
-                              .read<CartCubit>()
-                              .removeFromCart(product.id);
-                        },
+                  onTap: () {
+                    context
+                        .read<FavoritesCubit>()
+                        .toggleFavorite(product);
+                  },
                   child: Container(
                     padding: EdgeInsets.all(8.w(context)),
                     decoration: BoxDecoration(
                       color: Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10.r(context)),
                     ),
-                    child: isRemoving
-                        ? SizedBox(
-                            width: 20.w(context),
-                            height: 20.w(context),
-                            child: const CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Colors.red,
-                            ),
-                          )
-                        : Icon(
-                            Icons.delete_outline_rounded,
-                            color: Colors.red,
-                            size: 20.w(context),
-                          ),
+                    child: Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 20.w(context),
+                    ),
                   ),
                 );
               },
             ),
+
           ],
         ),
       ),

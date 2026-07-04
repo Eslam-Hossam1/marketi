@@ -6,7 +6,7 @@ import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 import 'cart_header.dart';
-import 'cart_item_card.dart';
+import 'cart_item_card/cart_item_card.dart';
 import 'cart_bottom_bar.dart';
 
 class CartViewBody extends StatelessWidget {
@@ -17,11 +17,13 @@ class CartViewBody extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       buildWhen: (previous, current) =>
           current is CartSuccess ||
+          current is AddToCartSuccess ||
           current is RemoveFromCartSuccess ||
+          current is UpdateCartQuantitySuccess ||
           current is CartEmpty,
       builder: (context, state) {
         final cubit = context.read<CartCubit>();
-        final products = cubit.cartProducts;
+        final cartItems = cubit.cartItems;
 
         return Column(
           children: [
@@ -46,15 +48,15 @@ class CartViewBody extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.only(bottom: 8.h(context)),
-                itemCount: products.length,
+                itemCount: cartItems.length,
                 itemBuilder: (context, index) {
-                  return CartItemCard(product: products[index]);
+                  return CartItemCard(cartItem: cartItems[index]);
                 },
               ),
             ),
             // Bottom Bar
             CartBottomBar(
-              itemCount: products.length,
+              itemCount: cartItems.length,
               subtotal: cubit.subtotal,
             ),
           ],

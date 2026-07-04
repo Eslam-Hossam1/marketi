@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:nextcart/core/networking/api_consumer.dart';
-import 'package:nextcart/core/networking/end_points.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/edit_profile/data/models/edit_user_data_request_model.dart';
 
 abstract class EditProfileRemoteDataSource {
@@ -9,24 +7,22 @@ abstract class EditProfileRemoteDataSource {
 }
 
 class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
-  final ApiConsumer _apiConsumer;
+  final SupabaseClient _supabaseClient;
 
-  EditProfileRemoteDataSourceImpl(this._apiConsumer);
+  EditProfileRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<void> editUserData(EditUserDataRequestModel requestModel) async {
-    await _apiConsumer.post(
-      EndPoints.editUserData,
-      data: requestModel.toJson(),
-    );
+    final user = _supabaseClient.auth.currentUser;
+    if (user == null) throw Exception('Not authenticated');
+    
+    await _supabaseClient.from('profiles').update(requestModel.toJson()).eq('id', user.id);
   }
 
   @override
   Future<void> addImage(String filePath) async {
-    await _apiConsumer.post(
-      EndPoints.addImage,
-      data: {'file': await MultipartFile.fromFile(filePath)},
-      isFromData: true,
-    );
+    // Add logic to upload image to Supabase Storage if required
+    final user = _supabaseClient.auth.currentUser;
+    if (user == null) throw Exception('Not authenticated');
   }
 }

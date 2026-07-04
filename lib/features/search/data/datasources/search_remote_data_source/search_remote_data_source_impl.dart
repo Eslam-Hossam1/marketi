@@ -1,21 +1,35 @@
-import 'package:nextcart/core/networking/api_consumer.dart';
-import 'package:nextcart/core/networking/end_points.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/models/product_request_model.dart';
 import 'package:nextcart/core/models/products_response_model.dart';
+import 'package:nextcart/core/models/product_model.dart';
 import 'search_remote_data_source.dart';
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
-  final ApiConsumer _apiConsumer;
+  final SupabaseClient _supabaseClient;
 
-  SearchRemoteDataSourceImpl(this._apiConsumer);
+  SearchRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<ProductsResponseModel> searchProducts(
       ProductRequestModel requestModel) async {
-    final response = await _apiConsumer.post(
-      EndPoints.productsFilter,
-      data: requestModel.toJson(),
+    final limit = requestModel.limit;
+    final skip = requestModel.skip;
+
+    final response = await _supabaseClient
+        .from('products')
+        .select('*, categories(*), brands(*)')
+        .ilike('title', '%${requestModel.search ?? ''}%')
+        .range(skip, skip + limit - 1);
+
+    final list = (response as List)
+        .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return ProductsResponseModel(
+      list: list,
+      total: list.length,
+      skip: skip,
+      limit: limit,
     );
-    return ProductsResponseModel.fromJson(response);
   }
 }

@@ -18,10 +18,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RoutingHelper.pushProductDetails(
-          context,
-          params: ProductDetailsRoutingParams(productId: product.id),
-        );
+        RoutingHelper.pushProductDetails(context, productId: product.id);
       },
       child: Container(
         width: 160.w(context),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/widgets/spacing/height_space.dart';
 import '../../../domain/entities/product_details_entity.dart';
-import 'product_details_shipping_and_rating.dart';
+import 'product_details_rating_and_stock_status.dart';
 import 'product_details_title_and_description.dart';
 
 class ProductDetailsInfo extends StatelessWidget {
@@ -17,9 +17,9 @@ class ProductDetailsInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProductDetailsShippingAndRating(
-            shippingInformation: product.shippingInformation,
+          ProductDetailsRatingAndStockStatus(
             rating: product.rating,
+            inStock: product.stock > 0,
           ),
           const HeightSpace(height: 16),
           ProductDetailsTitleAndDescription(
