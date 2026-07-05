@@ -18,7 +18,7 @@ class NextCartApp extends StatelessWidget {
             routerConfig: AppRouter.router,
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
-            themeMode: ThemeMode.light,
+            themeMode: mode,
           );
         },
       ),

@@ -18,11 +18,11 @@ class EditUserDataRequestModel extends EditUserDataParams {
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
-      'name': name,
+      'full_name': name,
       'phone': phone,
     };
     if (image != null) {
-      data['image'] = image;
+      data['avatar_url'] = image;
     }
     return data;
   }

@@ -28,7 +28,10 @@ class ProfileSettingItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.w(context)),
+        padding: EdgeInsets.symmetric(
+          vertical: 16.w(context),
+          horizontal: 16.w(context),
+        ),
         child: Row(
           children: [
             if (svgIcon != null)
