@@ -39,47 +39,17 @@ class EditProfileRemoteDataSourceImpl implements EditProfileRemoteDataSource {
 
   @override
   Future<void> deleteImage(String imageUrl) async {
-    log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', name: 'deleteImage');
-    log('🗑️  deleteImage called', name: 'deleteImage');
-    log('📎 imageUrl: $imageUrl', name: 'deleteImage');
     try {
       final user = _supabaseClient.auth.currentUser;
-      if (user == null) {
-        log('❌ No authenticated user found — aborting', name: 'deleteImage');
-        return;
-      }
-      log('👤 Current user ID: ${user.id}', name: 'deleteImage');
+      if (user == null) return;
 
-      // List all files in the bucket
-      log('📂 Listing all files in avatars bucket...', name: 'deleteImage');
-      final files = await _supabaseClient.storage.from('avatars').list();
-      log('📋 Total files in bucket: ${files.length}', name: 'deleteImage');
-      for (final f in files) {
-        log('   • ${f.name}', name: 'deleteImage');
-      }
+      final String fileName = imageUrl.split('/').last;
 
-      final allFiles = files.map((f) => f.name).toList();
-
-      if (allFiles.isEmpty) {
-        log('✅ Nothing to delete', name: 'deleteImage');
-        log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', name: 'deleteImage');
-        return;
+      if (fileName.isNotEmpty) {
+        await _supabaseClient.storage.from('avatars').remove([fileName]);
       }
-
-      // Delete each file one by one
-      for (final fileName in allFiles) {
-        log('🗑️  Deleting: $fileName', name: 'deleteImage');
-        final response = await _supabaseClient.storage.from('avatars').remove([fileName]);
-        if (response.isEmpty) {
-          log('⚠️  Delete returned empty — policy may be blocking: $fileName', name: 'deleteImage');
-        } else {
-          log('✅ Deleted successfully: $fileName', name: 'deleteImage');
-        }
-      }
-      log('🏁 deleteImage complete', name: 'deleteImage');
-    } catch (e, st) {
-      log('❌ Exception during deleteImage: $e', name: 'deleteImage', error: e, stackTrace: st);
+    } catch (e) {
+      // Fire-and-forget, ignore errors during cleanup
     }
-    log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', name: 'deleteImage');
   }
 }
