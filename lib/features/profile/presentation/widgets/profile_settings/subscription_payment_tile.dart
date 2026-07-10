@@ -7,8 +7,8 @@ class SubscriptionPaymentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ProfileSettingItem(
-      iconData: Icons.credit_card_outlined,
-      title: 'Subscription & Payment',
+      iconData: Icons.shopping_bag_outlined,
+      title: 'My Orders',
     );
   }
 }

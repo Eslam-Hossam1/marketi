@@ -11,6 +11,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit,
+    this.httpHeaders,
   });
 
   final String url;
@@ -18,6 +19,8 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit? fit;
+  final Map<String, String>? httpHeaders;
+
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -25,6 +28,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
       width: width,
       height: height,
       imageUrl: url,
+      httpHeaders: httpHeaders,
       placeholder: (context, url) =>
           placeHolder ??
           Container(color: context.cachedNetworkImagePlaceholderColor),

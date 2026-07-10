@@ -6,7 +6,6 @@ class UserProfileModel extends UserProfileEntity {
     required super.name,
     required super.phone,
     required super.email,
-    required super.address,
     required super.image,
   });
 
@@ -15,12 +14,11 @@ class UserProfileModel extends UserProfileEntity {
       json = json['message'] as Map<String, dynamic>;
     }
     return UserProfileModel(
-      id: json['_id'] ?? '',
-      name: json['name'] ?? '',
+      id: json['id'] ?? json['_id'] ?? '',
+      name: json['full_name'] ?? json['name'] ?? '',
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',
-      address: json['address'] ?? '',
-      image: json['image'] ?? '',
+      image: json['avatar_url'] ?? json['image'] ?? '',
     );
   }
 }

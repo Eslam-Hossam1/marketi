@@ -12,7 +12,7 @@ class AccountPreferencesTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileSettingItem(
       iconData: Icons.person_outline,
-      title: 'Account Preferences',
+      title: 'Edit Profile',
       onTap: () async {
         final result = await RoutingHelper.pushEditProfile(
           context,

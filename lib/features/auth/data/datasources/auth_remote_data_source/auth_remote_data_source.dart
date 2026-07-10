@@ -5,4 +5,5 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class AuthRemoteDataSource {
   Future<AuthResponse> login(LoginRequestModel requestModel);
   Future<AuthResponse> signUp(SignUpRequestModel requestModel);
+  Future<void> logout();
 }

@@ -6,6 +6,8 @@ import 'package:nextcart/features/cart/presentation/views/cart_view.dart';
 import 'package:nextcart/features/favorites/presentation/views/favorites_view.dart';
 import 'package:nextcart/features/home/presentation/views/home_view.dart';
 import 'package:nextcart/features/main/presentation/views/main_view.dart';
+
+import 'package:nextcart/features/auth/domain/usecases/logout_use_case.dart';
 import 'package:nextcart/features/profile/domain/usecases/get_user_data_use_case.dart';
 import 'package:nextcart/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:nextcart/features/profile/presentation/views/profile_view.dart';
@@ -53,8 +55,10 @@ class MainRoute {
             GoRoute(
               path: RoutePaths.profile,
               builder: (context, state) => BlocProvider(
-                create: (context) =>
-                    ProfileCubit(getIt<GetUserDataUseCase>())..getUserData(),
+                create: (context) => ProfileCubit(
+                  getIt<GetUserDataUseCase>(),
+                  getIt<LogoutUseCase>(),
+                )..getUserData(),
                 child: const ProfileView(),
               ),
             ),

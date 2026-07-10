@@ -36,18 +36,7 @@ class EditProfileForm extends StatelessWidget {
             return null;
           },
         ),
-        const SizedBox(height: 16),
-        CustomTextFormField(
-          initialValue: cubit.userProfile.address,
-          hintText: "Address",
-          onSaved: (value) => cubit.formData.address = value!.trim(),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your address';
-            }
-            return null;
-          },
-        ),
+
       ],
     );
   }

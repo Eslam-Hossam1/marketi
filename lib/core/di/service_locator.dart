@@ -6,6 +6,7 @@ import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_rem
 import 'package:nextcart/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:nextcart/features/edit_profile/domain/repos/edit_profile_repo.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/delete_image_use_case.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
 import 'package:nextcart/core/services/image_picker_service/cropped_image_picker_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -57,6 +58,7 @@ import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/domain/repos/auth_repo.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
+import '../../features/auth/domain/usecases/logout_use_case.dart';
 import '../networking/api_consumer.dart';
 import '../networking/dio_consumer.dart';
 import '../services/storage_services/preferences/preferences_service.dart';
@@ -178,6 +180,10 @@ void _setupEditProfile() {
   getIt.registerLazySingleton<AddImageUseCase>(
     () => AddImageUseCase(getIt<EditProfileRepo>()),
   );
+
+  getIt.registerLazySingleton<DeleteImageUseCase>(
+    () => DeleteImageUseCase(getIt<EditProfileRepo>()),
+  );
 }
 
 void _setupProfile() {
@@ -192,6 +198,8 @@ void _setupProfile() {
   getIt.registerLazySingleton<GetUserDataUseCase>(
     () => GetUserDataUseCase(getIt<ProfileRepo>()),
   );
+  
+
 }
 
 void _setupOtp() {
@@ -245,6 +253,9 @@ void _setupAuth() {
   );
   getIt.registerLazySingleton<SignUpUseCase>(
     () => SignUpUseCase(getIt<AuthRepo>()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(getIt<AuthRepo>()),
   );
 }
 

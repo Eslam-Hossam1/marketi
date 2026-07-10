@@ -6,4 +6,5 @@ import 'package:nextcart/features/auth/domain/params/sign_up_params.dart';
 abstract class AuthRepo {
   Future<Either<ApiFailure, void>> login(LoginParams params);
   Future<Either<ApiFailure, void>> signUp(SignUpParams params);
+  Future<Either<ApiFailure, void>> logout();
 }

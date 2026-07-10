@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../manager/profile_cubit/profile_cubit.dart';
 import 'profile_setting_item.dart';
 
 class LogOutTile extends StatelessWidget {
@@ -6,10 +8,13 @@ class LogOutTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProfileSettingItem(
+    return ProfileSettingItem(
       iconData: Icons.logout,
       title: 'Log Out',
       iconColor: Colors.redAccent,
+      onTap: () {
+        context.read<ProfileCubit>().logout();
+      },
     );
   }
 }

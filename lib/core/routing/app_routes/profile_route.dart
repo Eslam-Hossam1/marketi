@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/di/service_locator.dart';
 import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/delete_image_use_case.dart';
 import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
 import 'package:nextcart/features/edit_profile/presentation/manager/edit_profile/edit_profile_cubit.dart';
 import 'package:nextcart/features/edit_profile/presentation/views/edit_profile_view.dart';
@@ -25,6 +26,7 @@ class ProfileRoute {
           create: (context) => EditProfileCubit(
             getIt<EditUserDataUseCase>(),
             getIt<AddImageUseCase>(),
+            getIt<DeleteImageUseCase>(),
             userProfile,
           ),
           child: const EditProfileView(),
