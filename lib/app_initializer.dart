@@ -7,10 +7,12 @@ import 'package:nextcart/core/networking/supabase_logger_client.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/utils/app_bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 class AppInitializer {
   static Future<void> initialize() async {
     await dotenv.load(fileName: ".env");
+    Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
     await _initBlocObserverAndHydratedBloc();
     await _initSupabase();
     await _initServiceLocator();

@@ -19,6 +19,8 @@ import 'package:nextcart/core/routing/app_routes/otp_route.dart';
 import 'package:nextcart/core/routing/app_routes/product_routes.dart';
 import 'package:nextcart/core/routing/app_routes/profile_route.dart';
 import 'package:nextcart/core/routing/app_routes/reset_password_routes.dart';
+import 'package:nextcart/features/orders/presentation/manager/checkout_cubit/checkout_cubit.dart';
+import 'package:nextcart/core/routing/app_routes/orders_routes.dart';
 
 class AppRoutes {
   static List<RouteBase> routes = [
@@ -42,6 +44,9 @@ class AppRoutes {
                 getIt<RemoveFromFavoritesUseCase>(),
               )..getFavorites(),
             ),
+            BlocProvider(
+              create: (context) => getIt<CheckoutCubit>(),
+            ),
           ],
           child: child,
         );
@@ -52,6 +57,7 @@ class AppRoutes {
         ...ProductRoutes.routes,
         ...CategoryProductsRoutes.routes,
         ...BrandProductsRoutes.routes,
+        ...OrdersRoutes.routes,
       ],
     ),
 

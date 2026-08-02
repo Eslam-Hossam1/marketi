@@ -88,6 +88,17 @@ import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_ca
 import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
 import 'package:nextcart/features/favorites/domain/usecases/remove_from_favorites_use_case.dart';
 
+import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source.dart';
+import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source_impl.dart';
+import 'package:nextcart/features/orders/data/repos/orders_repo_impl.dart';
+import 'package:nextcart/features/orders/domain/repos/orders_repo.dart';
+import 'package:nextcart/features/orders/domain/usecases/create_checkout_use_case.dart';
+import 'package:nextcart/features/orders/domain/usecases/get_orders_use_case.dart';
+import 'package:nextcart/features/orders/domain/usecases/get_order_details_use_case.dart';
+import 'package:nextcart/features/orders/presentation/manager/checkout_cubit/checkout_cubit.dart';
+import 'package:nextcart/features/orders/presentation/manager/orders_cubit/orders_cubit.dart';
+import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
@@ -107,6 +118,32 @@ Future<void> setupServiceLocator() async {
   _setupProductDetails();
   _setupCart();
   _setupFavorites();
+  _setupOrders();
+}
+
+void _setupOrders() {
+  getIt.registerLazySingleton<StripeService>(() => StripeService());
+  getIt.registerLazySingleton<OrdersRemoteDataSource>(
+    () => OrdersRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<OrdersRepo>(
+    () => OrdersRepoImpl(getIt<OrdersRemoteDataSource>(), getIt<StripeService>()),
+  );
+  getIt.registerLazySingleton<CreateCheckoutUseCase>(
+    () => CreateCheckoutUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerLazySingleton<GetOrdersUseCase>(
+    () => GetOrdersUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerLazySingleton<GetOrderDetailsUseCase>(
+    () => GetOrderDetailsUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerFactory<CheckoutCubit>(
+    () => CheckoutCubit(getIt<CreateCheckoutUseCase>()),
+  );
+  getIt.registerFactory<OrdersCubit>(
+    () => OrdersCubit(getIt<GetOrdersUseCase>(), getIt<GetOrderDetailsUseCase>()),
+  );
 }
 
 void _setupCart() {
