@@ -14,14 +14,15 @@ class HomeHeader extends StatelessWidget {
         children: [
           const CustomNetworkCircleImage(
             baseSize: 48,
-            userImageUrl: "https://static.wikia.nocookie.net/gracieabrams/images/3/39/Billie_Eilish.jpeg/revision/latest?cb=20250318232144",
+            userImageUrl:
+                "https://static.wikia.nocookie.net/gracieabrams/images/3/39/Billie_Eilish.jpeg/revision/latest?cb=20250318232144",
           ),
           const SizedBox(width: 12),
           Text(
-            "Hi Yousef !",
-            style: AppTextStyles.bold20(context).copyWith(
-              color: context.mainTextColor,
-            ),
+            "Hi Eslam !",
+            style: AppTextStyles.bold20(
+              context,
+            ).copyWith(color: context.mainTextColor),
           ),
           const Spacer(),
           IconButton(

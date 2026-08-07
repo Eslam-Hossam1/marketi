@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:dartz/dartz.dart';
 import 'package:nextcart/core/errors/api_failure.dart';
@@ -28,6 +30,7 @@ class StripeService {
       }
       return Left(StripeFailure(e.error.localizedMessage ?? 'Payment failed', ErrorCodes.unknownError, StatusCode.unknownError, e.error.message));
     } catch (e) {
+      log('⭐🌞🔥🔥⛄Stripe Exception: ${e.toString()}');
       return Left(StripeFailure('An unexpected error occurred during payment', ErrorCodes.unknownError, StatusCode.unknownError, e.toString()));
     }
   }
