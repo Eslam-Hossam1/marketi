@@ -80,6 +80,7 @@ import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/update_cart_quantity_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/clear_cart_use_case.dart';
 import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source.dart';
 import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source_impl.dart';
 import 'package:nextcart/features/favorites/data/repos/favorites_repo_impl.dart';
@@ -88,14 +89,18 @@ import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_ca
 import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
 import 'package:nextcart/features/favorites/domain/usecases/remove_from_favorites_use_case.dart';
 
+import 'package:nextcart/features/checkout/data/datasources/checkout_remote_data_source/checkout_remote_data_source.dart';
+import 'package:nextcart/features/checkout/data/datasources/checkout_remote_data_source/checkout_remote_data_source_impl.dart';
+import 'package:nextcart/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:nextcart/features/checkout/domain/repos/checkout_repo.dart';
+import 'package:nextcart/features/checkout/domain/usecases/create_checkout_use_case.dart';
+import 'package:nextcart/features/checkout/presentation/manager/checkout_cubit/checkout_cubit.dart';
 import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source.dart';
 import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source_impl.dart';
 import 'package:nextcart/features/orders/data/repos/orders_repo_impl.dart';
 import 'package:nextcart/features/orders/domain/repos/orders_repo.dart';
-import 'package:nextcart/features/orders/domain/usecases/create_checkout_use_case.dart';
 import 'package:nextcart/features/orders/domain/usecases/get_orders_use_case.dart';
 import 'package:nextcart/features/orders/domain/usecases/get_order_details_use_case.dart';
-import 'package:nextcart/features/orders/presentation/manager/checkout_cubit/checkout_cubit.dart';
 import 'package:nextcart/features/orders/presentation/manager/orders_cubit/orders_cubit.dart';
 import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
 
@@ -119,27 +124,34 @@ Future<void> setupServiceLocator() async {
   _setupCart();
   _setupFavorites();
   _setupOrders();
+  _setupCheckout();
+}
+
+void _setupCheckout() {
+  getIt.registerLazySingleton<StripeService>(() => StripeService());
+  getIt.registerLazySingleton<CheckoutRemoteDataSource>(
+    () => CheckoutRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<CheckoutRepo>(
+    () => CheckoutRepoImpl(getIt<CheckoutRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<CreateCheckoutUseCase>(
+    () => CreateCheckoutUseCase(getIt<CheckoutRepo>()),
+  );
 }
 
 void _setupOrders() {
-  getIt.registerLazySingleton<StripeService>(() => StripeService());
   getIt.registerLazySingleton<OrdersRemoteDataSource>(
     () => OrdersRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<OrdersRepo>(
-    () => OrdersRepoImpl(getIt<OrdersRemoteDataSource>(), getIt<StripeService>()),
-  );
-  getIt.registerLazySingleton<CreateCheckoutUseCase>(
-    () => CreateCheckoutUseCase(getIt<OrdersRepo>()),
+    () => OrdersRepoImpl(getIt<OrdersRemoteDataSource>()),
   );
   getIt.registerLazySingleton<GetOrdersUseCase>(
     () => GetOrdersUseCase(getIt<OrdersRepo>()),
   );
   getIt.registerLazySingleton<GetOrderDetailsUseCase>(
     () => GetOrderDetailsUseCase(getIt<OrdersRepo>()),
-  );
-  getIt.registerFactory<CheckoutCubit>(
-    () => CheckoutCubit(getIt<CreateCheckoutUseCase>()),
   );
   getIt.registerFactory<OrdersCubit>(
     () => OrdersCubit(getIt<GetOrdersUseCase>(), getIt<GetOrderDetailsUseCase>()),
@@ -164,6 +176,9 @@ void _setupCart() {
   );
   getIt.registerLazySingleton<UpdateCartQuantityUseCase>(
     () => UpdateCartQuantityUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<ClearCartUseCase>(
+    () => ClearCartUseCase(getIt<CartRepo>()),
   );
 }
 
