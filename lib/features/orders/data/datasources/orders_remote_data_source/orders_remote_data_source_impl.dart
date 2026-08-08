@@ -1,42 +1,12 @@
-import 'package:nextcart/core/errors/supabase_failures/supabase_edge_function_failure.dart';
 import 'package:nextcart/features/orders/data/models/order_item_model.dart';
 import 'package:nextcart/features/orders/data/models/order_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../domain/params/checkout_params.dart';
 import 'orders_remote_data_source.dart';
 
 class OrdersRemoteDataSourceImpl implements OrdersRemoteDataSource {
   final SupabaseClient _supabaseClient;
 
   OrdersRemoteDataSourceImpl(this._supabaseClient);
-
-  @override
-  Future<Map<String, dynamic>> createCheckout(CheckoutParams params) async {
-    try {
-      final response = await _supabaseClient.functions.invoke(
-        'create-payment-intent',
-        body: params.toJson(),
-      );
-
-      if (response.status != 200) {
-        final errorMsg =
-            response.data['error'] ?? 'Unknown edge function error';
-        throw FunctionException(
-          status: response.status,
-          details: response.data,
-          reasonPhrase: errorMsg,
-        );
-      }
-
-      return response.data as Map<String, dynamic>;
-    } on FunctionException catch (e) {
-      throw SupabaseEdgeFunctionFailure.fromFunctionException(e);
-    } catch (e) {
-      throw SupabaseEdgeFunctionFailure.unknownException(
-        unKnownExceptionMsg: e.toString(),
-      );
-    }
-  }
 
   @override
   Future<List<OrderModel>> getOrders() async {
