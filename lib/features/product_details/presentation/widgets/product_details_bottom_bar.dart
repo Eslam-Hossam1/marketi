@@ -32,7 +32,7 @@ class ProductDetailsBottomBar extends StatelessWidget {
               ).copyWith(color: context.mainTextColor),
             ),
             Text(
-              '${product.price.toStringAsFixed(2)} EGP',
+              '${product.price.toStringAsFixed(2)} USD',
               style: AppTextStyles.bold20(
                 context,
               ).copyWith(color: context.mainTextColor),
