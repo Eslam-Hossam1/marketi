@@ -25,4 +25,7 @@ abstract class RoutePaths {
   static const productDetails = "/product_details";
   static const orders = "/orders";
   static const orderDetails = "/order_details";
+  static const checkout = "/checkout";
+  static const paymentSuccess = "/payment_success";
+  static const paymentDelay = "/payment_delay";
 }
