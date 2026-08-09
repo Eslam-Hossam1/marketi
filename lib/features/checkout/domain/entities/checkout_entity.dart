@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class CheckoutResponseEntity extends Equatable {
+class CheckoutEntity extends Equatable {
   final String clientSecret;
   final String orderId;
   final double subtotal;
@@ -9,7 +9,7 @@ class CheckoutResponseEntity extends Equatable {
   final double total;
   final String currency;
 
-  const CheckoutResponseEntity({
+  const CheckoutEntity({
     required this.clientSecret,
     required this.orderId,
     required this.subtotal,
