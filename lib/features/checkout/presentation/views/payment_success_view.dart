@@ -5,10 +5,10 @@ import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/buttons/custom_button.dart';
-import '../../domain/entities/checkout_response_entity.dart';
+import '../../domain/entities/checkout_entity.dart';
 
 class PaymentSuccessView extends StatelessWidget {
-  final CheckoutResponseEntity response;
+  final CheckoutEntity response;
 
   const PaymentSuccessView({super.key, required this.response});
 

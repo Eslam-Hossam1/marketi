@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
 import 'package:nextcart/features/cart/domain/usecases/clear_cart_use_case.dart';
-import '../../../domain/entities/checkout_response_entity.dart';
+import '../../../domain/entities/checkout_entity.dart';
 import '../../../domain/params/checkout_params.dart';
 import '../../../domain/usecases/create_checkout_use_case.dart';
 import 'checkout_state.dart';
@@ -25,7 +25,7 @@ class CheckoutCubit extends Cubit<CheckoutState> {
         _clearCartUseCase = clearCartUseCase,
         super(CheckoutInitial());
 
-  CheckoutResponseEntity? checkoutResponse;
+  CheckoutEntity? checkoutResponse;
   StreamSubscription<List<Map<String, dynamic>>>? _streamSubscription;
   Timer? _timeoutTimer;
 

@@ -4,10 +4,10 @@ import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
-import '../../domain/entities/checkout_response_entity.dart';
+import '../../domain/entities/checkout_entity.dart';
 
 class CheckoutSummarySection extends StatelessWidget {
-  final CheckoutResponseEntity response;
+  final CheckoutEntity response;
 
   const CheckoutSummarySection({super.key, required this.response});
 
