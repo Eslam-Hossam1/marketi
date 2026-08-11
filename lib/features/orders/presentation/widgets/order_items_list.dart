@@ -7,7 +7,7 @@ import '../../domain/entities/order_item_entity.dart';
 
 class OrderItemsList extends StatelessWidget {
   const OrderItemsList({super.key, required this.items});
-  
+
   final List<OrderItemEntity> items;
 
   @override
@@ -17,48 +17,58 @@ class OrderItemsList extends StatelessWidget {
       children: [
         Text(
           'Items (${items.length})',
-          style: AppTextStyles.bold16(context).copyWith(color: context.mainTextColor),
+          style: AppTextStyles.bold16(
+            context,
+          ).copyWith(color: context.mainTextColor),
         ),
         SizedBox(height: 12.h(context)),
-        ...items.map((item) => Padding(
-              padding: EdgeInsets.only(bottom: 12.h(context)),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.r(context)),
-                    child: CustomCachedNetworkImage(
-                      url: item.productImage,
-                      width: 60.w(context),
-                      height: 60.w(context),
-                      fit: BoxFit.cover,
-                    ),
+        ...items.map(
+          (item) => Padding(
+            padding: EdgeInsets.only(bottom: 12.h(context)),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r(context)),
+                  child: CustomCachedNetworkImage(
+                    url: item.productImage,
+                    width: 60.w(context),
+                    height: 60.w(context),
+                    fit: BoxFit.cover,
                   ),
-                  SizedBox(width: 12.w(context)),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.productName,
-                          style: AppTextStyles.semiBold14(context).copyWith(color: context.mainTextColor),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 4.h(context)),
-                        Text(
-                          '\$${item.unitPrice.toStringAsFixed(2)} x ${item.quantity}',
-                          style: AppTextStyles.regular12(context).copyWith(color: context.secondaryTextColor),
-                        ),
-                      ],
-                    ),
+                ),
+                SizedBox(width: 12.w(context)),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.productName,
+                        style: AppTextStyles.semiBold14(
+                          context,
+                        ).copyWith(color: context.mainTextColor),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 4.h(context)),
+                      Text(
+                        '\$${item.unitPrice.toStringAsFixed(2)} x ${item.quantity}',
+                        style: AppTextStyles.regular12(
+                          context,
+                        ).copyWith(color: context.mainTextColor),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '\$${item.subtotal.toStringAsFixed(2)}',
-                    style: AppTextStyles.semiBold14(context).copyWith(color: context.primaryColor),
-                  ),
-                ],
-              ),
-            )),
+                ),
+                Text(
+                  '\$${item.subtotal.toStringAsFixed(2)}',
+                  style: AppTextStyles.semiBold14(
+                    context,
+                  ).copyWith(color: context.primaryColor),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
