@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class ProcessingOverlay extends StatelessWidget {
   const ProcessingOverlay({super.key});
@@ -22,7 +23,9 @@ class ProcessingOverlay extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'Processing your payment...',
-                style: AppTextStyles.bold16(context),
+                style: AppTextStyles.bold16(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ],
           ),
