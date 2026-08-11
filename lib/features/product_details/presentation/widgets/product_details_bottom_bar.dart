@@ -50,7 +50,8 @@ class ProductDetailsBottomBar extends StatelessWidget {
                   current.productId == product.id) ||
               (current is RemoveFromCartFailure &&
                   current.productId == product.id) ||
-              current is CartSuccess,
+              current is CartSuccess ||
+              current is CartEmpty,
           builder: (context, state) {
             final cartCubit = context.read<CartCubit>();
             final isInCart = cartCubit.isInCart(product.id);
