@@ -34,17 +34,17 @@ class PaymentSuccessView extends StatelessWidget {
               Text(
                 'Payment Successful!',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.bold24(context).copyWith(
-                  color: context.mainTextColor,
-                ),
+                style: AppTextStyles.bold24(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
               SizedBox(height: 12.h(context)),
               Text(
                 'Your order has been successfully placed.',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.regular16(context).copyWith(
-                  color: context.secondaryTextColor,
-                ),
+                style: AppTextStyles.regular16(
+                  context,
+                ).copyWith(color: context.secondaryTextColor),
               ),
               SizedBox(height: 32.h(context)),
               _buildSummaryCard(context),
@@ -60,7 +60,9 @@ class PaymentSuccessView extends StatelessWidget {
                 borderRadius: 16.r(context),
                 child: Text(
                   'View Order',
-                  style: AppTextStyles.bold16(context).copyWith(color: Colors.white),
+                  style: AppTextStyles.bold16(
+                    context,
+                  ).copyWith(color: Colors.white),
                 ),
               ),
               SizedBox(height: 12.h(context)),
@@ -72,7 +74,9 @@ class PaymentSuccessView extends StatelessWidget {
                 borderRadius: 16.r(context),
                 child: Text(
                   'Continue Shopping',
-                  style: AppTextStyles.bold16(context).copyWith(color: context.mainTextColor),
+                  style: AppTextStyles.bold16(
+                    context,
+                  ).copyWith(color: context.mainTextColor),
                 ),
               ),
             ],
@@ -97,15 +101,15 @@ class PaymentSuccessView extends StatelessWidget {
             children: [
               Text(
                 'Amount Paid',
-                style: AppTextStyles.regular14(context).copyWith(
-                  color: context.secondaryTextColor,
-                ),
+                style: AppTextStyles.regular14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
               Text(
                 '${response.total.toStringAsFixed(2)} USD',
-                style: AppTextStyles.bold18(context).copyWith(
-                  color: context.primaryColor,
-                ),
+                style: AppTextStyles.bold18(
+                  context,
+                ).copyWith(color: context.primaryColor),
               ),
             ],
           ),
@@ -117,15 +121,15 @@ class PaymentSuccessView extends StatelessWidget {
             children: [
               Text(
                 'Order ID',
-                style: AppTextStyles.regular14(context).copyWith(
-                  color: context.secondaryTextColor,
-                ),
+                style: AppTextStyles.regular14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
               Text(
                 '#${response.orderId.substring(0, 8).toUpperCase()}',
-                style: AppTextStyles.semiBold14(context).copyWith(
-                  color: context.mainTextColor,
-                ),
+                style: AppTextStyles.semiBold14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ],
           ),
