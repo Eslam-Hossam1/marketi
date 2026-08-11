@@ -68,7 +68,7 @@ class PaymentSuccessView extends StatelessWidget {
                 onPressed: () {
                   context.go(RoutePaths.home);
                 },
-                backgroundColor: context.outlineColor,
+                backgroundColor: context.formColor,
                 borderRadius: 16.r(context),
                 child: Text(
                   'Continue Shopping',
@@ -86,7 +86,7 @@ class PaymentSuccessView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20.r(context)),
       decoration: BoxDecoration(
-        color: context.outlineColor,
+        color: context.formColor,
         borderRadius: BorderRadius.circular(16.r(context)),
         border: Border.all(color: context.secondaryTextColor.withOpacity(0.1)),
       ),
