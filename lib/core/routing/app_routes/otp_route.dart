@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../features/otp/data/repos/otp_repo_impl.dart';
 import '../../../features/otp/domain/entities/otp_reason.dart';
+import '../../../features/otp/domain/repos/otp_repo.dart';
 import '../../../features/otp/domain/usecases/send_otp_usecase.dart';
 import '../../../features/otp/domain/usecases/verify_otp_usecase.dart';
 import '../../../features/otp/presentation/manager/otp_cubit/otp_cubit.dart';
@@ -17,8 +17,8 @@ class OtpRoute {
         final OtpReason otpReason = state.extra as OtpReason;
         return BlocProvider(
           create: (context) => OtpCubit(
-            sendOtpUsecase: SendOtpUsecase(otpRepo: getIt<OtpRepoImpl>()),
-            verifyOtpUsecase: VerifyOtpUsecase(otpRepo: getIt<OtpRepoImpl>()),
+            sendOtpUsecase: SendOtpUsecase(otpRepo: getIt<OtpRepo>()),
+            verifyOtpUsecase: VerifyOtpUsecase(otpRepo: getIt<OtpRepo>()),
             otpReason: otpReason,
           ),
           child: const OtpView(),
