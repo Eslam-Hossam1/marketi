@@ -6,7 +6,7 @@ import '../../domain/entities/order_entity.dart';
 
 class PaymentSummaryCard extends StatelessWidget {
   const PaymentSummaryCard({super.key, required this.order});
-  
+
   final OrderEntity order;
 
   @override
@@ -23,7 +23,9 @@ class PaymentSummaryCard extends StatelessWidget {
         children: [
           Text(
             'Payment Summary',
-            style: AppTextStyles.bold16(context).copyWith(color: context.mainTextColor),
+            style: AppTextStyles.bold16(
+              context,
+            ).copyWith(color: context.mainTextColor),
           ),
           SizedBox(height: 16.h(context)),
           _buildSummaryRow(context, 'Subtotal', order.subtotalAmount),
@@ -39,11 +41,15 @@ class PaymentSummaryCard extends StatelessWidget {
             children: [
               Text(
                 'Total',
-                style: AppTextStyles.bold16(context).copyWith(color: context.mainTextColor),
+                style: AppTextStyles.bold16(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
               Text(
                 '\$${order.totalAmount.toStringAsFixed(2)}',
-                style: AppTextStyles.bold18(context).copyWith(color: context.primaryColor),
+                style: AppTextStyles.bold18(
+                  context,
+                ).copyWith(color: context.primaryColor),
               ),
             ],
           ),
@@ -58,11 +64,15 @@ class PaymentSummaryCard extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTextStyles.regular14(context).copyWith(color: context.secondaryTextColor),
+          style: AppTextStyles.regular14(
+            context,
+          ).copyWith(color: context.mainTextColor),
         ),
         Text(
           '\$${amount.toStringAsFixed(2)}',
-          style: AppTextStyles.semiBold14(context).copyWith(color: context.mainTextColor),
+          style: AppTextStyles.semiBold14(
+            context,
+          ).copyWith(color: context.mainTextColor),
         ),
       ],
     );
