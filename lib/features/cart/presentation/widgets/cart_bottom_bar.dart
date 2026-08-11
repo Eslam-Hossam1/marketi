@@ -3,8 +3,7 @@ import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/buttons/custom_button.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 
 class CartBottomBar extends StatelessWidget {
   final int itemCount;
@@ -66,8 +65,8 @@ class CartBottomBar extends StatelessWidget {
               width: double.infinity,
               borderRadius: 16.r(context),
               onPressed: () {
-                if (itemCount > 0) {
-                  context.push(RoutePaths.checkout);
+                  if (itemCount > 0) {
+                  RoutingHelper.pushCheckout(context);
                 }
               },
               child: Text(

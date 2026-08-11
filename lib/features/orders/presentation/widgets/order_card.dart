@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
-import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/features/orders/domain/entities/order_entity.dart';
@@ -20,7 +19,7 @@ class OrderCard extends StatelessWidget {
     
     return GestureDetector(
       onTap: () {
-        context.push(RoutePaths.orderDetails, extra: order.id);
+        RoutingHelper.pushOrderDetails(context, orderId: order.id);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h(context)),

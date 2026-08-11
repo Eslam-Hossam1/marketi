@@ -43,7 +43,7 @@ class ProductDetailsHeader extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  context.push(RoutePaths.cart);
+                  context.go(RoutePaths.cart);
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
