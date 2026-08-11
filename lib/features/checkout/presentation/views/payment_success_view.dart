@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
@@ -50,11 +51,15 @@ class PaymentSuccessView extends StatelessWidget {
               const Spacer(),
               CustomButton(
                 onPressed: () {
-                  context.go(RoutePaths.orders);
+                  RoutingHelper.pushOrderDetails(
+                    context,
+                    orderId: response.orderId,
+                    fromCheckout: true,
+                  );
                 },
                 borderRadius: 16.r(context),
                 child: Text(
-                  'View My Orders',
+                  'View Order',
                   style: AppTextStyles.bold16(context).copyWith(color: Colors.white),
                 ),
               ),

@@ -75,7 +75,10 @@ class _CheckoutViewState extends State<CheckoutView> {
           } else if (state is CheckoutProcessingDelay) {
             _hideOverlay();
             context.read<CartCubit>().clearCart();
-            context.push(RoutePaths.paymentDelay);
+            context.push(
+              RoutePaths.paymentDelay,
+              extra: context.read<CheckoutCubit>().checkoutResponse?.orderId,
+            );
           } else if (state is CheckoutCancelled) {
             _hideOverlay();
             DialogHelper.showErrorDialog(

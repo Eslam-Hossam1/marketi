@@ -4,6 +4,7 @@ import 'package:nextcart/features/checkout/domain/entities/checkout_entity.dart'
 import 'package:nextcart/features/checkout/presentation/views/checkout_view.dart';
 import 'package:nextcart/features/checkout/presentation/views/payment_delay_view.dart';
 import 'package:nextcart/features/checkout/presentation/views/payment_success_view.dart';
+import 'package:nextcart/features/orders/domain/params/order_details_params.dart';
 import 'package:nextcart/features/orders/presentation/views/order_details_view.dart';
 import 'package:nextcart/features/orders/presentation/views/orders_view.dart';
 
@@ -15,10 +16,9 @@ class OrdersRoutes {
     ),
     GoRoute(
       path: RoutePaths.orderDetails,
-
       builder: (context, state) {
-        final orderId = state.extra as String;
-        return OrderDetailsView(orderId: orderId);
+        final params = state.extra as OrderDetailsParams;
+        return OrderDetailsView(params: params);
       },
     ),
     GoRoute(
@@ -36,8 +36,10 @@ class OrdersRoutes {
     ),
     GoRoute(
       path: RoutePaths.paymentDelay,
-
-      builder: (context, state) => const PaymentDelayView(),
+      builder: (context, state) {
+        final orderId = state.extra as String?;
+        return PaymentDelayView(orderId: orderId);
+      },
     ),
   ];
 }
