@@ -46,7 +46,7 @@ class CheckoutSummarySection extends StatelessWidget {
                       '${item.quantity}x ${item.product.title}',
                       style: AppTextStyles.regular14(
                         context,
-                      ).copyWith(color: context.secondaryTextColor),
+                      ).copyWith(color: context.mainTextColor),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -105,7 +105,7 @@ class CheckoutSummarySection extends StatelessWidget {
           title,
           style: AppTextStyles.regular14(
             context,
-          ).copyWith(color: context.secondaryTextColor),
+          ).copyWith(color: context.mainTextColor),
         ),
         Text(
           '${amount.toStringAsFixed(2)} USD',
