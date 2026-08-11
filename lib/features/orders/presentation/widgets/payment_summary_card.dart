@@ -14,7 +14,7 @@ class PaymentSummaryCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r(context)),
       decoration: BoxDecoration(
-        color: context.outlineColor,
+        color: context.formColor,
         borderRadius: BorderRadius.circular(16.r(context)),
         border: Border.all(color: context.secondaryTextColor.withOpacity(0.1)),
       ),
