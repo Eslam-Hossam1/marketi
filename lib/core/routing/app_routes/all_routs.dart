@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/di/service_locator.dart';
 import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
 import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
-import 'package:nextcart/features/cart/domain/usecases/clear_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/update_cart_quantity_use_case.dart';
@@ -53,13 +52,13 @@ class AppRoutes {
                 createCheckoutUseCase: getIt<CreateCheckoutUseCase>(),
                 stripeService: getIt<StripeService>(),
                 supabaseClient: getIt<SupabaseClient>(),
-                clearCartUseCase: getIt<ClearCartUseCase>(),
               ),
             ),
           ],
           child: child,
         );
       },
+
       routes: [
         ...MainRoute.routes,
         ...ProfileRoute.routes,

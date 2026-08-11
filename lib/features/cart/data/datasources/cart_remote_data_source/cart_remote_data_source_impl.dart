@@ -55,15 +55,5 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         .eq('user_id', user.id)
         .eq('product_id', productId);
   }
-
-  @override
-  Future<void> clearCart() async {
-    final user = _supabaseClient.auth.currentUser;
-    if (user == null) throw Exception('Not authenticated');
-
-    await _supabaseClient
-        .from('cart')
-        .delete()
-        .eq('user_id', user.id);
-  }
 }
+

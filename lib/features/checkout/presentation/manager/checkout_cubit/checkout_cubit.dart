@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
-import 'package:nextcart/features/cart/domain/usecases/clear_cart_use_case.dart';
 import '../../../domain/entities/checkout_entity.dart';
 import '../../../domain/params/checkout_params.dart';
 import '../../../domain/usecases/create_checkout_use_case.dart';
@@ -12,17 +11,14 @@ class CheckoutCubit extends Cubit<CheckoutState> {
   final CreateCheckoutUseCase _createCheckoutUseCase;
   final StripeService _stripeService;
   final SupabaseClient _supabaseClient;
-  final ClearCartUseCase _clearCartUseCase;
 
   CheckoutCubit({
     required CreateCheckoutUseCase createCheckoutUseCase,
     required StripeService stripeService,
     required SupabaseClient supabaseClient,
-    required ClearCartUseCase clearCartUseCase,
   })  : _createCheckoutUseCase = createCheckoutUseCase,
         _stripeService = stripeService,
         _supabaseClient = supabaseClient,
-        _clearCartUseCase = clearCartUseCase,
         super(CheckoutInitial());
 
   CheckoutEntity? checkoutResponse;
@@ -91,7 +87,6 @@ class CheckoutCubit extends Cubit<CheckoutState> {
           switch (status) {
             case 'paid':
               _cleanupRealtime();
-              _clearCartUseCase();
               emit(CheckoutSuccess());
             case 'cancelled':
               _cleanupRealtime();
@@ -114,7 +109,6 @@ class CheckoutCubit extends Cubit<CheckoutState> {
 
   Future<void> _onTimeoutFired() async {
     _cleanupRealtime();
-    await _clearCartUseCase();
     emit(CheckoutProcessingDelay());
   }
 
@@ -131,3 +125,4 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     return super.close();
   }
 }
+

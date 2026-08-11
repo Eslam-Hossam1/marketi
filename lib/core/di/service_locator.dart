@@ -80,8 +80,8 @@ import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
 import 'package:nextcart/features/cart/domain/usecases/update_cart_quantity_use_case.dart';
-import 'package:nextcart/features/cart/domain/usecases/clear_cart_use_case.dart';
 import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source.dart';
+
 import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source_impl.dart';
 import 'package:nextcart/features/favorites/data/repos/favorites_repo_impl.dart';
 import 'package:nextcart/features/favorites/domain/repos/favorites_repo.dart';
@@ -177,10 +177,8 @@ void _setupCart() {
   getIt.registerLazySingleton<UpdateCartQuantityUseCase>(
     () => UpdateCartQuantityUseCase(getIt<CartRepo>()),
   );
-  getIt.registerLazySingleton<ClearCartUseCase>(
-    () => ClearCartUseCase(getIt<CartRepo>()),
-  );
 }
+
 
 void _setupFavorites() {
   getIt.registerLazySingleton<FavoritesRemoteDataSource>(

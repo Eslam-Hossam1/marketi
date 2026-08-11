@@ -64,17 +64,5 @@ class CartRepoImpl implements CartRepo {
       return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
     }
   }
-
-  @override
-  Future<Either<ApiFailure, void>> clearCart() async {
-    try {
-      await _cartRemoteDataSource.clearCart();
-      return const Right(null);
-    } catch (e) {
-      if (e is PostgrestException) {
-        return Left(SupabaseDatabaseFailure.fromPostgrestException(e));
-      }
-      return Left(SupabaseDatabaseFailure.unknownException(unKnownExceptionMsg: e.toString()));
-    }
-  }
 }
+
