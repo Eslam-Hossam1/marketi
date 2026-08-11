@@ -23,6 +23,9 @@ import 'package:nextcart/core/routing/app_routes/product_routes.dart';
 import 'package:nextcart/core/routing/app_routes/profile_route.dart';
 import 'package:nextcart/core/routing/app_routes/reset_password_routes.dart';
 import 'package:nextcart/core/routing/app_routes/orders_routes.dart';
+import 'package:nextcart/features/auth/domain/usecases/logout_use_case.dart';
+import 'package:nextcart/features/profile/domain/usecases/get_user_data_use_case.dart';
+import 'package:nextcart/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppRoutes {
@@ -53,6 +56,12 @@ class AppRoutes {
                 stripeService: getIt<StripeService>(),
                 supabaseClient: getIt<SupabaseClient>(),
               ),
+            ),
+            BlocProvider(
+              create: (context) => ProfileCubit(
+                getIt<GetUserDataUseCase>(),
+                getIt<LogoutUseCase>(),
+              )..getUserData(),
             ),
           ],
           child: child,
