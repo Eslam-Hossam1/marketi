@@ -19,17 +19,17 @@ class ProductCardImage extends StatelessWidget {
       height: 140.h(context),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: context.primaryColor.withValues(alpha: 0.1),
+        color: context.primaryColor.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Stack(
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
+          Positioned.fill(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
               child: CustomCachedNetworkImage(
                 url: product.thumbnail,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -44,7 +44,7 @@ class ProductCardImage extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: context.primaryColor.withValues(alpha: 0.25),
+                  color: context.primaryColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),
@@ -53,7 +53,7 @@ class ProductCardImage extends StatelessWidget {
                 child: Text(
                   "${product.discountPercentage.toInt()}% OFF",
                   style: AppTextStyles.medium12(context).copyWith(
-                    color: context.primaryColor,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 10.w(context),
                   ),
