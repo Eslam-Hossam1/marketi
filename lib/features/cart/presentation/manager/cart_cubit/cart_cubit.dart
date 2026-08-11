@@ -207,6 +207,20 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
+  // ── Clear Cart (local only) ───────────────────────────────────────────────
+  //
+  // The backend clears the DB cart automatically via the Stripe webhook.
+  // This method wipes the in-memory state so the UI reflects it instantly.
+
+  void clearCart() {
+    _debounceTimers.values.forEach((t) => t.cancel());
+    _debounceTimers.clear();
+    _cartItems.clear();
+    _committedQuantities.clear();
+    _requestVersions.clear();
+    emit(CartEmpty());
+  }
+
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   @override

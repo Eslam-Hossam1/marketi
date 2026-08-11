@@ -39,7 +39,7 @@ class CartItemInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Price: ${cartItem.product.price.toStringAsFixed(2)} EGP',
+              'Price: ${cartItem.product.price.toStringAsFixed(2)} USD',
               style: AppTextStyles.bold14(
                 context,
               ).copyWith(color: context.mainTextColor),

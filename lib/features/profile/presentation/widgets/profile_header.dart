@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
@@ -13,7 +14,7 @@ class ProfileHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          onPressed: () => context.pop(),
+          onPressed: () => context.go(RoutePaths.home),
           icon: Padding(
             padding: const EdgeInsets.all(12),
             child: Icon(

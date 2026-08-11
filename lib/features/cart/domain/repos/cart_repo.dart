@@ -9,3 +9,4 @@ abstract class CartRepo {
   Future<Either<ApiFailure, void>> removeFromCart(CartProductParams params);
   Future<Either<ApiFailure, void>> updateQuantity(CartProductParams params);
 }
+

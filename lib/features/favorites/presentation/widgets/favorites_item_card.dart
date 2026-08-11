@@ -81,7 +81,7 @@ class FavoritesItemCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.price.toStringAsFixed(2)} EGP',
+                        '${product.price.toStringAsFixed(2)} USD',
                         style: AppTextStyles.bold14(context).copyWith(
                           color: context.primaryColor,
                         ),

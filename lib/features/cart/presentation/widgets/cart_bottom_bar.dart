@@ -3,6 +3,7 @@ import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/buttons/custom_button.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 
 class CartBottomBar extends StatelessWidget {
   final int itemCount;
@@ -51,7 +52,7 @@ class CartBottomBar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${subtotal.toStringAsFixed(2)} EGP',
+                  '${subtotal.toStringAsFixed(2)} USD',
                   style: AppTextStyles.bold18(context).copyWith(
                     color: context.mainTextColor,
                   ),
@@ -63,7 +64,11 @@ class CartBottomBar extends StatelessWidget {
             CustomButton(
               width: double.infinity,
               borderRadius: 16.r(context),
-              onPressed: () {},
+              onPressed: () {
+                  if (itemCount > 0) {
+                  RoutingHelper.pushCheckout(context);
+                }
+              },
               child: Text(
                 'Checkout',
                 style: AppTextStyles.bold16(context).copyWith(

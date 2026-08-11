@@ -32,7 +32,7 @@ class ProductDetailsBottomBar extends StatelessWidget {
               ).copyWith(color: context.mainTextColor),
             ),
             Text(
-              '${product.price.toStringAsFixed(2)} EGP',
+              '${product.price.toStringAsFixed(2)} USD',
               style: AppTextStyles.bold20(
                 context,
               ).copyWith(color: context.mainTextColor),
@@ -50,7 +50,8 @@ class ProductDetailsBottomBar extends StatelessWidget {
                   current.productId == product.id) ||
               (current is RemoveFromCartFailure &&
                   current.productId == product.id) ||
-              current is CartSuccess,
+              current is CartSuccess ||
+              current is CartEmpty,
           builder: (context, state) {
             final cartCubit = context.read<CartCubit>();
             final isInCart = cartCubit.isInCart(product.id);

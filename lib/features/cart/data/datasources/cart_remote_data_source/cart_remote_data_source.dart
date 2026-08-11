@@ -6,3 +6,4 @@ abstract class CartRemoteDataSource {
   Future<void> removeFromCart(String productId);
   Future<void> updateQuantity(String productId, int quantity);
 }
+

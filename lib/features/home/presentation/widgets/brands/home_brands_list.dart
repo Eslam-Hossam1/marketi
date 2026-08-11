@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/entities/brand_entity.dart';
-import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/features/home/presentation/widgets/common/home_section_header.dart';
 import 'package:nextcart/features/home/presentation/widgets/brands/brand_item.dart';
 
@@ -16,7 +15,7 @@ class HomeBrandsList extends StatelessWidget {
       children: [
         HomeSectionHeader(
           title: "Brands",
-          onViewAllPressed: () => context.push(RoutePaths.brands),
+          onViewAllPressed: () => RoutingHelper.pushBrands(context),
         ),
         const SizedBox(height: 16),
         SizedBox(

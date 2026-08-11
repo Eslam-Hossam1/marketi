@@ -59,6 +59,8 @@ dependencies:
   supabase_flutter: ^2.15.0
   flutter_dotenv: ^5.2.1
   http: ^1.6.0
+  flutter_stripe: ^13.0.0
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:
