@@ -33,13 +33,13 @@ class HomeBrandItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: context.outlineColor.withValues(alpha: 0.3),
+              color: context.outlineColor.withValues(alpha: 0.5),
               blurRadius: 10,
-              offset: const Offset(0, 2),
+              offset: const Offset(0, 1),
             ),
           ],
           border: Border.all(
-            color: context.outlineColor.withValues(alpha: 0.05),
+            color: context.brandBackground.withValues(alpha: 0.2),
           ),
         ),
         child: Column(
@@ -48,7 +48,7 @@ class HomeBrandItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: context.formColor,
+                color: context.brandBackground,
                 shape: BoxShape.circle,
               ),
               child: SizedBox(
