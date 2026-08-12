@@ -39,16 +39,20 @@ class CategoryItem extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: context.primaryColor.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
                 ),
-                child: CustomCachedNetworkImage(
-                  url: category.image,
-                  fit: BoxFit.contain,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                  child: CustomCachedNetworkImage(
+                    url: category.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -59,8 +63,9 @@ class CategoryItem extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.medium14(context)
-                    .copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ),
           ],
