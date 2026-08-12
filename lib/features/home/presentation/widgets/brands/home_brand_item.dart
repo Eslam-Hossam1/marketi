@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
-import 'package:nextcart/core/entities/brand_entity.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routing_helper.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
 import 'package:nextcart/features/brand_products/domain/params/brand_products_routing_params.dart';
 
-class BrandItem extends StatelessWidget {
+class HomeBrandItem extends StatelessWidget {
   final BrandEntity brand;
-  const BrandItem({super.key, required this.brand});
+
+  const HomeBrandItem({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +25,25 @@ class BrandItem extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
+        margin: .only(bottom: 16.h(context)),
+        width: 100.w(context),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
         decoration: BoxDecoration(
           color: context.scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: context.outlineColor.withValues(alpha: 0.3),
               blurRadius: 10,
-              offset: const Offset(0, 5),
+              offset: const Offset(0, 2),
             ),
           ],
+          border: Border.all(
+            color: context.outlineColor.withValues(alpha: 0.05),
+          ),
         ),
-        child: Row(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
@@ -46,28 +52,29 @@ class BrandItem extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: SizedBox(
-                width: 32.w(context),
-                height: 32.h(context),
+                width: 40.w(context),
+                height: 40.h(context),
                 child: CustomCachedNetworkImage(
                   url: brand.image,
                   fit: BoxFit.contain,
                 ),
               ),
             ),
-            const SizedBox(width: 16),
-            Expanded(
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Text(
                 brand.name,
-                style: AppTextStyles.medium18(
-                  context,
-                ).copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium12(context).copyWith(
+                  color: context.mainTextColor,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 16.w(context),
-              color: context.mainTextColor,
-            ),
+            const SizedBox(height: 2),
           ],
         ),
       ),
