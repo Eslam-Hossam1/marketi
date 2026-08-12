@@ -72,7 +72,7 @@ class CartCubit extends Cubit<CartState> {
           _cartItems[item.product.id] = item;
           _committedQuantities[item.product.id] = item.quantity;
         }
-        emit(_cartItems.isEmpty ? CartEmpty() : CartSuccess());
+        emit(_cartItems.isEmpty ? CartEmpty() : GetCartSuccess());
       },
     );
   }
@@ -218,7 +218,7 @@ class CartCubit extends Cubit<CartState> {
     _cartItems.clear();
     _committedQuantities.clear();
     _requestVersions.clear();
-    emit(CartEmpty());
+    emit(CartCleared());
   }
 
   // ── Lifecycle ─────────────────────────────────────────────────────────────

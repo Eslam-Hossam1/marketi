@@ -103,7 +103,6 @@ import 'package:nextcart/features/orders/data/repos/orders_repo_impl.dart';
 import 'package:nextcart/features/orders/domain/repos/orders_repo.dart';
 import 'package:nextcart/features/orders/domain/usecases/get_orders_use_case.dart';
 import 'package:nextcart/features/orders/domain/usecases/get_order_details_use_case.dart';
-import 'package:nextcart/features/orders/presentation/manager/orders_cubit/orders_cubit.dart';
 import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
 
 final getIt = GetIt.instance;
@@ -154,9 +153,6 @@ void _setupOrders() {
   );
   getIt.registerLazySingleton<GetOrderDetailsUseCase>(
     () => GetOrderDetailsUseCase(getIt<OrdersRepo>()),
-  );
-  getIt.registerFactory<OrdersCubit>(
-    () => OrdersCubit(getIt<GetOrdersUseCase>(), getIt<GetOrderDetailsUseCase>()),
   );
 }
 
