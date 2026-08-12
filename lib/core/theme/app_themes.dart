@@ -31,6 +31,7 @@ abstract class AppThemes {
         myChatBubbleTimeTextColor: AppColors.lightMyChatBubbleTimeTextColor,
         otherChatBubbleTimeTextColor:
             AppColors.lightOtherChatBubbleTimeTextColor,
+        brandBackground: AppColors.lightBrandBackground,
       ),
     ],
   );
@@ -62,6 +63,7 @@ abstract class AppThemes {
         myChatBubbleTimeTextColor: AppColors.darkMyChatBubbleTimeTextColor,
         otherChatBubbleTimeTextColor:
             AppColors.darkOtherChatBubbleTimeTextColor,
+        brandBackground: AppColors.darkBrandBackground,
       ),
     ],
   );

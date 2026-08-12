@@ -42,7 +42,7 @@ class BrandItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: context.formColor,
+                color: context.brandBackground,
                 shape: BoxShape.circle,
               ),
               child: SizedBox(

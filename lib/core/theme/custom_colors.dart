@@ -13,6 +13,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color otherChatBubbleTextColor;
   final Color myChatBubbleTimeTextColor;
   final Color otherChatBubbleTimeTextColor;
+  final Color brandBackground;
   const CustomColors({
     required this.mainTextColor,
     required this.secondaryTextColor,
@@ -25,6 +26,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     required this.otherChatBubbleTextColor,
     required this.myChatBubbleTimeTextColor,
     required this.otherChatBubbleTimeTextColor,
+    required this.brandBackground,
   });
 
   @override
@@ -40,6 +42,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? otherChatBubbleTextColor,
     Color? myChatBubbleTimeTextColor,
     Color? otherChatBubbleTimeTextColor,
+    Color? brandBackground,
   }) {
     return CustomColors(
       mainTextColor: mainTextColor ?? this.mainTextColor,
@@ -61,6 +64,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
           myChatBubbleTimeTextColor ?? this.myChatBubbleTimeTextColor,
       otherChatBubbleTimeTextColor:
           otherChatBubbleTimeTextColor ?? this.otherChatBubbleTimeTextColor,
+      brandBackground: brandBackground ?? this.brandBackground,
     );
   }
 
@@ -111,6 +115,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
         other.otherChatBubbleTimeTextColor,
         t,
       )!,
+      brandBackground: Color.lerp(brandBackground, other.brandBackground, t)!,
     );
   }
 }
