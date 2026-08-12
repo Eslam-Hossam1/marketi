@@ -7,6 +7,7 @@ import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/buttons/custom_button.dart';
 import '../../domain/entities/checkout_entity.dart';
+import '../widgets/payment_success_summary_card.dart';
 
 class PaymentSuccessView extends StatelessWidget {
   final CheckoutEntity response;
@@ -34,20 +35,18 @@ class PaymentSuccessView extends StatelessWidget {
               Text(
                 'Payment Successful!',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.bold24(
-                  context,
-                ).copyWith(color: context.mainTextColor),
+                style: AppTextStyles.bold24(context)
+                    .copyWith(color: context.mainTextColor),
               ),
               SizedBox(height: 12.h(context)),
               Text(
                 'Your order has been successfully placed.',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.regular16(
-                  context,
-                ).copyWith(color: context.secondaryTextColor),
+                style: AppTextStyles.regular16(context)
+                    .copyWith(color: context.secondaryTextColor),
               ),
               SizedBox(height: 32.h(context)),
-              _buildSummaryCard(context),
+              PaymentSuccessSummaryCard(response: response),
               const Spacer(),
               CustomButton(
                 onPressed: () {
@@ -60,80 +59,24 @@ class PaymentSuccessView extends StatelessWidget {
                 borderRadius: 16.r(context),
                 child: Text(
                   'View Order',
-                  style: AppTextStyles.bold16(
-                    context,
-                  ).copyWith(color: Colors.white),
+                  style: AppTextStyles.bold16(context)
+                      .copyWith(color: Colors.white),
                 ),
               ),
               SizedBox(height: 12.h(context)),
               CustomButton(
-                onPressed: () {
-                  context.go(RoutePaths.home);
-                },
+                onPressed: () => context.go(RoutePaths.home),
                 backgroundColor: context.formColor,
                 borderRadius: 16.r(context),
                 child: Text(
                   'Continue Shopping',
-                  style: AppTextStyles.bold16(
-                    context,
-                  ).copyWith(color: context.mainTextColor),
+                  style: AppTextStyles.bold16(context)
+                      .copyWith(color: context.mainTextColor),
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSummaryCard(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20.r(context)),
-      decoration: BoxDecoration(
-        color: context.formColor,
-        borderRadius: BorderRadius.circular(16.r(context)),
-        border: Border.all(color: context.secondaryTextColor.withOpacity(0.1)),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Amount Paid',
-                style: AppTextStyles.regular14(
-                  context,
-                ).copyWith(color: context.mainTextColor),
-              ),
-              Text(
-                '${response.total.toStringAsFixed(2)} USD',
-                style: AppTextStyles.bold18(
-                  context,
-                ).copyWith(color: context.primaryColor),
-              ),
-            ],
-          ),
-          SizedBox(height: 12.h(context)),
-          Divider(color: context.secondaryTextColor.withOpacity(0.1)),
-          SizedBox(height: 12.h(context)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Order ID',
-                style: AppTextStyles.regular14(
-                  context,
-                ).copyWith(color: context.mainTextColor),
-              ),
-              Text(
-                '#${response.orderId.substring(0, 8).toUpperCase()}',
-                style: AppTextStyles.semiBold14(
-                  context,
-                ).copyWith(color: context.mainTextColor),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
