@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
 import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 import 'package:nextcart/core/routing/routes_paths.dart';

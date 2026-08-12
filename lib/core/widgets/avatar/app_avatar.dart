@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nextcart/core/utils/assets.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppAvatar extends StatelessWidget {
   final String? imageUrl;
@@ -26,26 +25,14 @@ class AppAvatar extends StatelessWidget {
   }
 
   Widget _buildImage() {
-    String? url = imageUrl;
-    if (url == null || url.trim().isEmpty) {
+    if (imageUrl == null || imageUrl!.trim().isEmpty) {
       return _defaultAvatar();
     }
 
-    Map<String, String>? headers;
-    if (url.contains('/storage/v1/object/public/')) {
-      url = url.replaceAll(
-          '/storage/v1/object/public/', '/storage/v1/object/authenticated/');
-      final token = Supabase.instance.client.auth.currentSession?.accessToken;
-      if (token != null) {
-        headers = {'Authorization': 'Bearer $token'};
-      }
-    }
-
     return CustomCachedNetworkImage(
-      url: url,
+      url: imageUrl!,
       width: radius * 2,
       height: radius * 2,
-      httpHeaders: headers,
     );
   }
 
