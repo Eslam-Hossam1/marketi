@@ -25,8 +25,11 @@ class OrderCard extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 16.h(context)),
         padding: EdgeInsets.all(16.r(context)),
         decoration: BoxDecoration(
-          color: context.outlineColor,
+          color: context.formColor,
           borderRadius: BorderRadius.circular(16.r(context)),
+          border: Border.all(
+            color: context.outlineColor.withValues(alpha: 0.05),
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),
