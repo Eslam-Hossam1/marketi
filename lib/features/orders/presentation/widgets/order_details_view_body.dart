@@ -33,9 +33,8 @@ class OrderDetailsViewBody extends StatelessWidget {
         if (state is OrderDetailsFailure) {
           return CustomFailureMessageWithButton(
             failureMessage: state.message,
-            onPressed: () => context
-                .read<OrdersCubit>()
-                .fetchOrderDetails(params.orderId),
+            onPressed: () =>
+                context.read<OrdersCubit>().fetchOrderDetails(params.orderId),
           );
         }
 
@@ -69,12 +68,14 @@ class OrderDetailsViewBody extends StatelessWidget {
                     16.h(context),
                   ),
                   child: CustomButton(
+                    width: double.infinity,
                     onPressed: () => context.go(RoutePaths.home),
                     borderRadius: 16.r(context),
                     child: Text(
                       'Continue Shopping',
-                      style: AppTextStyles.bold16(context)
-                          .copyWith(color: Colors.white),
+                      style: AppTextStyles.bold16(
+                        context,
+                      ).copyWith(color: Colors.white),
                     ),
                   ),
                 ),

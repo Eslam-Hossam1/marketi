@@ -10,13 +10,13 @@ import 'order_status_badge.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({super.key, required this.order});
-  
+
   final OrderEntity order;
 
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('MMM dd, yyyy - hh:mm a');
-    
+
     return GestureDetector(
       onTap: () {
         RoutingHelper.pushOrderDetails(context, orderId: order.id);
@@ -28,11 +28,11 @@ class OrderCard extends StatelessWidget {
           color: context.formColor,
           borderRadius: BorderRadius.circular(16.r(context)),
           border: Border.all(
-            color: context.outlineColor.withValues(alpha: 0.05),
+            color: context.outlineColor.withValues(alpha: 0.5),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -46,7 +46,9 @@ class OrderCard extends StatelessWidget {
               children: [
                 Text(
                   'Order #${order.id.substring(0, 8).toUpperCase()}',
-                  style: AppTextStyles.semiBold16(context).copyWith(color: context.mainTextColor),
+                  style: AppTextStyles.semiBold16(
+                    context,
+                  ).copyWith(color: context.mainTextColor),
                 ),
                 OrderStatusBadge(status: order.status),
               ],
@@ -54,7 +56,9 @@ class OrderCard extends StatelessWidget {
             SizedBox(height: 12.h(context)),
             Text(
               dateFormat.format(order.createdAt),
-              style: AppTextStyles.regular14(context).copyWith(color: context.secondaryTextColor),
+              style: AppTextStyles.regular14(
+                context,
+              ).copyWith(color: context.mainTextColor),
             ),
             SizedBox(height: 12.h(context)),
             Divider(color: context.secondaryTextColor.withValues(alpha: 0.1)),
@@ -64,11 +68,15 @@ class OrderCard extends StatelessWidget {
               children: [
                 Text(
                   'Total Amount',
-                  style: AppTextStyles.regular14(context).copyWith(color: context.secondaryTextColor),
+                  style: AppTextStyles.regular14(
+                    context,
+                  ).copyWith(color: context.mainTextColor),
                 ),
                 Text(
                   '\$${order.totalAmount.toStringAsFixed(2)}',
-                  style: AppTextStyles.bold16(context).copyWith(color: context.primaryColor),
+                  style: AppTextStyles.bold16(
+                    context,
+                  ).copyWith(color: context.primaryColor),
                 ),
               ],
             ),
