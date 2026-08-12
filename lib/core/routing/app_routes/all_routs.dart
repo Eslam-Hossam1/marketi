@@ -22,6 +22,7 @@ import 'package:nextcart/core/routing/app_routes/otp_route.dart';
 import 'package:nextcart/core/routing/app_routes/product_routes.dart';
 import 'package:nextcart/core/routing/app_routes/profile_route.dart';
 import 'package:nextcart/core/routing/app_routes/reset_password_routes.dart';
+import 'package:nextcart/core/routing/app_routes/checkout_routes.dart';
 import 'package:nextcart/core/routing/app_routes/orders_routes.dart';
 import 'package:nextcart/features/auth/domain/usecases/logout_use_case.dart';
 import 'package:nextcart/features/profile/domain/usecases/get_user_data_use_case.dart';
@@ -75,6 +76,7 @@ class AppRoutes {
         ...CategoryProductsRoutes.routes,
         ...BrandProductsRoutes.routes,
         ...OrdersRoutes.routes,
+        ...CheckoutRoutes.routes,
       ],
     ),
 
