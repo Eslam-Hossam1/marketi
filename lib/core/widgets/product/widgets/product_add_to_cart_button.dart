@@ -24,8 +24,8 @@ class ProductAddToCartButton extends StatelessWidget {
               current.productId == product.id) ||
           (current is RemoveFromCartFailure &&
               current.productId == product.id) ||
-          current is CartSuccess ||
-          current is CartEmpty,
+          current is GetCartSuccess ||
+          current is CartCleared,
       builder: (context, state) {
         final cartCubit = context.read<CartCubit>();
         final isInCart = cartCubit.isInCart(product.id);

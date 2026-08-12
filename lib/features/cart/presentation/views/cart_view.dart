@@ -33,7 +33,7 @@ class CartView extends StatelessWidget {
           child: BlocBuilder<CartCubit, CartState>(
             buildWhen: (previous, current) =>
                 current is CartLoading ||
-                current is CartSuccess ||
+                current is GetCartSuccess ||
                 current is CartFailure ||
                 current is CartEmpty ||
                 current is CartNotEmpty,

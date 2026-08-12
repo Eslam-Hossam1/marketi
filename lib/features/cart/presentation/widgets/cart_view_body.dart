@@ -16,7 +16,7 @@ class CartViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       buildWhen: (previous, current) =>
-          current is CartSuccess ||
+          current is GetCartSuccess ||
           current is AddToCartSuccess ||
           current is RemoveFromCartSuccess ||
           current is UpdateCartQuantitySuccess ||

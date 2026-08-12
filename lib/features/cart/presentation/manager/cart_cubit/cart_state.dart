@@ -12,9 +12,11 @@ final class CartInitial extends CartState {}
 
 final class CartLoading extends CartState {}
 
-final class CartSuccess extends CartState {}
+final class GetCartSuccess extends CartState {}
 
 final class CartEmpty extends CartState {}
+
+final class CartCleared extends CartState {}
 
 final class CartNotEmpty extends CartState {}
 
