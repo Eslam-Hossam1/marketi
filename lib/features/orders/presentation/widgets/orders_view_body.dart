@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/orders_cubit/orders_cubit.dart';
 import '../manager/orders_cubit/orders_state.dart';
 import '../widgets/order_card.dart';
@@ -23,13 +24,9 @@ class OrdersViewBody extends StatelessWidget {
         }
 
         if (state is OrdersFailure) {
-          return Center(
-            child: Text(
-              state.message,
-              style: AppTextStyles.regular16(context)
-                  .copyWith(color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
+          return CustomFailureMessageWithButton(
+            failureMessage: state.message,
+            onPressed: () => context.read<OrdersCubit>().fetchOrders(),
           );
         }
 

@@ -6,6 +6,7 @@ import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/widgets/buttons/custom_button.dart';
 import 'package:nextcart/features/orders/domain/params/order_details_params.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/orders_cubit/orders_cubit.dart';
 import '../manager/orders_cubit/orders_state.dart';
 import 'order_details_header.dart';
@@ -30,13 +31,11 @@ class OrderDetailsViewBody extends StatelessWidget {
         }
 
         if (state is OrderDetailsFailure) {
-          return Center(
-            child: Text(
-              state.message,
-              style: AppTextStyles.regular16(context)
-                  .copyWith(color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
+          return CustomFailureMessageWithButton(
+            failureMessage: state.message,
+            onPressed: () => context
+                .read<OrdersCubit>()
+                .fetchOrderDetails(params.orderId),
           );
         }
 
