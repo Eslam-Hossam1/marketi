@@ -9,7 +9,13 @@ import 'products_scrolling_loading_indicator_builder.dart';
 
 class ProductsViewBody extends StatefulWidget {
   final String title;
-  const ProductsViewBody({super.key, required this.title});
+  final Color? badgeColor;
+  
+  const ProductsViewBody({
+    super.key,
+    required this.title,
+    this.badgeColor,
+  });
 
   @override
   State<ProductsViewBody> createState() => _ProductsViewBodyState();
@@ -56,7 +62,7 @@ class _ProductsViewBodyState extends State<ProductsViewBody> {
               child: CustomHeaderWithImage(title: widget.title),
             ),
             const SliverToBoxAdapter(child: HeightSpace(height: 24)),
-            const ProductsGrid(),
+            ProductsGrid(badgeColor: widget.badgeColor),
             const ProductsScrollingLoadingIndicatorBuilder(),
           ],
         ),

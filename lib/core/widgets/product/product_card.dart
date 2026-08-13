@@ -11,8 +11,13 @@ import 'widgets/product_add_to_cart_button.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity product;
+  final Color? badgeColor;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({
+    super.key,
+    required this.product,
+    this.badgeColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,7 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProductCardImage(product: product),
+            ProductCardImage(product: product, badgeColor: badgeColor),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),

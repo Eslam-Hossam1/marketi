@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/brand_products/domain/params/brand_products_routing_params.dart';
 import '../../features/category_products/domain/params/category_products_routing_params.dart';
+import '../../features/products/domain/params/products_routing_params.dart';
+import '../../core/params/product_params.dart';
 
 import '../../features/otp/domain/entities/otp_reason.dart';
 import '../../features/orders/domain/params/order_details_params.dart';
@@ -35,8 +37,11 @@ abstract class RoutingHelper {
     context.push(RoutePaths.search);
   }
 
-  static void pushProducts(BuildContext context, {String title = 'Products'}) {
-    context.push(RoutePaths.products, extra: {'title': title});
+  static void pushProducts(BuildContext context, {
+    required String title,
+    ProductParams? params,
+  }) {
+    context.push(RoutePaths.products, extra: ProductsRoutingParams(title: title, params: params ?? const ProductParams()).toJson());
   }
 
   static void pushBrands(BuildContext context) {

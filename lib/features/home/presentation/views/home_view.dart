@@ -7,6 +7,8 @@ import 'package:nextcart/features/products/domain/usecases/get_products_use_case
 import 'package:nextcart/features/home/presentation/manager/brands_cubit/brands_cubit.dart';
 import 'package:nextcart/features/home/presentation/manager/categories_cubit/categories_cubit.dart';
 import 'package:nextcart/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
+import 'package:nextcart/features/banners/domain/usecases/get_banners_use_case.dart';
+import 'package:nextcart/features/home/presentation/manager/banners_cubit/banners_cubit.dart';
 import 'package:nextcart/features/home/presentation/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -25,6 +27,10 @@ class HomeView extends StatelessWidget {
         BlocProvider(
           create: (context) => PopularProductsCubit(getIt<GetProductsUseCase>())
             ..getPopularProducts(),
+        ),
+        BlocProvider(
+          create: (context) => BannersCubit(getIt<GetBannersUseCase>())
+            ..getBanners(),
         ),
       ],
       child: const Scaffold(

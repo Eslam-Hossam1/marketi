@@ -1,5 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source.dart';
+import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source_impl.dart';
+import 'package:nextcart/features/banners/data/repos/banners_repo_impl.dart';
+import 'package:nextcart/features/banners/domain/repos/banners_repo.dart';
+import 'package:nextcart/features/banners/domain/usecases/get_banners_use_case.dart';
 import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
 import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
 import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
@@ -126,6 +131,19 @@ Future<void> setupServiceLocator() async {
   _setupFavorites();
   _setupOrders();
   _setupCheckout();
+  _setupBanners();
+}
+
+void _setupBanners() {
+  getIt.registerLazySingleton<BannersRemoteDataSource>(
+    () => BannersRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<BannersRepo>(
+    () => BannersRepoImpl(getIt<BannersRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetBannersUseCase>(
+    () => GetBannersUseCase(getIt<BannersRepo>()),
+  );
 }
 
 void _setupCheckout() {

@@ -10,8 +10,13 @@ import 'package:nextcart/features/favorites/presentation/manager/favorites_cubit
 
 class ProductCardImage extends StatelessWidget {
   final ProductEntity product;
+  final Color? badgeColor;
 
-  const ProductCardImage({super.key, required this.product});
+  const ProductCardImage({
+    super.key,
+    required this.product,
+    this.badgeColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ class ProductCardImage extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: context.primaryColor,
+                  color: badgeColor ?? context.primaryColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),

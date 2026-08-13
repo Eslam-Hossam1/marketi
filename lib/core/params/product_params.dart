@@ -8,6 +8,9 @@ class ProductParams {
   final String? price;
   final double? discount;
   final bool? popular;
+  final String? targetType;
+  final String? targetOperator;
+  final String? targetValue;
 
   const ProductParams({
     this.skip = 0,
@@ -19,5 +22,8 @@ class ProductParams {
     this.price,
     this.discount,
     this.popular,
+    this.targetType,
+    this.targetOperator,
+    this.targetValue,
   });
 }
