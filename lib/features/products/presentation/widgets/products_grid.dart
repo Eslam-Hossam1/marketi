@@ -8,7 +8,9 @@ import '../manager/products_cubit/products_cubit.dart';
 import '../manager/products_cubit/products_state.dart';
 
 class ProductsGrid extends StatelessWidget {
-  const ProductsGrid({super.key});
+  final Color? badgeColor;
+  
+  const ProductsGrid({super.key, this.badgeColor});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,10 @@ class ProductsGrid extends StatelessWidget {
             ),
             itemCount: products.length,
             itemBuilder: (context, index) {
-              return ProductCard(product: products[index]);
+              return ProductCard(
+                product: products[index],
+                badgeColor: badgeColor,
+              );
             },
           );
         }

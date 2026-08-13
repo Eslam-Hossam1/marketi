@@ -6,6 +6,8 @@ import 'package:nextcart/features/categories/presentation/views/categories_view.
 import 'package:nextcart/features/search/presentation/views/search_view.dart';
 import 'package:nextcart/features/product_details/presentation/views/product_details_view.dart';
 import 'package:nextcart/features/product_details/domain/params/product_details_params.dart';
+import 'package:nextcart/core/params/product_params.dart';
+import 'package:nextcart/features/products/domain/params/products_routing_params.dart';
 
 class ProductRoutes {
   static List<RouteBase> routes = [
@@ -13,7 +15,9 @@ class ProductRoutes {
       path: RoutePaths.products,
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
-        return ProductsView(title: extra?['title'] ?? 'Products');
+        final title = extra?['title'] as String? ?? 'Products';
+        final params = extra?['params'] as ProductParams? ?? const ProductParams();
+        return ProductsView(title: title, params: params);
       },
     ),
     GoRoute(
