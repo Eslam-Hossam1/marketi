@@ -10,6 +10,9 @@ class ProductRequestModel {
   final String? price;
   final double? discount;
   final bool? popular;
+  final String? targetType;
+  final String? targetOperator;
+  final String? targetValue;
 
   const ProductRequestModel({
     required this.skip,
@@ -21,6 +24,9 @@ class ProductRequestModel {
     this.price,
     this.discount,
     this.popular,
+    this.targetType,
+    this.targetOperator,
+    this.targetValue,
   });
 
   factory ProductRequestModel.fromParams(ProductParams params) {
@@ -34,6 +40,9 @@ class ProductRequestModel {
       price: params.price,
       discount: params.discount,
       popular: params.popular,
+      targetType: params.targetType,
+      targetOperator: params.targetOperator,
+      targetValue: params.targetValue,
     );
   }
 
@@ -48,6 +57,9 @@ class ProductRequestModel {
       if (price != null) 'price': price,
       if (discount != null) 'discountPercentage': discount,
       if (popular != null) 'popular': popular,
+      if (targetType != null) 'targetType': targetType,
+      if (targetOperator != null) 'targetOperator': targetOperator,
+      if (targetValue != null) 'targetValue': targetValue,
     };
   }
 }
