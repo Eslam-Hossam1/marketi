@@ -14,7 +14,7 @@ class ProductCardPriceAndRating extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "${product.price.toInt()} LE",
+          "${product.price.toInt()} \$",
           style: AppTextStyles.bold14(
             context,
           ).copyWith(color: context.mainTextColor),
