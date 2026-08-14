@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -40,7 +41,10 @@ class _HomePromoBannerState extends State<HomePromoBanner> {
                 items: state.banners.map((banner) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<BannersCubit>().onBannerTapped(banner, context);
+                      context.read<BannersCubit>().onBannerTapped(
+                        banner,
+                        context,
+                      );
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
@@ -58,7 +62,9 @@ class _HomePromoBannerState extends State<HomePromoBanner> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: state.banners.asMap().entries.map((entry) {
-                  return Container(
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
                     width: _currentIndex == entry.key ? 24.0 : 8.0,
                     height: 8.0,
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -82,16 +88,15 @@ class _HomePromoBannerState extends State<HomePromoBanner> {
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   height: 160.h(context),
-                  color: Colors.grey[300],
+                  color: context.cachedNetworkImagePlaceholderColor,
                 ),
               ),
             ),
           );
         }
-        
+
         return const SizedBox.shrink();
       },
     );
   }
 }
-
