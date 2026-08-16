@@ -1,4 +1,4 @@
-package com.example.marketi
+package com.example.nextcart
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
