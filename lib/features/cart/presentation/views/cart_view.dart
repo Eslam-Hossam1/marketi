@@ -36,7 +36,9 @@ class CartView extends StatelessWidget {
                 current is GetCartSuccess ||
                 current is CartFailure ||
                 current is CartEmpty ||
-                current is CartNotEmpty,
+                current is CartNotEmpty ||
+                current is CartCleared,
+
             builder: (context, state) {
               if (state is CartLoading) {
                 return const CustomCircularProgressIndecator();
@@ -47,7 +49,7 @@ class CartView extends StatelessWidget {
                   onPressed: () => context.read<CartCubit>().getCart(),
                 );
               }
-              if (state is CartEmpty) {
+              if (state is CartEmpty || state is CartCleared) {
                 return const CartEmptyWidget();
               }
               return const CartViewBody();
