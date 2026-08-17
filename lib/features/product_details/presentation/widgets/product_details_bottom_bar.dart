@@ -8,6 +8,7 @@ import 'package:nextcart/core/widgets/spacing/width_space.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
 import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 
 class ProductDetailsBottomBar extends StatelessWidget {
   final ProductEntity product;
@@ -39,7 +40,19 @@ class ProductDetailsBottomBar extends StatelessWidget {
             ),
           ],
         ),
-        BlocBuilder<CartCubit, CartState>(
+        BlocConsumer<CartCubit, CartState>(
+          listenWhen: (previous, current) =>
+              (current is AddToCartFailure && current.productId == product.id),
+          listener: (context, state) {
+            if (state is AddToCartFailure && state.productId == product.id) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
           buildWhen: (previous, current) =>
               (current is AddToCartLoading && current.productId == product.id) ||
               (current is AddToCartSuccess && current.productId == product.id) ||
