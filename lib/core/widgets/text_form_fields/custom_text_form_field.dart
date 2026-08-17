@@ -87,6 +87,10 @@ class CustomTextFormField extends StatelessWidget {
                   prefixSvgPath!,
                   fit: BoxFit.contain,
                   width: 16.w(context),
+                  colorFilter: ColorFilter.mode(
+                    context.mainTextColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
               )
             : prefixIcon != null

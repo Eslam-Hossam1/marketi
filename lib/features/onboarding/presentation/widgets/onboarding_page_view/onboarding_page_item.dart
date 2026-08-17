@@ -31,7 +31,9 @@ class OnboardingPageItem extends StatelessWidget {
               SizedBox(height: 24.h(context)),
               Text(
                 page.title,
-                style: AppTextStyles.textStyleSemiBold20(context),
+                style: AppTextStyles.textStyleSemiBold20(
+                  context,
+                ).copyWith(color: context.mainTextColor),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 12.h(context)),

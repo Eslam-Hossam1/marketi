@@ -6,6 +6,7 @@ import 'package:nextcart/core/widgets/custom_circular_progress_indecator.dart';
 import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 import '../manager/search_cubit/search_cubit.dart';
 import '../manager/search_cubit/search_state.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
 class SearchResultsGrid extends StatelessWidget {
   const SearchResultsGrid({super.key});
@@ -25,9 +26,14 @@ class SearchResultsGrid extends StatelessWidget {
         final products = searchCubit.products;
 
         if (state is SearchInitial) {
-          return const SliverFillRemaining(
+          return  SliverFillRemaining(
             hasScrollBody: false,
-            child: Center(child: Text("Search for products...")),
+            child: Center(
+              child: Text(
+                "Search for products...",
+                style: TextStyle(color: context.mainTextColor),
+              ),
+            ),
           );
         } else if (state is SearchFirstLoading) {
           return const SliverFillRemaining(
@@ -44,9 +50,14 @@ class SearchResultsGrid extends StatelessWidget {
             ),
           );
         } else if (state is SearchEmpty) {
-          return const SliverFillRemaining(
+          return  SliverFillRemaining(
             hasScrollBody: false,
-            child: Center(child: Text("No products found.")),
+            child: Center(
+              child: Text(
+                "No products found.",
+                style: TextStyle(color: context.mainTextColor),
+              ),
+            ),
           );
         } else {
           return SliverGrid.builder(
