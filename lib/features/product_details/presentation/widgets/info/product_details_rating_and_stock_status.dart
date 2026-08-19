@@ -43,7 +43,7 @@ class ProductDetailsRatingAndStockStatus extends StatelessWidget {
             Row(
               children: List.generate(5, (index) {
                 return Icon(
-                  index < rating.round() ? Icons.star : Icons.star_border,
+                  index < rating.round() ? Icons.star_rounded : Icons.star_outline_rounded,
                   color: index < rating.round() ? Colors.amber : Colors.grey,
                   size: 20.w(context),
                 );

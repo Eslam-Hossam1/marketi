@@ -27,6 +27,8 @@ extension ThemeColorsExtension on BuildContext {
       customColorsExtension.otherChatBubbleTimeTextColor;
   Color get brandBackground =>
       customColorsExtension.brandBackground;
+  Color get onboardingActiveDotColor =>
+      customColorsExtension.onboardingActiveDotColor;
   Color get outlineColor => colorScheme.outline;
   Color get dialogBackgroundColor => theme.dialogBackgroundColor;
   Color get primaryColor => colorScheme.primary;

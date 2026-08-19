@@ -24,11 +24,7 @@ class CartHeader extends StatelessWidget {
               color: context.mainTextColor,
             ),
           ),
-          const CustomNetworkCircleImage(
-            baseSize: 45,
-            userImageUrl:
-                "https://static.wikia.nocookie.net/gracieabrams/images/3/39/Billie_Eilish.jpeg/revision/latest?cb=20250318232144",
-          ),
+          const SizedBox(width: 45),
         ],
       ),
     );

@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
-import 'package:nextcart/core/routing/routes_paths.dart';
+
+import '../../../../core/widgets/buttons/cart_icon_button.dart';
 
 class ProductDetailsHeader extends StatelessWidget {
   const ProductDetailsHeader({super.key});
@@ -11,7 +12,10 @@ class ProductDetailsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w(context), vertical: 8.h(context)),
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w(context),
+        vertical: 8.h(context),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -36,42 +40,11 @@ class ProductDetailsHeader extends StatelessWidget {
           ),
           Text(
             'Product Details',
-            style: AppTextStyles.medium18(context).copyWith(color: context.mainTextColor),
+            style: AppTextStyles.medium18(
+              context,
+            ).copyWith(color: context.mainTextColor),
           ),
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              IconButton(
-                onPressed: () {
-                  context.go(RoutePaths.cart);
-                },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: context.primaryColor,
-                  size: 24.w(context),
-                ),
-              ),
-              Positioned(
-                top: 2,
-                right: 2,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.blue, // Primary color fallback if not using context
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(
-                    '3', // Dummy badge number
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10.w(context),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          const CartIconButton(),
         ],
       ),
     );

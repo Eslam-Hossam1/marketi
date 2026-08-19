@@ -42,6 +42,10 @@ class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
           prefixIcon: SvgPicture.asset(
             Assets.imagesSvgPasswordIcon,
             fit: BoxFit.contain,
+            colorFilter: ColorFilter.mode(
+              context.mainTextColor,
+              BlendMode.srcIn,
+            ),
             width: 16.w(context),
           ),
         ),

@@ -6,6 +6,7 @@ import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:nextcart/features/cart/presentation/manager/cart_cubit/cart_state.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 
 class ProductAddToCartButton extends StatelessWidget {
   final ProductEntity product;
@@ -13,7 +14,19 @@ class ProductAddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
+    return BlocConsumer<CartCubit, CartState>(
+      listenWhen: (previous, current) =>
+          (current is AddToCartFailure && current.productId == product.id),
+      listener: (context, state) {
+        if (state is AddToCartFailure && state.productId == product.id) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
       buildWhen: (previous, current) =>
           (current is AddToCartLoading && current.productId == product.id) ||
           (current is AddToCartSuccess && current.productId == product.id) ||

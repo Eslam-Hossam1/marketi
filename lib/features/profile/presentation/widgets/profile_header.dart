@@ -4,6 +4,7 @@ import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/routing/routes_paths.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/buttons/cart_icon_button.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -38,35 +39,7 @@ class ProfileHeader extends StatelessWidget {
             context,
           ).copyWith(color: context.primaryColor),
         ),
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.shopping_cart_outlined,
-                color: context.primaryColor,
-                size: 24.w(context),
-              ),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(),
-            ),
-            Container(
-              padding: EdgeInsets.all(4.w(context)),
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: Text(
-                '3',
-                style: AppTextStyles.regular12(
-                  context,
-                ).copyWith(color: Colors.white, fontSize: 10),
-              ),
-            ),
-          ],
-        ),
+        CartIconButton(),
       ],
     );
   }

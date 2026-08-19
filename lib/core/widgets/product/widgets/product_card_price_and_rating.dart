@@ -22,9 +22,9 @@ class ProductCardPriceAndRating extends StatelessWidget {
         Row(
           children: [
             Icon(
-              Icons.star_border,
+              Icons.star_rounded,
               size: 18.w(context),
-              color: context.mainTextColor,
+              color: Colors.amber,
             ),
             const SizedBox(width: 4),
             Text(
