@@ -4,7 +4,7 @@ import 'package:nextcart/core/extensions/responsive_extension.dart';
 import 'package:nextcart/core/theme/app_text_styles.dart';
 import 'package:nextcart/core/theme/theme_colors_extension.dart';
 
-import 'product_details_cart_icon_button.dart';
+import '../../../../core/widgets/buttons/cart_icon_button.dart';
 
 class ProductDetailsHeader extends StatelessWidget {
   const ProductDetailsHeader({super.key});
@@ -44,7 +44,7 @@ class ProductDetailsHeader extends StatelessWidget {
               context,
             ).copyWith(color: context.mainTextColor),
           ),
-          const ProductDetailsCartIconButton(),
+          const CartIconButton(),
         ],
       ),
     );
