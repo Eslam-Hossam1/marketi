@@ -10,12 +10,21 @@ class ForgotPasswordRemoteDataSourceImpl
   ForgotPasswordRemoteDataSourceImpl(this._supabaseClient);
 
   @override
-  Future<void> sendCode(SendCodeRequestModel requestModel) async {
-    await _supabaseClient.auth.resetPasswordForEmail(requestModel.email!);
+  Future<void> sendCode(
+    SendCodeRequestModel requestModel, {
+    required String redirectTo,
+  }) async {
+    await _supabaseClient.auth.resetPasswordForEmail(
+      requestModel.email,
+      redirectTo: redirectTo,
+    );
   }
 
   @override
   Future<void> resetPassword(ResetPasswordRequestModel requestModel) async {
-    await _supabaseClient.auth.updateUser(UserAttributes(password: requestModel.password));
+    await _supabaseClient.auth.updateUser(
+      UserAttributes(password: requestModel.password),
+    );
   }
 }
+
