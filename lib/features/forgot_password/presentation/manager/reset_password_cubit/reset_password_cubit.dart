@@ -14,7 +14,6 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   Future<void> resetPassword() async {
     emit(const ResetPasswordLoading());
     final params = ResetPasswordParams(
-      email: formData.email,
       password: formData.password,
       confirmPassword: formData.confirmPassword,
     );

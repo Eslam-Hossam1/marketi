@@ -20,14 +20,11 @@ class ResetPasswordRoutes {
     ),
     GoRoute(
       path: RoutePaths.resetPassword,
-      builder: (context, state) {
-        final email = state.extra as String;
-        return BlocProvider(
-          create: (context) => ResetPasswordCubit(getIt<ResetPasswordUseCase>())
-            ..formData.email = email,
-          child: const ResetPasswordView(),
-        );
-      },
+      builder: (context, state) => BlocProvider(
+        create: (context) => ResetPasswordCubit(getIt<ResetPasswordUseCase>()),
+        child: const ResetPasswordView(),
+      ),
     ),
   ];
 }
+

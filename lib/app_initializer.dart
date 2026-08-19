@@ -8,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/utils/app_bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:nextcart/core/routing/app_router.dart';
 
 class AppInitializer {
   static Future<void> initialize() async {
@@ -16,7 +17,10 @@ class AppInitializer {
     await _initBlocObserverAndHydratedBloc();
     await _initSupabase();
     await _initServiceLocator();
+    AppRouter.setupDeepLinkListener();
   }
+
+
 
   static Future<void> _initSupabase() async {
     await Supabase.initialize(
