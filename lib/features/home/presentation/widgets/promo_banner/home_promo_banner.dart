@@ -25,37 +25,39 @@ class _HomePromoBannerState extends State<HomePromoBanner> {
         if (state is BannersLoaded && state.banners.isNotEmpty) {
           return Column(
             children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 160.h(context),
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 4),
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.9,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                ),
-                items: state.banners.map((banner) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<BannersCubit>().onBannerTapped(
-                        banner,
-                        context,
-                      );
+              AspectRatio(
+                aspectRatio: 21 / 9,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 4),
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: CustomCachedNetworkImage(
-                        url: banner.imageUrl,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
+                  ),
+                  items: state.banners.map((banner) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<BannersCubit>().onBannerTapped(
+                          banner,
+                          context,
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: CustomCachedNetworkImage(
+                          url: banner.imageUrl,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
               const SizedBox(height: 12),
               // Dot indicators
