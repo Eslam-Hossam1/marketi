@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source.dart';
 import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source_impl.dart';
@@ -17,9 +16,6 @@ import 'package:nextcart/core/services/image_picker_service/cropped_image_picker
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:nextcart/features/profile/domain/usecases/get_user_data_use_case.dart';
-import 'package:nextcart/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
-import 'package:nextcart/features/otp/data/repos/otp_repo_impl.dart';
-import 'package:nextcart/features/otp/domain/repos/otp_repo.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source_impl.dart';
 import '../../features/forgot_password/data/repos/forgot_password_repo_impl.dart';
@@ -65,8 +61,7 @@ import '../../features/auth/domain/repos/auth_repo.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../../features/auth/domain/usecases/logout_use_case.dart';
-import '../networking/api_consumer.dart';
-import '../networking/dio_consumer.dart';
+
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
 import 'package:nextcart/features/profile/data/datasources/profile_remote_data_source.dart';
@@ -114,10 +109,8 @@ final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
   await _setupCaching();
-  _setupNetworking();
   _setupAuth();
   _setupForgotPassword();
-  _setupOtp();
   _setupProfile();
   _setupEditProfile();
   _setupProducts();
@@ -269,15 +262,6 @@ void _setupProfile() {
 
 }
 
-void _setupOtp() {
-  getIt.registerSingleton<OtpRepo>(
-    OtpRepoImpl(
-      otpRemoteDataSource: OtpRemoteDataSourceImpl(
-        apiConsumer: getIt<ApiConsumer>(),
-      ),
-    ),
-  );
-}
 
 Future<void> _setupCaching() async {
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -296,10 +280,6 @@ Future<void> _setupCaching() async {
 
 }
 
-void _setupNetworking() {
-  getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
-  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
-}
 
 void _setupAuth() {
   // Data Source

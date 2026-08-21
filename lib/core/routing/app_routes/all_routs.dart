@@ -18,7 +18,6 @@ import 'package:nextcart/core/routing/app_routes/brand_products_routes.dart';
 import 'package:nextcart/core/routing/app_routes/category_products_routes.dart';
 import 'package:nextcart/core/routing/app_routes/main_route.dart';
 import 'package:nextcart/core/routing/app_routes/onboarding_route.dart';
-import 'package:nextcart/core/routing/app_routes/otp_route.dart';
 import 'package:nextcart/core/routing/app_routes/product_routes.dart';
 import 'package:nextcart/core/routing/app_routes/profile_route.dart';
 import 'package:nextcart/core/routing/app_routes/reset_password_routes.dart';
@@ -84,6 +83,5 @@ class AppRoutes {
     ...OnboardingRoute.routes,
     ...AuthRoutes.routes,
     ...ResetPasswordRoutes.routes,
-    ...OtpRoute.routes,
   ];
 }

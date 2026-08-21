@@ -1,4 +1,3 @@
-import 'package:nextcart/core/networking/api_keys.dart';
 import 'package:nextcart/features/auth/domain/params/login_params.dart';
 
 class LoginRequestModel {
@@ -19,8 +18,8 @@ class LoginRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      ApiKeys.email: email,
-      ApiKeys.password: password,
+      'email': email,
+      'password': password,
     };
   }
 }

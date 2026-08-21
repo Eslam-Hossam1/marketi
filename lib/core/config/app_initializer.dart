@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:nextcart/core/config/stripe_config.dart';
 import 'package:nextcart/core/di/service_locator.dart';
-import 'package:nextcart/core/networking/supabase_config.dart';
-import 'package:nextcart/core/networking/supabase_logger_client.dart';
+import 'package:nextcart/core/config/supabase_config.dart';
+import 'package:nextcart/core/services/supabase_logger_client.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:nextcart/core/utils/app_bloc_observer.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,11 +14,15 @@ import 'package:nextcart/core/routing/app_router.dart';
 class AppInitializer {
   static Future<void> initialize() async {
     await dotenv.load(fileName: ".env");
-    Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+    _initStripe();
     await _initBlocObserverAndHydratedBloc();
     await _initSupabase();
     await _initServiceLocator();
     AppRouter.setupDeepLinkListener();
+  }
+
+  static void _initStripe() {
+    Stripe.publishableKey = StripeConfig.stripePublishableKey;
   }
 
 
@@ -25,7 +30,7 @@ class AppInitializer {
   static Future<void> _initSupabase() async {
     await Supabase.initialize(
       url: SupabaseConfig.projectUrl,
-      anonKey: SupabaseConfig.publishableKey,
+      publishableKey: SupabaseConfig.publishableKey,
       httpClient: SupabaseLoggerClient(),
     );
   }
