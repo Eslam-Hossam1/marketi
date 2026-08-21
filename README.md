@@ -421,32 +421,52 @@ Custom colors are managed through **ThemeExtensions** (`CustomColors`) for consi
 
 ---
 
-## 🗺️ App Navigation
+## 🗺️ App Navigation Flow
 
-NextCart uses **GoRouter** for declarative, type-safe navigation with a **ShellRoute** for the main bottom navigation bar.
+NextCart uses **GoRouter** for declarative, type-safe navigation with a **StatefulShellRoute** for the main bottom navigation bar.
 
-```
-/ (Splash)
-├── /onboarding
-├── /login
-├── /sign_up
-├── /forgot_password
-│
-├── 🏠 Shell (Bottom Nav)
-│   ├── /home
-│   ├── /cart
-│   ├── /favorites
-│   └── /profile
-│
-├── /products
-├── /product_details
-├── /categories
-├── /category_products
-├── /brands
-├── /brand_products
-├── /search
-├── /edit_profile
-└── /theme_selection
+```mermaid
+flowchart TD
+    A([🚀 Launch]) --> B[Splash Screen]
+    B --> C{First time?}
+    C -- Yes --> D[Onboarding]
+    C -- No --> E{Logged in?}
+    D --> E
+    E -- No --> F[Login]
+    F --> G[Sign Up]
+    F --> H[Forgot Password]
+    H --> I[Reset Password]
+    I --> F
+    G --> J
+    E -- Yes --> J
+
+    J[Main Shell] --> K[🏠 Home]
+    J --> L[🛒 Cart]
+    J --> M[❤️ Favorites]
+    J --> N[👤 Profile]
+
+    K --> O[🔍 Search]
+    K --> P[📦 Product Details]
+    K --> Q[🏷️ Categories]
+    K --> R[🏢 Brands]
+
+    Q --> S[Category Products]
+    R --> T[Brand Products]
+    S --> P
+    T --> P
+    M --> P
+
+    L --> U[Checkout]
+    U --> V[💳 Payment Methods]
+    V --> W[✅ Payment Success]
+    V --> X[⏳ Payment Pending]
+    W --> Y[Order Details]
+    X --> Y
+
+    N --> Z[Edit Profile]
+    N --> AA[🎨 Theme Selection]
+    N --> AB[📋 Orders]
+    AB --> Y
 ```
 
 ---
