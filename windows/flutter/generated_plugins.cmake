@@ -7,7 +7,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   firebase_core
   flutter_secure_storage_windows
-  passkeys_windows
   rive_native
   url_launcher_windows
 )
