@@ -1,4 +1,5 @@
 <h1 align="center">🛍️ NextCart — Your Smart Shopping Companion</h1>
+<img width="1983" height="793" alt="NextCart Banner" src="https://github.com/user-attachments/assets/a42dc3f7-8d13-4e7e-aec5-f2ad78d19cc5" />
 
 <p align="center">
   <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-3.10+-02569B?style=for-the-badge&logo=flutter&logoColor=white" /></a>
@@ -9,9 +10,15 @@
 </p>
 
 <p align="center">
-  <b>A beautifully crafted e-commerce mobile app built with Flutter, following Clean Architecture & Cubit state management.</b>
-  <br/>
-  Browse products, explore brands & categories, manage your cart, save favorites, and enjoy a fully personalized shopping experience! 🚀
+  <b>NextCart is a modern, production-oriented e-commerce mobile application built with Flutter, Clean Architecture, and Cubit.</b>
+  <br/><br/>
+  🛍️ Discover products, explore categories, search and filter, manage your cart and favorites, and enjoy a seamless shopping experience.
+  <br/><br/>
+  💳 Secure payments powered by <b>Stripe</b>, featuring server-side price validation, PaymentIntents, Stripe Customer management, and webhook-driven payment confirmation.
+  <br/><br/>
+  📦 Full order lifecycle management with payment status tracking, order history, detailed order views, and automated cart synchronization.
+  <br/><br/>
+  ⚡ Built with <b>Supabase, PostgreSQL, and Edge Functions</b>, leveraging authentication, Row Level Security (RLS), and secure server-side business logic.
 </p>
 
 ---
