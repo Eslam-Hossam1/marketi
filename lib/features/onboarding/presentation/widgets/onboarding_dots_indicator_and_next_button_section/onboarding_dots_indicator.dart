@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/features/onboarding/presentation/manager/onboarding_cubit/onboarding_cubit.dart';
 
 class OnboardingDotsIndicator extends StatelessWidget {
   final int currentPage;
@@ -25,7 +26,6 @@ class Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const activeColor = Color(0xFF001640);
     const inactiveColor = Color(0xFFB2CCFF);
 
     return AnimatedContainer(
@@ -35,7 +35,7 @@ class Dot extends StatelessWidget {
       width: isActive ? 15.w(context) : 13.w(context),
       height: isActive ? 15.w(context) : 13.w(context),
       decoration: BoxDecoration(
-        color: isActive ? activeColor : inactiveColor,
+        color: isActive ? context.onboardingActiveDotColor : inactiveColor,
         shape: BoxShape.circle,
       ),
     );

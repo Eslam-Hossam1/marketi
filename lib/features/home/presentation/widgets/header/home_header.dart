@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/avatar/custom_network_circle_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/avatar/global_profile_avatar.dart';
+import 'package:nextcart/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
+import 'package:nextcart/features/profile/presentation/manager/profile_cubit/profile_state.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -12,16 +15,22 @@ class HomeHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: [
-          const CustomNetworkCircleImage(
-            baseSize: 48,
-            userImageUrl: "https://static.wikia.nocookie.net/gracieabrams/images/3/39/Billie_Eilish.jpeg/revision/latest?cb=20250318232144",
-          ),
+          const GlobalProfileAvatar(baseSize: 48),
           const SizedBox(width: 12),
-          Text(
-            "Hi Yousef !",
-            style: AppTextStyles.bold20(context).copyWith(
-              color: context.mainTextColor,
-            ),
+          BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, state) {
+              final userProfile = context.read<ProfileCubit>().userProfile;
+              final name = userProfile != null && userProfile.name.isNotEmpty
+                  ? userProfile.name.split(' ').first
+                  : 'User';
+                  
+              return Text(
+                "Hi $name !",
+                style: AppTextStyles.bold20(
+                  context,
+                ).copyWith(color: context.mainTextColor),
+              );
+            },
           ),
           const Spacer(),
           IconButton(

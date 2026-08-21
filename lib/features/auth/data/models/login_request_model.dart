@@ -1,5 +1,4 @@
-import 'package:marketi/core/networking/api_keys.dart';
-import 'package:marketi/features/auth/domain/params/login_params.dart';
+import 'package:nextcart/features/auth/domain/params/login_params.dart';
 
 class LoginRequestModel {
   final String email;
@@ -19,8 +18,8 @@ class LoginRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      ApiKeys.email: email,
-      ApiKeys.password: password,
+      'email': email,
+      'password': password,
     };
   }
 }

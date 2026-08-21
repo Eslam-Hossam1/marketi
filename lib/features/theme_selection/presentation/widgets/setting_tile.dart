@@ -1,5 +1,5 @@
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 class SettingTile extends StatelessWidget {

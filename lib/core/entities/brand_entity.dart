@@ -1,6 +1,11 @@
 class BrandEntity {
+  final String id;
   final String name;
-  final String emoji;
+  final String image;
 
-  const BrandEntity({required this.name, required this.emoji});
+  const BrandEntity({
+    required this.id,
+    required this.name,
+    required this.image,
+  });
 }

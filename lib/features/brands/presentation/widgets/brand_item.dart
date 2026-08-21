@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/entities/brand_entity.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/features/brand_products/domain/params/brand_products_routing_params.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/core/entities/brand_entity.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/features/brand_products/domain/params/brand_products_routing_params.dart';
 
 class BrandItem extends StatelessWidget {
   final BrandEntity brand;
@@ -41,20 +42,25 @@ class BrandItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: context.primaryColor.withValues(alpha: 0.1),
+                color: context.brandBackground,
                 shape: BoxShape.circle,
               ),
-              child: Text(
-                brand.emoji,
-                style: TextStyle(fontSize: 24.w(context)),
+              child: SizedBox(
+                width: 32.w(context),
+                height: 32.h(context),
+                child: CustomCachedNetworkImage(
+                  url: brand.image,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Text(
                 brand.name,
-                style: AppTextStyles.medium18(context)
-                    .copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium18(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ),
             Icon(

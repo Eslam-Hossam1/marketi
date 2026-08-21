@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/routing/routes_paths.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/text_form_fields/custom_text_form_field.dart';
 
 class HomeSearchTextField extends StatelessWidget {
   const HomeSearchTextField({super.key});
@@ -13,7 +12,7 @@ class HomeSearchTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: GestureDetector(
-        onTap: () => context.push(RoutePaths.search),
+        onTap: () => RoutingHelper.pushSearch(context),
         child: AbsorbPointer(
           child: CustomTextFormField(
             hintText: "What are you looking for ?",

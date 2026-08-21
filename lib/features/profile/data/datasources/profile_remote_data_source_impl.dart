@@ -1,17 +1,23 @@
-import 'package:marketi/core/networking/end_points.dart';
-
-import '../../../../core/networking/api_consumer.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_profile_model.dart';
 import 'profile_remote_data_source.dart';
 
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
-  final ApiConsumer _apiConsumer;
+  final SupabaseClient _supabaseClient;
 
-  ProfileRemoteDataSourceImpl(this._apiConsumer);
+  ProfileRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<UserProfileModel> getUserData() async {
-    final response = await _apiConsumer.get(EndPoints.userData);
+    final user = _supabaseClient.auth.currentUser;
+    if (user == null) throw Exception('Not authenticated');
+
+    final response = await _supabaseClient
+        .from('profiles')
+        .select()
+        .eq('id', user.id)
+        .single();
+        
     return UserProfileModel.fromJson(response);
   }
 }

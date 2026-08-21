@@ -22,4 +22,12 @@ abstract class RoutePaths {
   static const search = "/search";
   static const categoryProducts = "/category_products";
   static const brandProducts = "/brand_products";
+  static const productDetails = "/product_details";
+  static const orders = "/orders";
+  static const orderDetails = "/order_details";
+  static const checkout = "/checkout";
+  static const paymentSuccess = "/payment_success";
+  static const paymentDelay = "/payment_delay";
+  static const fireSale = "/fire_sale";
+  static const filteredProducts = "/filtered_products";
 }

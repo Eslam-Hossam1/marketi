@@ -1,5 +1,4 @@
-import 'package:marketi/core/networking/api_keys.dart';
-import 'package:marketi/features/auth/domain/params/sign_up_params.dart';
+import 'package:nextcart/features/auth/domain/params/sign_up_params.dart';
 
 class SignUpRequestModel {
   final String name;
@@ -28,11 +27,11 @@ class SignUpRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      ApiKeys.name: name,
-      ApiKeys.phone: phone,
-      ApiKeys.email: email,
-      ApiKeys.password: password,
-      ApiKeys.confirmPassword: confirmPassword,
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'password': password,
+      'confirmPassword': confirmPassword,
     };
   }
 }

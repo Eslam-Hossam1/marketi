@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/features/auth/domain/params/login_params.dart';
-import 'package:marketi/features/auth/domain/usecases/login_use_case.dart';
-import 'package:marketi/features/auth/presentation/manager/login_cubit/login_form_data.dart';
-import 'package:marketi/features/auth/presentation/manager/login_cubit/login_state.dart';
+import 'package:nextcart/features/auth/domain/params/login_params.dart';
+import 'package:nextcart/features/auth/domain/usecases/login_use_case.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_form_data.dart';
+import 'package:nextcart/features/auth/presentation/manager/login_cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
@@ -19,8 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
     final result = await _loginUseCase(params);
     result.fold(
-      (failure) =>
-          emit(LoginFailure(failure.serverErrorMessage ?? failure.errMsg)),
+      (failure) => emit(LoginFailure(failure.errMsg)),
       (_) => emit(const LoginSuccess()),
     );
   }

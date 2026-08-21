@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/widgets/sliver_sticky_footer.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/features/auth/presentation/widgets/login/dont_have_an_email.dart';
-import 'package:marketi/features/auth/presentation/widgets/login/login_button.dart';
+import 'package:nextcart/core/widgets/sliver_sticky_footer.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/features/auth/presentation/widgets/login/dont_have_an_email.dart';
+import 'package:nextcart/features/auth/presentation/widgets/login/login_button.dart';
 
 class LoginButtonAndDontHaveAccountSection extends StatelessWidget {
   final GlobalKey<FormState> formKey;

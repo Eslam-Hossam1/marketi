@@ -13,6 +13,8 @@ abstract class AppColors {
   static const Color lightFormColor = Color(0xFFF3F6F6);
   static const Color lightToastBackground = Color(0xFFF4F5F7);
   static const Color lightCachedNetworkImagePlacholderColor = Color(0xFFEBEBF4);
+  static const Color lightBrandBackground = Color(0xFFF3F6F6);
+  static const Color lightOnboardingActiveDot = Color(0xFF001640);
   // 💬 Chat Bubble Colors (Light)
   static const Color lightMyChatBubbleBackground = Color(0xFF20A090);
   static const Color lightOtherChatBubbleBackground = Color(0xFFE5F6FD);
@@ -42,4 +44,5 @@ abstract class AppColors {
   static const Color darkFormColor = Color(0xFF2E2E2E);
   static const Color darkToastBackground = Color(0xFF2E2E2E);
   static const Color darkCachedNetworkImagePlacholderColor = Color(0xFF3A3A3A);
+  static const Color darkBrandBackground = Color(0xFFFFFFFF);
 }

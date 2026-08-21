@@ -1,51 +1,55 @@
-import 'package:dio/dio.dart';
-import 'package:marketi/features/brands/domain/usecases/get_brands_use_case.dart';
-import 'package:marketi/features/categories/domain/usecases/get_categories_use_case.dart';
-import 'package:marketi/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
-import 'package:marketi/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
-import 'package:marketi/features/edit_profile/domain/repos/edit_profile_repo.dart';
-import 'package:marketi/features/edit_profile/domain/usecases/add_image_use_case.dart';
-import 'package:marketi/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
-import 'package:marketi/core/services/image_picker_service/cropped_image_picker_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source.dart';
+import 'package:nextcart/features/banners/data/datasources/banners_remote_data_source/banners_remote_data_source_impl.dart';
+import 'package:nextcart/features/banners/data/repos/banners_repo_impl.dart';
+import 'package:nextcart/features/banners/domain/repos/banners_repo.dart';
+import 'package:nextcart/features/banners/domain/usecases/get_banners_use_case.dart';
+import 'package:nextcart/features/brands/domain/usecases/get_brands_use_case.dart';
+import 'package:nextcart/features/categories/domain/usecases/get_categories_use_case.dart';
+import 'package:nextcart/features/edit_profile/data/datasources/edit_profile_remote_datasource.dart';
+import 'package:nextcart/features/edit_profile/data/repos/edit_profile_repo_impl.dart';
+import 'package:nextcart/features/edit_profile/domain/repos/edit_profile_repo.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/add_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/delete_image_use_case.dart';
+import 'package:nextcart/features/edit_profile/domain/usecases/edit_user_data_use_case.dart';
+import 'package:nextcart/core/services/image_picker_service/cropped_image_picker_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:marketi/features/profile/domain/usecases/get_user_data_use_case.dart';
-import 'package:marketi/features/otp/data/data_sources/otp_remote_data_source_impl.dart';
-import 'package:marketi/features/otp/data/repos/otp_repo_impl.dart';
+import 'package:nextcart/features/profile/domain/usecases/get_user_data_use_case.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_remote_data_source/forgot_password_remote_data_source_impl.dart';
 import '../../features/forgot_password/data/repos/forgot_password_repo_impl.dart';
 import '../../features/forgot_password/domain/repos/forgot_password_repo.dart';
 import '../../features/forgot_password/domain/usecases/reset_password_use_case.dart';
 import '../../features/forgot_password/domain/usecases/send_code_use_case.dart';
-import 'package:marketi/features/products/data/datasources/products_remote_data_source/products_remote_data_source.dart';
-import 'package:marketi/features/products/data/datasources/products_remote_data_source/products_remote_data_source_impl.dart';
-import 'package:marketi/features/products/data/repos/products_repo_impl.dart';
-import 'package:marketi/features/products/domain/repos/products_repo.dart';
-import 'package:marketi/features/products/domain/usecases/get_products_use_case.dart' as products_usecase;
-import 'package:marketi/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source.dart';
-import 'package:marketi/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source_impl.dart';
-import 'package:marketi/features/brands/data/repos/brands_repo_impl.dart';
-import 'package:marketi/features/brands/domain/repos/brands_repo.dart';
-import 'package:marketi/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source.dart';
-import 'package:marketi/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source_impl.dart';
-import 'package:marketi/features/categories/data/repos/categories_repo_impl.dart';
-import 'package:marketi/features/categories/domain/repos/categories_repo.dart';
-import 'package:marketi/features/search/data/datasources/search_remote_data_source/search_remote_data_source.dart';
-import 'package:marketi/features/search/data/datasources/search_remote_data_source/search_remote_data_source_impl.dart';
-import 'package:marketi/features/search/data/repos/search_repo_impl.dart';
-import 'package:marketi/features/search/domain/repos/search_repo.dart';
-import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
-import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source.dart';
-import 'package:marketi/features/brand_products/data/datasources/brand_products_remote_data_source_impl.dart';
-import 'package:marketi/features/brand_products/data/repos/brand_products_repo_impl.dart';
-import 'package:marketi/features/brand_products/domain/repos/brand_products_repo.dart';
-import 'package:marketi/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
-import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source.dart';
-import 'package:marketi/features/category_products/data/datasources/category_products_remote_data_source_impl.dart';
-import 'package:marketi/features/category_products/data/repos/category_products_repo_impl.dart';
-import 'package:marketi/features/category_products/domain/repos/category_products_repo.dart';
-import 'package:marketi/features/category_products/domain/usecases/get_category_products_use_case.dart';
+import 'package:nextcart/features/products/data/datasources/products_remote_data_source/products_remote_data_source.dart';
+import 'package:nextcart/features/products/data/datasources/products_remote_data_source/products_remote_data_source_impl.dart';
+import 'package:nextcart/features/products/data/repos/products_repo_impl.dart';
+import 'package:nextcart/features/products/domain/repos/products_repo.dart';
+import 'package:nextcart/features/products/domain/usecases/get_products_use_case.dart' as products_usecase;
+import 'package:nextcart/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source.dart';
+import 'package:nextcart/features/brands/data/datasources/brands_remote_data_source/brands_remote_data_source_impl.dart';
+import 'package:nextcart/features/brands/data/repos/brands_repo_impl.dart';
+import 'package:nextcart/features/brands/domain/repos/brands_repo.dart';
+import 'package:nextcart/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source.dart';
+import 'package:nextcart/features/categories/data/datasources/categories_remote_data_source/categories_remote_data_source_impl.dart';
+import 'package:nextcart/features/categories/data/repos/categories_repo_impl.dart';
+import 'package:nextcart/features/categories/domain/repos/categories_repo.dart';
+import 'package:nextcart/features/search/data/datasources/search_remote_data_source/search_remote_data_source.dart';
+import 'package:nextcart/features/search/data/datasources/search_remote_data_source/search_remote_data_source_impl.dart';
+import 'package:nextcart/features/search/data/repos/search_repo_impl.dart';
+import 'package:nextcart/features/search/domain/repos/search_repo.dart';
+import 'package:nextcart/features/search/domain/usecases/search_products_use_case.dart';
+import 'package:nextcart/features/brand_products/data/datasources/brand_products_remote_data_source.dart';
+import 'package:nextcart/features/brand_products/data/datasources/brand_products_remote_data_source_impl.dart';
+import 'package:nextcart/features/brand_products/data/repos/brand_products_repo_impl.dart';
+import 'package:nextcart/features/brand_products/domain/repos/brand_products_repo.dart';
+import 'package:nextcart/features/brand_products/domain/usecases/get_brand_products_use_case.dart';
+import 'package:nextcart/features/category_products/data/datasources/category_products_remote_data_source.dart';
+import 'package:nextcart/features/category_products/data/datasources/category_products_remote_data_source_impl.dart';
+import 'package:nextcart/features/category_products/data/repos/category_products_repo_impl.dart';
+import 'package:nextcart/features/category_products/domain/repos/category_products_repo.dart';
+import 'package:nextcart/features/category_products/domain/usecases/get_category_products_use_case.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,25 +60,57 @@ import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/domain/repos/auth_repo.dart';
 import '../../features/auth/domain/usecases/login_use_case.dart';
 import '../../features/auth/domain/usecases/sign_up_use_case.dart';
-import '../networking/api_consumer.dart';
-import '../networking/dio_consumer.dart';
-import '../services/auth_credentials_manager/auth_credentials_manager.dart';
-import '../services/jwt_decoder/jwt_decoder_service_impl.dart';
+import '../../features/auth/domain/usecases/logout_use_case.dart';
+
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
-import 'package:marketi/features/profile/data/datasources/profile_remote_data_source.dart';
-import 'package:marketi/features/profile/data/datasources/profile_remote_data_source_impl.dart';
-import 'package:marketi/features/profile/data/repos/profile_repo_impl.dart';
-import 'package:marketi/features/profile/domain/repos/profile_repo.dart';
+import 'package:nextcart/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:nextcart/features/profile/data/datasources/profile_remote_data_source_impl.dart';
+import 'package:nextcart/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:nextcart/features/profile/domain/repos/profile_repo.dart';
+import 'package:nextcart/features/product_details/data/datasources/product_details_remote_data_source.dart';
+import 'package:nextcart/features/product_details/data/datasources/product_details_remote_data_source_impl.dart';
+import 'package:nextcart/features/product_details/data/repos/product_details_repo_impl.dart';
+import 'package:nextcart/features/product_details/domain/repos/product_details_repo.dart';
+import 'package:nextcart/features/product_details/domain/usecases/get_product_details_usecase.dart';
+import 'package:nextcart/features/cart/data/datasources/cart_remote_data_source/cart_remote_data_source.dart';
+import 'package:nextcart/features/cart/data/datasources/cart_remote_data_source/cart_remote_data_source_impl.dart';
+import 'package:nextcart/features/cart/data/repos/cart_repo_impl.dart';
+import 'package:nextcart/features/cart/domain/repos/cart_repo.dart';
+import 'package:nextcart/features/cart/domain/usecases/get_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/add_to_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:nextcart/features/cart/domain/usecases/update_cart_quantity_use_case.dart';
+
+import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source.dart';
+
+import 'package:nextcart/features/favorites/data/datasources/favorites_remote_data_source/favorites_remote_data_source_impl.dart';
+import 'package:nextcart/features/favorites/data/repos/favorites_repo_impl.dart';
+import 'package:nextcart/features/favorites/domain/repos/favorites_repo.dart';
+import 'package:nextcart/features/favorites/domain/usecases/get_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/add_to_favorites_use_case.dart';
+import 'package:nextcart/features/favorites/domain/usecases/remove_from_favorites_use_case.dart';
+
+import 'package:nextcart/features/checkout/data/datasources/checkout_remote_data_source/checkout_remote_data_source.dart';
+import 'package:nextcart/features/checkout/data/datasources/checkout_remote_data_source/checkout_remote_data_source_impl.dart';
+import 'package:nextcart/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:nextcart/features/checkout/domain/repos/checkout_repo.dart';
+import 'package:nextcart/features/checkout/domain/usecases/create_checkout_use_case.dart';
+
+import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source.dart';
+import 'package:nextcart/features/orders/data/datasources/orders_remote_data_source/orders_remote_data_source_impl.dart';
+import 'package:nextcart/features/orders/data/repos/orders_repo_impl.dart';
+import 'package:nextcart/features/orders/domain/repos/orders_repo.dart';
+import 'package:nextcart/features/orders/domain/usecases/get_orders_use_case.dart';
+import 'package:nextcart/features/orders/domain/usecases/get_order_details_use_case.dart';
+import 'package:nextcart/core/services/stripe_service/stripe_service.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
   await _setupCaching();
-  _setupNetworking();
   _setupAuth();
   _setupForgotPassword();
-  _setupOtp();
   _setupProfile();
   _setupEditProfile();
   _setupProducts();
@@ -83,6 +119,105 @@ Future<void> setupServiceLocator() async {
   _setupSearch();
   _setupCategoryProducts();
   _setupBrandProducts();
+  _setupProductDetails();
+  _setupCart();
+  _setupFavorites();
+  _setupOrders();
+  _setupCheckout();
+  _setupBanners();
+}
+
+void _setupBanners() {
+  getIt.registerLazySingleton<BannersRemoteDataSource>(
+    () => BannersRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<BannersRepo>(
+    () => BannersRepoImpl(getIt<BannersRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetBannersUseCase>(
+    () => GetBannersUseCase(getIt<BannersRepo>()),
+  );
+}
+
+void _setupCheckout() {
+  getIt.registerLazySingleton<StripeService>(() => StripeService());
+  getIt.registerLazySingleton<CheckoutRemoteDataSource>(
+    () => CheckoutRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<CheckoutRepo>(
+    () => CheckoutRepoImpl(getIt<CheckoutRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<CreateCheckoutUseCase>(
+    () => CreateCheckoutUseCase(getIt<CheckoutRepo>()),
+  );
+}
+
+void _setupOrders() {
+  getIt.registerLazySingleton<OrdersRemoteDataSource>(
+    () => OrdersRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<OrdersRepo>(
+    () => OrdersRepoImpl(getIt<OrdersRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetOrdersUseCase>(
+    () => GetOrdersUseCase(getIt<OrdersRepo>()),
+  );
+  getIt.registerLazySingleton<GetOrderDetailsUseCase>(
+    () => GetOrderDetailsUseCase(getIt<OrdersRepo>()),
+  );
+}
+
+void _setupCart() {
+  getIt.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<CartRepo>(
+    () => CartRepoImpl(getIt<CartRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetCartUseCase>(
+    () => GetCartUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<AddToCartUseCase>(
+    () => AddToCartUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<RemoveFromCartUseCase>(
+    () => RemoveFromCartUseCase(getIt<CartRepo>()),
+  );
+  getIt.registerLazySingleton<UpdateCartQuantityUseCase>(
+    () => UpdateCartQuantityUseCase(getIt<CartRepo>()),
+  );
+
+}
+
+
+void _setupFavorites() {
+  getIt.registerLazySingleton<FavoritesRemoteDataSource>(
+    () => FavoritesRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImpl(getIt<FavoritesRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetFavoritesUseCase>(
+    () => GetFavoritesUseCase(getIt<FavoritesRepo>()),
+  );
+  getIt.registerLazySingleton<AddToFavoritesUseCase>(
+    () => AddToFavoritesUseCase(getIt<FavoritesRepo>()),
+  );
+  getIt.registerLazySingleton<RemoveFromFavoritesUseCase>(
+    () => RemoveFromFavoritesUseCase(getIt<FavoritesRepo>()),
+  );
+}
+
+void _setupProductDetails() {
+  getIt.registerLazySingleton<ProductDetailsRemoteDataSource>(
+    () => ProductDetailsRemoteDataSourceImpl(getIt<SupabaseClient>()),
+  );
+  getIt.registerLazySingleton<ProductDetailsRepo>(
+    () => ProductDetailsRepoImpl(getIt<ProductDetailsRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<GetProductDetailsUseCase>(
+    () => GetProductDetailsUseCase(getIt<ProductDetailsRepo>()),
+  );
 }
 
 void _setupEditProfile() {
@@ -91,7 +226,7 @@ void _setupEditProfile() {
   );
 
   getIt.registerLazySingleton<EditProfileRemoteDataSource>(
-    () => EditProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => EditProfileRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   getIt.registerLazySingleton<EditProfileRepo>(
@@ -105,11 +240,15 @@ void _setupEditProfile() {
   getIt.registerLazySingleton<AddImageUseCase>(
     () => AddImageUseCase(getIt<EditProfileRepo>()),
   );
+
+  getIt.registerLazySingleton<DeleteImageUseCase>(
+    () => DeleteImageUseCase(getIt<EditProfileRepo>()),
+  );
 }
 
 void _setupProfile() {
   getIt.registerLazySingleton<ProfileRemoteDataSource>(
-    () => ProfileRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ProfileRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   getIt.registerLazySingleton<ProfileRepo>(
@@ -119,17 +258,10 @@ void _setupProfile() {
   getIt.registerLazySingleton<GetUserDataUseCase>(
     () => GetUserDataUseCase(getIt<ProfileRepo>()),
   );
+  
+
 }
 
-void _setupOtp() {
-  getIt.registerSingleton<OtpRepoImpl>(
-    OtpRepoImpl(
-      otpRemoteDataSource: OtpRemoteDataSourceImpl(
-        apiConsumer: getIt<ApiConsumer>(),
-      ),
-    ),
-  );
-}
 
 Future<void> _setupCaching() async {
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -146,29 +278,19 @@ Future<void> _setupCaching() async {
     SecureStorageService(secureStorage),
   );
 
-  getIt.registerSingleton<AuthCredentialsManager>(
-    AuthCredentialsManager(
-      secureStorageService: getIt<SecureStorageService>(),
-      jwtDecoder: const JwtDecoderServiceImpl(),
-    ),
-  );
 }
 
-void _setupNetworking() {
-  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: Dio()));
-}
 
 void _setupAuth() {
   // Data Source
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => AuthRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   // Repository
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       getIt<AuthRemoteDataSource>(),
-      getIt<AuthCredentialsManager>(),
     ),
   );
 
@@ -179,12 +301,15 @@ void _setupAuth() {
   getIt.registerLazySingleton<SignUpUseCase>(
     () => SignUpUseCase(getIt<AuthRepo>()),
   );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(getIt<AuthRepo>()),
+  );
 }
 
 void _setupForgotPassword() {
   // Data Source
   getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(
-    () => ForgotPasswordRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ForgotPasswordRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
 
   // Repository
@@ -204,7 +329,7 @@ void _setupForgotPassword() {
 
 void _setupProducts() {
   getIt.registerLazySingleton<ProductsRemoteDataSource>(
-    () => ProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => ProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<ProductsRepo>(
     () => ProductsRepoImpl(getIt<ProductsRemoteDataSource>()),
@@ -216,7 +341,7 @@ void _setupProducts() {
 
 void _setupBrands() {
   getIt.registerLazySingleton<BrandsRemoteDataSource>(
-    () => BrandsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => BrandsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<BrandsRepo>(
     () => BrandsRepoImpl(getIt<BrandsRemoteDataSource>()),
@@ -228,7 +353,7 @@ void _setupBrands() {
 
 void _setupCategories() {
   getIt.registerLazySingleton<CategoriesRemoteDataSource>(
-    () => CategoriesRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => CategoriesRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<CategoriesRepo>(
     () => CategoriesRepoImpl(getIt<CategoriesRemoteDataSource>()),
@@ -240,7 +365,7 @@ void _setupCategories() {
 
 void _setupSearch() {
   getIt.registerLazySingleton<SearchRemoteDataSource>(
-    () => SearchRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => SearchRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<SearchRepo>(
     () => SearchRepoImpl(getIt<SearchRemoteDataSource>()),
@@ -252,7 +377,7 @@ void _setupSearch() {
 
 void _setupCategoryProducts() {
   getIt.registerLazySingleton<CategoryProductsRemoteDataSource>(
-    () => CategoryProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => CategoryProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<CategoryProductsRepo>(
     () => CategoryProductsRepoImpl(getIt<CategoryProductsRemoteDataSource>()),
@@ -264,7 +389,7 @@ void _setupCategoryProducts() {
 
 void _setupBrandProducts() {
   getIt.registerLazySingleton<BrandProductsRemoteDataSource>(
-    () => BrandProductsRemoteDataSourceImpl(getIt<ApiConsumer>()),
+    () => BrandProductsRemoteDataSourceImpl(getIt<SupabaseClient>()),
   );
   getIt.registerLazySingleton<BrandProductsRepo>(
     () => BrandProductsRepoImpl(getIt<BrandProductsRemoteDataSource>()),

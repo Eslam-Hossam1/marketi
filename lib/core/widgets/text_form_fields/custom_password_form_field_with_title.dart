@@ -1,11 +1,11 @@
 import 'package:flutter_svg/svg.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/core/utils/form_validators.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
-import 'package:marketi/core/widgets/text_form_fields/obscure_text_form_field.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/core/utils/form_validators.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/widgets/text_form_fields/obscure_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
@@ -42,6 +42,10 @@ class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
           prefixIcon: SvgPicture.asset(
             Assets.imagesSvgPasswordIcon,
             fit: BoxFit.contain,
+            colorFilter: ColorFilter.mode(
+              context.mainTextColor,
+              BlendMode.srcIn,
+            ),
             width: 16.w(context),
           ),
         ),

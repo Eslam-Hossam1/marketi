@@ -58,6 +58,14 @@ class Assets {
   /// assets/images/svg/camera_add_icon.svg
   static const String imagesSvgCameraAddIcon = "assets/images/svg/camera_add_icon.svg";
 
+  /// Assets for imagesSvgDefaultAvatar
+  /// assets/images/svg/default_avatar.svg
+  static const String imagesSvgDefaultAvatar = "assets/images/svg/default_avatar.svg";
+
+  /// Assets for imagesPngDefaultAvatar
+  /// assets/images/png/default_avatar.png
+  static const String imagesPngDefaultAvatar = "assets/images/png/default_avatar.png";
+
   /// Assets for imagesSvgCreditCardIcon
   /// assets/images/svg/credit_card_icon.svg
   static const String imagesSvgCreditCardIcon = "assets/images/svg/credit_card_icon.svg";

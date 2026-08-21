@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/services/storage_services/preferences/preferences_keys.dart';
-import 'package:marketi/core/services/storage_services/preferences/preferences_service.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/features/onboarding/domain/entities/onboarding_page_entity.dart';
+import 'package:nextcart/core/services/storage_services/preferences/preferences_keys.dart';
+import 'package:nextcart/core/services/storage_services/preferences/preferences_service.dart';
+import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/features/onboarding/domain/entities/onboarding_page_entity.dart';
 
 import 'onboarding_state.dart';
 
@@ -18,7 +18,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   static const List<OnboardingPageEntity> pages = [
     OnboardingPageEntity(
       imagePath: Assets.imagesPngIllustrationOnboarding1,
-      title: 'Welcome to Marketi',
+      title: 'Welcome to NextCart',
       description:
           'Discover a world of endless possibilities and shop from the comfort of your fingertips. Browse through a wide range of products, from fashion and electronics to home.',
     ),

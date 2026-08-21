@@ -4,6 +4,7 @@ import '../params/edit_user_data_params.dart';
 
 abstract class EditProfileRepo {
   Future<Either<Failure, void>> editUserData(EditUserDataParams params);
-  Future<Either<Failure, void>> addImage(String filePath);
+  Future<Either<Failure, String>> addImage(String filePath);
+  Future<void> deleteImage(String imageUrl);
 }
 

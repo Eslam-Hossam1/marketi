@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/spacing/width_space.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/spacing/width_space.dart';
 
 class ProfileSettingItem extends StatelessWidget {
   final IconData? iconData;
@@ -28,7 +28,10 @@ class ProfileSettingItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.w(context)),
+        padding: EdgeInsets.symmetric(
+          vertical: 16.w(context),
+          horizontal: 16.w(context),
+        ),
         child: Row(
           children: [
             if (svgIcon != null)

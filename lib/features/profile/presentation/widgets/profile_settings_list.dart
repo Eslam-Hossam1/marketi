@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
 
 import 'profile_settings/account_preferences_tile.dart';
 import 'profile_settings/app_notifications_tile.dart';

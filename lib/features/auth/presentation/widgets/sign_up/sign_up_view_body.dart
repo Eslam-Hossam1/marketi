@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/app_logo_image.dart';
-import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_button_and_already_have_account_section.dart';
-import 'package:marketi/features/auth/presentation/widgets/sign_up/sign_up_text_fields_section.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/app_logo_image.dart';
+import 'package:nextcart/core/widgets/spacing/sliver_height_space.dart';
+import 'package:nextcart/features/auth/presentation/widgets/sign_up/sign_up_button_and_already_have_account_section.dart';
+import 'package:nextcart/features/auth/presentation/widgets/sign_up/sign_up_text_fields_section.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});

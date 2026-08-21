@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/features/search/domain/usecases/search_products_use_case.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/features/search/domain/usecases/search_products_use_case.dart';
 import '../manager/search_cubit/search_cubit.dart';
 import '../widgets/search_view_body.dart';
 

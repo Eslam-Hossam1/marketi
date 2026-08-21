@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/utils/responsive_helper.dart';
+import 'package:nextcart/core/utils/responsive_helper.dart';
 
 extension ResponsiveExtension on num {
   double w(

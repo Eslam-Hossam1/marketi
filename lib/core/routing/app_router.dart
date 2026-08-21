@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/core/routing/router_redirect.dart';
-import 'package:marketi/core/services/auth_credentials_manager/auth_credentials_manager.dart';
-import 'package:marketi/core/services/storage_services/preferences/preferences_service.dart';
+import 'package:nextcart/core/di/service_locator.dart';
+import 'package:nextcart/core/routing/router_redirect.dart';
+import 'package:nextcart/core/services/storage_services/preferences/preferences_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as import_supabase;
 
 import 'app_routes/all_routs.dart';
 import 'routes_paths.dart';
@@ -13,7 +13,6 @@ class AppRouter {
 
   static final routerRedirect = RouterRedirect(
     preferencesService: getIt<PreferencesService>(),
-    authCredentialsManager: getIt<AuthCredentialsManager>(),
   );
 
   static final router = GoRouter(
@@ -23,4 +22,14 @@ class AppRouter {
     debugLogDiagnostics: true,
     routes: AppRoutes.routes,
   );
+
+  static void setupDeepLinkListener() {
+    import_supabase.Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      if (data.event == import_supabase.AuthChangeEvent.passwordRecovery) {
+        router.go(RoutePaths.resetPassword);
+      }
+    });
+  }
 }
+
+

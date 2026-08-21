@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/utils/assets.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
-import 'package:marketi/features/profile/domain/entities/user_profile_entity.dart';
+
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/utils/assets.dart';
+import 'package:nextcart/core/widgets/avatar/app_avatar.dart';
+import 'package:nextcart/features/profile/domain/entities/user_profile_entity.dart';
 
 class ProfileGalaxyImage extends StatelessWidget {
   const ProfileGalaxyImage({super.key, required this.userProfile});
@@ -39,35 +39,9 @@ class ProfileGalaxyImage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(3.w(context)),
               child: Center(
-                child: Stack(
-                  children: [
-                    ClipOval(
-                      child: CustomCachedNetworkImage(
-                        url: userProfile.image,
-                        width: 150.w(context),
-                        height: 150.w(context),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        radius: 18.r(context),
-                        backgroundColor: context.scaffoldBackgroundColor,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            Assets.imagesSvgCameraAddIcon,
-                            width: 20.w(context),
-                            colorFilter: ColorFilter.mode(
-                              context.primaryColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: AppAvatar(
+                  imageUrl: userProfile.image,
+                  radius: 75.w(context),
                 ),
               ),
             ),

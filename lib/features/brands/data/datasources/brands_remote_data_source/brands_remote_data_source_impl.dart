@@ -1,17 +1,16 @@
-import 'package:marketi/core/networking/api_consumer.dart';
-import 'package:marketi/core/networking/end_points.dart';
-import 'package:marketi/core/models/brand_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:nextcart/core/models/brand_model.dart';
 import 'brands_remote_data_source.dart';
 
 class BrandsRemoteDataSourceImpl implements BrandsRemoteDataSource {
-  final ApiConsumer _apiConsumer;
+  final SupabaseClient _supabaseClient;
 
-  BrandsRemoteDataSourceImpl(this._apiConsumer);
+  BrandsRemoteDataSourceImpl(this._supabaseClient);
 
   @override
   Future<List<BrandModel>> getBrands() async {
-    final response = await _apiConsumer.get(EndPoints.brands);
-    return (response['list'] as List)
+    final response = await _supabaseClient.from('brands').select();
+    return (response as List)
         .map((e) => BrandModel.fromJson(e as Map<String, dynamic>))
         .toList();
   }

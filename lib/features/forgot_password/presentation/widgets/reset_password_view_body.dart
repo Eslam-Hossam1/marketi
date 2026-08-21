@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
-import 'package:marketi/core/widgets/custom_back_button_with_title_header.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_button.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_description_text.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_illustration.dart';
-import 'package:marketi/features/forgot_password/presentation/widgets/reset_password_text_fields_section.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/spacing/sliver_height_space.dart';
+import 'package:nextcart/core/widgets/custom_back_button_with_title_header.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_button.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_description_text.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_illustration.dart';
+import 'package:nextcart/features/forgot_password/presentation/widgets/reset_password_text_fields_section.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nextcart/core/routing/routes_paths.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
   const ResetPasswordViewBody({super.key});
@@ -33,8 +36,20 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
       child: Form(
         key: formKey,
         autovalidateMode: autovalidateMode,
-        child: CustomScrollView(
-          slivers: [
+        child: PopScope(
+          canPop: false,
+          onPopInvoked: (didPop) {
+            if (didPop) return;
+            DialogHelper.showCustomExitConfirmationDialog(
+              context,
+              errorMessage: "Are you sure you want to exit? You haven't reset your password yet.",
+              btnOkOnPress: () {
+                context.go(RoutePaths.login);
+              },
+            );
+          },
+          child: CustomScrollView(
+            slivers: [
             const SliverHeightSpace(height: 12),
             const SliverToBoxAdapter(
               child: CustomBackButtonWithTitleHeader(
@@ -55,6 +70,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:marketi/core/utils/responsive_helper.dart';
+import 'package:nextcart/core/utils/responsive_helper.dart';
 
 import '../../theme/app_text_styles.dart';
 import '../../theme/theme_colors_extension.dart';

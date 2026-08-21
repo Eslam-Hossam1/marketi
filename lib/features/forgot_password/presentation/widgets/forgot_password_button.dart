@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/helpers/dialog_helper/dialog_helper.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/core/widgets/buttons/custom_text_button.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
-import 'package:marketi/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
-import 'package:marketi/features/otp/data/models/auth_otp/forgot_password_otp_reason.dart';
+import 'package:nextcart/core/helpers/dialog_helper/dialog_helper.dart';
+import 'package:nextcart/core/widgets/buttons/custom_text_button.dart';
+import 'package:nextcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_cubit.dart';
+import 'package:nextcart/features/forgot_password/presentation/manager/forgot_password_cubit/forgot_password_state.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -22,10 +20,10 @@ class ForgotPasswordButton extends StatelessWidget {
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {
-          final email = context.read<ForgotPasswordCubit>().formData.email;
-          RoutingHelper.pushOtp(
+          DialogHelper.showSuccessDialog(
             context,
-            otpReason: ForgotPasswordOtpReason(email: email),
+            message:
+                'We sent a password reset link to your email. Please check your inbox and tap the link to continue.',
           );
         } else if (state is ForgotPasswordFailure) {
           DialogHelper.showErrorDialog(context, errorMessage: state.errMsg);
@@ -34,7 +32,7 @@ class ForgotPasswordButton extends StatelessWidget {
       builder: (context, state) {
         return CustomTextButton(
           width: double.infinity,
-          text: 'Send Code',
+          text: 'Send Reset Link',
           isLoading: state is ForgotPasswordLoading,
           onPressed: () {
             if (formKey.currentState!.validate()) {
@@ -49,3 +47,4 @@ class ForgotPasswordButton extends StatelessWidget {
     );
   }
 }
+

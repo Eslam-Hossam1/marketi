@@ -1,11 +1,13 @@
 import '../entities/product_entity.dart';
+import 'category_model.dart';
+import 'brand_model.dart';
 
 class ProductModel extends ProductEntity {
   const ProductModel({
     required super.id,
     required super.title,
     required super.description,
-    required super.category,
+    super.category,
     required super.price,
     required super.discountPercentage,
     required super.rating,
@@ -20,16 +22,16 @@ class ProductModel extends ProductEntity {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'] as int,
+      id: json['id'].toString(),
       title: json['title'] as String,
       description: json['description'] as String,
-      category: json['category'] as String,
-      price: (json['price'] as num).toDouble(),
-      discountPercentage: (json['discountPercentage'] as num).toDouble(),
-      rating: (json['rating'] as num).toDouble(),
-      stock: json['stock'] as int,
+      category: json['categories'] != null ? CategoryModel.fromJson(json['categories']) : null,
+      price: ((json['price'] ?? 0) as num).toDouble(),
+      discountPercentage: ((json['discountPercentage'] ?? json['discount_percentage'] ?? 0) as num).toDouble(),
+      rating: ((json['rating'] ?? 0) as num).toDouble(),
+      stock: (json['stock'] ?? 0) as int,
       tags: List<String>.from(json['tags'] ?? []),
-      brand: json['brand'] as String?,
+      brand: json['brands'] != null ? BrandModel.fromJson(json['brands']) : null,
       sku: json['sku'] as String?,
       availabilityStatus: json['availabilityStatus'] as String?,
       images: List<String>.from(json['images'] ?? []),
@@ -42,13 +44,13 @@ class ProductModel extends ProductEntity {
       'id': id,
       'title': title,
       'description': description,
-      'category': category,
+      'category_id': category?.id,
       'price': price,
       'discountPercentage': discountPercentage,
       'rating': rating,
       'stock': stock,
       'tags': tags,
-      'brand': brand,
+      'brand_id': brand?.id,
       'sku': sku,
       'availabilityStatus': availabilityStatus,
       'images': images,

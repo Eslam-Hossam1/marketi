@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/utils/constants.dart';
-import 'package:marketi/core/widgets/custom_header_with_image.dart';
-import 'package:marketi/core/widgets/spacing/height_space.dart';
+import 'package:nextcart/core/utils/constants.dart';
+import 'package:nextcart/core/widgets/custom_header_with_image.dart';
+import 'package:nextcart/core/widgets/spacing/height_space.dart';
 import '../manager/category_products_cubit.dart';
 import 'category_products_grid.dart';
 import 'category_products_scrolling_loading_indicator_builder.dart';

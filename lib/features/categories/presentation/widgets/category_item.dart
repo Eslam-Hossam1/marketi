@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/entities/category_entity.dart';
-import 'package:marketi/core/routing/routing_helper.dart';
-import 'package:marketi/core/theme/app_text_styles.dart';
-import 'package:marketi/core/theme/theme_colors_extension.dart';
-import 'package:marketi/core/widgets/custom_cached_network_image.dart';
-import 'package:marketi/features/category_products/domain/params/category_products_routing_params.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
+import 'package:nextcart/core/routing/routing_helper.dart';
+import 'package:nextcart/core/theme/app_text_styles.dart';
+import 'package:nextcart/core/theme/theme_colors_extension.dart';
+import 'package:nextcart/core/widgets/custom_cached_network_image.dart';
+import 'package:nextcart/features/category_products/domain/params/category_products_routing_params.dart';
 
 class CategoryItem extends StatelessWidget {
   final CategoryEntity category;
@@ -18,7 +18,7 @@ class CategoryItem extends StatelessWidget {
           context,
           params: CategoryProductsRoutingParams(
             title: category.name,
-            categorySlug: category.slug,
+            categorySlug: category.name,
           ),
         );
       },
@@ -39,16 +39,19 @@ class CategoryItem extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: context.primaryColor.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
                 ),
-                child: CustomCachedNetworkImage(
-                  url: category.image,
-                  fit: BoxFit.contain,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                  child: CustomCachedNetworkImage(
+                    url: category.image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -59,8 +62,9 @@ class CategoryItem extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.medium14(context)
-                    .copyWith(color: context.mainTextColor),
+                style: AppTextStyles.medium14(
+                  context,
+                ).copyWith(color: context.mainTextColor),
               ),
             ),
           ],

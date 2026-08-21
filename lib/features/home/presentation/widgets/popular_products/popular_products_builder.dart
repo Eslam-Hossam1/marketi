@@ -1,11 +1,13 @@
+import 'package:nextcart/core/entities/brand_entity.dart';
+import 'package:nextcart/core/entities/category_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/entities/product_entity.dart';
-import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
-import 'package:marketi/features/home/presentation/manager/popular_products_cubit/popular_products_state.dart';
-import 'package:marketi/features/home/presentation/widgets/popular_products/home_popular_products_list.dart';
+import 'package:nextcart/core/entities/product_entity.dart';
+import 'package:nextcart/features/home/presentation/manager/popular_products_cubit/popular_products_cubit.dart';
+import 'package:nextcart/features/home/presentation/manager/popular_products_cubit/popular_products_state.dart';
+import 'package:nextcart/features/home/presentation/widgets/popular_products/home_popular_products_list.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:marketi/core/widgets/custom_failure_message_with_button.dart';
+import 'package:nextcart/core/widgets/custom_failure_message_with_button.dart';
 
 class PopularProductsBuilder extends StatelessWidget {
   const PopularProductsBuilder({super.key});
@@ -32,15 +34,15 @@ class PopularProductsBuilder extends StatelessWidget {
               products: List.generate(
                 5,
                 (index) => const ProductEntity(
-                  id: 1,
+                  id: "1",
                   title: "Product Title",
                   description: "Description",
-                  category: "Category",
+                  category: CategoryEntity(id: '1', name: 'Category', url: '', image: ''),
                   price: 99.9,
                   discountPercentage: 10,
                   rating: 4.5,
                   stock: 10,
-                  brand: "Brand",
+                  brand: BrandEntity(id: '1', name: 'Brand', image: ''),
                   thumbnail: "thumbnail",
                   images: [],
                   tags: [],

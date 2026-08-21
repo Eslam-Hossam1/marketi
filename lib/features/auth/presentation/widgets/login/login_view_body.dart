@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/extensions/responsive_extension.dart';
-import 'package:marketi/core/widgets/app_logo_image.dart';
-import 'package:marketi/core/widgets/spacing/sliver_height_space.dart';
-import 'package:marketi/features/auth/presentation/widgets/login/login_button_and_dont_have_account_section.dart';
-import 'package:marketi/features/auth/presentation/widgets/login/login_text_fields_section.dart';
+import 'package:nextcart/core/extensions/responsive_extension.dart';
+import 'package:nextcart/core/widgets/app_logo_image.dart';
+import 'package:nextcart/core/widgets/spacing/sliver_height_space.dart';
+import 'package:nextcart/features/auth/presentation/widgets/login/login_button_and_dont_have_account_section.dart';
+import 'package:nextcart/features/auth/presentation/widgets/login/login_text_fields_section.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
