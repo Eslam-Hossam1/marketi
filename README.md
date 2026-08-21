@@ -10,15 +10,7 @@
 </p>
 
 <p align="center">
-  <b>NextCart is a modern, production-oriented e-commerce mobile application built with Flutter, Clean Architecture, and Cubit.</b>
-  <br/><br/>
-  🛍️ Discover products, explore categories, search and filter, manage your cart and favorites, and enjoy a seamless shopping experience.
-  <br/><br/>
-  💳 Secure payments powered by <b>Stripe</b>, featuring server-side price validation, PaymentIntents, Stripe Customer management, and webhook-driven payment confirmation.
-  <br/><br/>
-  📦 Full order lifecycle management with payment status tracking, order history, detailed order views, and automated cart synchronization.
-  <br/><br/>
-  ⚡ Built with <b>Supabase, PostgreSQL, and Edge Functions</b>, leveraging authentication, Row Level Security (RLS), and secure server-side business logic.
+  A modern, production-ready Flutter e-commerce app — built with <b>Clean Architecture</b>, <b>Cubit</b>, <b>Supabase</b>, and <b>Stripe</b> payments.
 </p>
 
 ---
@@ -209,45 +201,47 @@
 lib/
 │
 ├── main.dart                    # App entry point
-├── app_initializer.dart         # Service locator, Bloc observer, Hydrated storage init
-├── nextcart_app.dart             # Root MaterialApp with theme & router
+├── app_initializer.dart         # App bootstrap (DI, observers, storage)
+├── nextcart_app.dart            # Root MaterialApp with theme & router
 │
 ├── core/
-│   ├── networking/              # Supabase config, API helpers
+│   ├── config/                  # Supabase & app-level configuration
 │   ├── errors/                  # Failure models, API error mapping
-│   ├── widgets/                 # Shared reusable widgets (buttons, headers, avatars...)
-│   ├── theme/                   # App themes, colors, text styles, theme extensions
-│   ├── services/                # Auth credentials, secure storage, image picker
-│   ├── usecases/                # UseCase<Failure, Entity, Params> & NoParamUseCase
+│   ├── widgets/                 # Shared reusable widgets
+│   ├── theme/                   # App themes, colors, text styles, extensions
+│   ├── services/                # Auth credentials, secure storage, Stripe
+│   ├── usecases/                # UseCase<Failure, Entity, Params> interfaces
 │   ├── routing/                 # GoRouter config, route paths, routing helper
 │   ├── di/                      # GetIt service locator setup
-│   ├── extensions/              # Responsive extension helpers
+│   ├── extensions/              # Dart & Flutter extension helpers
 │   ├── helpers/                 # Dialog helpers (AwesomeDialog)
-│   ├── models/                  # Shared models (ProductModel, etc.)
+│   ├── models/                  # Shared models
 │   ├── entities/                # Global shared entities
 │   ├── params/                  # Shared parameter objects
 │   ├── cubit/                   # Global cubits (ThemeCubit)
-│   ├── enums/                   # App-wide enumerations
-│   ├── Functions/               # Utility functions
-│   └── utils/                   # Asset paths, bloc observer, etc.
+│   ├── Functions/               # Utility / pure functions
+│   └── utils/                   # Asset paths, Bloc observer, constants
 │
 └── features/
     ├── auth/                    # Login & Sign Up
-    ├── onboarding/              # Onboarding screens
-    ├── home/                    # Home dashboard (banners, popular, brands, categories)
-    ├── products/                # Products listing with pagination
+    ├── onboarding/              # First-time onboarding screens
+    ├── home/                    # Home dashboard
+    ├── banners/                 # Promotional banners
+    ├── products/                # Product listing with pagination
     ├── product_details/         # Product detail view with carousel
     ├── categories/              # Categories browser
     ├── category_products/       # Products filtered by category
     ├── brands/                  # Brands browser
     ├── brand_products/          # Products filtered by brand
-    ├── search/                  # Product search with pagination
-    ├── cart/                    # Shopping cart management
+    ├── search/                  # Real-time product search
+    ├── cart/                    # Shopping cart
     ├── favorites/               # Wishlist / Favorites
+    ├── checkout/                # Stripe checkout & payment flow
+    ├── orders/                  # Order history & order details
     ├── profile/                 # User profile
     ├── edit_profile/            # Edit profile with image picker
     ├── forgot_password/         # Password recovery flow
-    ├── theme_selection/         # Theme switching (Dark/Light)
+    ├── theme_selection/         # Theme switching (Dark / Light)
     └── main/                    # Main shell with bottom navigation
 ```
 
