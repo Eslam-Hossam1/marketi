@@ -202,66 +202,6 @@
 
 ---
 
-## 🏛️ Architecture Overview
-
-NextCart follows **Clean Architecture** principles with a strict separation of concerns. Each feature is self-contained with its own **Domain**, **Data**, and **Presentation** layers.
-
-```mermaid
-%%{init: {
-  "flowchart": { "nodeSpacing": 50, "rankSpacing": 65 },
-  "themeVariables": { "fontSize": "16px", "primaryColor": "#E8F0FE", "primaryTextColor": "#001640", "primaryBorderColor": "#3F80FF", "lineColor": "#3F80FF" }
-}}%%
-flowchart TD
-  A["🛍️ NextCart App"]
-
-  A --> CORE
-  A --> FEATURES
-
-  subgraph CORE["🔧 core/"]
-    C1["networking/"]
-    C2["errors/"]
-    C3["widgets/"]
-    C4["theme/"]
-    C5["services/"]
-    C6["usecases/"]
-    C7["routing/"]
-    C8["di/"]
-    C9["extensions/"]
-    C10["helpers/"]
-    C11["models/"]
-    C12["entities/"]
-    C13["params/"]
-  end
-
-  subgraph FEATURES["📦 features/"]
-    F1["auth"]
-    F2["onboarding"]
-    F3["home"]
-    F4["products"]
-    F5["product_details"]
-    F6["categories"]
-    F7["category_products"]
-    F8["brands"]
-    F9["brand_products"]
-    F10["search"]
-    F11["cart"]
-    F12["favorites"]
-    F13["profile"]
-    F14["edit_profile"]
-    F15["forgot_password"]
-    F16["theme_selection"]
-    F17["main"]
-  end
-
-  F1 --> LAYERS
-  subgraph LAYERS["Each Feature Contains:"]
-    L1["📐 domain/ — entities, params, repos, usecases"]
-    L2["💾 data/ — models, datasources, repos"]
-    L3["🎨 presentation/ — views, widgets, manager"]
-  end
-```
-
----
 
 ## 🧱 Project Structure
 
@@ -320,7 +260,7 @@ lib/
 | **Language** | Dart 3.10+ |
 | **Framework** | Flutter 3.10+ |
 | **Architecture** | Clean Architecture, Repository Pattern |
-| **State Management** | flutter_bloc / Cubit, Hydrated Bloc |
+| **State Management** | flutter_bloc / Cubit |
 | **Navigation** | GoRouter (declarative, type-safe routing) |
 | **Backend** | Supabase |
 | **Dependency Injection** | GetIt (Service Locator) |
@@ -343,13 +283,12 @@ lib/
 |:---|:---|
 | **Clean Architecture** | Strict separation into Domain → Data → Presentation layers |
 | **Cubit Only** | No Riverpod, no raw Bloc events — Cubit is the single state management solution |
-| **No Code Generation** | ❌ No `freezed`, no `json_serializable` — all models are hand-written |
 | **Either for Errors** | All error handling uses `Either<Failure, T>` from the `dartz` package |
 | **Feature Independence** | No feature depends on another feature; only `core/` is shared |
 | **Domain Purity** | Domain layer has zero framework imports — pure Dart only |
 | **Params Objects** | No primitive parameters passed to use cases — always wrapped in a `Params` object |
 | **Composition over Inheritance** | Small, `const` widgets composed together |
-| **Responsive Design** | All sizing handled by `ResponsiveHelper` / `SmartScaler` |
+| **Responsive Design** | All sizing handled by `ResponsiveHelper` |
 | **Theme Extensions** | Colors & text styles accessed via theme extensions — no inline styling |
 
 ### 🔒 Dependency Rules
@@ -365,59 +304,6 @@ Presentation  ──►  Domain  ◄──  Data
 - **Data** depends on **Domain** and **Core**
 - **Domain** depends on **nothing** (pure Dart)
 - **Core** is accessible from all layers
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) `3.10+`
-- [Dart SDK](https://dart.dev/get-dart) `3.10+`
-- Android Studio / VS Code with Flutter extensions
-- An Android emulator or physical device
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/Eslam-Hossam1/nextcart.git
-```
-
-### 2️⃣ Open the Project
-
-```bash
-cd nextcart
-```
-
-Open in **Android Studio** or **VS Code**.
-
-### 3️⃣ Install Dependencies
-
-```bash
-flutter pub get
-```
-
-### 4️⃣ Run the App
-
-```bash
-flutter run
-```
-
----
-
-## 🎨 Theming
-
-NextCart supports **Dark** and **Light** themes with seamless switching powered by **Hydrated Cubit** (persisted across app restarts).
-
-| | Light Theme | Dark Theme |
-|:---|:---|:---|
-| **Primary** | `#3F80FF` 🔵 | `#3F80FF` 🔵 |
-| **Secondary** | `#FE0017` 🔴 | `#FE0017` 🔴 |
-| **Scaffold BG** | `#FFFFFF` ⬜ | `#121212` ⬛ |
-| **Main Text** | `#001640` 🌑 | `#ECEFF4` 🌕 |
-| **Font Family** | Poppins | Poppins |
-
-Custom colors are managed through **ThemeExtensions** (`CustomColors`) for consistent access across the entire app.
 
 ---
 
@@ -468,58 +354,6 @@ flowchart TD
     N --> AB[Orders]
     AB --> Y
 ```
-
----
-
-## 🧪 Testing
-
-```bash
-flutter test
-```
-
----
-
-## 📂 Feature Breakdown
-
-| Feature | Domain | Data | Presentation | Description |
-|:---|:---:|:---:|:---:|:---|
-| **Auth** | ✅ | ✅ | ✅ | Login, Sign Up with form validation |
-| **Onboarding** | ✅ | — | ✅ | First-time user introduction screens |
-| **Home** | — | — | ✅ | Dashboard with banners, brands, categories, popular products |
-| **Products** | ✅ | ✅ | ✅ | Product listing with infinite scroll pagination |
-| **Product Details** | ✅ | ✅ | ✅ | Carousel, expandable description, pricing |
-| **Categories** | ✅ | ✅ | ✅ | Category browsing & filtering |
-| **Category Products** | ✅ | ✅ | ✅ | Products by selected category |
-| **Brands** | ✅ | ✅ | ✅ | Brand browsing & filtering |
-| **Brand Products** | ✅ | ✅ | ✅ | Products by selected brand |
-| **Search** | ✅ | ✅ | ✅ | Real-time product search with pagination |
-| **Cart** | — | — | ✅ | Shopping cart management |
-| **Favorites** | — | — | ✅ | Wishlist with saved products |
-| **Profile** | ✅ | ✅ | ✅ | View user profile info |
-| **Edit Profile** | ✅ | ✅ | ✅ | Update name, avatar (image picker + cropper) |
-| **Forgot Password** | ✅ | ✅ | ✅ | Email-based password reset flow |
-| **Theme Selection** | — | — | ✅ | Switch between Dark / Light mode |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-> [!TIP]
-> Please follow the project's Clean Architecture conventions and ensure all new features include proper domain, data, and presentation layers.
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ---
 
