@@ -17,6 +17,7 @@ class ResetPasswordTextFieldsSection extends StatelessWidget {
         children: [
           CustomPasswordTextFormFieldWithTitle(
             title: "Password",
+            onChanged: (value) => cubit.formData.password = value.trim(),
             onSaved: (value) => cubit.formData.password = value!.trim(),
           ),
           HeightSpace(height: Constants.authTextFormFieldsGap),

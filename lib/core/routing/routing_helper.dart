@@ -6,17 +6,11 @@ import '../../features/category_products/domain/params/category_products_routing
 import '../../features/products/domain/params/products_routing_params.dart';
 import '../../core/params/product_params.dart';
 
-import '../../features/otp/domain/entities/otp_reason.dart';
 import '../../features/orders/domain/params/order_details_params.dart';
 import '../../features/profile/domain/entities/user_profile_entity.dart';
 import 'routes_paths.dart';
 
 abstract class RoutingHelper {
-  // ── Auth / OTP ────────────────────────────────────────────────────────────
-
-  static void pushOtp(BuildContext context, {required OtpReason otpReason}) {
-    context.push(RoutePaths.otp, extra: otpReason);
-  }
 
   // ── Profile ───────────────────────────────────────────────────────────────
 
