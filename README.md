@@ -427,7 +427,7 @@ NextCart uses **GoRouter** for declarative, type-safe navigation with a **Statef
 
 ```mermaid
 flowchart TD
-    A([🚀 Launch]) --> B[Splash Screen]
+    A([Launch]) --> B[Splash Screen]
     B --> C{First time?}
     C -- Yes --> D[Onboarding]
     C -- No --> E{Logged in?}
@@ -440,15 +440,15 @@ flowchart TD
     G --> J
     E -- Yes --> J
 
-    J[Main Shell] --> K[🏠 Home]
-    J --> L[🛒 Cart]
-    J --> M[❤️ Favorites]
-    J --> N[👤 Profile]
+    J[Main Shell] --> K[Home]
+    J --> L[Cart]
+    J --> M[Favorites]
+    J --> N[Profile]
 
-    K --> O[🔍 Search]
-    K --> P[📦 Product Details]
-    K --> Q[🏷️ Categories]
-    K --> R[🏢 Brands]
+    K --> O[Search]
+    K --> P[Product Details]
+    K --> Q[Categories]
+    K --> R[Brands]
 
     Q --> S[Category Products]
     R --> T[Brand Products]
@@ -457,15 +457,15 @@ flowchart TD
     M --> P
 
     L --> U[Checkout]
-    U --> V[💳 Payment Methods]
-    V --> W[✅ Payment Success]
-    V --> X[⏳ Payment Pending]
+    U --> V[Payment Methods]
+    V --> W[Payment Success]
+    V --> X[Payment Pending]
     W --> Y[Order Details]
     X --> Y
 
     N --> Z[Edit Profile]
-    N --> AA[🎨 Theme Selection]
-    N --> AB[📋 Orders]
+    N --> AA[Theme Selection]
+    N --> AB[Orders]
     AB --> Y
 ```
 
